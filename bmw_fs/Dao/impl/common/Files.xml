@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sqlMap namespace="files" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="FilesClass" type="bmw_fs.Models.common.Files"/>
+  </alias>
+
+  <resultMaps>
+    <resultMap id="FilesMap" class="FilesClass">
+      <result property="fileIdx" column="IDX" />
+      <result property="masterIdx" column="MASTER_IDX" />
+      <result property="savedFilename" column="SAVED_FILENAME" />
+      <result property="originalFilename" column="ORIGINAL_FILENAME" />
+      <result property="type" column="TYPE" />      
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+
+    <select id="findAllByIdx" resultMap="FilesMap">
+      SELECT IDX
+                ,MASTER_IDX
+                ,ORIGINAL_FILENAME
+                ,SAVED_FILENAME
+                ,TYPE
+       FROM BMW_FS_FILES_DATA
+      WHERE IDX = #fileIdx#
+    </select>
+
+    <insert id="insertFile">
+      INSERT INTO BMW_FS_FILES_DATA (
+                  MASTER_IDX
+                 ,ORIGINAL_FILENAME
+                 ,SAVED_FILENAME
+                 ,TYPE
+                 )
+      VALUES (
+                 #masterIdx#
+                ,#originalFilename#
+                ,#savedFilename#
+                ,#type#
+                )
+      <selectKey resultClass="int" type="post" property="fileIdx">
+        SELECT @@IDENTITY AS IDX
+      </selectKey>
+    </insert>
+
+    <update id="updateFile">
+      UPDATE BMW_FS_FILES_DATA
+            SET ORIGINAL_FILENAME = #originalFilename#
+                 ,SAVED_FILENAME = #savedFilename#
+                 ,TYPE = #type#
+      WHERE IDX = #fileIdx#
+    </update>
+
+    <delete id="deleteFileByFileIdx">
+      DELETE FROM BMW_FS_FILES_DATA
+      WHERE IDX = #fileIdx#
+    </delete>
+    
+
+    <select id="findAllByMasterIdx" resultMap="FilesMap">
+      SELECT IDX
+                ,MASTER_IDX
+                ,ORIGINAL_FILENAME
+                ,SAVED_FILENAME
+                ,TYPE
+        FROM BMW_FS_FILES_DATA
+      WHERE MASTER_IDX = #masterIdx#
+    </select>
+
+    <select id="findAllByMasterIdxAndType" resultMap="FilesMap">
+      SELECT IDX
+                ,MASTER_IDX
+                ,ORIGINAL_FILENAME
+                ,SAVED_FILENAME
+                ,TYPE
+        FROM BMW_FS_FILES_DATA
+      WHERE MASTER_IDX = #masterIdx#
+          AND TYPE = #type#
+    </select>
+    
+  </statements>
+
+</sqlMap>
