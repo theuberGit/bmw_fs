@@ -46,7 +46,16 @@ namespace bmw_fs.Controllers
                 var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                 HttpContext.Response.Cookies.Add(authCookie);                                                                                                          
                 memberService.updateLoginDate(member);
-                return RedirectToAction("Index", "Home");
+                if (String.IsNullOrWhiteSpace(returnUrl))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    return Redirect(returnUrl);
+                }
+
+                
             }
             else
             {
