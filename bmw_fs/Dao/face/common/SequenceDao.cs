@@ -13,7 +13,7 @@ namespace bmw_fs.Dao.face.common
         {
             Sequence seq = new Sequence();
             seq.id = id;
-            Mapper.Instance().QueryForObject<int>("getSequence", seq);
+            Mapper.Instance().QueryForObject<int>("seq.getSequence", seq);
             return seq.seq;
         }
     }

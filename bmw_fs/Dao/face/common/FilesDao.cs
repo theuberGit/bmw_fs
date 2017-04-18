@@ -11,33 +11,33 @@ namespace bmw_fs.Dao.face.common
     {
         public Files findAllByIdx(Files files)
         {
-            return Mapper.Instance().QueryForObject<Files>("findAllByIdx", files);
+            return Mapper.Instance().QueryForObject<Files>("files.findAllByIdx", files);
         }
 
         public int insertFile(Files files)
         {
-            Mapper.Instance().Insert("insertFile", files);
+            Mapper.Instance().Insert("files.insertFile", files);
             return files.fileIdx;
         }
 
         public void updateFile(Files files)
         {
-            Mapper.Instance().Update("updateFile", files);
+            Mapper.Instance().Update("files.updateFile", files);
         }
 
         public void deleteFileByFileIdx(Files files)
         {
-            Mapper.Instance().Delete("deleteFileByFileIdx", files);
+            Mapper.Instance().Delete("files.deleteFileByFileIdx", files);
         }
 
         public IList<Files> findAllByMasterIdx(Files files)
         {
-            return Mapper.Instance().QueryForList<Files>("findAllByMasterIdx", files);
+            return Mapper.Instance().QueryForList<Files>("files.findAllByMasterIdx", files);
         }
 
         public IList<Files> findAllByMasterIdxAndType(Files files)
         {
-            return Mapper.Instance().QueryForList<Files>("findAllByMasterIdxAndType", files);
+            return Mapper.Instance().QueryForList<Files>("files.findAllByMasterIdxAndType", files);
         }
 
     }

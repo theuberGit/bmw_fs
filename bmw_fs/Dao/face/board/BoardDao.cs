@@ -11,32 +11,32 @@ namespace bmw_fs.Dao.face.board
     {
         public IList<Board> findAll(Board board)
         {
-            return Mapper.Instance().QueryForList<Board>("findAll", board);
+            return Mapper.Instance().QueryForList<Board>("board.findAll", board);
         }
 
         public void insertBoard(Board board)
         {
-            Mapper.Instance().Insert("insertBoard", board);
+            Mapper.Instance().Insert("board.insertBoard", board);
         }
 
         public Board findBoard(Board board)
         {
-            return Mapper.Instance().QueryForObject<Board>("findBoard", board);
+            return Mapper.Instance().QueryForObject<Board>("board.findBoard", board);
         }
 
         public int findAllCount(Board board)
         {
-            return Mapper.Instance().QueryForObject<int>("findAllCount", board);
+            return Mapper.Instance().QueryForObject<int>("board.findAllCount", board);
         }
 
         public void updateBoard(Board board)
         {
-            Mapper.Instance().Update("updateBoard", board);
+            Mapper.Instance().Update("board.updateBoard", board);
         }
 
         public void deleteBoard(Board board)
         {
-            Mapper.Instance().Delete("deleteBoard", board);
+            Mapper.Instance().Delete("board.deleteBoard", board);
         }
     }
 }
