@@ -31,5 +31,7 @@ namespace bmw_fs.Service.face.common
         void deleteFileAndFileUpload(HttpFileCollectionBase multipartFiles, String inputFileName, String allowType, long fileSize, int masterIdx, IList<int> fileIdxs);
 
         Boolean deleteRealFilesAndDataByFileMasterIdx(int masterIdx);
+
+        Files filePhotoUpload(HttpFileCollectionBase multipartFiles);
     }
 }

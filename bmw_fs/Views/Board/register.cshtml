@@ -59,10 +59,14 @@
         <a href="list?@Session["searchString"]" class="btn">목록</a>
     </div>
 </div>
+<script type="text/javascript" src="/resources/se/js/HuskyEZCreator.js"></script>
+<script type="text/javascript" src="/resources/js/smarteditor.js"></script>
 <script>
     function register() {
+        
         if (!confirm('등록하시겠습니까')) return;
         if (!$('#title').required()) return;
+        editor_object.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
         if (!$('#contents').required()) return;
         $('form').attr('action', 'registerProc').submit();
     };

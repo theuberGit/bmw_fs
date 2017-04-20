@@ -4,6 +4,7 @@ using bmw_fs.Service.face.common;
 using bmw_fs.Service.impl.common;
 using System;
 using System.Diagnostics;
+using System.Web;
 using System.Web.Mvc;
 
 namespace bmw_fs.Controllers
@@ -39,6 +40,16 @@ namespace bmw_fs.Controllers
                 return null;
             }
         }
-       
+
+        public ActionResult photoUpload(String callback_func)
+        {
+            HttpFileCollectionBase multipartRequest = Request.Files;
+            String callback = "/resources/se/sample/photo_uploader/callback.html";
+            Files files = filesService.filePhotoUpload(multipartRequest);
+            
+            String file_result = "&bNewLine=true&sFileName=" + files.originalFilename + "&sFileURL=/Files/imageView?fileIdx=" + files.fileIdx;
+            return Redirect(callback + "?callback_func="+callback_func+file_result);
+        }
+
     }
 }

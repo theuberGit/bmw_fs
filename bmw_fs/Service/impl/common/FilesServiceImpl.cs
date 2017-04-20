@@ -143,6 +143,11 @@ namespace bmw_fs.Service.impl.common
             
         }
 
+        public Files filePhotoUpload(HttpFileCollectionBase multipartFiles)
+        {
+            return fileUpload(multipartFiles, "Filedata", "jpg|png|gif|bmp", 10 * 1024 * 1024, -1, null);
+        }
+
         private void validationFileUpload(HttpPostedFileBase file, String allowType, long fileSize, String fileType)
         {
             Debug.WriteLine(allowType.IndexOf(fileType.ToLower()));

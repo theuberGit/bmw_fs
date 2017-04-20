@@ -36,9 +36,6 @@
                                     <input type="file" name="files" class="file_input" />
                                 </span>
                                 <input type="hidden" name="fileIdxs" value="@ViewBag.filesList1[i].fileIdx" />
-                                <!--
-                                <c:if test="${!empty list.fileIdx }"><span class="btn_area file_area optional_btn_area"><a href="javascript:void(0);" class="del_btn btn" data-idx="${list.fileIdx }" onclick="deleteFile(this);">삭제</a></span></c:if>
-                                    -->
                             </div>
                         }
                     </td>
@@ -71,12 +68,15 @@
         <a href="list?@Session["searchString"]" class="btn">목록</a>
     </div>
 </div>
+<script type="text/javascript" src="/resources/se/js/HuskyEZCreator.js"></script>
+<script type="text/javascript" src="/resources/js/smarteditor.js"></script>
 <script>
     function modify() {
-                                if (!confirm('수정하시겠습니까')) return;
-                                if (!$('#title').required()) return;
-                                if (!$('#contents').required()) return;
+        if (!confirm('수정하시겠습니까')) return;
+        if (!$('#title').required()) return;
+        editor_object.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
+        if (!$('#contents').required()) return;
         $('form').attr('action', 'modifyProc').submit();
-                            };
+    };
 
 </script>
