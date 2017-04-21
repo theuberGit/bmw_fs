@@ -28,7 +28,7 @@ namespace bmw_fs.Controllers
             
         }
 
-        public ActionResult imageView(Files files)
+        public FileResult imageView(Files files)
         {
             Files item = filesService.findAllByIdx(files);
             if (item != null)
