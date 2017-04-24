@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace bmw_fs.Controllers
+namespace bmw_fs.Controllers.common
 {
     public class BoardController : Controller
     {

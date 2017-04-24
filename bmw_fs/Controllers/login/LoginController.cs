@@ -9,7 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 
-namespace bmw_fs.Controllers
+namespace bmw_fs.Controllers.login
 {
     public class LoginController : Controller
     {

@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Web;
 using System.Web.Mvc;
 
-namespace bmw_fs.Controllers
+namespace bmw_fs.Controllers.common
 {
     public class FilesController : Controller
     {

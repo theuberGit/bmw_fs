@@ -151,12 +151,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Config\StringProperties.cs" />
-    <Compile Include="Controllers\BoardController.cs" />
-    <Compile Include="Controllers\ErrorController.cs" />
-    <Compile Include="Controllers\FilesController.cs" />
+    <Compile Include="Controllers\test\BoardController.cs" />
+    <Compile Include="Controllers\common\ErrorController.cs" />
+    <Compile Include="Controllers\common\FilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\MemberController.cs" />
+    <Compile Include="Controllers\login\LoginController.cs" />
+    <Compile Include="Controllers\login\MemberController.cs" />
     <Compile Include="Dao\face\admin\MemberDao.cs" />
     <Compile Include="Dao\face\board\BoardDao.cs" />
     <Compile Include="Dao\face\common\FilesDao.cs" />

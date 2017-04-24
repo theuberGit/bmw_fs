@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace bmw_fs.Controllers
+namespace bmw_fs.Controllers.login
 {
     public class MemberController : Controller
     {
