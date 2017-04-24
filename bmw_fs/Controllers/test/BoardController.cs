@@ -1,9 +1,9 @@
-﻿using bmw_fs.Models.board;
+﻿using bmw_fs.Common.Filter;
+using bmw_fs.Models.board;
 using bmw_fs.Service.face.board;
 using bmw_fs.Service.face.common;
 using bmw_fs.Service.impl.board;
 using bmw_fs.Service.impl.common;
-using System.Diagnostics;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -11,6 +11,7 @@ using System.Web.Routing;
 namespace bmw_fs.Controllers.common
 {
     [Authorize]
+    [TestFilter]
     public class BoardController : Controller
     {
         BoardService boardSerivce = new BoardServiceImpl();

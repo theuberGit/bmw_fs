@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -39,20 +40,30 @@ namespace bmw_fs
             var lastError = Server.GetLastError();
             Exception exception = lastError;
             var serverError = lastError as HttpException;
-
-            if (serverError != null && serverError.GetHttpCode() == 404)
+            
+            if ("CustomException".Equals(exception.GetType().Name))
             {
-                Response.Redirect("/Error/Error404");
-            }
-            else if (serverError != null && serverError.GetHttpCode() == 403)
-            {
-                Response.Redirect("/Error/Error403");
+                logger.Error(exception.ToString());
+                Session.Add("msg", exception.Message);
+                Server.ClearError();
+                Response.Redirect("/Error/CustomError");
             }
             else
             {
-                logger.Error(exception.ToString());
-                Server.ClearError();
-                Response.Redirect("/Error/Error500");
+                if (serverError != null && serverError.GetHttpCode() == 404)
+                {
+                    Response.Redirect("/Error/Error404");
+                }
+                else if (serverError != null && serverError.GetHttpCode() == 403)
+                {
+                    Response.Redirect("/Error/Error403");
+                }
+                else
+                {
+                    logger.Error(exception.ToString());
+                    Server.ClearError();
+                    Response.Redirect("/Error/Error500");
+                }
             }
         }
     }

@@ -18,5 +18,10 @@ namespace bmw_fs.Controllers.common
         {
             return View();
         }
+
+        public ActionResult CustomError()
+        {
+            return View();
+        }
     }
 }

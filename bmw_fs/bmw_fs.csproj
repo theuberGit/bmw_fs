@@ -150,6 +150,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Common\CustomException.cs" />
     <Compile Include="Config\StringProperties.cs" />
     <Compile Include="Controllers\test\BoardController.cs" />
     <Compile Include="Controllers\common\ErrorController.cs" />
@@ -161,6 +162,7 @@
     <Compile Include="Dao\face\board\BoardDao.cs" />
     <Compile Include="Dao\face\common\FilesDao.cs" />
     <Compile Include="Dao\face\common\SequenceDao.cs" />
+    <Compile Include="Common\Filter\TestFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -326,6 +328,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Error\Error404.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Error\CustomError.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
