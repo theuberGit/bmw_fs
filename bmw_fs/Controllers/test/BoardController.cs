@@ -3,12 +3,14 @@ using bmw_fs.Service.face.board;
 using bmw_fs.Service.face.common;
 using bmw_fs.Service.impl.board;
 using bmw_fs.Service.impl.common;
+using System.Diagnostics;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace bmw_fs.Controllers.common
 {
+    [Authorize]
     public class BoardController : Controller
     {
         BoardService boardSerivce = new BoardServiceImpl();
@@ -21,6 +23,7 @@ namespace bmw_fs.Controllers.common
             searchService.setPagination(board, 10, boardSerivce.findAllCount(board));
             ViewBag.list = boardSerivce.findAll(board);
             ViewBag.pagination = board;
+            
             return View();
         }
 
@@ -34,7 +37,7 @@ namespace bmw_fs.Controllers.common
         public RedirectToRouteResult registerProc(Board board)
         {
             HttpFileCollectionBase multipartRequest = Request.Files;
-            board.regId = "testasp";
+            board.regId = System.Web.HttpContext.Current.User.Identity.Name;
             boardSerivce.insertBoard(multipartRequest, board);
 
          
@@ -65,7 +68,7 @@ namespace bmw_fs.Controllers.common
         public RedirectToRouteResult modifyProc(Board board)
         {
             HttpFileCollectionBase multipartRequest = Request.Files;
-            board.updateId = "testAsp11";
+            board.updateId = System.Web.HttpContext.Current.User.Identity.Name;
             boardSerivce.updateBoard(multipartRequest, board);
             return RedirectToAction("list");
         }
