@@ -158,6 +158,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\CustomException.cs" />
     <Compile Include="Config\StringProperties.cs" />
+    <Compile Include="Controllers\recruit\RecruitNoticeController.cs" />
     <Compile Include="Controllers\test\BoardController.cs" />
     <Compile Include="Controllers\common\ErrorController.cs" />
     <Compile Include="Controllers\common\FilesController.cs" />
@@ -169,6 +170,7 @@
     <Compile Include="Dao\face\common\FilesDao.cs" />
     <Compile Include="Dao\face\common\SequenceDao.cs" />
     <Compile Include="Common\Filter\TestFilter.cs" />
+    <Compile Include="Dao\face\recruit\RecruitNoticeDao.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -178,23 +180,27 @@
     <Compile Include="Models\common\Pagination.cs" />
     <Compile Include="Models\common\SearchInfo.cs" />
     <Compile Include="Models\common\Sequence.cs" />
+    <Compile Include="Models\recruit\RecruitNotice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\face\admin\MemberService.cs" />
     <Compile Include="Service\face\board\BoardService.cs" />
     <Compile Include="Service\face\common\FilesService.cs" />
     <Compile Include="Service\face\common\SearchService.cs" />
     <Compile Include="Service\face\common\SequenceService.cs" />
+    <Compile Include="Service\face\recruit\RecruitNoticeService.cs" />
     <Compile Include="Service\impl\admin\MemberServiceImpl.cs" />
     <Compile Include="Service\impl\board\BoardServiceImpl.cs" />
     <Compile Include="Service\impl\common\FilesServiceImpl.cs" />
     <Compile Include="Service\impl\common\SearchServiceImpl.cs" />
     <Compile Include="Service\impl\common\SequenceServiceImpl.cs" />
+    <Compile Include="Service\impl\recruit\RecruitNoticeServiceImpl.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dao\impl\admin\Member.xml" />
     <Content Include="Dao\impl\board\Board.xml" />
     <Content Include="Dao\impl\common\Files.xml" />
     <Content Include="Dao\impl\common\Sequence.xml" />
+    <Content Include="Dao\impl\recruit\RecruitNotice.xml" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
@@ -287,6 +293,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Files\" />
+    <Folder Include="Views\RecruitNotice\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

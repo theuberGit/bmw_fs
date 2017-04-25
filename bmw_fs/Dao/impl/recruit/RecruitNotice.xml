@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sqlMap namespace="recruitNotice" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="RecruitNoticeClass" type="bmw_fs.Models.recruit.RecruitNotice"/>
+  </alias>
+
+  <resultMaps>
+    <resultMap id="RecruitNoticeMap" class="RecruitNoticeClass">
+      <result property="idx" column="IDX" />
+      <result property="title" column="TITLE" />
+      <result property="startDate" column="START_DATE" />
+      <result property="endDate" column="END_DATE" />
+      <result property="contents" column="CONTENTS" />
+      <result property="deployYn" column="DEPLOY_YN" />
+      <result property="regDate" column="REG_DATE" />
+      <result property="regId" column="REG_ID" />
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+
+    <select id="findAll" resultMap="RecruitNoticeMap">
+      SELECT *
+        FROM (
+          SELECT
+            ROW_NUMBER() OVER(ORDER BY idx DESC) AS RNUM
+            ,IDX
+            ,TITLE
+            ,CONTENTS
+            ,REG_DATE
+            ,REG_ID
+          FROM BMW_FS_RECRUIT_NOTICE
+          WHERE 1=1
+          <isNotEmpty property="searchInput">
+            <isEqual property="searchOption" compareValue="title">
+              AND TITLE LIKE '%'+#searchInput#+'%'
+            </isEqual>
+            <isEqual property="searchOption" compareValue="contents">
+              AND CONTENTS LIKE '%'+#searchInput#+'%'
+            </isEqual>
+        </isNotEmpty>
+      
+       )t
+      WHERE 1=1
+        AND (RNUM BETWEEN #currentItem# AND #currentItemEnd# )
+    </select>
+
+    <select id="findAllCount" resultClass="int">
+      SELECT COUNT(*)
+        FROM BMW_FS_RECRUIT_NOTICE
+      WHERE 1=1
+      <isNotEmpty property="searchInput">
+          <isEqual property="searchOption" compareValue="title">
+            AND TITLE LIKE '%'+#searchInput#+'%'
+          </isEqual>
+          <isEqual property="searchOption" compareValue="contents">
+            AND CONTENTS LIKE '%'+#searchInput#+'%'
+          </isEqual>
+        </isNotEmpty>
+    </select>
+
+    <insert id="insertRecruitNotice">
+      INSERT INTO BMW_FS_RECRUIT_NOTICE (
+             IDX
+            ,TITLE
+            ,CONTENTS
+            ,START_DATE
+            ,END_DATE
+            ,DEPLOY_YN
+            ,REG_ID
+      )
+      VALUES (
+             #idx#
+            ,#title#
+            ,#contents#
+            ,#startDate#
+            ,#endDate#
+            ,#deployYn#
+            ,#regId#
+      )
+    </insert>
+
+    <select id="findRecruitNotice" resultMap="RecruitNoticeMap">
+      SELECT IDX
+            ,TITLE
+            ,CONTENTS
+            ,START_DATE
+            ,END_DATE
+            ,DEPLOY_YN
+            ,REG_DATE
+            ,REG_ID
+      FROM BMW_FS_RECRUIT_NOTICE
+      WHERE IDX = #idx#
+    </select>
+
+    <update id="updateRecruitNotice">
+      UPDATE BMW_FS_RECRUIT_NOTICE
+         SET TITLE = #title#
+            ,CONTENTS = #contents#
+            ,START_DATE = #startDate#
+            ,END_DATE = #endDate#
+            ,DEPLOY_YN = #deployYn#
+            ,UPT_DATE = getDate()
+            ,UPT_ID = #updateId#
+      WHERE IDX = #idx#
+    </update>
+
+    <delete id="deleteRecruitNotice">
+      DELETE FROM BMW_FS_RECRUIT_NOTICE
+      WHERE IDX = #idx#
+    </delete>
+    
+  </statements>
+
+</sqlMap>

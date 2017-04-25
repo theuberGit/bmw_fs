@@ -47,8 +47,8 @@ namespace bmw_fs.Service.impl.board
         public void updateBoard(HttpFileCollectionBase multipartFiles, Board board)
         {
             Mapper.Instance().BeginTransaction();
-            filesService.deleteFileAndFileUpload(multipartFiles, "files", "jpg|png", 5 * 1024 * 1024, board.masterIdx, board.fileIdxs);
-            filesService.deleteFileAndFileUpload(multipartFiles, "files2", "jpg|png", 5 * 1024 * 1024, board.masterIdx, board.fileIdxs2);
+            filesService.deleteFileAndFileUpload(multipartFiles, "files", "jpg|png", 5 * 1024 * 1024, board.idx, board.fileIdxs);
+            filesService.deleteFileAndFileUpload(multipartFiles, "files2", "jpg|png", 5 * 1024 * 1024, board.idx, board.fileIdxs2);
             boardDao.updateBoard(board);
             Mapper.Instance().CommitTransaction();
         }
