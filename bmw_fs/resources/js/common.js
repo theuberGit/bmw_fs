@@ -14,7 +14,7 @@
 });
 function searchList() {
     $('#page').val(1);
-    $('form').submit();
+    $('#content form').submit();
 };
 
 function lnbSet(mainIdx, subIdx) {
