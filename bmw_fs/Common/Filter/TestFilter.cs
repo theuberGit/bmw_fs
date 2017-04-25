@@ -11,6 +11,10 @@ namespace bmw_fs.Common.Filter
 
     public class TestFilter : ActionFilterAttribute
     {
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            //filterContext.HttpContext.Request.Params;
+        }
 
         /*
         public override void OnActionExecuting(ActionExecutingContext filterContext)
@@ -34,13 +38,13 @@ namespace bmw_fs.Common.Filter
             Debug.WriteLine("param : " + filterContext.HttpContext.Request.Params);
         }
         */
-
         public override void OnResultExecuted(ResultExecutedContext filterContext)
         {
             Log("OnResultExecuted", filterContext.RouteData);
             Debug.WriteLine("param : " + filterContext.HttpContext.Request.QueryString);
             Debug.WriteLine("param : " + filterContext.HttpContext.Request.Params);
         }
+        
 
         private void Log(string methodName, RouteData routeData)
         {            

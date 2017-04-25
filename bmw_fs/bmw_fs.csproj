@@ -45,6 +45,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AntiXssLibrary, Version=4.3.0.0, Culture=neutral, PublicKeyToken=d127efab8a9c114f, processorArchitecture=MSIL">
+      <HintPath>..\packages\AntiXSS.4.3.0\lib\net40\AntiXssLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlSanitizationLibrary, Version=4.3.0.0, Culture=neutral, PublicKeyToken=d127efab8a9c114f, processorArchitecture=MSIL">
+      <HintPath>..\packages\AntiXSS.4.3.0\lib\net40\HtmlSanitizationLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="IBatisNet.Common, Version=1.6.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MyBatis.NET.1.6.4\lib\IBatisNet.Common.dll</HintPath>
     </Reference>
@@ -283,7 +289,9 @@
     <Folder Include="Views\Files\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="SqlMap.config" />
