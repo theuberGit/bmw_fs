@@ -6,14 +6,24 @@
     });
 
     $('.search_text').keyup(function (e) {
-        if (e.keyCode == 13) {
+        if (e.keyCode === 13) {
             searchList();
         }
     });
+
 });
 function searchList() {
     $('#page').val(1);
     $('form').submit();
+};
+
+function lnbSet(mainIdx, subIdx) {
+    $('.menu_list li').removeClass('on');
+    if (subIdx !== 0) {
+        $('.menu_list>li:nth-child(' + mainIdx + ')').find('li:nth-child(' + subIdx + ')').addClass('on');
+    } else {
+        $('.menu_list>li:nth-child(' + mainIdx + ')').addClass('on');
+    }
 };
 
 function addFileBtn(target) {
@@ -55,7 +65,7 @@ function deleteFile(obj) {
             alert('요청하신 작업을 수행하던 중 예상치 않게 중지되었습니다.\n\n다시 시도해 주십시오.');
         },
         success: function (data) {
-            if (data.status == -1) {
+            if (data.status === -1) {
                 alert('파일이 존재하지 않습니다.');
                 return;
             }
@@ -63,7 +73,7 @@ function deleteFile(obj) {
             $fileCount = $parentObject.find('.file-wrapper').length;
             $targetObject = $obj.closest('.file-wrapper');
             $hasAddBtn = $targetObject.find('.add_btn').length;
-            if ($fileCount == 1 || $hasAddBtn == 1) {
+            if ($fileCount === 1 || $hasAddBtn === 1) {
                 $targetObject.find('.file_text').val('');
                 $targetObject.find('input[type=hidden]').val('');
             } else {

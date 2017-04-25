@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="news" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+  <alias>
+    <typeAlias alias="NewsClass" type="bmw_fs.Models.news.News"/>
+  </alias>
+
+  <resultMaps>
+    <resultMap id="newsMap" class="NewsClass">
+      <result property="idx" column="IDX" />
+      <result property="type" column="TYPE" />
+      <result property="title" column="TITLE" />
+      <result property="contents" column="CONTENTS" />
+      <result property="deployYn" column="DEPLOY_YN" />
+      <result property="hit" column="HIT" />
+      <result property="regDate" column="REG_DATE" />
+      <result property="regId" column="REG_ID" />
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+
+    <select id="findAll" resultMap="newsMap">
+      SELECT *
+        FROM (
+          SELECT
+            ROW_NUMBER() OVER(ORDER BY IDX DESC) AS RNUM
+              ,IDX
+              ,TYPE
+              ,TITLE
+              ,CONTENTS
+              ,DEPLOY_YN
+              ,HIT
+              ,REG_DATE
+              ,REG_ID
+            FROM BMW_FS_NEWS
+            WHERE 1=1
+            <isNotEmpty property="searchInput">
+              <isEqual property="searchOption" compareValue="title">
+                AND TITLE LIKE '%'+#searchInput#+'%'
+              </isEqual>
+              <isEqual property="searchOption" compareValue="contents">
+                AND CONTENTS LIKE '%'+#searchInput#+'%'
+              </isEqual>
+            </isNotEmpty>
+          )t
+        WHERE 1=1
+        AND (RNUM BETWEEN #currentItem# AND #currentItemEnd# )
+    </select>
+
+    <select id="findAllCount" resultClass="int">
+      SELECT COUNT(*)
+      FROM BMW_FS_NEWS
+      WHERE 1=1
+      <isNotEmpty property="searchInput">
+        <isEqual property="searchOption" compareValue="title">
+          AND TITLE LIKE '%'+#searchInput#+'%'
+        </isEqual>
+        <isEqual property="searchOption" compareValue="contents">
+          AND CONTENTS LIKE '%'+#searchInput#+'%'
+        </isEqual>
+      </isNotEmpty>
+    </select>
+
+    <select id="findNews" resultMap="newsMap">
+      SELECT IDX
+      ,TITLE
+      ,CONTENTS
+      ,DEPLOY_YN
+      ,TYPE
+      ,REG_DATE
+      ,REG_ID
+      FROM BMW_FS_NEWS
+      WHERE IDX = #idx#
+    </select>
+
+    <insert id="insertNews">
+      INSERT INTO BMW_FS_NEWS
+      (
+      IDX
+      ,TYPE
+      ,TITLE
+      ,CONTENTS
+      ,DEPLOY_YN
+      ,REG_ID
+      )
+      VALUES (
+      #idx#
+      ,#type#
+      ,#title#
+      ,#contents#
+      ,#deployYn#
+      ,#regId#
+      )
+
+    </insert>
+
+    <update id="updateNews">
+      UPDATE BMW_FS_NEWS
+      SET TYPE = #type# 
+      ,TITLE = #title#
+      ,CONTENTS = #contents#
+      ,DEPLOY_YN = #deployYn#
+      ,UPT_DATE = getDate()
+      ,UPT_ID = #uptId#
+      WHERE IDX = #idx#
+    </update>
+
+    <delete id="deleteNews">
+      DELETE FROM BMW_FS_NEWS
+      WHERE IDX = #idx#
+    </delete>
+    
+  </statements>
+</sqlMap>

@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - 내 ASP.NET 응용 프로그램</title>
-    <link rel="stylesheet" type="text/css" href="/resources/css/mgmt.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/common.css">
     <script src="/resources/js/jquery-1.12.4.min.js"></script>
     <script src="/resources/js/jquery-ui.min.js"></script>
     <script src="/resources/js/jquery.cust.js"></script>
@@ -13,11 +13,59 @@
 </head>
 <body>
     <div id="wrap">
-        <div id="content">
-            <div class="content_wrap">
-                @RenderBody()
+        <div id="header">
+            <h1><a href="#"><img src="/resources/images/logo.png" alt=""></a></h1>
+            <div class="header_inner">
+                <h2>BMW FS 관리자</h2>
+                <div class="link_list">
+                    <a href="#" class="on">관리자 관리</a>
+                    <a href="#">미답변 1:1 문의 <span></span></a>
+                    <a href="#">My Account</a>
+                    <a href="#">로그인</a>
+                </div>
             </div>
-            <div id="footer"></div>
         </div>
+        <div id="container">
+            <div id="lnb">
+                <ul class="menu_list">
+                    <li class="sub_list on">
+                        <a href="#">메인롤링 관리</a>
+                        <ul>
+                            <li><a href="#">웹 메인롤링</a></li>
+                            <li><a href="#">모바일 메인롤링</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub_list">
+                        <a href="#">프로모션 관리</a>
+                        <ul>
+                            <li><a href="#">웹 프로모션</a></li>
+                            <li><a href="#">모바일 프로모션</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">배너 관리</a></li>
+                    <li><a href="#">월납입금 관리</a></li>
+                    <li><a href="/News/list">뉴스 관리</a></li>
+                    <li><a href="#">전시장 관리 </a></li>
+                    <li><a href="#">법적 고지</a></li>
+                    <li class="sub_list">
+                        <a href="#">인재채용</a>
+                        <ul>
+                            <li><a href="#">채용 공고</a></li>
+                            <li><a href="#">채용 FAQ</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub_list">
+                        <a href="#">고객센터</a>
+                        <ul>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">1:1 문의</a></li>
+                            <li><a href="#">다운로드 자료/양식</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            @RenderBody()
+        </div>
+    </div>
 </body>
 </html>

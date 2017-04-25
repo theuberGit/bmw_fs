@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "뉴스 리스트";
+}
+
+<!DOCTYPE html>
+
+<div id="content" class="list">
+    <div class="cont_top">
+        <h3>뉴스 관리</h3>
+        <div class="search_box">
+            <select name="" id="">
+                <option value="op1">제목</option>
+                <option value="op2">내용</option>
+            </select>
+            <input type="text">
+            <button type="button"></button>
+        </div>
+    </div>
+    <div class="cont_bottom">
+
+        <table class="list_table">
+            <colgroup>
+                <col width="60px" />
+                <col width="*" />
+                <col width="100px" />
+                <col width="100px" />
+                <col width="100px" />
+                <col width="100px" />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>등록일</th>
+                    <th>조회수</th>
+                    <th>배포</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (var i = 0; i < ViewBag.list.Count; i++)
+                {
+                    <tr>
+                        @if ("N".Equals(ViewBag.list[i].type))
+                        {
+                            <td>공지</td>
+                        }
+                        else
+                        {
+                            <td>@(ViewBag.pagination.totalItemCount - (ViewBag.pagination.currentPage - 1) * ViewBag.pagination.itemPerPage - i)</td>
+                        }
+                        <td class="tit_area">@ViewBag.list[i].title</td>
+                        <td>@ViewBag.list[i].regId</td>
+                        <td>@ViewBag.list[i].regDate</td>
+                        <td>@ViewBag.list[i].hit</td>
+                        <td>@ViewBag.list[i].deployYn</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @RenderPage("~/Views/Common/Pagination.cshtml")
+        <a href="register" class="btn_defualt btn_reg">등록</a>
+    </div>
+</div>
+<script>
+    lnbSet(5,0);
+    //$('.menu_list>li:nth-child(5)').addClass('on').siblings().removeClass('on');
+</script>

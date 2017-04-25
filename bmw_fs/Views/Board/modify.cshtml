@@ -1,73 +1,94 @@
 ﻿@{
     ViewBag.Title = "register";
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - 내 ASP.NET 응용 프로그램</title>
+    <link rel="stylesheet" type="text/css" href="/resources/css/mgmt.css">
+    <script src="/resources/js/jquery-1.12.4.min.js"></script>
+    <script src="/resources/js/jquery-ui.min.js"></script>
+    <script src="/resources/js/jquery.cust.js"></script>
+    <script src="/resources/js/common.js"></script>
+</head>
+<body>
+    <div id="wrap">
+        <div id="content">
+            <div class="content_wrap">
+                <div class="sub_content">
+                    <h2>테스트 수정</h2>
+                    <div class="manager_detail">
+                        <form method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="idx" value="@ViewBag.item.idx" />
+                            <table>
+                                <caption>테스트 입력 테이블</caption>
+                                <colgroup>
+                                    <col width="20%">
+                                    <col width="30%">
+                                    <col width="20%">
+                                    <col width="30%">
+                                </colgroup>
+                                <tr>
+                                    <th scope="row"><label for="title">* 제목</label></th>
+                                    <td colspan="3"><input type="text" name="title" id="title" class="title" maxlength="50" value="@ViewBag.item.title" /></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><label for="pw">* 내용</label></th>
+                                    <td colspan="3"><textarea rows="20" cols="30" id="contents" name="contents">@ViewBag.item.contents</textarea> </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><label for="name">* 파일</label></th>
+                                    <td colspan="3">
 
-<div class="sub_content">
-    <h2>테스트 수정</h2>
-    <div class="manager_detail">
-        <form method="post" enctype="multipart/form-data">
-            <input type="hidden" name="idx" value="@ViewBag.item.idx" />
-            <table>
-                <caption>테스트 입력 테이블</caption>
-                <colgroup>
-                    <col width="20%">
-                    <col width="30%">
-                    <col width="20%">
-                    <col width="30%">
-                </colgroup>
-                <tr>
-                    <th scope="row"><label for="title">* 제목</label></th>
-                    <td colspan="3"><input type="text" name="title" id="title" class="title" maxlength="50" value="@ViewBag.item.title" /></td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="pw">* 내용</label></th>
-                    <td colspan="3"><textarea rows="20" cols="30" id="contents" name="contents">@ViewBag.item.contents</textarea> </td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="name">* 파일</label></th>
-                    <td colspan="3">
-                        
-                        @for (int i = 0, size = ViewBag.filesList1.Count; i < size; i++)
-                        {
-                            <div class="file-wrapper">
-                                <input type="text" class="file_text" value="@ViewBag.filesList1[i].originalFilename" readonly="readonly" />
-                                <span class="btn_area file_area">
-                                    <button type="button" class="btn file_btn">파일 선택</button>
-                                    <input type="file" name="files" class="file_input" />
-                                </span>
-                                <input type="hidden" name="fileIdxs" value="@ViewBag.filesList1[i].fileIdx" />
-                            </div>
-                        }
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="name">* 파일 여러개</label></th>
-                    <td colspan="3">
-                        @for (int i = 0, size = ViewBag.filesList2.Count; i < size; i++)
-                        {
-                            <div class="file-wrapper">
-                                <input type="text" class="file_text" value="@ViewBag.filesList2[i].originalFilename" readonly="readonly" />
-                                <span class="btn_area file_area">
-                                    <button type="button" class="btn file_btn">파일 선택</button>
-                                    <input type="file" name="files2" class="file_input" />
-                                </span>
-                                <input type="hidden" name="fileIdxs2" value="@ViewBag.filesList2[i].fileIdx" />
-                                @if (i == 0)
-                                {
-                                    <span class="btn_area file_area optional_btn_area"><a href="javascript:void(0);" class="add_btn btn" onclick="addFileBtn(this);">+</a></span><span>(파일형식: jpg, png)</span>
-                                }
-                            </div>
-                        }                        
-                    </td>
-                </tr>
-            </table>
-        </form>
-    </div>
-    <div class="btn_area">
-        <a href="javascript:void(0);" class="btn" onclick="modify();">수정</a>
-        <a href="list?@Session["searchString"]" class="btn">목록</a>
-    </div>
-</div>
+                                        @for (int i = 0, size = ViewBag.filesList1.Count; i < size; i++)
+                                        {
+                                            <div class="file-wrapper">
+                                                <input type="text" class="file_text" value="@ViewBag.filesList1[i].originalFilename" readonly="readonly" />
+                                                <span class="btn_area file_area">
+                                                    <button type="button" class="btn file_btn">파일 선택</button>
+                                                    <input type="file" name="files" class="file_input" />
+                                                </span>
+                                                <input type="hidden" name="fileIdxs" value="@ViewBag.filesList1[i].fileIdx" />
+                                            </div>
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><label for="name">* 파일 여러개</label></th>
+                                    <td colspan="3">
+                                        @for (int i = 0, size = ViewBag.filesList2.Count; i < size; i++)
+                                        {
+                                            <div class="file-wrapper">
+                                                <input type="text" class="file_text" value="@ViewBag.filesList2[i].originalFilename" readonly="readonly" />
+                                                <span class="btn_area file_area">
+                                                    <button type="button" class="btn file_btn">파일 선택</button>
+                                                    <input type="file" name="files2" class="file_input" />
+                                                </span>
+                                                <input type="hidden" name="fileIdxs2" value="@ViewBag.filesList2[i].fileIdx" />
+                                                @if (i == 0)
+                                                {
+                                                    <span class="btn_area file_area optional_btn_area"><a href="javascript:void(0);" class="add_btn btn" onclick="addFileBtn(this);">+</a></span><span>(파일형식: jpg, png)</span>
+                                                }
+                                            </div>
+                                        }
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                    <div class="btn_area">
+                        <a href="javascript:void(0);" class="btn" onclick="modify();">수정</a>
+                        <a href="list?@Session["searchString"]" class="btn">목록</a>
+                    </div>
+                </div>
+            </div>
+            <div id="footer"></div>
+        </div>
+</body>
+</html>
 <script type="text/javascript" src="/resources/se/js/HuskyEZCreator.js"></script>
 <script type="text/javascript" src="/resources/js/smarteditor.js"></script>
 <script>

@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 
 html,body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select{margin:0; padding:0}
 body{font-family:'NotoSans', sans-serif, Helvetica; font-size:14px; line-height:1.45em; color:#333; letter-spacing:-1px; -webkit-text-size-adjust:none; }
@@ -42,6 +42,7 @@ body, html{height:100%;}
 #lnb .menu_list > li > a{font-weight:bold; color:#3d3d3d;}
 #lnb .menu_list > li.on > a{color:#1f69d2;}
 #lnb .menu_list > li li{margin-left:6px;}
+#lnb .menu_list > li li.on > a {color: #1f69d2;}
 #lnb .menu_list > li li a{font-size:12px; color:#777;}
 #lnb .menu_list > li.sub_list > a{display:block; margin-bottom:10px}
 
@@ -58,7 +59,7 @@ body, html{height:100%;}
 .list .cont_bottom .list_table thead th{padding:13px 0; border-top:1px solid #ccc; border-bottom:1px solid #ccc; border-right:1px solid #ccc;  background-color:#f4f4f4;}
 .list .cont_bottom .list_table tbody tr td{padding:13px 0; border-bottom:1px solid #ccc; border-right:1px solid #ccc; text-align:center; box-sizing:border-box;}
 .list .cont_bottom .list_table tbody tr td.tit{padding-left:13px; text-align:left;}
-
+.list .cont_bottom .list_table tbody tr td.tit_area {padding-left: 10px; text-align: left;}
 
 .reg .cont_top{margin-bottom:20px;}
 .reg .cont_bottom .reg_table{width:100%; margin-bottom:10px; border-top:2px solid #828282}
