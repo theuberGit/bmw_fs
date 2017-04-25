@@ -158,8 +158,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\CustomException.cs" />
     <Compile Include="Config\StringProperties.cs" />
+    <Compile Include="Controllers\legalNotice\PrivacyController.cs" />
     <Compile Include="Controllers\news\NewsController.cs" />
-    <Compile Include="Controllers\PrivacyController.cs" />
     <Compile Include="Controllers\recruit\RecruitNoticeController.cs" />
     <Compile Include="Controllers\test\BoardController.cs" />
     <Compile Include="Controllers\common\ErrorController.cs" />
@@ -173,6 +173,7 @@
     <Compile Include="Dao\face\common\SequenceDao.cs" />
     <Compile Include="Common\Filter\TestFilter.cs" />
     <Compile Include="Dao\face\news\NewsDao.cs" />
+    <Compile Include="Dao\face\privacy\PrivacyDao.cs" />
     <Compile Include="Dao\face\recruit\RecruitNoticeDao.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -210,6 +211,7 @@
     <Content Include="Dao\impl\common\Files.xml" />
     <Content Include="Dao\impl\common\Sequence.xml" />
     <Content Include="Dao\impl\news\News.xml" />
+    <Content Include="Dao\impl\privacy\Privacy.xml" />
     <Content Include="Dao\impl\recruit\RecruitNotice.xml" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />

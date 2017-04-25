@@ -16,6 +16,16 @@ namespace bmw_fs.Service.impl.privacy
         PrivacyDao privacyDao = new PrivacyDao();
         SequenceService sequenceService = new SequenceServiceImpl();
 
+        public IList<Privacy> findAll(Privacy privacy)
+        {
+           return this.privacyDao.findAll(privacy);
+        }
+
+        public int findAllCount(Privacy privacy)
+        {
+            return this.privacyDao.findAllCount(privacy);
+        }
+
         public void insertPrivacy(Privacy privacy)
         {
             int masterIdx = sequenceService.getSequenceMasterIdx();
@@ -24,5 +34,7 @@ namespace bmw_fs.Service.impl.privacy
             privacyDao.insertPrivacy(privacy);
             Mapper.Instance().CommitTransaction();
         }
+
+
     }
 } 

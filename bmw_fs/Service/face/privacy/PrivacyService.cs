@@ -10,5 +10,9 @@ namespace bmw_fs.Service.face.privacy
     interface PrivacyService
     {
         void insertPrivacy(Privacy privacy);
+
+        IList<Privacy> findAll(Privacy privacy);
+
+        int findAllCount(Privacy privacy);
     }
 }
