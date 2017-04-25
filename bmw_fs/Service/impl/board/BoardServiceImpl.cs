@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace bmw_fs.Service.impl.board
@@ -67,7 +68,7 @@ namespace bmw_fs.Service.impl.board
         private void validation(Board board)
         {
             if (String.IsNullOrWhiteSpace(board.title)) throw new CustomException("필수 값이 없습니다.");
-            if (String.IsNullOrWhiteSpace(board.contents)) throw new CustomException("필수 값이 없습니다.");
+            if (String.IsNullOrWhiteSpace(Regex.Replace(board.contents, "<.*?>", string.Empty))) throw new CustomException("필수 값이 없습니다.");
         }
     }
 }
