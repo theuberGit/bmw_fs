@@ -1,0 +1,49 @@
+﻿<div class="sub_content">
+    <h2>테스트</h2>
+    <form method="get">
+        <fieldset>
+            <legend>운영자 리스트 검색</legend>
+            <div class="search_box">
+                <select id="searchOption" class="search_select" name="searchOption">
+                    <option value="">구분</option>
+                    <option value="title">제목</option>
+                    <option value="contents">내용</option>
+                </select>
+                <input type="text" name="searchInput" class="search_text" value="" /><input type="text" style="display: none;" />
+                <button type="button" class="submit_btn" onclick="searchList();"><img src="/resources/images/mgmt/btn_search.gif" alt="" /></button>
+            </div>
+        </fieldset>
+        <div class="board">
+            <table>
+                <caption>목록 테이블</caption>
+                <colgroup>
+                    <col width="">
+                    <col width="50%">
+                    <col width="20%">
+                    <col width="20%">
+                </colgroup>
+                <thead>
+                    <tr class="title_tr">
+                        <th scope="col" class="co1">번호</th>
+                        <th scope="col" class="co2 line">제목</th>
+                        <th scope="col" class="co4 line">작성자</th>
+                        <th scope="col" class="co6 line">등록일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr>
+                            <td class="co1">1</td>
+                            <td class="co2">블라블라</td>
+                            <td class="co4">test</td>
+                            <td class="co6">17.04.25</td>
+                        </tr>
+                </tbody>
+            </table>
+            <a href="register" class="enrollment_btn">등록</a>
+        </div>
+    </form>
+
+</div>
+<script>
+    
+</script>

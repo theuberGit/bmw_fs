@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+
+<sqlMap namespace="privacy" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="PrivacyClass" type="bmw_fs.Models.privacy.Privacy"/>
+  </alias>
+
+  <resultMaps>
+    <resultMap id="privacyMap" class="PrivacyClass">
+      <result property="idx" column="idx" />
+      <result property="title" column="title" />
+      <result property="contents" column="contents" />
+      <result property="regDate" column="reg_date" />
+      <result property="regId" column="reg_id" />
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+
+    <insert id="insertPrivacy">
+      INSERT INTO BMW_FS_PRIVACY(
+                  idx
+                  ,title
+                  ,contents
+                  ,reg_id
+                  )
+      VALUES (
+                  #idx#
+                  ,#title#
+                  ,#contents#
+                  ,#regId#
+                  )
+    </insert>
+            
+            
+
+  </statements>
+</sqlMap>
