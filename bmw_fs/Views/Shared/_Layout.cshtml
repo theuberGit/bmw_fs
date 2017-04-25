@@ -17,12 +17,22 @@
             <h1><a href="#"><img src="/resources/images/logo.png" alt=""></a></h1>
             <div class="header_inner">
                 <h2>BMW FS 관리자</h2>
-                <div class="link_list">
-                    <a href="#" class="on">관리자 관리</a>
-                    <a href="#">미답변 1:1 문의 <span></span></a>
-                    <a href="#">My Account</a>
-                    <a href="#">로그인</a>
-                </div>
+                <form method="post" action="/login/LogOff" id="logoutForm">
+                    <div class="link_list">
+                        <!--
+                        <a href="#" class="on">관리자 관리</a>
+                        <a href="#">미답변 1:1 문의 <span></span></a>
+                        <a href="#">My Account</a>
+                         -->
+                        @Html.AntiForgeryToken()
+                        <a href="javascript:void(0);" onclick="logout();">로그아웃</a>
+                    </div>
+                </form>
+                <script>
+                    function logout() {
+                        $('#logoutForm').submit();
+                    }
+                </script>
             </div>
         </div>
         <div id="container">

@@ -29,17 +29,22 @@
             ,IDX
             ,TITLE
             ,CONTENTS
+            ,START_DATE
+            ,END_DATE
             ,REG_DATE
             ,REG_ID
+            ,DEPLOY_YN
           FROM BMW_FS_RECRUIT_NOTICE
           WHERE 1=1
           <isNotEmpty property="searchInput">
-            <isEqual property="searchOption" compareValue="title">
-              AND TITLE LIKE '%'+#searchInput#+'%'
-            </isEqual>
-            <isEqual property="searchOption" compareValue="contents">
-              AND CONTENTS LIKE '%'+#searchInput#+'%'
-            </isEqual>
+            <isNotEmpty property="searchOption">
+              <isEqual property="searchOption" compareValue="title">
+                AND TITLE LIKE '%'+#searchInput#+'%'
+              </isEqual>
+              <isEqual property="searchOption" compareValue="contents">
+                AND CONTENTS LIKE '%'+#searchInput#+'%'
+              </isEqual>
+            </isNotEmpty>
         </isNotEmpty>
       
        )t
@@ -52,6 +57,7 @@
         FROM BMW_FS_RECRUIT_NOTICE
       WHERE 1=1
       <isNotEmpty property="searchInput">
+        <isNotEmpty property="searchOption">
           <isEqual property="searchOption" compareValue="title">
             AND TITLE LIKE '%'+#searchInput#+'%'
           </isEqual>
@@ -59,6 +65,7 @@
             AND CONTENTS LIKE '%'+#searchInput#+'%'
           </isEqual>
         </isNotEmpty>
+      </isNotEmpty>
     </select>
 
     <insert id="insertRecruitNotice">

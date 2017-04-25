@@ -13,6 +13,7 @@ using System.Web.Routing;
 
 namespace bmw_fs.Controllers.recruit
 {
+    [Authorize]
     public class RecruitNoticeController : Controller
     {
         RecruitNoticeService recruitNoticeSerivce = new RecruitNoticeServiceImpl();
@@ -25,7 +26,8 @@ namespace bmw_fs.Controllers.recruit
             searchService.setPagination(recruitNotice, 10, recruitNoticeSerivce.findAllCount(recruitNotice));
             ViewBag.list = recruitNoticeSerivce.findAll(recruitNotice);
             ViewBag.pagination = recruitNotice;
-            
+            ViewBag.today = DateTime.Now;
+
             return View();
         }
 

@@ -305,7 +305,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Files\" />
-    <Folder Include="Views\RecruitNotice\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -366,6 +365,13 @@
   <ItemGroup>
     <Content Include="Views\Privacy\list.cshtml" />
     <Content Include="Views\Privacy\register.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\RecruitNotice\list.cshtml" />
+    <Content Include="Views\RecruitNotice\register.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\RecruitNotice\modify.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
