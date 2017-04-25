@@ -1,4 +1,5 @@
-﻿using bmw_fs.Dao.face.board;
+﻿using bmw_fs.Common;
+using bmw_fs.Dao.face.board;
 using bmw_fs.Models.board;
 using bmw_fs.Service.face.board;
 using bmw_fs.Service.face.common;
@@ -28,6 +29,7 @@ namespace bmw_fs.Service.impl.board
             int masterIdx = sequenceService.getSequenceMasterIdx();
             board.idx = masterIdx;
             Mapper.Instance().BeginTransaction();
+            validation(board);
             boardDao.insertBoard(board);
             filesService.fileUpload(multipartFiles, "files" , "jpg|png", 5 * 1024 * 1024, masterIdx, null);
             filesService.fileUpload(multipartFiles, "files2" , "jpg|png", 5 * 1024 * 1024, masterIdx, null);
@@ -49,6 +51,7 @@ namespace bmw_fs.Service.impl.board
             Mapper.Instance().BeginTransaction();
             filesService.deleteFileAndFileUpload(multipartFiles, "files", "jpg|png", 5 * 1024 * 1024, board.idx, board.fileIdxs);
             filesService.deleteFileAndFileUpload(multipartFiles, "files2", "jpg|png", 5 * 1024 * 1024, board.idx, board.fileIdxs2);
+            validation(board);
             boardDao.updateBoard(board);
             Mapper.Instance().CommitTransaction();
         }
@@ -59,6 +62,12 @@ namespace bmw_fs.Service.impl.board
             boardDao.deleteBoard(board);
             filesService.deleteRealFilesAndDataByFileMasterIdx(board.idx);
             Mapper.Instance().CommitTransaction();
+        }
+
+        private void validation(Board board)
+        {
+            if (String.IsNullOrWhiteSpace(board.title)) throw new CustomException("필수 값이 없습니다.");
+            if (String.IsNullOrWhiteSpace(board.contents)) throw new CustomException("필수 값이 없습니다.");
         }
     }
 }
