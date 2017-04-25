@@ -1,5 +1,5 @@
 ﻿using bmw_fs.Models.recruit;
-using bmw_fs.Service.face.common;
+using bmw_fs.Service.face.common;Board
 using bmw_fs.Service.face.recruit;
 using bmw_fs.Service.impl.common;
 using bmw_fs.Service.impl.recruit;
