@@ -54,7 +54,7 @@ body, html{height:100%;}
 .list .search_box{float:right;}
 .list .search_box input{height:33px;}
 .list .search_box select{width:100px; height:37px;}
-.list .search_box button{width:37px; height:37px; border:1px solid #a9a9a9; background:url(../../resource/images/btn_search.jpg) center center no-repeat}
+.list .search_box button{width:37px; height:37px; border:1px solid #a9a9a9; background:url(../../resources/images/btn_search.jpg) center center no-repeat}
 .list .cont_bottom .list_table{width:100%; margin-bottom:10px; border-left:1px solid #ccc;}
 .list .cont_bottom .list_table thead th{padding:13px 0; border-top:1px solid #ccc; border-bottom:1px solid #ccc; border-right:1px solid #ccc;  background-color:#f4f4f4;}
 .list .cont_bottom .list_table tbody tr td{padding:13px 0; border-bottom:1px solid #ccc; border-right:1px solid #ccc; text-align:center; box-sizing:border-box;}
@@ -92,7 +92,14 @@ body, html{height:100%;}
 #paging em.paging_box{background-color:#666666; color:#fff;}
 
 
-
+.file_area > div {margin-bottom: 10px;}
+.file_area > div > .file_src, .file_area > div > .btn_file, .file_area > div > button {float: left; margin-left: 10px;}
+.file_area > div .file_src {overflow: hidden; display: block; width: 532px; height: 35px; margin-left: 0; padding: 0 6px; line-height: 39px; font-size: 13px; border: 1px solid #c7c7c7; text-overflow: ellipsis; white-space: nowrap; word-wrap: normal;}
+.file_area input[type="file"] {width: 0; height: 0; text-indent: -9999px;}
+.btn_file {display: block; width: 120px; height: 35px; line-height: 35px; border: 1px solid #c8c8c8; text-align: center; cursor: pointer;}
+.file_area button {display: block; width: 120px; height: 37px; border: 1px solid #c8c8c8}
+.reg .cont_bottom .reg_table td input[type="text"].input_long_type {width: 670px;}
+.reg .cont_bottom .reg_table td textarea {width: 666px; height: 300px; padding: 5px; resize: none;}
 
 
 

@@ -13,6 +13,7 @@ using System.Web.Routing;
 
 namespace bmw_fs.Controllers.recruit
 {
+    [Authorize]
     public class RecruitNoticeController : Controller
     {
         RecruitNoticeService recruitNoticeSerivce = new RecruitNoticeServiceImpl();
