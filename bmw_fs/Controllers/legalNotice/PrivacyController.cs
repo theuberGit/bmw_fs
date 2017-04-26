@@ -3,6 +3,7 @@ using bmw_fs.Service.face.common;
 using bmw_fs.Service.face.privacy;
 using bmw_fs.Service.impl.common;
 using bmw_fs.Service.impl.privacy;
+using Microsoft.Security.Application;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,8 +35,40 @@ namespace bmw_fs.Controllers.legalNotice
         [ValidateInput(false)]
         public RedirectToRouteResult registerProc(Privacy privacy)
         {
+            privacy.contents = Sanitizer.GetSafeHtmlFragment(privacy.contents);
             privacyService.insertPrivacy(privacy);
+            return RedirectToAction("list");
+        }
 
+        public ActionResult view(Privacy privacy)
+        {
+            Privacy item =  privacyService.findPrivacy(privacy);
+            ViewBag.item = item;
+
+            return View();
+        }
+
+        public ActionResult modify(Privacy privacy)
+        {
+            Privacy item = privacyService.findPrivacy(privacy);
+            ViewBag.item = item;
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public RedirectToRouteResult modifyProc(Privacy privacy)
+        {
+            privacy.contents = Sanitizer.GetSafeHtmlFragment(privacy.contents);
+            privacyService.updatePrivacy(privacy);
+            return RedirectToAction("list");
+        }
+
+        [HttpPost]
+        public RedirectToRouteResult delete(Privacy privacy)
+        {
+            privacyService.deletePrivacy(privacy);
             return RedirectToAction("list");
         }
     }

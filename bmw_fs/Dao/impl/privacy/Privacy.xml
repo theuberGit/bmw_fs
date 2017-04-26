@@ -76,6 +76,30 @@
                   ,#regId#
                   )
     </insert>
+
+    <select id="findPrivacy" resultMap="privacyMap">
+      SELECT IDX
+            ,TITLE
+            ,CONTENTS
+            ,REG_DATE
+            ,REG_ID
+        FROM BMW_FS_PRIVACY
+      WHERE IDX = #idx#
+    </select>
+
+    <update id="updatePrivacy">
+      UPDATE BMW_FS_PRIVACY
+        SET TITLE = #title#
+            ,CONTENTS = #contents#
+            ,UPT_ID = #uptId#
+            ,UPT_DATE = getdate()
+      WHERE IDX = #idx#;
+    </update>
+
+    <delete id="deletePrivacy">
+      DELETE BMW_FS_PRIVACY
+      WHERE IDX = #idx#;
+    </delete>
             
             
 
