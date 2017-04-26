@@ -134,9 +134,8 @@ namespace bmw_fs.Service.impl.common
             else
             {
                 foreach(var item in fileList){
-                    files.fileIdx = item.fileIdx;
-                    filesDao.deleteFileByFileIdx(files);
-                    deleteRealFile(files);
+                    filesDao.deleteFileByFileIdx(item);
+                    deleteRealFile(item);
                 }
                 return true;
             }

@@ -30,7 +30,7 @@
                     <td class="file_area">
                         <div class="attach_file">
                             <span class="file_src"></span>
-                            <input type="file" class="input_file" name="attachFile" id="attachFile">
+                            <input type="file" class="input_file" name="files" id="attachFile">
                             <label for="attachFile" class="btn_file">파일찾기</label>
                         </div>
                     </td>
@@ -53,29 +53,17 @@
 <script type="text/javascript" src="/resources/se/js/HuskyEZCreator.js"></script>
 <script type="text/javascript" src="/resources/js/smarteditor.js"></script>
 <script>
-(function(){
-	$(".add_img_area").find(".file_area").on("change",".input_file",function(e){
-		var $parent = $(this).closest("div");
-		var val = $(this).val();
-		var valTit = val.split("\\");
-		var valTittext = valTit[valTit.length -1]
-		if(val != ""){
-			$parent.find(".file_src").text(valTittext).addClass("on");
-		};
-	});
-})();
-
-        function register() {
+function register() {
             
-            if (!$('#title').required()) return;
-            if (!$('#sdate').required()) return;
-            if (!$('#edate').required()) return;
-            editor_object.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
-            if ($('#contents').val().trim().replace(/<p>/gi, '').replace(/<\/p>/gi, '').replace(/<br>/gi, '').replace(/&nbsp;/gi, '').replace(/ /gi, '') == '') {
-                alert('내용을 입력하세요.');
-                return;
-            }
-            if (!confirm('등록하시겠습니까')) return;
-            $('form').attr('action', 'registerProc').submit();
-        };
+    if (!$('#title').required()) return;
+    if (!$('#sdate').required()) return;
+    if (!$('#edate').required()) return;
+    editor_object.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
+    if ($('#contents').val().trim().replace(/<p>/gi, '').replace(/<\/p>/gi, '').replace(/<br>/gi, '').replace(/&nbsp;/gi, '').replace(/ /gi, '') == '') {
+        alert('내용을 입력하세요.');
+        return;
+    }
+    if (!confirm('등록하시겠습니까')) return;
+    $('#content form').attr('action', 'registerProc').submit();
+};
 </script>
