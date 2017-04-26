@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "개인정보처리방침 수정";
+}
+
+<head>
+    <script src="/resources/js/jquery-1.12.4.min.js"></script>
+    <script src="/resources/js/jquery-ui.min.js"></script>
+    <script src="/resources/js/jquery.cust.js"></script>
+    <script src="/resources/js/common.js"></script>
+</head>
+    <div id="content" class="reg">
+        <div class="cont_top">
+            <h3>개인정보처리방침 수정</h3>
+        </div>
+        <div class="cont_bottom">
+            <form method="post" enctype="multipart/form-data">
+                <table class="reg_table">
+                    <caption>개인정보처리방침 수정 테이블</caption>
+                    <colgroup>
+                        <col width="130px">
+                        <col width="870px">
+                    </colgroup>
+                    <tr>
+                        <th scope="row"><label for="title">* 제목</label></th>
+                        <td><input type="text" name="title" id="title" value="@ViewBag.item.title" /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="contents">* 내용</label></th>
+                        <td><textarea rows="20" cols="30" id="contents" name="contents">@Html.Raw(@ViewBag.item.contents)</textarea></td>
+                    </tr>
+                </table>
+                <input type="hidden" name="uptId" id="uptId" value="test" />
+                <input type="hidden" name="idx" value="@ViewBag.item.idx" />
+            </form>
+            <div class="btn_area">
+                <a href="list?@Session["searchString"]" class="btn_defualt btn_list">취소</a>
+                <a href="javascript:void(0);" class="btn_defualt" onclick="modify();">수정</a>
+                <a href="javascript:void(0);" class="btn_defualt" onclick="deleteItem();">삭제</a>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/resources/se/js/HuskyEZCreator.js"></script>
+    <script type="text/javascript" src="/resources/js/smarteditor.js"></script>
+    <script>
+    lnbSet(7, 1);
+        function modify() {
+        if (!confirm('수정하시겠습니까?')) return;
+        if (!$('#title').required()) return;
+        editor_object.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
+        if (!$('#contents').required()) return;
+        $('#content form').attr('action', 'modifyProc').submit();
+        }
+
+    function deleteItem() {
+        if (!confirm('삭제하시겠습니까?')) return;
+        $('#content form').attr('action', 'delete').submit();
+        }
+    </script>

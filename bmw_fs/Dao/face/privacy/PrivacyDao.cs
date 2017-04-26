@@ -21,7 +21,24 @@ namespace bmw_fs.Dao.face.privacy
 
         public void insertPrivacy(Privacy privacy)
         {
-            Mapper.Instance().Insert("privacy.insertPrivacy", privacy);
+          Mapper.Instance().Insert("privacy.insertPrivacy", privacy);
         }
+
+        public Privacy findPrivacy(Privacy privacy)
+        {
+           return Mapper.Instance().QueryForObject<Privacy>("privacy.findPrivacy", privacy);
+        }
+
+        public void updatePrivacy(Privacy privacy)
+        {
+           Mapper.Instance().Update("privacy.updatePrivacy", privacy);
+        }
+
+        public void deletePrivacy(Privacy privacy)
+        {
+            Mapper.Instance().Delete("privacy.deletePrivacy", privacy);
+        }
+
+
     }
 }

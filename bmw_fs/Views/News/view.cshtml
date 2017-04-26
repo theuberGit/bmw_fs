@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "뉴스 관리";
+}
+<head>
+    <style>
+     .file_area > div {margin-bottom: 10px;}
+     .file_area > div > .file_src, .file_area > div > .btn_file, .file_area > div > button {float: left; margin-left: 10px;}
+     .file_area > div .file_src {overflow: hidden; display: block; width: 532px; height: 35px; margin-left: 0; padding: 0 6px; line-height: 39px; font-size: 13px; border: 1px solid #c7c7c7; text-overflow: ellipsis; white-space: nowrap; word-wrap: normal;}
+     .file_area input[type="file"] {width: 0; height: 0; text-indent: -9999px;}
+     .btn_file {display: block; width: 120px; height: 35px; line-height: 35px; border: 1px solid #c8c8c8; text-align: center; cursor: pointer;}
+     .file_area button {display: block; width: 120px; height: 37px; border: 1px solid #c8c8c8}
+     .reg .cont_bottom .reg_table td input[type="text"].input_long_type {width: 670px;}
+     .reg .cont_bottom .reg_table td textarea {width: 666px; height: 300px; padding: 5px; resize: none;}
+    </style>
+</head>
+<div id="content" class="reg">
+    <div class="cont_top">
+        <h3>뉴스 관리</h3>
+    </div>
+    <div class="cont_bottom">
+        <form method="post" enctype="multipart/form-data">
+            <table class="reg_table">
+                <colgroup>
+                    <col width="130px" />
+                    <col width="870px" />
+                </colgroup>
+                <tr>
+                    <th>작성자 </th>
+                    <td>홍길동</td>
+                </tr>
+                <tr>
+                    <th><label for="">구분</label></th>
+                    <td class="radio_area">@ViewBag.item.type</td>
+                </tr>
+                <tr>
+                    <th><label for="">제목</label></th>
+                    <td>@ViewBag.item.title</td>
+                </tr>
+                <tr>
+                    <th><label for="">내용</label></th>
+                    <td>@Html.Raw(ViewBag.item.contents)</td>
+                </tr>
+                <tr class="add_img_area">
+                    <th>썸네일 이미지</th>
+                    <td class="file_area">
+                        @foreach (var file in ViewBag.thumbList)
+                        {
+                            <div><a href="/Files/fileDownload?fileIdx=@file.fileIdx">@file.originalFilename</a></div>
+                        }
+                    </td>
+                </tr>
+                <tr class="add_img_area">
+                    <th>본문 이미지</th>
+                    <td class="file_area">
+                        @foreach (var file in ViewBag.mainList)
+                        {
+                            <div><a href="/Files/fileDownload?fileIdx=@file.fileIdx">@file.originalFilename</a></div>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="">배포</label></th>
+                    <td class="radio_area">@ViewBag.item.deployYn</td>
+                </tr>
+            </table>
+            <input type="hidden" name="idx" value="@ViewBag.item.idx"/>
+        </form>
+        <div class="btn_area">
+            <a href="list?@Session["searchString"]"" class="btn_defualt btn_list">목록</a>
+            <a href="javascript:void(0);" class="btn_defualt btn_reg" onclick="modify();">수정</a>
+            <a href="javascript:void(0);" class="btn_defualt btn_reg" onclick="deleteItem();">삭제</a>
+        </div>
+    </div>
+</div>
+<script>
+    lnbSet(5, 0);
+function modify() {
+  $('form').attr('action', 'modify').submit();
+};
+function deleteItem() {
+  $('form').attr('action', 'delete').submit();
+};
+</script>
