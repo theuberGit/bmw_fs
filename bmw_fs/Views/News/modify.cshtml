@@ -50,17 +50,25 @@
                     {
                         for (int i = 0, size = ViewBag.thumbList.Count; i < size; i++)
                         {
-                            <div class="thum_nail">
+                            <div class="thum_nail thumbImg">
                                 <span class="file_src">@ViewBag.thumbList[i].originalFilename</span>
+                                <input type="file" class="input_file" name="thumbImg" id="thumNail">
+                                <label for="thumNail" class="btn_file file_del">삭제</label>
+                                <input type="hidden" name="thumbIdxs" value="@ViewBag.thumbList[i].fileIdx" />
+                            </div>
+                            <!--
+                            <div class="thum_nail thumbImg_new" style="display:none;">
+                                <span class="file_src"></span>
                                 <input type="file" class="input_file" name="thumbImg" id="thumNail">
                                 <label for="thumNail" class="btn_file">파일찾기</label>
                                 <input type="hidden" name="thumbIdxs" value="@ViewBag.thumbList[i].fileIdx" />
                             </div>
+                            -->  
                         }
                     }
                     else
                     {
-                        <div class="thum_nail">
+                        <div class="thum_nail thumbImg">
                             <span class="file_src"></span>
                             <input type="file" class="input_file" name="thumbImg" id="thumNail">
                             <label for="thumNail" class="btn_file">파일찾기</label>
@@ -124,6 +132,12 @@ if ('@ViewBag.item.deployYn' === 'Y') {
 } else {
   $('#inactivity').prop('checked', true);
 }
+
+    $('.file_del').click(function () {
+        $('.thumbImg_new').show();
+        $('.thumbImg').hide();
+     });
+
     function modifyProc() {
         if (!$('#title').required()) return;
         editor_object.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
