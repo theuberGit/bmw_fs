@@ -1,9 +1,13 @@
-﻿$(function () {
-
-    $('body').on('change', '.file_input', function () {
-        var text = $(this).val();
-        $(this).parents('.file-wrapper').find('.file_text').val(text.substring(text.lastIndexOf('\\') + 1, text.length));
-    });
+﻿$(function () {    
+    $(".add_img_area").find(".file_area").on("change", ".input_file", function (e) {
+        var $parent = $(this).closest("div");
+        var val = $(this).val();
+        var valTit = val.split("\\");
+        var valTittext = valTit[valTit.length - 1]
+        if (val != "") {
+            $parent.find(".file_src").text(valTittext).addClass("on");
+        };
+    });    
 
     $('.search_text').keyup(function (e) {
         if (e.keyCode === 13) {
@@ -14,7 +18,7 @@
 });
 function searchList() {
     $('#page').val(1);
-    $('form').submit();
+    $('#content form').submit();
 };
 
 function lnbSet(mainIdx, subIdx) {
@@ -41,45 +45,4 @@ function addFileBtn(target) {
     html += '</div>';
     var appendTarget = $(target).parents('td').find('.file-wrapper:last');
     appendTarget.after(html);
-};
-
-function deleteFile(obj) {
-    if (!confirm('파일을 삭제하시겠습니까?')) return;
-    $obj = $(obj);
-    $fileKey = $obj.attr('data-key');
-    $csrf = $obj.attr('data-csrf');
-    $.ajax({
-        url: '/files/fileDelete.do',
-        data: { 'key': $fileKey, '_csrf': $csrf },
-        dataType: 'json',
-        timeout: 10000,
-        cache: false,
-        type: 'POST',
-        beforeSend: function () {
-            //$.blockUI(_BLOCKUI_OPTION);
-        },
-        complete: function () {
-            //$.unblockUI();
-        },
-        error: function (x, e) {
-            alert('요청하신 작업을 수행하던 중 예상치 않게 중지되었습니다.\n\n다시 시도해 주십시오.');
-        },
-        success: function (data) {
-            if (data.status === -1) {
-                alert('파일이 존재하지 않습니다.');
-                return;
-            }
-            $parentObject = $obj.closest('td');
-            $fileCount = $parentObject.find('.file-wrapper').length;
-            $targetObject = $obj.closest('.file-wrapper');
-            $hasAddBtn = $targetObject.find('.add_btn').length;
-            if ($fileCount === 1 || $hasAddBtn === 1) {
-                $targetObject.find('.file_text').val('');
-                $targetObject.find('input[type=hidden]').val('');
-            } else {
-                $targetObject.remove();
-            }
-            return;
-        }
-    });
 };

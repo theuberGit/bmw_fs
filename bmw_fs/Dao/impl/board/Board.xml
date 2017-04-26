@@ -31,13 +31,15 @@
           FROM test_table
           WHERE 1=1
           <isNotEmpty property="searchInput">
-            <isEqual property="searchOption" compareValue="title">
-              AND title LIKE '%'+#searchInput#+'%'
-            </isEqual>
-            <isEqual property="searchOption" compareValue="contents">
-              AND contents LIKE '%'+#searchInput#+'%'
-            </isEqual>
-        </isNotEmpty>
+            <isNotEmpty property="searchOption">
+              <isEqual property="searchOption" compareValue="title">
+                AND TITLE LIKE '%'+#searchInput#+'%'
+              </isEqual>
+              <isEqual property="searchOption" compareValue="contents">
+                AND CONTENTS LIKE '%'+#searchInput#+'%'
+              </isEqual>
+            </isNotEmpty>
+          </isNotEmpty>
       
        )t
       WHERE 1=1
@@ -48,14 +50,16 @@
       SELECT COUNT(*)
       FROM test_table
       WHERE 1=1
-        <isNotEmpty property="searchInput">
+      <isNotEmpty property="searchInput">
+        <isNotEmpty property="searchOption">
           <isEqual property="searchOption" compareValue="title">
-            AND title LIKE '%'+#searchInput#+'%'
+            AND TITLE LIKE '%'+#searchInput#+'%'
           </isEqual>
           <isEqual property="searchOption" compareValue="contents">
-            AND contents LIKE '%'+#searchInput#+'%'
+            AND CONTENTS LIKE '%'+#searchInput#+'%'
           </isEqual>
         </isNotEmpty>
+      </isNotEmpty>
     </select>
 
     <insert id="insertBoard">
