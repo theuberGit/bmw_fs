@@ -9,22 +9,65 @@
 
   <resultMaps>
     <resultMap id="privacyMap" class="PrivacyClass">
-      <result property="idx" column="idx" />
-      <result property="title" column="title" />
-      <result property="contents" column="contents" />
-      <result property="regDate" column="reg_date" />
-      <result property="regId" column="reg_id" />
+      <result property="idx" column="IDX" />
+      <result property="title" column="TITLE" />
+      <result property="contents" column="CONTENTS" />
+      <result property="regDate" column="REG_DATE" />
+      <result property="regId" column="REG_ID" />
     </resultMap>
   </resultMaps>
 
   <statements>
 
+    <select id="findAll" resultMap="privacyMap">
+      SELECT *
+        FROM (
+          SELECT
+            ROW_NUMBER() OVER(ORDER BY IDX DESC) AS RNUM
+              ,IDX
+              ,TITLE
+              ,CONTENTS
+              ,REG_DATE
+              ,REG_ID
+            FROM BMW_FS_PRIVACY
+            WHERE 1=1
+            <isNotEmpty property="searchInput">
+              <isNotEmpty property="searchOption">
+                <isEqual property="searchOption" compareValue="title">
+                  AND TITLE LIKE '%'+#searchInput#+'%'
+                </isEqual>
+                <isEqual property="searchOption" compareValue="contents">
+                  AND CONTENTS LIKE '%'+#searchInput#+'%'
+                </isEqual>
+              </isNotEmpty>
+            </isNotEmpty>
+          )t
+        WHERE 1=1
+        AND (RNUM BETWEEN #currentItem# AND #currentItemEnd# )
+    </select>
+
+    <select id="findAllCount" resultClass="int">
+      SELECT COUNT(*)
+      FROM BMW_FS_PRIVACY
+      WHERE 1=1
+      <isNotEmpty property="searchInput">
+        <isNotEmpty property="searchOption">
+          <isEqual property="searchOption" compareValue="title">
+            AND TITLE LIKE '%'+#searchInput#+'%'
+          </isEqual>
+          <isEqual property="searchOption" compareValue="contents">
+            AND CONTENTS LIKE '%'+#searchInput#+'%'
+          </isEqual>
+        </isNotEmpty>
+      </isNotEmpty>
+    </select>
+
     <insert id="insertPrivacy">
       INSERT INTO BMW_FS_PRIVACY(
-                  idx
-                  ,title
-                  ,contents
-                  ,reg_id
+                  IDX
+                  ,TITLE
+                  ,CONTENTS
+                  ,REG_ID
                   )
       VALUES (
                   #idx#

@@ -158,8 +158,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\CustomException.cs" />
     <Compile Include="Config\StringProperties.cs" />
+    <Compile Include="Controllers\legalNotice\PrivacyController.cs" />
     <Compile Include="Controllers\news\NewsController.cs" />
-    <Compile Include="Controllers\PrivacyController.cs" />
     <Compile Include="Controllers\recruit\RecruitNoticeController.cs" />
     <Compile Include="Controllers\test\BoardController.cs" />
     <Compile Include="Controllers\common\ErrorController.cs" />
