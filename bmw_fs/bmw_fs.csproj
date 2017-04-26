@@ -357,6 +357,12 @@
     <Content Include="Views\News\list.cshtml" />
     <Content Include="Views\News\register.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\News\view.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\News\modify.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

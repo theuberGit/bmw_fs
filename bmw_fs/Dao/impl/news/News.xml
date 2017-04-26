@@ -61,14 +61,29 @@
       </isNotEmpty>
     </select>
 
+    <select id="findAllNotice" resultMap="newsMap">
+      SELECT IDX
+        ,TYPE
+        ,TITLE
+        ,CONTENTS
+        ,DEPLOY_YN
+        ,HIT
+        ,REG_DATE
+        ,REG_ID
+      FROM BMW_FS_NEWS
+      WHERE TYPE = 'N'
+      ORDER BY REG_DATE DESC
+    </select>
+
     <select id="findNews" resultMap="newsMap">
       SELECT IDX
-      ,TITLE
-      ,CONTENTS
-      ,DEPLOY_YN
-      ,TYPE
-      ,REG_DATE
-      ,REG_ID
+        ,TITLE
+        ,CONTENTS
+        ,DEPLOY_YN
+        ,TYPE
+        ,HIT
+        ,REG_DATE
+        ,REG_ID
       FROM BMW_FS_NEWS
       WHERE IDX = #idx#
     </select>
@@ -76,20 +91,20 @@
     <insert id="insertNews">
       INSERT INTO BMW_FS_NEWS
       (
-      IDX
-      ,TYPE
-      ,TITLE
-      ,CONTENTS
-      ,DEPLOY_YN
-      ,REG_ID
+        IDX
+        ,TYPE
+        ,TITLE
+        ,CONTENTS
+        ,DEPLOY_YN
+        ,REG_ID
       )
       VALUES (
-      #idx#
-      ,#type#
-      ,#title#
-      ,#contents#
-      ,#deployYn#
-      ,#regId#
+        #idx#
+        ,#type#
+        ,#title#
+        ,#contents#
+        ,#deployYn#
+        ,#regId#
       )
 
     </insert>
@@ -97,11 +112,11 @@
     <update id="updateNews">
       UPDATE BMW_FS_NEWS
       SET TYPE = #type# 
-      ,TITLE = #title#
-      ,CONTENTS = #contents#
-      ,DEPLOY_YN = #deployYn#
-      ,UPT_DATE = getDate()
-      ,UPT_ID = #uptId#
+        ,TITLE = #title#
+        ,CONTENTS = #contents#
+        ,DEPLOY_YN = #deployYn#
+        ,UPT_DATE = getDate()
+        ,UPT_ID = #uptId#
       WHERE IDX = #idx#
     </update>
 
