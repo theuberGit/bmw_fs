@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "개인정보처리방침 상세보기";
+    ViewBag.Title = "일반공시 상세보기";
 }
 
 <head>
@@ -10,12 +10,12 @@
 </head>
 <div id="content" class="reg">
     <div class="cont_top">
-        <h3>개인정보처리방침</h3>
+        <h3>일반공시</h3>
     </div>
     <div class="cont_bottom">
         <form method="post">
             <table class="reg_table">
-                <caption>개인정보처리방침 뷰 테이블</caption>
+                <caption>일반공시 뷰 테이블</caption>
                 <colgroup>
                     <col width="130px">
                     <col width="870px">
@@ -42,7 +42,7 @@
     </div>
 </div>
 <script>
-    lnbSet(7, 1);
+    lnbSet(7, 5);
     function modForm() {
         $('form').attr('action', 'modify').submit();
     }
