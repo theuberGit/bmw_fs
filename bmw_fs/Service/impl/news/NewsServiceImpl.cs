@@ -38,6 +38,11 @@ namespace bmw_fs.Service.impl.news
             return this.newsDao.findAllCount(news);
         }
 
+        public IList<News> findAllNotice(News news)
+        {
+            return this.newsDao.findAllNotice(news);
+        }
+
         public News findNews(News news)
         {
             return this.newsDao.findNews(news);
@@ -47,7 +52,8 @@ namespace bmw_fs.Service.impl.news
         {
             Mapper.Instance().BeginTransaction();
             //type이 일반인 경우, 공지인 경우
-            
+            filesService.deleteFileAndFileUpload(multipartFiles, "thumbImg", "jpg|png", 5 * 1024 * 1024, news.idx, news.thumbIdxs);
+            filesService.deleteFileAndFileUpload(multipartFiles, "mainImg", "jpg|png", 5 * 1024 * 1024, news.idx, news.fileIdxs);
             this.newsDao.updateNews(news);
             Mapper.Instance().CommitTransaction();
         }

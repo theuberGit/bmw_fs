@@ -1,0 +1,174 @@
+﻿@{
+    ViewBag.Title = "뉴스 관리";
+}
+<head>
+    <style>
+     .file_area > div {margin-bottom: 10px;}
+     .file_area > div > .file_src, .file_area > div > .btn_file, .file_area > div > button {float: left; margin-left: 10px;}
+     .file_area > div .file_src {overflow: hidden; display: block; width: 532px; height: 35px; margin-left: 0; padding: 0 6px; line-height: 39px; font-size: 13px; border: 1px solid #c7c7c7; text-overflow: ellipsis; white-space: nowrap; word-wrap: normal;}
+     .file_area input[type="file"] {width: 0; height: 0; text-indent: -9999px;}
+     .btn_file {display: inline-block; width: 120px; height: 35px; line-height: 35px; border: 1px solid #c8c8c8; text-align: center; cursor: pointer;}
+     .file_area button {display: inline-block; width: 120px; height: 37px; border: 1px solid #c8c8c8}
+     .reg .cont_bottom .reg_table td input[type="text"].input_long_type {width: 670px;}
+     .reg .cont_bottom .reg_table td textarea {width: 666px; height: 300px; padding: 5px; resize: none;}
+    </style>
+</head>
+<div id="content" class="reg">
+    <div class="cont_top">
+        <h3>뉴스 관리</h3>
+    </div>
+    <div class="cont_bottom">
+        <form method="post" enctype="multipart/form-data">
+            <table class="reg_table">
+                <colgroup>
+                    <col width="130px" />
+                    <col width="870px" />
+                </colgroup>
+                <tr>
+                    <th>작성자 </th>
+                    <td>홍길동</td>
+                </tr>
+                <tr>
+                    <th><label for="">구분 *</label></th>
+                    <td class="radio_area">
+                        <label for="notice"><input type="radio" name="type" id="notice" value="N" title="구분"> 공지</label>
+                        <label for="normal"><input type="radio" name="type" id="normal" value="G" title="구분"> 일반</label>
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="">제목 *</label></th>
+                    <td><input type="text" name="title" id="title" class="input_long_type" title="제목" maxlength="100" value="@ViewBag.item.title"></td>
+                </tr>
+                <tr>
+                    <th><label for="">내용 *</label></th>
+                    <td><textarea name="contents" id="contents" title="내용">@ViewBag.item.contents</textarea></td>
+                </tr>
+                <tr class="add_img_area">
+                    <th>썸네일 이미지</th>
+                    <td class="file_area">
+                    @if (ViewBag.thumbList.Count != 0)
+                    {
+                        for (int i = 0, size = ViewBag.thumbList.Count; i < size; i++)
+                        {
+                            <div class="thum_nail thumbImg">
+                                <span class="file_src">@ViewBag.thumbList[i].originalFilename</span>
+                                <input type="file" class="input_file" name="thumbImg" id="thumNail">
+                                <label for="thumNail" class="btn_file file_del">삭제</label>
+                                <input type="hidden" name="thumbIdxs" value="@ViewBag.thumbList[i].fileIdx" />
+                            </div>
+                            <!--
+                            <div class="thum_nail thumbImg_new" style="display:none;">
+                                <span class="file_src"></span>
+                                <input type="file" class="input_file" name="thumbImg" id="thumNail">
+                                <label for="thumNail" class="btn_file">파일찾기</label>
+                                <input type="hidden" name="thumbIdxs" value="@ViewBag.thumbList[i].fileIdx" />
+                            </div>
+                            -->  
+                        }
+                    }
+                    else
+                    {
+                        <div class="thum_nail thumbImg">
+                            <span class="file_src"></span>
+                            <input type="file" class="input_file" name="thumbImg" id="thumNail">
+                            <label for="thumNail" class="btn_file">파일찾기</label>
+                        </div>
+                    }
+                    </td>
+                </tr>
+                <tr class="add_img_area">
+                    <th>본문 이미지 *</th>
+                    <td class="file_area">
+                        @if (ViewBag.mainList.Count != 0)
+                        {
+                            for (int i = 0, size = ViewBag.mainList.Count; i < size; i++)
+                            {
+                                <div class="thum_nail">
+                                    <span class="file_src">@ViewBag.mainList[i].originalFilename</span>
+                                    <input type="file" class="input_file" name="mainImg" id="mainImg">
+                                    <label for="mainImg" class="btn_file">파일찾기</label>
+                                    <input type="hidden" name="fileIdxs" value="@ViewBag.mainList[i].fileIdx" />
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="main_img">
+                                <span class="file_src"></span>
+                                <input type="file" class="input_file" name="mainImg" id="mainImg">
+                                <label for="mainImg" class="btn_file">파일찾기</label>
+                            </div>
+                        }
+
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="">배포 *</label></th>
+                    <td class="radio_area">
+                        <label for="active"><input type="radio" name="deployYn" id="active" value="Y" title="배포 여부"> 배포</label>
+                        <label for="inactivity"><input type="radio" name="deployYn" id="inactivity" value="N" title="배포 여부"> 미배포</label>
+                    </td>
+                </tr>
+            </table>
+            <input type="hidden" name="idx" value="@ViewBag.item.idx"/>
+        </form>
+        <div class="btn_area">
+            <a href="list?@Session["searchString"]"" class="btn_defualt btn_list">목록</a>
+            <a href="javascript:void(0);" class="btn_defualt btn_reg" onclick="modifyProc();">수정</a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/resources/se/js/HuskyEZCreator.js"></script>
+<script type="text/javascript" src="/resources/js/smarteditor.js"></script>
+<script>
+    lnbSet(5, 0);
+if ('@ViewBag.item.type' === 'N') {
+  $('#notice').prop('checked', true);
+} else {
+  $('#normal').prop('checked', true);
+}
+if ('@ViewBag.item.deployYn' === 'Y') {
+  $('#active').prop('checked', true);
+} else {
+  $('#inactivity').prop('checked', true);
+}
+
+    $('.file_del').click(function () {
+        $('.thumbImg_new').show();
+        $('.thumbImg').hide();
+     });
+
+    function modifyProc() {
+        if (!$('#title').required()) return;
+        editor_object.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
+        if ($('#contents').val().trim().replace(/<p>/gi, '').replace(/<\/p>/gi, '').replace(/<br>/gi, '').replace(/&nbsp;/gi, '').replace(/ /gi, '') == '') {
+            alert('내용을 입력하세요.');
+            return;
+        }
+        if ($('#normal').prop('checked')) {//일반 게시물일 경우
+            if ($('#thumNail').val() === '') {
+                alert('섬네일이미지를 등록하세요.');
+                return;
+            }
+            return;
+        }
+        if ($('#mainImg').val() === '') {
+            alert('본문이미지를 등록하세요.');
+            return;
+        }
+        if (!confirm('수정하시겠습니까?')) return;
+        $('form').attr('action', 'modifyProc').submit();
+    };
+(function(){
+	$(".add_img_area").find(".file_area").on("change",".input_file",function(e){
+		var $parent = $(this).closest("div");
+		var val = $(this).val();
+		var valTit = val.split("\\");
+		var valTittext = valTit[valTit.length -1]
+		if(val != ""){
+			$parent.find(".file_src").text(valTittext).addClass("on");
+		};
+	});
+})();
+
+</script>

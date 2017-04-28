@@ -1,26 +1,13 @@
 ﻿@{
-    ViewBag.Title = "register";
+    ViewBag.Title = "개인정보처리방침 등록";
 }
-
-<head>
-    <style>
-     .file_area > div {margin-bottom: 10px;}
-     .file_area > div > .file_src, .file_area > div > .btn_file, .file_area > div > button {float: left; margin-left: 10px;}
-     .file_area > div .file_src {overflow: hidden; display: block; width: 532px; height: 35px; margin-left: 0; padding: 0 6px; line-height: 39px; font-size: 13px; border: 1px solid #c7c7c7; text-overflow: ellipsis; white-space: nowrap; word-wrap: normal;}
-     .file_area input[type="file"] {width: 0; height: 0; text-indent: -9999px;}
-     .btn_file {display: block; width: 120px; height: 35px; line-height: 35px; border: 1px solid #c8c8c8; text-align: center; cursor: pointer;}
-     .file_area button {display: block; width: 120px; height: 37px; border: 1px solid #c8c8c8}
-     .reg .cont_bottom .reg_table td input[type="text"].input_long_type {width: 670px;}
-     .reg .cont_bottom .reg_table td textarea {width: 666px; height: 300px; padding: 5px; resize: none;}
-    </style>
-</head>
 <div id="content" class="reg">
     <div class="cont_top">
         <h3>개인정보처리방침 등록</h3>
     </div>
     <div class="cont_bottom">
         <form method="post" enctype="multipart/form-data">
-            <table class="reg_table">
+            <table class="reg_table" >
                 <caption>개인정보처리방침 입력 테이블</caption>
                 <colgroup>
                     <col width="130px">
@@ -41,7 +28,7 @@
             </table>
         </form>
         <div class="btn_area">
-            <a href="list" class="btn_defualt btn_list">목록</a>
+            <a href="list?@Session["searchString"]" class="btn_defualt btn_list">목록</a>
             <a href="javascript:void(0);" class="btn_defualt btn_reg" onclick="register();">등록</a>
         </div>
     </div>
@@ -49,13 +36,14 @@
 <script type="text/javascript" src="/resources/se/js/HuskyEZCreator.js"></script>
 <script type="text/javascript" src="/resources/js/smarteditor.js"></script>
 <script>
+    lnbSet(7, 1);
     function register() {
 
-        if (!confirm('등록하시겠습니까')) return;
+        if (!confirm('등록하시겠습니까?')) return;
         if (!$('#title').required()) return;
         editor_object.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
         if (!$('#contents').required()) return;
-        $('form').attr('action', 'registerProc').submit();
+        $('#content form').attr('action', 'registerProc').submit();
     };
 
 </script>

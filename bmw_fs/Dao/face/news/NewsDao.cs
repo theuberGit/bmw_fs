@@ -24,6 +24,11 @@ namespace bmw_fs.Dao.face.news
             return Mapper.Instance().QueryForObject<int>("news.findAllCount", news);
         }
 
+        public IList<News> findAllNotice(News news)
+        {
+            return Mapper.Instance().QueryForList<News>("news.findAllNotice", news);
+        }
+
         public News findNews(News news)
         {
             return Mapper.Instance().QueryForObject<News>("news.findNews", news);
