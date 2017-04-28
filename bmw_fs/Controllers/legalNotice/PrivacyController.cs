@@ -1,4 +1,4 @@
-﻿using bmw_fs.Models.privacy;
+﻿using bmw_fs.Models.legalNotice;
 using bmw_fs.Service.face.common;
 using bmw_fs.Service.face.privacy;
 using bmw_fs.Service.impl.common;

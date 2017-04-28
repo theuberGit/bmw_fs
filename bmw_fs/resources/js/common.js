@@ -14,7 +14,12 @@
             searchList();
         }
     });
-
+    $('#sdate').change(function () {
+        $('#edate').attr('min', $(this).val());
+    });
+    $('#edate').change(function () {
+        $('#sdate').attr('max', $(this).val());
+    });
 });
 function searchList() {
     $('#page').val(1);

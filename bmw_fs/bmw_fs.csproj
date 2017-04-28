@@ -158,6 +158,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\CustomException.cs" />
     <Compile Include="Config\StringProperties.cs" />
+    <Compile Include="Controllers\legalNotice\CreditController.cs" />
+    <Compile Include="Controllers\legalNotice\GeneralController.cs" />
     <Compile Include="Controllers\legalNotice\PrivacyController.cs" />
     <Compile Include="Controllers\catalog\CatalogController.cs" />
     <Compile Include="Controllers\news\NewsController.cs" />
@@ -174,8 +176,10 @@
     <Compile Include="Dao\face\common\SequenceDao.cs" />
     <Compile Include="Common\Filter\TestFilter.cs" />
     <Compile Include="Dao\face\catalog\CatalogDao.cs" />
+    <Compile Include="Dao\face\legalNotice\CreditDao.cs" />
+    <Compile Include="Dao\face\legalNotice\GeneralDao.cs" />
     <Compile Include="Dao\face\news\NewsDao.cs" />
-    <Compile Include="Dao\face\privacy\PrivacyDao.cs" />
+    <Compile Include="Dao\face\legalNotice\PrivacyDao.cs" />
     <Compile Include="Dao\face\recruit\RecruitNoticeDao.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -186,9 +190,11 @@
     <Compile Include="Models\common\Pagination.cs" />
     <Compile Include="Models\common\SearchInfo.cs" />
     <Compile Include="Models\common\Sequence.cs" />
+    <Compile Include="Models\legalNotice\Credit.cs" />
+    <Compile Include="Models\legalNotice\General.cs" />
+    <Compile Include="Models\legalNotice\Privacy.cs" />
     <Compile Include="Models\catalog\Catalog.cs" />
     <Compile Include="Models\news\News.cs" />
-    <Compile Include="Models\privacy\Privacy.cs" />
     <Compile Include="Models\recruit\RecruitNotice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\face\admin\MemberService.cs" />
@@ -197,8 +203,10 @@
     <Compile Include="Service\face\common\SearchService.cs" />
     <Compile Include="Service\face\common\SequenceService.cs" />
     <Compile Include="Service\face\catalog\CatalogService.cs" />
+    <Compile Include="Service\face\legalNotice\CreditService.cs" />
+    <Compile Include="Service\face\legalNotice\GeneralService.cs" />
     <Compile Include="Service\face\news\NewsService.cs" />
-    <Compile Include="Service\face\privacy\PrivacyService.cs" />
+    <Compile Include="Service\face\legalNotice\PrivacyService.cs" />
     <Compile Include="Service\face\recruit\RecruitNoticeService.cs" />
     <Compile Include="Service\impl\admin\MemberServiceImpl.cs" />
     <Compile Include="Service\impl\board\BoardServiceImpl.cs" />
@@ -206,8 +214,10 @@
     <Compile Include="Service\impl\common\SearchServiceImpl.cs" />
     <Compile Include="Service\impl\common\SequenceServiceImpl.cs" />
     <Compile Include="Service\impl\catalog\CatalogServiceImpl.cs" />
+    <Compile Include="Service\impl\legalNotice\CreditServiceImpl.cs" />
+    <Compile Include="Service\impl\legalNotice\GeneralServiceImpl.cs" />
     <Compile Include="Service\impl\news\NewsServiceImpl.cs" />
-    <Compile Include="Service\impl\privacy\PrivacyServiceImpl.cs" />
+    <Compile Include="Service\impl\legalNotice\PrivacyServiceImpl.cs" />
     <Compile Include="Service\impl\recruit\RecruitNoticeServiceImpl.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -221,7 +231,10 @@
     <Content Include="Dao\impl\news\News.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Dao\impl\privacy\Privacy.xml" />
+    <Content Include="Dao\impl\legalNotice\Credit.xml" />
+    <Content Include="Dao\impl\legalNotice\General.xml" />
+    <Content Include="Dao\impl\news\News.xml" />
+    <Content Include="Dao\impl\legalNotice\Privacy.xml" />
     <Content Include="Dao\impl\recruit\RecruitNotice.xml" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -409,6 +422,30 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Catalog\view.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Credit\list.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Credit\register.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Credit\modify.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Credit\view.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\General\list.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\General\modify.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\General\register.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\General\view.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

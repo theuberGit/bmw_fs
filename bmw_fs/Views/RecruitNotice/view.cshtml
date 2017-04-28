@@ -54,13 +54,14 @@
             <a href="list?@Session["searchString"]" class="btn_defualt btn_list">목록</a>
             <div class="view_btn_area">
                 <a href="modify?idx=@ViewBag.item.idx" class="btn_defualt btn_modifyt">수정</a>
-                <a href="javascript:void(0);" class="btn_defualt btn_delete" onclick="deleteItem();">삭제</a>
+                <a href="javascript:void(0);" class="btn_defualt btn_delete" onclick="delForm();">삭제</a>
             </div>
         </div>
     </div>
 </div>
 <script>
-    function deleteItem() {
+    lnbSet(8, 1);
+    function delForm() {
         $('#content form').attr('action', 'delete').submit();
     };
 </script>

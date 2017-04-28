@@ -1,4 +1,4 @@
-﻿using bmw_fs.Models.privacy;
+﻿using bmw_fs.Models.legalNotice;
 using IBatisNet.DataMapper;
 using System;
 using System.Collections.Generic;
