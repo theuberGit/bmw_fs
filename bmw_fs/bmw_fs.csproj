@@ -159,6 +159,7 @@
     <Compile Include="Common\CustomException.cs" />
     <Compile Include="Config\StringProperties.cs" />
     <Compile Include="Controllers\legalNotice\PrivacyController.cs" />
+    <Compile Include="Controllers\catalog\CatalogController.cs" />
     <Compile Include="Controllers\news\NewsController.cs" />
     <Compile Include="Controllers\recruit\RecruitNoticeController.cs" />
     <Compile Include="Controllers\test\BoardController.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="Dao\face\common\FilesDao.cs" />
     <Compile Include="Dao\face\common\SequenceDao.cs" />
     <Compile Include="Common\Filter\TestFilter.cs" />
+    <Compile Include="Dao\face\catalog\CatalogDao.cs" />
     <Compile Include="Dao\face\news\NewsDao.cs" />
     <Compile Include="Dao\face\privacy\PrivacyDao.cs" />
     <Compile Include="Dao\face\recruit\RecruitNoticeDao.cs" />
@@ -184,6 +186,7 @@
     <Compile Include="Models\common\Pagination.cs" />
     <Compile Include="Models\common\SearchInfo.cs" />
     <Compile Include="Models\common\Sequence.cs" />
+    <Compile Include="Models\catalog\Catalog.cs" />
     <Compile Include="Models\news\News.cs" />
     <Compile Include="Models\privacy\Privacy.cs" />
     <Compile Include="Models\recruit\RecruitNotice.cs" />
@@ -193,6 +196,7 @@
     <Compile Include="Service\face\common\FilesService.cs" />
     <Compile Include="Service\face\common\SearchService.cs" />
     <Compile Include="Service\face\common\SequenceService.cs" />
+    <Compile Include="Service\face\catalog\CatalogService.cs" />
     <Compile Include="Service\face\news\NewsService.cs" />
     <Compile Include="Service\face\privacy\PrivacyService.cs" />
     <Compile Include="Service\face\recruit\RecruitNoticeService.cs" />
@@ -201,6 +205,7 @@
     <Compile Include="Service\impl\common\FilesServiceImpl.cs" />
     <Compile Include="Service\impl\common\SearchServiceImpl.cs" />
     <Compile Include="Service\impl\common\SequenceServiceImpl.cs" />
+    <Compile Include="Service\impl\catalog\CatalogServiceImpl.cs" />
     <Compile Include="Service\impl\news\NewsServiceImpl.cs" />
     <Compile Include="Service\impl\privacy\PrivacyServiceImpl.cs" />
     <Compile Include="Service\impl\recruit\RecruitNoticeServiceImpl.cs" />
@@ -210,7 +215,12 @@
     <Content Include="Dao\impl\board\Board.xml" />
     <Content Include="Dao\impl\common\Files.xml" />
     <Content Include="Dao\impl\common\Sequence.xml" />
-    <Content Include="Dao\impl\news\News.xml" />
+    <Content Include="Dao\impl\catalog\Catalog.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Dao\impl\news\News.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Dao\impl\privacy\Privacy.xml" />
     <Content Include="Dao\impl\recruit\RecruitNotice.xml" />
     <Content Include="favicon.ico" />
@@ -387,6 +397,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\News\modify.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Catalog\list.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Catalog\modify.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Catalog\register.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Catalog\view.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
