@@ -8,6 +8,8 @@ using bmw_fs.Service.face.common;
 using bmw_fs.Service.impl.common;
 using bmw_fs.Models.news;
 using IBatisNet.DataMapper;
+using System.Text.RegularExpressions;
+using bmw_fs.Common;
 
 namespace bmw_fs.Service.impl.news
 {
@@ -22,6 +24,7 @@ namespace bmw_fs.Service.impl.news
             int masterIdx = sequenceService.getSequenceMasterIdx();
             news.idx = masterIdx;
             Mapper.Instance().BeginTransaction();
+            validation(news);
             newsDao.insertNews(news);
             filesService.fileUpload(multipartFiles, "thumbImg", "jpg|png", 5 * 1024 * 1024, masterIdx, null);
             filesService.fileUpload(multipartFiles, "mainImg", "jpg|png", 5 * 1024 * 1024, masterIdx, null);
@@ -54,6 +57,7 @@ namespace bmw_fs.Service.impl.news
             //type이 일반인 경우, 공지인 경우
             filesService.deleteFileAndFileUpload(multipartFiles, "thumbImg", "jpg|png", 5 * 1024 * 1024, news.idx, news.thumbIdxs);
             filesService.deleteFileAndFileUpload(multipartFiles, "mainImg", "jpg|png", 5 * 1024 * 1024, news.idx, news.fileIdxs);
+            validation(news);
             this.newsDao.updateNews(news);
             Mapper.Instance().CommitTransaction();
         }
@@ -64,6 +68,13 @@ namespace bmw_fs.Service.impl.news
             this.newsDao.deleteNews(news);
             filesService.deleteRealFilesAndDataByFileMasterIdx(news.idx);
             Mapper.Instance().CommitTransaction();
+        }
+
+        private void validation(News news)
+        {
+            if (String.IsNullOrWhiteSpace(news.type)) throw new CustomException("필수 값이 없습니다.(구분)");
+            if (String.IsNullOrWhiteSpace(news.title)) throw new CustomException("필수 값이 없습니다.(제목)");
+            if (String.IsNullOrWhiteSpace(Regex.Replace(news.contents, "<.*?>", string.Empty))) throw new CustomException("필수 값이 없습니다.(내용)");
         }
     }
 }

@@ -13,6 +13,7 @@ using System.Web.Routing;
 
 namespace bmw_fs.Controllers.news
 {
+    [Authorize]
     public class NewsController : Controller
     {
         NewsService newsService = new NewsServiceImpl();
@@ -40,7 +41,7 @@ namespace bmw_fs.Controllers.news
         public RedirectToRouteResult registerProc(News news)
         {
             HttpFileCollectionBase multipartfiles = Request.Files;
-            news.regId = "testnews";
+            news.regId = System.Web.HttpContext.Current.User.Identity.Name;
             newsService.insertNews(multipartfiles, news);
             return RedirectToAction("list", (RouteValueDictionary)Session["searchMap"]);
         }
@@ -72,6 +73,13 @@ namespace bmw_fs.Controllers.news
             news.contents = Sanitizer.GetSafeHtmlFragment(news.contents);
             newsService.updateNews(multipartRequest, news);
             return RedirectToAction("list", (RouteValueDictionary)Session["searchMap"]);
+        }
+
+        [HttpPost]
+        public RedirectToRouteResult delete(News news)
+        {
+            newsService.deleteNews(news);
+            return RedirectToAction("list");
         }
     }
 }

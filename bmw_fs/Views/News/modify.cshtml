@@ -26,7 +26,7 @@
                 </colgroup>
                 <tr>
                     <th>작성자 </th>
-                    <td>홍길동</td>
+                    <td>@ViewBag.item.regId</td>
                 </tr>
                 <tr>
                     <th><label for="">구분 *</label></th>
@@ -51,20 +51,20 @@
                         for (int i = 0, size = ViewBag.thumbList.Count; i < size; i++)
                         {
                             <div class="thum_nail thumbImg">
-                                <span class="file_src">@ViewBag.thumbList[i].originalFilename</span>
-                                <input type="file" class="input_file" name="thumbImg" id="thumNail">
-                                <label for="thumNail" class="btn_file file_del">삭제</label>
+                                <span class="file_src del_src">@ViewBag.thumbList[i].originalFilename</span>
+                                <input type="file" style="display:none;" class="input_file" name="thumbImg" id="thumNail"> 
+                                <label for="" class="btn_file file_del">삭제</label>
                                 <input type="hidden" name="thumbIdxs" value="@ViewBag.thumbList[i].fileIdx" />
                             </div>
-                            <!--
+                        }
+                           <!--
                             <div class="thum_nail thumbImg_new" style="display:none;">
                                 <span class="file_src"></span>
                                 <input type="file" class="input_file" name="thumbImg" id="thumNail">
                                 <label for="thumNail" class="btn_file">파일찾기</label>
-                                <input type="hidden" name="thumbIdxs" value="@ViewBag.thumbList[i].fileIdx" />
+                                <input type="hidden" name="thumbIdxs" value="@ViewBag.thumbList[0].fileIdx" />
                             </div>
-                            -->  
-                        }
+                            --> 
                     }
                     else
                     {
@@ -83,8 +83,8 @@
                         {
                             for (int i = 0, size = ViewBag.mainList.Count; i < size; i++)
                             {
-                                <div class="thum_nail">
-                                    <span class="file_src">@ViewBag.mainList[i].originalFilename</span>
+                                <div class="main_img">
+                                    <span class="file_src main_src">@ViewBag.mainList[i].originalFilename</span>
                                     <input type="file" class="input_file" name="mainImg" id="mainImg">
                                     <label for="mainImg" class="btn_file">파일찾기</label>
                                     <input type="hidden" name="fileIdxs" value="@ViewBag.mainList[i].fileIdx" />
@@ -94,7 +94,7 @@
                         else
                         {
                             <div class="main_img">
-                                <span class="file_src"></span>
+                                <span class="file_src main_src"></span>
                                 <input type="file" class="input_file" name="mainImg" id="mainImg">
                                 <label for="mainImg" class="btn_file">파일찾기</label>
                             </div>
@@ -134,8 +134,12 @@ if ('@ViewBag.item.deployYn' === 'Y') {
 }
 
     $('.file_del').click(function () {
-        $('.thumbImg_new').show();
-        $('.thumbImg').hide();
+        //var html = '';
+       // html += '<input type="file" class="input_file" name="thumbImg" id="thumNail">';
+        $('#thumNail').show();
+        $('.file_del').text('파일 찾기');
+        $('.del_src').text('');
+        return;
      });
 
     function modifyProc() {
@@ -148,18 +152,18 @@ if ('@ViewBag.item.deployYn' === 'Y') {
         if ($('#normal').prop('checked')) {//일반 게시물일 경우
             if ($('#thumNail').val() === '') {
                 alert('섬네일이미지를 등록하세요.');
-                return;
+                return false;
             }
             return;
         }
-        if ($('#mainImg').val() === '') {
+        if ($('.main_src').text() === '') {
             alert('본문이미지를 등록하세요.');
             return;
         }
         if (!confirm('수정하시겠습니까?')) return;
         $('form').attr('action', 'modifyProc').submit();
     };
-(function(){
+/*(function(){
 	$(".add_img_area").find(".file_area").on("change",".input_file",function(e){
 		var $parent = $(this).closest("div");
 		var val = $(this).val();
@@ -170,5 +174,5 @@ if ('@ViewBag.item.deployYn' === 'Y') {
 		};
 	});
 })();
-
+    */
 </script>
