@@ -82,7 +82,7 @@ body, html{height:100%;}
 .btn_defualt{display:inline-block; width:130px; height:37px; line-height:37px; color:#fff; background-color:#666; text-align:center;}
 .btn_area{overflow:hidden;}
 .btn_defualt.btn_list{float:left}
-.btn_defualt.btn_reg {float: right; margin: 3px;}
+.btn_defualt.btn_reg {float: right; margin-left:5px}
 .view_btn_area{float:right}
 .view_btn_area a{background-color:#fff; color:#666; border:1px solid #666}
 .view_btn_area a:first-child{margin-right:5px}
