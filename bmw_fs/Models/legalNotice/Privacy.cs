@@ -2,9 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
-namespace bmw_fs.Models.privacy
+namespace bmw_fs.Models.legalNotice
 {
     public class Privacy : SearchInfo
     {

@@ -3,6 +3,7 @@ using bmw_fs.Models.common;
 using bmw_fs.Service.face.common;
 using bmw_fs.Service.impl.common;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Web;
 using System.Web.Mvc;
@@ -26,6 +27,22 @@ namespace bmw_fs.Controllers.common
                 return null;
             }
             
+        }
+
+        public FileResult fileDownloadByMIdx(Files files)
+        {
+            IList<Files> items = filesService.findAllByMasterIdx(files);
+            if (items != null)
+            {
+                Files item = items[0]; 
+                byte[] fileBytes = System.IO.File.ReadAllBytes(StringProperties.FILE_PATH + "/" + item.savedFilename);
+                return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, item.originalFilename);
+            }
+            else
+            {
+                return null;
+            }
+
         }
 
         public FileResult imageView(Files files)

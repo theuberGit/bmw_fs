@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "카탈로그 등록";
+}
+<style>
+#catYear, #catMonth{width:100px;}
+.cat_txt{display: inline-block; padding: 10px;}
+</style>
+<div id="content" class="reg">
+    <div class="cont_top">
+        <h3>카탈로그 관리</h3>
+    </div>
+    <div class="cont_bottom">
+        <form method="post" enctype="multipart/form-data">
+            <table class="reg_table">
+                <colgroup>
+                    <col width="130px" />
+                    <col width="870px" />
+                </colgroup>
+                <tr>
+                    <th>작성자 </th>
+                    <td>@HttpContext.Current.User.Identity.Name</td>
+                </tr>
+                <tr>
+                    <th><label for="">카탈로그 *</label></th>
+                    <td>
+                        <select id="catYear" title="년도">
+                            <option value="">선택</option>
+                        </select>
+                        <span class="cat_txt">년</span>
+                        <select id="catMonth" title="월">
+                            <option value="">선택</option>
+                        </select>
+                        <span class="cat_txt">월 금융 카탈로그</span>
+                    </td>
+                </tr>
+                <tr class="add_img_area">
+                    <th>파일 *</th>
+                    <td class="file_area">
+                        <div class="thum_nail">
+                            <span class="file_src"></span>
+                            <input type="file" class="input_file" name="file" id="file">
+                            <label for="file" class="btn_file">파일찾기</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="">배포 *</label></th>
+                    <td class="radio_area">
+                        <label for="active"><input type="radio" name="deployYn" id="active" value="Y" title="배포 여부"> 배포</label>
+                        <label for="inactivity"><input type="radio" name="deployYn" id="inactivity" checked value="N" title="배포 여부"> 미배포</label>
+                    </td>
+                </tr>
+            </table>
+            <input type="hidden" id="title" name="title" value=""/>
+        </form>
+        <div class="btn_area">
+            <a href="list?@Session["searchString"]"" class="btn_defualt btn_list">목록</a>
+            <a href="javascript:void(0);" class="btn_defualt btn_reg" onclick="regForm();">등록</a>
+        </div>
+    </div>
+</div>
+<script>
+    lnbSet(3, 3);
+    var yearHtml = '';
+    var monthHtml = '';
+    for (var i = 2017; i <= 2050; i++) {
+        yearHtml += '<option value="' + i + '">' + i + '</option>';
+    }
+    for (var i = 1; i <= 12; i++) {
+        if (i < 10) {
+            monthHtml += '<option value="0' + i + '">0' + i + '</option>';
+        } else {
+            monthHtml += '<option value="' + i + '">' + i + '</option>';
+        }
+    }
+    $('#catYear').append(yearHtml);
+    $('#catMonth').append(monthHtml);
+    function regForm() {    
+        if (!$('#catYear').reqSelect()) return;
+        if (!$('#catMonth').reqSelect()) return;
+        var title = $('#catYear').val() + '년 ' + $('#catMonth').val() + '월 금융 카탈로그';
+        $('#title').val(title);
+        if ($('#file').val() === '') {
+           alert('파일을 등록하세요.');
+           return;
+        }
+       if (!confirm('등록하시겠습니까?')) return;
+       $('form').attr('action', 'registerProc').submit();
+     };
+</script>
