@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "개인정보처리방침 상세보기";
+    ViewBag.Title = "일반공시 수정";
 }
 
 <head>
@@ -10,45 +10,49 @@
 </head>
 <div id="content" class="reg">
     <div class="cont_top">
-        <h3>개인정보처리방침</h3>
+        <h3>일반공시 수정</h3>
     </div>
     <div class="cont_bottom">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <table class="reg_table">
-                <caption>개인정보처리방침 뷰 테이블</caption>
+                <caption>일반공시 수정 테이블</caption>
                 <colgroup>
                     <col width="130px">
                     <col width="870px">
                 </colgroup>
                 <tr>
                     <th scope="row"><label for="title">* 제목</label></th>
-                    <td>@ViewBag.item.title</td>
+                    <td><input type="text" name="title" id="title" value="@ViewBag.item.title" /></td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="contents">* 내용</label></th>
-                    <td>@Html.Raw(@ViewBag.item.contents)</td>
+                    <td><textarea rows="20" cols="30" id="contents" name="contents">@Html.Raw(@ViewBag.item.contents)</textarea></td>
                 </tr>
             </table>
+            <input type="hidden" name="uptId" id="uptId" value="test" />
             <input type="hidden" name="idx" value="@ViewBag.item.idx" />
         </form>
         <div class="btn_area">
-            <a href="list?@Session["searchString"]" class="btn_defualt btn_list">목록</a>
+            <a href="list?@Session["searchString"]" class="btn_defualt btn_list">취소</a>
             <a href="javascript:void(0);" class="btn_defualt btn_reg" onclick="modForm();">수정</a>
             <a href="javascript:void(0);" class="btn_defualt btn_reg" onclick="delForm();">삭제</a>
         </div>
-        <div class="btn_area right">
-
-        </div>
     </div>
 </div>
+<script type="text/javascript" src="/resources/se/js/HuskyEZCreator.js"></script>
+<script type="text/javascript" src="/resources/js/smarteditor.js"></script>
 <script>
-    lnbSet(7, 1);
-    function modForm() {
-        $('form').attr('action', 'modify').submit();
-    }
+    lnbSet(7, 5);
+        function modForm() {
+        if (!confirm('수정하시겠습니까?')) return;
+        if (!$('#title').required()) return;
+        editor_object.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
+        if (!$('#contents').required()) return;
+        $('#content form').attr('action', 'modifyProc').submit();
+        }
 
-    function delForm() {
+        function delForm() {
         if (!confirm('삭제하시겠습니까?')) return;
-        $('form').attr('action', 'delete').submit();
-    }
+        $('#content form').attr('action', 'delete').submit();
+        }
 </script>

@@ -16,15 +16,15 @@ namespace bmw_fs.Controllers.recruit
     [Authorize]
     public class RecruitNoticeController : Controller
     {
-        RecruitNoticeService recruitNoticeSerivce = new RecruitNoticeServiceImpl();
+        RecruitNoticeService recruitNoticeService = new RecruitNoticeServiceImpl();
         SearchService searchService = new SearchServiceImpl();
         FilesService filesServce = new FilesServiceImpl();
 
         public ActionResult list(RecruitNotice recruitNotice)
         {
             searchService.setSearchSession(Request, Session);
-            searchService.setPagination(recruitNotice, 10, recruitNoticeSerivce.findAllCount(recruitNotice));
-            ViewBag.list = recruitNoticeSerivce.findAll(recruitNotice);
+            searchService.setPagination(recruitNotice, 10, recruitNoticeService.findAllCount(recruitNotice));
+            ViewBag.list = recruitNoticeService.findAll(recruitNotice);
             ViewBag.pagination = recruitNotice;
             ViewBag.today = DateTime.Now;
 
@@ -43,7 +43,7 @@ namespace bmw_fs.Controllers.recruit
             HttpFileCollectionBase multipartRequest = Request.Files;
             recruitNotice.regId = System.Web.HttpContext.Current.User.Identity.Name;
             recruitNotice.contents = Sanitizer.GetSafeHtmlFragment(recruitNotice.contents);
-            recruitNoticeSerivce.insertRecruitNotice(multipartRequest, recruitNotice);
+            recruitNoticeService.insertRecruitNotice(multipartRequest, recruitNotice);
 
          
             return RedirectToAction("list", (RouteValueDictionary)Session["searchMap"]);
@@ -51,7 +51,7 @@ namespace bmw_fs.Controllers.recruit
        
         public ActionResult view(RecruitNotice recruitNotice)
         {
-            RecruitNotice item = recruitNoticeSerivce.findRecruitNotice(recruitNotice);
+            RecruitNotice item = recruitNoticeService.findRecruitNotice(recruitNotice);
             ViewBag.item = item;
             ViewBag.filesList1 = filesServce.findAllByMasterIdxAndType(item.idx, "files");
 
@@ -60,7 +60,7 @@ namespace bmw_fs.Controllers.recruit
 
         public ActionResult modify(RecruitNotice recruitNotice)
         {
-            RecruitNotice item = recruitNoticeSerivce.findRecruitNotice(recruitNotice);
+            RecruitNotice item = recruitNoticeService.findRecruitNotice(recruitNotice);
             ViewBag.item = item;
             ViewBag.filesList1 = filesServce.findAllByMasterIdxAndTypeForUpload(item.idx, "files");
 
@@ -73,14 +73,14 @@ namespace bmw_fs.Controllers.recruit
             HttpFileCollectionBase multipartRequest = Request.Files;
             recruitNotice.updateId = System.Web.HttpContext.Current.User.Identity.Name;
             recruitNotice.contents = Sanitizer.GetSafeHtmlFragment(recruitNotice.contents);
-            recruitNoticeSerivce.updateRecruitNotice(multipartRequest, recruitNotice);
+            recruitNoticeService.updateRecruitNotice(multipartRequest, recruitNotice);
             return RedirectToAction("list");
         }
 
         [HttpPost]
         public RedirectToRouteResult delete(RecruitNotice recruitNotice)
         {
-            recruitNoticeSerivce.deleteRecruitNotice(recruitNotice);
+            recruitNoticeService.deleteRecruitNotice(recruitNotice);
             return RedirectToAction("list");
         }
 

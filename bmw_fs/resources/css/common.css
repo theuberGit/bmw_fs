@@ -77,7 +77,7 @@ body, html{height:100%;}
 .reg .cont_bottom .reg_table td input.tit{width:456px}
 .reg .cont_bottom .reg_table td input.num{width:37px}
 .reg .cont_bottom .reg_table td.rolling_img:after{content:"사이즈 1400 * 600"; display:inline-block; padding:7px 0 0 5px; }
-
+.reg .cont_bottom .reg_table td.contents {white-space: pre-line}
 
 .btn_defualt{display:inline-block; width:130px; height:37px; line-height:37px; color:#fff; background-color:#666; text-align:center;}
 .btn_area{overflow:hidden;}
