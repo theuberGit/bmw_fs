@@ -45,7 +45,7 @@
                             <td>공지</td>
                             <td class="tit_area"><a href="view?idx=@ViewBag.noticeList[i].idx">@ViewBag.noticeList[i].title </a></td>
                             <td>@ViewBag.noticeList[i].regId</td>
-                            <td>@ViewBag.noticeList[i].regDate</td>
+                            <td>@ViewBag.noticeList[i].regDate.ToString("yyyy-MM-dd")</td>
                             <td>@ViewBag.noticeList[i].hit</td>
                             <td>@ViewBag.noticeList[i].deployYn</td>
                         </tr>
@@ -56,7 +56,7 @@
                             <td>@(ViewBag.pagination.totalItemCount - (ViewBag.pagination.currentPage - 1) * ViewBag.pagination.itemPerPage - i)</td>
                             <td class="tit_area"><a href="view?idx=@ViewBag.list[i].idx">@ViewBag.list[i].title </a></td>
                             <td>@ViewBag.list[i].regId</td>
-                            <td>@ViewBag.list[i].regDate</td>
+                            <td>@ViewBag.list[i].regDate.ToString("yyyy-MM-dd")</td>
                             <td>@ViewBag.list[i].hit</td>
                             <td>@ViewBag.list[i].deployYn</td>
                         </tr>

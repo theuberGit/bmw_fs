@@ -1,0 +1,160 @@
+<!doctype html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="../../resource/css/common.css">
+<title>Document</title>
+<style>
+.img_view{overflow:hidden; margin-bottom:30px; }
+.img_view > div{float:left;width:499.5px; text-align:center}
+.img_view > div span{display:block; width:100%; padding:13px 0; font-weight:bold; background-color:#f4f4f4; border-top:1px solid #ccc; border-bottom:1px solid #ccc}
+.img_view > div div{padding:30px 0; border-bottom:1px solid #ccc}
+.img_view > div div img{width:300px;}
+.img_view > div:first-child{border-right:1px solid #ccc;}
+.main_img_area dl{margin-bottom:15px; }
+.main_img_area dl dt{margin-bottom:10px; font-weight:bold;}
+.main_img_area dl dd a{color:blue; text-decoration:underline;}
+</style>
+</head>
+<body>
+<div id="wrap">
+	<div id="header">
+		<h1><a href=""><img src="../../resource/images/logo.png" alt=""></a></h1>
+		<div class="header_inner">
+			<h2>BMW FS 관리자</h2>
+			<div class="link_list">
+				<a href="#" class="on">관리자 관리</a>
+				<a href="#">미답변 1:1 문의 <span></span></a>
+				<a href="#">My Account</a>
+				<a href="#">로그인</a>
+			</div>
+		</div>
+	</div>
+	<div id="container">
+		<div id="lnb">
+			<ul class="menu_list">
+				<li class="sub_list on">
+					<a href="#">메인롤링 관리</a>
+					<ul>
+						<li><a href="#">웹 메인롤링</a></li>
+						<li><a href="#">모바일 메인롤링</a></li>
+					</ul>
+				</li>
+				<li class="sub_list">
+					<a href="#">프로모션 관리</a>
+					<ul>
+						<li><a href="#">웹 프로모션</a></li>
+						<li><a href="#">모바일 프로모션</a></li>
+					</ul>
+				</li>
+				<li><a href="#">배너 관리</a></li>
+				<li><a href="#">월납입금 관리</a></li>
+				<li><a href="#">뉴스 관리</a></li>
+				<li><a href="#">전시장 관리 </a></li>
+				<li><a href="#">법적 고지</a></li>
+				<li class="sub_list">
+					<a href="#">인재채용</a>
+					<ul>
+						<li><a href="#">채용 공고</a></li>
+						<li><a href="#">채용 FAQ</a></li>
+					</ul>
+				</li>
+				<li class="sub_list">
+					<a href="#">고객센터</a>
+					<ul>
+						<li><a href="#">FAQ</a></li>
+						<li><a href="#">1:1 문의</a></li>
+						<li><a href="#">다운로드 자료/양식</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div id="content" class="reg">
+			<div class="cont_top">
+				<h3>관리자 관리</h3>
+			</div>
+			<div class="cont_bottom">
+				<table class="reg_table">
+					<colgroup>
+						<col width="130px" />
+						<col width="370px" />
+						<col width="130px" />
+						<col width="370px" />
+					</colgroup>
+					<tr>
+						<th>작성자</th>
+						<td colspan="3">홍길동</td>
+					</tr>
+					<tr>
+						<th>작성일</th>
+						<td>2017-03-20</td>
+						<th>게시 기간</th>
+						<td>2017-03-20  ~  2017-04-30</td>
+					</tr>
+					<tr>
+						<th>게시 위치</th>
+						<td>국문 </td>
+						<th>배포</th>
+						<td>배포</td>
+					</tr>
+				</table>
+				<table class="reg_table">
+					<colgroup>
+						<col width="130px" />
+						<col width="870px" />
+					</colgroup>
+					<tr>
+						<th>제목</th>
+						<td>당신의 첫 번째 드라이빙을 위한 특별한 혜택 월 20만원대로 BMW 3시리즈, 4시리즈를!</td>
+					</tr>
+					<tr>
+						<th>썸네일 이미지</th>
+						<td>0501_my first bmw program_thum.jpg</td>
+					</tr>
+					<tr>
+						<th>본문 상단 이미지</th>
+						<td>0501_my first bmw program_top.jpg</td>
+					</tr>
+					<tr>
+						<th>본문 이미지</th>
+						<td class="main_img_area">
+							<dl>
+								<dt>[이미지 <span>1</span>]</dt>
+								<dd> -  이미지 : <span>0501_my first bmw program_1.jpg</span></dd>
+								<dd> -  URL : <a href="https://www.bmwfs.co.kr/payment_calculator.html">https://www.bmwfs.co.kr/payment_calculator.html</a></dd>
+							</dl>
+							<dl>
+								<dt>[이미지 <span>2</span>]</dt>
+								<dd> -  이미지 : <span>0501_my first bmw program_2.jpg</span></dd>
+								<dd> -  URL : <a href="https://www.bmwfs.co.kr/payment_calculator.html">https://www.bmwfs.co.kr/payment_calculator.html</a></dd>
+							</dl>
+							<dl>
+								<dt>[이미지 <span>3</span>]</dt>
+								<dd> -  이미지 : <span>0501_my first bmw program_3.jpg</span></dd>
+								<dd> -  URL : <a href="https://www.bmwfs.co.kr/payment_calculator.html">https://www.bmwfs.co.kr/payment_calculator.html</a></dd>
+							</dl>
+						</td>
+					</tr>
+					
+				</table>
+
+				<div class="btn_area">
+					<a href="list.html" class="btn_defualt btn_list">목록</a>
+					<div class="view_btn_area">
+						<a href="modify.html" class="btn_defualt btn_modifyt">수정</a>
+						<a href="#" class="btn_defualt btn_delete">삭제</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="../../resource/js/lib/jquery-1.12.0.min.js"></script>
+<script>
+(function(){
+	$(".btn_delete").click(function(){
+		confirm("삭제하시겠습니까?");
+	});
+})();
+</script>
+</body>
+</html>

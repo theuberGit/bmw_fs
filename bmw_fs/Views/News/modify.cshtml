@@ -51,27 +51,23 @@
                         for (int i = 0, size = ViewBag.thumbList.Count; i < size; i++)
                         {
                             <div class="thum_nail thumbImg">
-                                <span class="file_src del_src">@ViewBag.thumbList[i].originalFilename</span>
-                                <input type="file" style="display:none;" class="input_file" name="thumbImg" id="thumNail"> 
-                                <label for="" class="btn_file file_del">삭제</label>
+                                <span class="file_src thumb_file_nm">@ViewBag.thumbList[i].originalFilename</span>
+                                <input type="file" class="input_file" name="thumbImg" id="thumNail">
+                                <label for="thumNail" style="display:none;" class="btn_file btn_file_txt">파일찾기</label>
+                                <label for="" class="btn_file del_file_txt">삭제</label>
                                 <input type="hidden" name="thumbIdxs" value="@ViewBag.thumbList[i].fileIdx" />
                             </div>
                         }
-                           <!--
-                            <div class="thum_nail thumbImg_new" style="display:none;">
-                                <span class="file_src"></span>
-                                <input type="file" class="input_file" name="thumbImg" id="thumNail">
-                                <label for="thumNail" class="btn_file">파일찾기</label>
-                                <input type="hidden" name="thumbIdxs" value="@ViewBag.thumbList[0].fileIdx" />
-                            </div>
-                            --> 
+                        
                     }
                     else
                     {
                         <div class="thum_nail thumbImg">
-                            <span class="file_src"></span>
+                            <span class="file_src thumb_file_nm"></span>
                             <input type="file" class="input_file" name="thumbImg" id="thumNail">
-                            <label for="thumNail" class="btn_file">파일찾기</label>
+                            <label for="thumNail" class="btn_file btn_file_txt">파일찾기</label>
+                            <label for="" style="display:none;" class="btn_file del_file_txt">삭제</label>
+                            <input type="hidden" name="thumbIdxs" value="-1" />
                         </div>
                     }
                     </td>
@@ -113,7 +109,7 @@
             <input type="hidden" name="idx" value="@ViewBag.item.idx"/>
         </form>
         <div class="btn_area">
-            <a href="list?@Session["searchString"]"" class="btn_defualt btn_list">목록</a>
+            <a href="list?@Session["searchString"]" class="btn_defualt btn_list">목록</a>
             <a href="javascript:void(0);" class="btn_defualt btn_reg" onclick="modifyProc();">수정</a>
         </div>
     </div>
@@ -122,25 +118,35 @@
 <script type="text/javascript" src="/resources/js/smarteditor.js"></script>
 <script>
     lnbSet(5, 0);
-if ('@ViewBag.item.type' === 'N') {
+if ('@ViewBag.item.type' === 'N') {//일반 or 공지 set
   $('#notice').prop('checked', true);
 } else {
   $('#normal').prop('checked', true);
 }
-if ('@ViewBag.item.deployYn' === 'Y') {
+if ('@ViewBag.item.deployYn' === 'Y') {//배포 여부 set
   $('#active').prop('checked', true);
 } else {
   $('#inactivity').prop('checked', true);
 }
+    $('.del_file_txt').click(function () {//썸네일 삭제 버튼 click
+        $(this).hide();
+        $('.thumb_file_nm').text('');
+        $('.btn_file_txt').show();
+    });
 
-    $('.file_del').click(function () {
-        //var html = '';
-       // html += '<input type="file" class="input_file" name="thumbImg" id="thumNail">';
-        $('#thumNail').show();
-        $('.file_del').text('파일 찾기');
-        $('.del_src').text('');
-        return;
-     });
+    $('.btn_file_txt').click(function () {//썸네일 파일찾기 버튼 click
+        if ($('.thumb_file_nm').text() != '') {
+            $(this).hide();
+            $('.thumb_file_nm').text('');
+            $('.del_file_txt').show();
+        }
+    });
+
+    $('#thumbNail').change(function () {//썸네일 file change 
+        if ($(this).val() != '') {
+            $('.del_file_txt').show();
+        }
+    });
 
     function modifyProc() {
         if (!$('#title').required()) return;
@@ -150,29 +156,21 @@ if ('@ViewBag.item.deployYn' === 'Y') {
             return;
         }
         if ($('#normal').prop('checked')) {//일반 게시물일 경우
-            if ($('#thumNail').val() === '') {
+            if ($('#thumNail').val() === '' && $('.thumb_file_nm').text() === '') {
                 alert('섬네일이미지를 등록하세요.');
                 return false;
             }
-            return;
         }
         if ($('.main_src').text() === '') {
             alert('본문이미지를 등록하세요.');
             return;
         }
+        
+        if ($('.thumb_file_nm').text() === '' && $('input[name=thumbIdxs]').val() !== -1) {// -1 : 새로등록, 0 : 기존파일 삭제
+            $('input[name=thumbIdxs]').val(0);
+        }
+        console.log($('input[name=thumbIdxs]').val());
         if (!confirm('수정하시겠습니까?')) return;
         $('form').attr('action', 'modifyProc').submit();
     };
-/*(function(){
-	$(".add_img_area").find(".file_area").on("change",".input_file",function(e){
-		var $parent = $(this).closest("div");
-		var val = $(this).val();
-		var valTit = val.split("\\");
-		var valTittext = valTit[valTit.length -1]
-		if(val != ""){
-			$parent.find(".file_src").text(valTittext).addClass("on");
-		};
-	});
-})();
-    */
 </script>

@@ -32,6 +32,8 @@ namespace bmw_fs.Service.face.common
 
         Boolean deleteRealFilesAndDataByFileMasterIdx(int masterIdx);
 
+        Boolean deleteRealFilesAndDataByFileMasterIdxAndTp(int masterIdx, String type);
+
         Files filePhotoUpload(HttpFileCollectionBase multipartFiles);
     }
 }

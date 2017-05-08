@@ -10,6 +10,7 @@ using bmw_fs.Models.news;
 using IBatisNet.DataMapper;
 using System.Text.RegularExpressions;
 using bmw_fs.Common;
+using System.Diagnostics;
 
 namespace bmw_fs.Service.impl.news
 {
@@ -54,8 +55,17 @@ namespace bmw_fs.Service.impl.news
         public void updateNews(HttpFileCollectionBase multipartFiles, News news)
         {
             Mapper.Instance().BeginTransaction();
-            //type이 일반인 경우, 공지인 경우
-            filesService.deleteFileAndFileUpload(multipartFiles, "thumbImg", "jpg|png", 5 * 1024 * 1024, news.idx, news.thumbIdxs);
+            if(("G".Equals(news.type) && news.thumbIdxs[0] != -1) || ("N".Equals(news.type) && news.thumbIdxs[0] != 0 && news.thumbIdxs[0] != -1))
+            {
+                filesService.deleteFileAndFileUpload(multipartFiles, "thumbImg", "jpg|png", 5 * 1024 * 1024, news.idx, news.thumbIdxs);  
+            }else if("N".Equals(news.type) && news.thumbIdxs[0] == 0)//기존에 등록되어있던 경우
+            {
+                filesService.deleteRealFilesAndDataByFileMasterIdxAndTp(news.idx, "thumbImg");
+            }else if(("N".Equals(news.type) && news.thumbIdxs[0] == -1) || ("G".Equals(news.type) && news.thumbIdxs[0] == -1))//새로 등록하는 경우
+            {
+                filesService.fileUpload(multipartFiles, "thumbImg", "jpg|png", 5 * 1024 * 1024, news.idx, null);
+            }
+
             filesService.deleteFileAndFileUpload(multipartFiles, "mainImg", "jpg|png", 5 * 1024 * 1024, news.idx, news.fileIdxs);
             validation(news);
             this.newsDao.updateNews(news);

@@ -297,6 +297,10 @@
     <Content Include="resources\se\SmartEditor2_noframe.html" />
     <Content Include="resources\se\smart_editor2_inputarea.html" />
     <Content Include="resources\se\smart_editor2_inputarea_ie8.html" />
+    <None Include="Views\Promotion\list.cshtml" />
+    <None Include="Views\Promotion\modify.cshtml" />
+    <None Include="Views\Promotion\view.cshtml" />
+    <None Include="Views\Promotion\write.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -30,7 +30,15 @@
                 </tr>
                 <tr>
                     <th><label for="">구분</label></th>
-                    <td class="radio_area">@ViewBag.item.type</td>
+                    
+                    @if ("N".Equals(ViewBag.item.type))
+                    {
+                        <td class="radio_area">공지</td>
+                    }
+                    else
+                    {
+                        <td class="radio_area">일반</td>
+                    }
                 </tr>
                 <tr>
                     <th><label for="">제목</label></th>

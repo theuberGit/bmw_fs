@@ -34,6 +34,7 @@
               ,REG_ID
             FROM BMW_FS_NEWS
             WHERE 1=1
+            AND TYPE = 'G'
             <isNotEmpty property="searchInput">
               <isEqual property="searchOption" compareValue="title">
                 AND TITLE LIKE '%'+#searchInput#+'%'
@@ -51,6 +52,7 @@
       SELECT COUNT(*)
       FROM BMW_FS_NEWS
       WHERE 1=1
+      AND TYPE = 'G'
       <isNotEmpty property="searchInput">
         <isEqual property="searchOption" compareValue="title">
           AND TITLE LIKE '%'+#searchInput#+'%'
