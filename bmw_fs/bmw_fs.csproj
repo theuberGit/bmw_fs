@@ -184,6 +184,7 @@
     <Compile Include="Dao\face\legalNotice\BusinessDao.cs" />
     <Compile Include="Dao\face\legalNotice\CreditDao.cs" />
     <Compile Include="Dao\face\legalNotice\GeneralDao.cs" />
+    <Compile Include="Dao\face\legalNotice\PrivacyDao.cs" />
     <Compile Include="Dao\face\legalNotice\ProductDao.cs" />
     <Compile Include="Dao\face\news\NewsDao.cs" />
     <Compile Include="Dao\face\recruit\RecruitFaqDao.cs" />
@@ -218,6 +219,7 @@
     <Compile Include="Service\face\legalNotice\BusinessService.cs" />
     <Compile Include="Service\face\legalNotice\CreditService.cs" />
     <Compile Include="Service\face\legalNotice\GeneralService.cs" />
+    <Compile Include="Service\face\legalNotice\PrivacyService.cs" />
     <Compile Include="Service\face\legalNotice\ProductService.cs" />
     <Compile Include="Service\face\news\NewsService.cs" />
     <Compile Include="Service\face\recruit\RecruitFaqService.cs" />
@@ -232,6 +234,7 @@
     <Compile Include="Service\impl\legalNotice\BusinessServiceImpl.cs" />
     <Compile Include="Service\impl\legalNotice\CreditServiceImpl.cs" />
     <Compile Include="Service\impl\legalNotice\GeneralServiceImpl.cs" />
+    <Compile Include="Service\impl\legalNotice\PrivacyServiceImpl.cs" />
     <Compile Include="Service\impl\legalNotice\ProductServiceImpl.cs" />
     <Compile Include="Service\impl\news\NewsServiceImpl.cs" />
     <Compile Include="Service\impl\recruit\RecruitFaqServiceImpl.cs" />
@@ -247,6 +250,7 @@
     </Content>
     <Content Include="Dao\impl\CustomerService\Faq.xml" />
     <Content Include="Dao\impl\legalNotice\Business.xml" />
+    <Content Include="Dao\impl\legalNotice\Privacy.xml" />
     <Content Include="Dao\impl\legalNotice\Product.xml" />
     <Content Include="Dao\impl\news\News.xml">
       <SubType>Designer</SubType>
