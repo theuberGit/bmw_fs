@@ -338,6 +338,8 @@
     <Content Include="Views\Faq\modify.cshtml" />
     <Content Include="Views\Faq\register.cshtml" />
     <Content Include="Views\Faq\view.cshtml" />
+    <Content Include="Views\News\modify.cshtml" />
+    <Content Include="Views\News\view.cshtml" />
     <None Include="Views\Promotion\list.cshtml" />
     <None Include="Views\Promotion\modify.cshtml" />
     <None Include="Views\Promotion\view.cshtml" />

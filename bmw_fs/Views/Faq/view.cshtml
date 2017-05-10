@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "상품약관 상세보기";
+    ViewBag.Title = "FAQ 상세보기";
 }
 
 <head>
@@ -10,12 +10,12 @@
 </head>
 <div id="content" class="reg">
     <div class="cont_top">
-        <h3>상품약관</h3>
+        <h3>FAQ</h3>
     </div>
     <div class="cont_bottom">
         <form method="post">
             <table class="reg_table">
-                <caption>상품약관 뷰 테이블</caption>
+                <caption>FAQ 뷰 테이블</caption>
                 <colgroup>
                     <col width="130px">
                     <col width="870px">
@@ -25,12 +25,12 @@
                     <td>@ViewBag.item.category</td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="title">* 제목</label></th>
-                    <td>@ViewBag.item.title</td>
+                    <th scope="row"><label for="title">* 항목</label></th>
+                    <td>@ViewBag.item.ask</td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="contents">* 내용</label></th>
-                    <td>@Html.Raw(@ViewBag.item.contents)</td>
+                    <th scope="row"><label for="contents">* 답변</label></th>
+                    <td>@ViewBag.item.question</td>
                 </tr>
             </table>
             <input type="hidden" name="idx" value="@ViewBag.item.idx" />
