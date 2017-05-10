@@ -179,8 +179,8 @@
     <Compile Include="Dao\face\catalog\CatalogDao.cs" />
     <Compile Include="Dao\face\legalNotice\CreditDao.cs" />
     <Compile Include="Dao\face\legalNotice\GeneralDao.cs" />
+    <Compile Include="Dao\face\legalNotice\PrivacyDao.cs" />
     <Compile Include="Dao\face\news\NewsDao.cs" />
-    <Compile Include="Dao\face\privacy\PrivacyDao.cs" />
     <Compile Include="Dao\face\recruit\RecruitFaqDao.cs" />
     <Compile Include="Dao\face\recruit\RecruitNoticeDao.cs" />
     <Compile Include="Global.asax.cs">
@@ -197,7 +197,6 @@
     <Compile Include="Models\legalNotice\Privacy.cs" />
     <Compile Include="Models\catalog\Catalog.cs" />
     <Compile Include="Models\news\News.cs" />
-    <Compile Include="Models\privacy\Privacy.cs" />
     <Compile Include="Models\recruit\RecruitFaq.cs" />
     <Compile Include="Models\recruit\RecruitNotice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -209,8 +208,8 @@
     <Compile Include="Service\face\catalog\CatalogService.cs" />
     <Compile Include="Service\face\legalNotice\CreditService.cs" />
     <Compile Include="Service\face\legalNotice\GeneralService.cs" />
+    <Compile Include="Service\face\legalNotice\PrivacyService.cs" />
     <Compile Include="Service\face\news\NewsService.cs" />
-    <Compile Include="Service\face\privacy\PrivacyService.cs" />
     <Compile Include="Service\face\recruit\RecruitFaqService.cs" />
     <Compile Include="Service\face\recruit\RecruitNoticeService.cs" />
     <Compile Include="Service\impl\admin\MemberServiceImpl.cs" />
@@ -221,8 +220,8 @@
     <Compile Include="Service\impl\catalog\CatalogServiceImpl.cs" />
     <Compile Include="Service\impl\legalNotice\CreditServiceImpl.cs" />
     <Compile Include="Service\impl\legalNotice\GeneralServiceImpl.cs" />
+    <Compile Include="Service\impl\legalNotice\PrivacyServiceImpl.cs" />
     <Compile Include="Service\impl\news\NewsServiceImpl.cs" />
-    <Compile Include="Service\impl\privacy\PrivacyServiceImpl.cs" />
     <Compile Include="Service\impl\recruit\RecruitFaqServiceImpl.cs" />
     <Compile Include="Service\impl\recruit\RecruitNoticeServiceImpl.cs" />
   </ItemGroup>
@@ -234,13 +233,13 @@
     <Content Include="Dao\impl\catalog\Catalog.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Dao\impl\legalNotice\Privacy.xml" />
     <Content Include="Dao\impl\news\News.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Dao\impl\legalNotice\Credit.xml" />
     <Content Include="Dao\impl\legalNotice\General.xml" />
     <Content Include="Dao\impl\news\News.xml" />
-    <Content Include="Dao\impl\privacy\Privacy.xml" />
     <Content Include="Dao\impl\recruit\RecruitFaq.xml" />
     <Content Include="Dao\impl\recruit\RecruitNotice.xml" />
     <Content Include="favicon.ico" />
@@ -317,6 +316,8 @@
     <Content Include="resources\se\SmartEditor2_noframe.html" />
     <Content Include="resources\se\smart_editor2_inputarea.html" />
     <Content Include="resources\se\smart_editor2_inputarea_ie8.html" />
+    <Content Include="Views\News\modify.cshtml" />
+    <Content Include="Views\News\view.cshtml" />
     <None Include="Views\Promotion\list.cshtml" />
     <None Include="Views\Promotion\modify.cshtml" />
     <None Include="Views\Promotion\view.cshtml" />
