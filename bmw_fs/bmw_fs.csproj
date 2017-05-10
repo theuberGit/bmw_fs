@@ -185,6 +185,7 @@
     <Compile Include="Dao\face\legalNotice\CreditDao.cs" />
     <Compile Include="Dao\face\legalNotice\GeneralDao.cs" />
     <Compile Include="Dao\face\legalNotice\PrivacyDao.cs" />
+    <Compile Include="Dao\face\legalNotice\ProductDao.cs" />
     <Compile Include="Dao\face\news\NewsDao.cs" />
     <Compile Include="Dao\face\recruit\RecruitFaqDao.cs" />
     <Compile Include="Dao\face\recruit\RecruitNoticeDao.cs" />
