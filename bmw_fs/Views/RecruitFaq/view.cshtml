@@ -1,6 +1,6 @@
 ﻿<div id="content" class="reg">
     <div class="cont_top">
-        <h3>채용 공고</h3>
+        <h3>채용 FAQ</h3>
     </div>
     <div class="cont_bottom">
         <form method="post" enctype="multipart/form-data">
@@ -15,28 +15,20 @@
                     <td>@ViewBag.item.regId</td>
                 </tr>
                 <tr>
-                    <th><label for="title">제목 *</label></th>
-                    <td>@ViewBag.item.title</td>
-                </tr>
-                <tr>
-                    <th><label for="sdate">접수 기간 *</label></th>
-                    <td>@ViewBag.item.startDate.ToString("yyyy-MM-dd") ~ @ViewBag.item.endDate.ToString("yyyy-MM-dd")</td>
-                </tr>
-                <tr>
-                    <th><label for="">내용</label></th>
-                    <td>@Html.Raw(@ViewBag.item.contents)</td>
-                </tr>
-                <tr class="add_img_area">
-                    <th>첨부파일</th>
-                    <td class="file_area">
-                        @for (int i = 0, size = ViewBag.filesList1.Count; i < size; i++)
+                    <th><label for="engY">영문 사이트</label></th>
+                    <td class="radio_area">
+                        @if ("Y".Equals(@ViewBag.item.engYn))
                         {
-                                <span><a href="/Files/fileDownload?fileIdx=@ViewBag.filesList1[i].fileIdx">@ViewBag.filesList1[i].originalFilename</a></span>  
+                            @:있음
+                        }
+                        else
+                        {
+                            @:없음
                         }
                     </td>
                 </tr>
                 <tr>
-                    <th><label for="">배포</label></th>
+                    <th><label for="deployY">배포</label></th>
                     <td class="radio_area">
                         @if ("Y".Equals(@ViewBag.item.deployYn))
                         {
@@ -44,9 +36,40 @@
                         }
                         else
                         {
-                           @:미배포
+                            @:미배포
                         }
                     </td>
+                </tr>
+            </table>
+
+            <h4>국문 사이트</h4>
+            <table class="reg_table">
+                <colgroup>
+                    <col width="130px" />
+                    <col width="870px" />
+                </colgroup>
+                <tr>
+                    <th><label for="title">항목</label></th>
+                    <td>@ViewBag.item.title</td>
+                </tr>
+                <tr>
+                    <th><label for="contents">답변</label></th>
+                    <td class="contents">@ViewBag.item.contents</td>
+                </tr>
+            </table>
+            <h4>영문 사이트</h4>
+            <table class="reg_table">
+                <colgroup>
+                    <col width="130px" />
+                    <col width="870px" />
+                </colgroup>
+                <tr>
+                    <th><label for="titleEng">항목 </label></th>
+                    <td>@ViewBag.item.titleEng</td>
+                </tr>
+                <tr>
+                    <th><label for="contentsEng">답변</label></th>
+                    <td class="contents">@ViewBag.item.contentsEng</td>
                 </tr>
             </table>
         </form>
@@ -60,7 +83,7 @@
     </div>
 </div>
 <script>
-    lnbSet(8, 1);
+    lnbSet(8, 2);
     function delForm() {
         if (!confirm('삭제하시겠습니까?')) return;
         $('#content form').attr('action', 'delete').submit();

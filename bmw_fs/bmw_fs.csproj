@@ -165,6 +165,7 @@
     <Compile Include="Controllers\catalog\CatalogController.cs" />
     <Compile Include="Controllers\legalNotice\ProductController.cs" />
     <Compile Include="Controllers\news\NewsController.cs" />
+    <Compile Include="Controllers\recruit\RecruitFaqController.cs" />
     <Compile Include="Controllers\recruit\RecruitNoticeController.cs" />
     <Compile Include="Controllers\test\BoardController.cs" />
     <Compile Include="Controllers\common\ErrorController.cs" />
@@ -183,7 +184,8 @@
     <Compile Include="Dao\face\legalNotice\GeneralDao.cs" />
     <Compile Include="Dao\face\legalNotice\ProductDao.cs" />
     <Compile Include="Dao\face\news\NewsDao.cs" />
-    <Compile Include="Dao\face\legalNotice\PrivacyDao.cs" />
+    <Compile Include="Dao\face\privacy\PrivacyDao.cs" />
+    <Compile Include="Dao\face\recruit\RecruitFaqDao.cs" />
     <Compile Include="Dao\face\recruit\RecruitNoticeDao.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -201,6 +203,8 @@
     <Compile Include="Models\catalog\Catalog.cs" />
     <Compile Include="Models\legalNotice\Product.cs" />
     <Compile Include="Models\news\News.cs" />
+    <Compile Include="Models\privacy\Privacy.cs" />
+    <Compile Include="Models\recruit\RecruitFaq.cs" />
     <Compile Include="Models\recruit\RecruitNotice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\face\admin\MemberService.cs" />
@@ -214,7 +218,8 @@
     <Compile Include="Service\face\legalNotice\GeneralService.cs" />
     <Compile Include="Service\face\legalNotice\ProductService.cs" />
     <Compile Include="Service\face\news\NewsService.cs" />
-    <Compile Include="Service\face\legalNotice\PrivacyService.cs" />
+    <Compile Include="Service\face\privacy\PrivacyService.cs" />
+    <Compile Include="Service\face\recruit\RecruitFaqService.cs" />
     <Compile Include="Service\face\recruit\RecruitNoticeService.cs" />
     <Compile Include="Service\impl\admin\MemberServiceImpl.cs" />
     <Compile Include="Service\impl\board\BoardServiceImpl.cs" />
@@ -227,7 +232,8 @@
     <Compile Include="Service\impl\legalNotice\GeneralServiceImpl.cs" />
     <Compile Include="Service\impl\legalNotice\ProductServiceImpl.cs" />
     <Compile Include="Service\impl\news\NewsServiceImpl.cs" />
-    <Compile Include="Service\impl\legalNotice\PrivacyServiceImpl.cs" />
+    <Compile Include="Service\impl\privacy\PrivacyServiceImpl.cs" />
+    <Compile Include="Service\impl\recruit\RecruitFaqServiceImpl.cs" />
     <Compile Include="Service\impl\recruit\RecruitNoticeServiceImpl.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -246,7 +252,8 @@
     <Content Include="Dao\impl\legalNotice\Credit.xml" />
     <Content Include="Dao\impl\legalNotice\General.xml" />
     <Content Include="Dao\impl\news\News.xml" />
-    <Content Include="Dao\impl\legalNotice\Privacy.xml" />
+    <Content Include="Dao\impl\privacy\Privacy.xml" />
+    <Content Include="Dao\impl\recruit\RecruitFaq.xml" />
     <Content Include="Dao\impl\recruit\RecruitNotice.xml" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -322,6 +329,10 @@
     <Content Include="resources\se\SmartEditor2_noframe.html" />
     <Content Include="resources\se\smart_editor2_inputarea.html" />
     <Content Include="resources\se\smart_editor2_inputarea_ie8.html" />
+    <None Include="Views\Promotion\list.cshtml" />
+    <None Include="Views\Promotion\modify.cshtml" />
+    <None Include="Views\Promotion\view.cshtml" />
+    <None Include="Views\Promotion\write.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -418,10 +429,16 @@
     <Content Include="Views\RecruitNotice\view.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\News\view.cshtml" />
+    <Content Include="Views\RecruitFaq\list.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\News\modify.cshtml" />
+    <Content Include="Views\RecruitFaq\register.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\RecruitFaq\view.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\RecruitFaq\modify.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Catalog\list.cshtml" />

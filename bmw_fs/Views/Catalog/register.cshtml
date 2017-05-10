@@ -54,13 +54,13 @@
             <input type="hidden" id="title" name="title" value=""/>
         </form>
         <div class="btn_area">
-            <a href="list?@Session["searchString"]"" class="btn_defualt btn_list">목록</a>
+            <a href="list?@Session["searchString"]" class="btn_defualt btn_list">목록</a>
             <a href="javascript:void(0);" class="btn_defualt btn_reg" onclick="regForm();">등록</a>
         </div>
     </div>
 </div>
 <script>
-    lnbSet(3, 3);
+    lnbSet(2, 3);
     var yearHtml = '';
     var monthHtml = '';
     for (var i = 2017; i <= 2050; i++) {

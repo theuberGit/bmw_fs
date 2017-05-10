@@ -6,6 +6,8 @@
         var valTittext = valTit[valTit.length - 1]
         if (val != "") {
             $parent.find(".file_src").text(valTittext).addClass("on");
+            $('.btn_file_txt').hide();//하나의 파일에 대해 삭제 및 파일찾기 trigger가 필요할 때 파일추가 버튼에 .btn_file_txt 클래스 추가
+            $('.del_file_txt').show();//하나의 파일에 대해 삭제 및 파일찾기 trigger가 필요할 때 삭제 버튼에 .btn_file_txt 클래스 추가
         };
     });    
 

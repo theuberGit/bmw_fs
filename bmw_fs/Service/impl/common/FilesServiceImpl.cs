@@ -142,6 +142,28 @@ namespace bmw_fs.Service.impl.common
             
         }
 
+        public Boolean deleteRealFilesAndDataByFileMasterIdxAndTp(int masterIdx, String type)
+        {
+            Files files = new Files();
+            files.masterIdx = masterIdx;
+            files.type = type;
+            IList<Files> fileList = filesDao.findAllByMasterIdxAndType(files);
+            if (fileList.Count == 0)
+            {
+                return false;
+            }
+            else
+            {
+                foreach (var item in fileList)
+                {
+                    filesDao.deleteFileByFileIdx(item);
+                    deleteRealFile(item);
+                }
+                return true;
+            }
+
+        }
+
         public Files filePhotoUpload(HttpFileCollectionBase multipartFiles)
         {
             return fileUpload(multipartFiles, "Filedata", "jpg|png|gif|bmp", 10 * 1024 * 1024, -1, null);
