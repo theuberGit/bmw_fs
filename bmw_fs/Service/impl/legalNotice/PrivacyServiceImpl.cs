@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using bmw_fs.Models.legalNotice;
-using bmw_fs.Dao.face.privacy;
 using bmw_fs.Service.face.common;
 using bmw_fs.Service.impl.common;
 using IBatisNet.DataMapper;
 using bmw_fs.Common;
 using System.Text.RegularExpressions;
 using bmw_fs.Service.face.privacy;
+using bmw_fs.Dao.face.legalNotice;
 
 namespace bmw_fs.Service.impl.privacy
 {

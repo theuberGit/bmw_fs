@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace bmw_fs.Dao.face.privacy
+namespace bmw_fs.Dao.face.legalNotice
 {
     public class PrivacyDao
     {

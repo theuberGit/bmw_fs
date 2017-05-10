@@ -158,10 +158,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\CustomException.cs" />
     <Compile Include="Config\StringProperties.cs" />
+    <Compile Include="Controllers\legalNotice\BusinessController.cs" />
     <Compile Include="Controllers\legalNotice\CreditController.cs" />
     <Compile Include="Controllers\legalNotice\GeneralController.cs" />
     <Compile Include="Controllers\legalNotice\PrivacyController.cs" />
     <Compile Include="Controllers\catalog\CatalogController.cs" />
+    <Compile Include="Controllers\legalNotice\ProductController.cs" />
     <Compile Include="Controllers\news\NewsController.cs" />
     <Compile Include="Controllers\recruit\RecruitFaqController.cs" />
     <Compile Include="Controllers\recruit\RecruitNoticeController.cs" />
@@ -177,6 +179,7 @@
     <Compile Include="Dao\face\common\SequenceDao.cs" />
     <Compile Include="Common\Filter\TestFilter.cs" />
     <Compile Include="Dao\face\catalog\CatalogDao.cs" />
+    <Compile Include="Dao\face\legalNotice\BusinessDao.cs" />
     <Compile Include="Dao\face\legalNotice\CreditDao.cs" />
     <Compile Include="Dao\face\legalNotice\GeneralDao.cs" />
     <Compile Include="Dao\face\legalNotice\PrivacyDao.cs" />
@@ -192,10 +195,12 @@
     <Compile Include="Models\common\Pagination.cs" />
     <Compile Include="Models\common\SearchInfo.cs" />
     <Compile Include="Models\common\Sequence.cs" />
+    <Compile Include="Models\legalNotice\Business.cs" />
     <Compile Include="Models\legalNotice\Credit.cs" />
     <Compile Include="Models\legalNotice\General.cs" />
     <Compile Include="Models\legalNotice\Privacy.cs" />
     <Compile Include="Models\catalog\Catalog.cs" />
+    <Compile Include="Models\legalNotice\Product.cs" />
     <Compile Include="Models\news\News.cs" />
     <Compile Include="Models\recruit\RecruitFaq.cs" />
     <Compile Include="Models\recruit\RecruitNotice.cs" />
@@ -206,6 +211,7 @@
     <Compile Include="Service\face\common\SearchService.cs" />
     <Compile Include="Service\face\common\SequenceService.cs" />
     <Compile Include="Service\face\catalog\CatalogService.cs" />
+    <Compile Include="Service\face\legalNotice\BusinessService.cs" />
     <Compile Include="Service\face\legalNotice\CreditService.cs" />
     <Compile Include="Service\face\legalNotice\GeneralService.cs" />
     <Compile Include="Service\face\legalNotice\PrivacyService.cs" />
@@ -218,6 +224,7 @@
     <Compile Include="Service\impl\common\SearchServiceImpl.cs" />
     <Compile Include="Service\impl\common\SequenceServiceImpl.cs" />
     <Compile Include="Service\impl\catalog\CatalogServiceImpl.cs" />
+    <Compile Include="Service\impl\legalNotice\BusinessServiceImpl.cs" />
     <Compile Include="Service\impl\legalNotice\CreditServiceImpl.cs" />
     <Compile Include="Service\impl\legalNotice\GeneralServiceImpl.cs" />
     <Compile Include="Service\impl\legalNotice\PrivacyServiceImpl.cs" />
@@ -464,6 +471,30 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\General\view.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Product\list.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Product\modify.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Product\register.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Product\view.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Business\list.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Business\modify.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Business\register.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Business\view.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
