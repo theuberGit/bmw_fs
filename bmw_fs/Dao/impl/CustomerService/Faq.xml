@@ -1,1 +1,115 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace ="faq" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="FaqClass" type="bmw_fs.Models.CustomerService.Faq"/>
+  </alias>
+
+  <resultMaps>
+    <resultMap id="FaqMap" class="FaqClass">
+      <result property="idx" column="IDX"/>
+      <result property="category" column="CATEGORY"/>
+      <result property="ask" column="ASK"/>
+      <result property="question" column="QUESTION"/>
+      <result property="deployYn" column="DEPLOY_YN"/>
+      <result property="regId" column="REG_ID"/>
+      <result property="regDate" column="REG_DATE"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="findAll" resultMap="FaqMap">
+      SELECT *
+      FROM (
+      SELECT
+      ROW_NUMBER() OVER(ORDER BY IDX DESC) AS RNUM
+      ,IDX
+      ,CATEGORY
+      ,ASK
+      ,QUESTION
+      ,DEPLOY_YN
+      ,REG_DATE
+      ,REG_ID
+      FROM BMW_FS_FAQ
+      WHERE 1=1
+      <isNotEmpty property="searchInput">
+        <isNotEmpty property="searchOption">
+          <isEqual property="searchOption" compareValue="ask">
+            AND ASK LIKE '%'+#searchInput#+'%'
+          </isEqual>
+          <isEqual property="searchOption" compareValue="question">
+            AND QUESTION LIKE '%'+#searchInput#+'%'
+          </isEqual>
+        </isNotEmpty>
+      </isNotEmpty>
+      )t
+      WHERE 1=1
+      AND (RNUM BETWEEN #currentItem# AND #currentItemEnd# )
+    </select>
+
+    <select id="findAllCount" resultClass="int">
+      SELECT COUNT(*)
+      FROM BMW_FS_FAQ
+      WHERE 1=1
+      <isNotEmpty property="searchInput">
+        <isNotEmpty property="searchOption">
+          <isEqual property="searchOption" compareValue="ask">
+            AND ASK LIKE '%'+#searchInput#+'%'
+          </isEqual>
+          <isEqual property="searchOption" compareValue="question">
+            AND QUESTION LIKE '%'+#searchInput#+'%'
+          </isEqual>
+        </isNotEmpty>
+      </isNotEmpty>
+    </select>
+
+    <insert id="insertFaq">
+      INSERT INTO BMW_FS_FAQ(
+      IDX
+      ,CATEGORY
+      ,ASK
+      ,QUESTION
+      ,DEPLOY_YN
+      ,REG_ID
+      )
+      VALUES (
+      #idx#
+      ,#category#
+      ,#ask#
+      ,#question#
+      ,#deployYn#
+      ,#regId#
+      )
+    </insert>
+
+    <select id="findFaq" resultMap="FaqMap">
+      SELECT IDX
+      ,CATEGORY
+      ,ASK
+      ,QUESTION
+      ,DEPLOY_YN
+      ,REG_DATE
+      ,REG_ID
+      FROM BMW_FS_FAQ
+      WHERE IDX = #idx#
+    </select>
+
+    <update id="updateFaq">
+      UPDATE BMW_FS_FAQ
+      SET CATEGORY = #category#
+      ,ASK = #ask#
+      ,QUESTION = #question#
+      ,DEPLOY_YN = #deployYn#
+      ,UPT_ID = #uptId#
+      ,UPT_DATE = getdate()
+      WHERE IDX = #idx#;
+    </update>
+
+    <delete id="deleteFaq">
+      DELETE BMW_FS_FAQ
+      WHERE IDX = #idx#;
+    </delete>
+
+  </statements>
+</sqlMap>
