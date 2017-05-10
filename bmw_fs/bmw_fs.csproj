@@ -219,6 +219,7 @@
     <Compile Include="Service\face\legalNotice\CreditService.cs" />
     <Compile Include="Service\face\legalNotice\GeneralService.cs" />
     <Compile Include="Service\face\legalNotice\PrivacyService.cs" />
+    <Compile Include="Service\face\legalNotice\ProductService.cs" />
     <Compile Include="Service\face\news\NewsService.cs" />
     <Compile Include="Service\face\recruit\RecruitFaqService.cs" />
     <Compile Include="Service\face\recruit\RecruitNoticeService.cs" />
@@ -233,6 +234,7 @@
     <Compile Include="Service\impl\legalNotice\CreditServiceImpl.cs" />
     <Compile Include="Service\impl\legalNotice\GeneralServiceImpl.cs" />
     <Compile Include="Service\impl\legalNotice\PrivacyServiceImpl.cs" />
+    <Compile Include="Service\impl\legalNotice\ProductServiceImpl.cs" />
     <Compile Include="Service\impl\news\NewsServiceImpl.cs" />
     <Compile Include="Service\impl\recruit\RecruitFaqServiceImpl.cs" />
     <Compile Include="Service\impl\recruit\RecruitNoticeServiceImpl.cs" />
@@ -245,7 +247,10 @@
     <Content Include="Dao\impl\catalog\Catalog.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Dao\impl\CustomerService\Faq.xml" />
+    <Content Include="Dao\impl\legalNotice\Business.xml" />
     <Content Include="Dao\impl\legalNotice\Privacy.xml" />
+    <Content Include="Dao\impl\legalNotice\Product.xml" />
     <Content Include="Dao\impl\news\News.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -330,6 +335,10 @@
     <Content Include="resources\se\smart_editor2_inputarea_ie8.html" />
     <Content Include="Views\News\modify.cshtml" />
     <Content Include="Views\News\view.cshtml" />
+    <Content Include="Views\Faq\list.cshtml" />
+    <Content Include="Views\Faq\modify.cshtml" />
+    <Content Include="Views\Faq\register.cshtml" />
+    <Content Include="Views\Faq\view.cshtml" />
     <None Include="Views\Promotion\list.cshtml" />
     <None Include="Views\Promotion\modify.cshtml" />
     <None Include="Views\Promotion\view.cshtml" />
