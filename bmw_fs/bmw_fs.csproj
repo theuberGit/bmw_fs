@@ -159,6 +159,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\CustomException.cs" />
     <Compile Include="Config\StringProperties.cs" />
+    <Compile Include="Controllers\CustomerService\DownLoadFormController.cs" />
     <Compile Include="Controllers\CustomerService\FaqController.cs" />
     <Compile Include="Controllers\legalNotice\BusinessController.cs" />
     <Compile Include="Controllers\legalNotice\CreditController.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="Dao\face\common\SequenceDao.cs" />
     <Compile Include="Common\Filter\TestFilter.cs" />
     <Compile Include="Dao\face\catalog\CatalogDao.cs" />
+    <Compile Include="Dao\face\CustomerService\DownLoadFormDao.cs" />
     <Compile Include="Dao\face\CustomerService\FaqDao.cs" />
     <Compile Include="Dao\face\legalNotice\BusinessDao.cs" />
     <Compile Include="Dao\face\legalNotice\CreditDao.cs" />
@@ -199,6 +201,7 @@
     <Compile Include="Models\common\Pagination.cs" />
     <Compile Include="Models\common\SearchInfo.cs" />
     <Compile Include="Models\common\Sequence.cs" />
+    <Compile Include="Models\CustomerService\DownLoadForm.cs" />
     <Compile Include="Models\CustomerService\Faq.cs" />
     <Compile Include="Models\legalNotice\Business.cs" />
     <Compile Include="Models\legalNotice\Credit.cs" />
@@ -216,6 +219,7 @@
     <Compile Include="Service\face\common\SearchService.cs" />
     <Compile Include="Service\face\common\SequenceService.cs" />
     <Compile Include="Service\face\catalog\CatalogService.cs" />
+    <Compile Include="Service\face\CustomerService\DownLoadFormService.cs" />
     <Compile Include="Service\face\CustomerService\FaqService.cs" />
     <Compile Include="Service\face\legalNotice\BusinessService.cs" />
     <Compile Include="Service\face\legalNotice\CreditService.cs" />
@@ -232,6 +236,7 @@
     <Compile Include="Service\impl\common\SearchServiceImpl.cs" />
     <Compile Include="Service\impl\common\SequenceServiceImpl.cs" />
     <Compile Include="Service\impl\catalog\CatalogServiceImpl.cs" />
+    <Compile Include="Service\impl\CustomerService\DownLoadFormServiceImpl.cs" />
     <Compile Include="Service\impl\CustomerService\FaqServiceImpl.cs" />
     <Compile Include="Service\impl\legalNotice\BusinessServiceImpl.cs" />
     <Compile Include="Service\impl\legalNotice\CreditServiceImpl.cs" />
@@ -250,6 +255,7 @@
     <Content Include="Dao\impl\catalog\Catalog.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Dao\impl\CustomerService\DownLoadForm.xml" />
     <Content Include="Dao\impl\CustomerService\Faq.xml" />
     <Content Include="Dao\impl\legalNotice\Business.xml" />
     <Content Include="Dao\impl\legalNotice\Privacy.xml" />
@@ -362,6 +368,10 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\RecruitFaq - 복사본\list.cshtml" />
+    <Content Include="Views\RecruitFaq - 복사본\modify.cshtml" />
+    <Content Include="Views\RecruitFaq - 복사본\register.cshtml" />
+    <Content Include="Views\RecruitFaq - 복사본\view.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
