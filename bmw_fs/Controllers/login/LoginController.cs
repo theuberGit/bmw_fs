@@ -1,6 +1,7 @@
 ﻿using bmw_fs.Models.admin;
 using bmw_fs.Service.face.admin;
 using bmw_fs.Service.impl.admin;
+using bmw_fs.Service.impl.common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace bmw_fs.Controllers.login
     {
 
         MemberService memberService = new MemberServiceImpl();
-
+        private String _domain = "HAP1KRS00";
         // GET: Login
         [AllowAnonymous]
         public ActionResult Login(String returnUrl)
@@ -36,6 +37,9 @@ namespace bmw_fs.Controllers.login
 
             Member member = new Member();
             member = memberService.findMemberForLogin(model);
+
+            //LdapAuthenticationService ldapService = new LdapAuthenticationService("LDAP://" + _domain);
+            //Boolean isLogin = ldapService.IsAuthenticated(_domain, model.userId, model.password);
 
             if (member != null)
             {
