@@ -12,13 +12,40 @@
                 </colgroup>
                 <tr>
                     <th>작성자 </th>
-                    <td>@HttpContext.Current.User.Identity.Name</td>
+                    <td>@ViewBag.item.regId</td>
                 </tr>
                 <tr>
-                    <th><label for="engY">영문 사이트*</label></th>
-                    <td class="radio_area">
-                        <label for="engY"><input type="radio" name="engYn" id="engY" value="Y" title="영문 사이트"> 있음</label>
-                        <label for="engN"><input type="radio" name="engYn" id="engN" checked value="N" title="영문 사이트"> 없음</label>
+                    <th><label for="">양식명 *</label></th>
+                    <td><input type="text" name="formName" id="formName" class="input_long_type" title="양식명" value="@ViewBag.item.formName" maxlength="50"></td>
+                </tr>
+                <tr>
+                    <th><label for="">이용 용도 *</label></th>
+                    <td><textarea name="usagePurpose" id="usagePurpose" title="이용 용도">@ViewBag.item.usagePurpose</textarea></td>
+                </tr>
+                <tr class="add_img_area">
+                    <th>첨부파일 *</th>
+                    <td class="file_area">
+                        @if (ViewBag.files.Count > 0)
+                        {
+                            for (int i = 0, size = ViewBag.files.Count; i < size; i++)
+                            {
+                                <div class="main_img">
+                                    <span class="file_src">@ViewBag.files[i].originalFilename</span>
+                                    <input type="file" class="input_file" name="formFile" id="formFile" title="첨부파일">
+                                    <label for="formFile" class="btn_file">찾아보기</label>
+                                    <input type="hidden" name="fileIdxs" value="@ViewBag.files[i].fileIdx" />
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="main_img">
+                                <span class="file_src"></span>
+                                <input type="file" class="input_file" name="formFile" id="formFile" title="첨부파일">
+                                <label for="formFile" class="btn_file">찾아보기</label>
+                                <input type="hidden" name="fileIdxs" />
+                            </div>
+                        }
                     </td>
                 </tr>
                 <tr>
@@ -27,36 +54,6 @@
                         <label for="deployY"><input type="radio" name="deployYn" id="deployY" value="Y" title="배포 여부"> 배포</label>
                         <label for="deployN"><input type="radio" name="deployYn" id="deployN" checked value="N" title="배포 여부"> 미배포</label>
                     </td>
-                </tr>
-            </table>
-            <h4>국문 사이트</h4>
-            <table class="reg_table">
-                <colgroup>
-                    <col width="130px" />
-                    <col width="870px" />
-                </colgroup>
-                <tr>
-                    <th><label for="title">항목 *</label></th>
-                    <td><input type="text" name="title" id="title" class="input_long_type" title="항목" maxlength="100" value="@ViewBag.item.title"></td>
-                </tr>
-                <tr>
-                    <th><label for="contents">답변 *</label></th>
-                    <td><textarea name="contents" id="contents" title="내용">@ViewBag.item.contents</textarea></td>
-                </tr>
-            </table>
-            <h4>영문 사이트</h4>
-            <table class="reg_table">
-                <colgroup>
-                    <col width="130px" />
-                    <col width="870px" />
-                </colgroup>
-                <tr>
-                    <th><label for="titleEng">항목 </label></th>
-                    <td><input type="text" name="titleEng" id="titleEng" class="input_long_type" title="항목" maxlength="100" value="@ViewBag.item.titleEng"></td>
-                </tr>
-                <tr>
-                    <th><label for="contentsEng">답변</label></th>
-                    <td><textarea name="contentsEng" id="contentsEng" title="내용">@ViewBag.item.contentsEng</textarea></td>
                 </tr>
             </table>
         </form>
@@ -68,30 +65,27 @@
 </div>
 
 <script>
-    lnbSet(8, 2);
-    $('input[name="engYn"][value="@ViewBag.item.engYn"]').prop('checked', true);
-    $('input[name="deployYn"][value="@ViewBag.item.deployYn"]').prop('checked', true);
-    $('input[name="engYn"]').change(function () {
-        if ($(this).val() == 'Y') {
-            $('#titleEng').prop('disabled', false);
-            $('#contentsEng').prop('disabled', false);
-        } else {
-            $('#titleEng').prop('disabled', true);
-            $('#contentsEng').prop('disabled', true);
-            $('#titleEng').val('');
-            $('#contentsEng').val('');
-        }
-    });
+    $(document).ready(function () {
+        lnbSet(8, 2);
 
+        if ('@ViewBag.item.deployYn' === 'Y') {
+            $('#deployY').prop('checked', true);
+        }
+        else {
+            $('#deployN').prop('checked', true);
+        }
+
+    });
     function modForm() {
-        if (!$('#title').required()) return;
-        if (!$('#contents').required()) return;
-        if ($('#engY:checked').length == 1) {
-            if (!$('#titleEng').required()) return;
-            if (!$('#contentsEng').required()) return;
+        if (!$('#formName').required()) return;
+        if (!$('#usagePurpose').required()) return;
+
+        if (Number('@ViewBag.files.Count') === 0) {
+            if (!$('#formFile').required()) return;
         }
 
         if (!confirm('수정하시겠습니까')) return;
+
         $('#content form').attr('action', 'modifyProc').submit();
     };
 </script>

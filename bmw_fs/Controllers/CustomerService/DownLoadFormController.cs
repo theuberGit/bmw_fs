@@ -16,14 +16,15 @@ namespace bmw_fs.Controllers.CustomerService
     [Authorize]
     public class DownLoadFormController : Controller
     {
-        DownLoadFormService downLoadFormService = new DownLoadFormServiceImpl();
-        SearchService searchService = new SearchServiceImpl();
+        private DownLoadFormService downLoadFormService = new DownLoadFormServiceImpl();
+        private SearchService searchService = new SearchServiceImpl();
+        private FilesService filesService = new FilesServiceImpl();
 
         public ActionResult list(DownLoadForm downLoadForm)
         {
-            searchService.setSearchSession(Request, Session);
-            searchService.setPagination(downLoadForm, 20, downLoadFormService.findAllCount(downLoadForm));
-            ViewBag.list = downLoadFormService.findAll(downLoadForm);
+            this.searchService.setSearchSession(Request, Session);
+            this.searchService.setPagination(downLoadForm, 20, this.downLoadFormService.findAllCount(downLoadForm));
+            ViewBag.list = this.downLoadFormService.findAll(downLoadForm);
             ViewBag.pagination = downLoadForm;
 
             return View();
@@ -39,19 +40,23 @@ namespace bmw_fs.Controllers.CustomerService
         {
             HttpFileCollectionBase multipartfiles = Request.Files;
             downLoadForm.regId = System.Web.HttpContext.Current.User.Identity.Name;
-            downLoadFormService.insertDownLoadForm(multipartfiles, downLoadForm);
+            this.downLoadFormService.insertDownLoadForm(multipartfiles, downLoadForm);
             return RedirectToAction("list", (RouteValueDictionary)Session["searchMap"]);
         }
 
         public ActionResult view(DownLoadForm downLoadForm)
         {
-            ViewBag.item = downLoadFormService.findDownLoadForm(downLoadForm);
+            DownLoadForm item = this.downLoadFormService.findDownLoadForm(downLoadForm);
+            ViewBag.item = item;
+            ViewBag.files = this.filesService.findAllByMasterIdxAndType(item.idx, "formFile");
             return View();
         }
 
         public ActionResult modify(DownLoadForm downLoadForm)
         {
-            ViewBag.item = downLoadFormService.findDownLoadForm(downLoadForm);
+            DownLoadForm item = this.downLoadFormService.findDownLoadForm(downLoadForm);
+            ViewBag.item = item;
+            ViewBag.files = this.filesService.findAllByMasterIdxAndType(item.idx, "formFile");
             return View();
         }
 
@@ -60,14 +65,14 @@ namespace bmw_fs.Controllers.CustomerService
         {
             HttpFileCollectionBase multipartfiles = Request.Files;
             downLoadForm.uptId = System.Web.HttpContext.Current.User.Identity.Name;
-            downLoadFormService.updateDownLoadForm(multipartfiles,downLoadForm);
+            this.downLoadFormService.updateDownLoadForm(multipartfiles,downLoadForm);
             return RedirectToAction("list", (RouteValueDictionary)Session["searchMap"]);
         }
 
         [HttpPost]
         public RedirectToRouteResult delete(DownLoadForm downLoadForm)
         {
-            downLoadFormService.deleteDownLoadForm(downLoadForm);
+            this.downLoadFormService.deleteDownLoadForm(downLoadForm);
             return RedirectToAction("list");
         }
     }

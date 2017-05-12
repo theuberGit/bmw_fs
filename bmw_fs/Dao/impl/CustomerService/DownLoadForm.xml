@@ -15,48 +15,59 @@
       <result property="regId" column="REG_ID"/>
       <result property="regDate" column="REG_DATE"/>
     </resultMap>
+
+    <resultMap id="DownLoadFormMapByList" class="DownLoadFormClass">
+      <result property="idx" column="IDX"/>
+      <result property="formName" column="FORMNAME"/>
+      <result property="usagePurpose" column="USAGEPURPOSE"/>
+      <result property="deployYn" column="DEPLOY_YN"/>
+      <result property="regId" column="REG_ID"/>
+      <result property="regDate" column="REG_DATE"/>
+      <result property="fileName" column="ORIGINAL_FILENAME"/>
+    </resultMap>
   </resultMaps>
 
   <statements>
-    <select id="findAll" resultMap="DownLoadFormMap">
+    <select id="findAll" resultMap="DownLoadFormMapByList">
       SELECT *
-           FROM (
-                  SELECT
-                           ROW_NUMBER() OVER(ORDER BY IDX DESC) AS RNUM
-                          ,IDX
-                          ,FORMNAME
-                          ,USAGEPURPOSE
-                          ,DEPLOY_YN
-                          ,REG_DATE
-                          ,REG_ID
-                   FROM BMW_FS_DOWNLOAD
-                  WHERE 1=1
-      <isNotEmpty property="searchInput">
-        <isNotEmpty property="searchOption">
-          <isEqual property="searchOption" compareValue="formname">
-            AND FORMNAME LIKE '%'+#searchInput#+'%'
-          </isEqual>
-          <isEqual property="searchOption" compareValue="usagepurpose">
-            AND USAGEPURPOSE LIKE '%'+#searchInput#+'%'
-          </isEqual>
-        </isNotEmpty>
-      </isNotEmpty>
-                )t
+      FROM (
+              SELECT
+                    ROW_NUMBER() OVER(ORDER BY D.IDX DESC) AS RNUM
+                    ,D.IDX
+                    ,D.FORMNAME
+                    ,D.USAGEPURPOSE
+                    ,D.DEPLOY_YN
+                    ,D.REG_DATE
+                    ,D.REG_ID
+                    ,FD.ORIGINAL_FILENAME
+              FROM BMW_FS_DOWNLOAD D LEFT OUTER JOIN BMW_FS_FILES_DATA FD ON D.IDX = FD.MASTER_IDX
+              WHERE 1=1
+              <isNotEmpty property="searchInput">
+                <isNotEmpty property="searchOption">
+                  <isEqual property="searchOption" compareValue="formname">
+                    AND D.FORMNAME LIKE '%'+#searchInput#+'%'
+                  </isEqual>
+                  <isEqual property="searchOption" compareValue="usagepurpose">
+                    AND D.USAGEPURPOSE LIKE '%'+#searchInput#+'%'
+                  </isEqual>
+                </isNotEmpty>
+              </isNotEmpty>
+            )t
       WHERE 1=1
         AND (RNUM BETWEEN #currentItem# AND #currentItemEnd# )
     </select>
 
     <select id="findAllCount" resultClass="int">
-      SELECT COUNT(*)
-      FROM BMW_FS_DOWNLOAD
+      SELECT COUNT(1)
+      FROM BMW_FS_DOWNLOAD D LEFT OUTER JOIN BMW_FS_FILES_DATA FD ON D.IDX = FD.MASTER_IDX
       WHERE 1=1
       <isNotEmpty property="searchInput">
         <isNotEmpty property="searchOption">
           <isEqual property="searchOption" compareValue="formname">
-            AND FORMNAME LIKE '%'+#searchInput#+'%'
+            AND D.FORMNAME LIKE '%'+#searchInput#+'%'
           </isEqual>
           <isEqual property="searchOption" compareValue="usagepurpose">
-            AND USAGEPURPOSE LIKE '%'+#searchInput#+'%'
+            AND D.USAGEPURPOSE LIKE '%'+#searchInput#+'%'
           </isEqual>
         </isNotEmpty>
       </isNotEmpty>
@@ -80,30 +91,29 @@
     </insert>
 
     <select id="findDownloadForm" resultMap="DownLoadFormMap">
-      SELECT IDX
-      ,CATEGORY
-      ,ASK
-      ,QUESTION
-      ,DEPLOY_YN
-      ,REG_DATE
-      ,REG_ID
-      FROM BMW_FS_FAQ
+      SELECT
+             IDX
+            ,FORMNAME
+            ,USAGEPURPOSE
+            ,DEPLOY_YN
+            ,REG_DATE
+            ,REG_ID
+      FROM BMW_FS_DOWNLOAD
       WHERE IDX = #idx#
     </select>
 
     <update id="updateDownloadForm">
-      UPDATE BMW_FS_FAQ
-      SET CATEGORY = #category#
-      ,ASK = #ask#
-      ,QUESTION = #question#
-      ,DEPLOY_YN = #deployYn#
-      ,UPT_ID = #uptId#
-      ,UPT_DATE = getdate()
+      UPDATE BMW_FS_DOWNLOAD
+       SET FORMNAME = #formName#
+          ,USAGEPURPOSE = #usagePurpose#
+          ,DEPLOY_YN = #deployYn#
+          ,UPT_ID = #uptId#
+          ,UPT_DATE = getdate()
       WHERE IDX = #idx#;
     </update>
 
     <delete id="deleteDownloadForm">
-      DELETE BMW_FS_FAQ
+      DELETE BMW_FS_DOWNLOAD
       WHERE IDX = #idx#;
     </delete>
 

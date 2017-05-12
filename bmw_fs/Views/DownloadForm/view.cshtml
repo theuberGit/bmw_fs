@@ -15,15 +15,19 @@
                     <td>@ViewBag.item.regId</td>
                 </tr>
                 <tr>
-                    <th><label for="engY">영문 사이트</label></th>
-                    <td class="radio_area">
-                        @if ("Y".Equals(@ViewBag.item.engYn))
+                    <th><label for="">양식명 *</label></th>
+                    <td>@ViewBag.item.formName</td>
+                </tr>
+                <tr>
+                    <th><label for="">이용 용도 *</label></th>
+                    <td><pre>@ViewBag.item.usagePurpose</pre></td>
+                </tr>
+                <tr class="add_img_area">
+                    <th>첨부파일</th>
+                    <td class="file_area">
+                        @foreach (var file in ViewBag.files)
                         {
-                            @:있음
-                        }
-                        else
-                        {
-                            @:없음
+                            <div><a href="/Files/fileDownload?fileIdx=@file.fileIdx">@file.originalFilename</a></div>
                         }
                     </td>
                 </tr>
@@ -39,37 +43,6 @@
                             @:미배포
                         }
                     </td>
-                </tr>
-            </table>
-
-            <h4>국문 사이트</h4>
-            <table class="reg_table">
-                <colgroup>
-                    <col width="130px" />
-                    <col width="870px" />
-                </colgroup>
-                <tr>
-                    <th><label for="title">항목</label></th>
-                    <td>@ViewBag.item.title</td>
-                </tr>
-                <tr>
-                    <th><label for="contents">답변</label></th>
-                    <td class="contents">@ViewBag.item.contents</td>
-                </tr>
-            </table>
-            <h4>영문 사이트</h4>
-            <table class="reg_table">
-                <colgroup>
-                    <col width="130px" />
-                    <col width="870px" />
-                </colgroup>
-                <tr>
-                    <th><label for="titleEng">항목 </label></th>
-                    <td>@ViewBag.item.titleEng</td>
-                </tr>
-                <tr>
-                    <th><label for="contentsEng">답변</label></th>
-                    <td class="contents">@ViewBag.item.contentsEng</td>
                 </tr>
             </table>
         </form>

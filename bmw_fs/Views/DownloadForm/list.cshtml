@@ -38,7 +38,7 @@
                         <tr>
                             <td>@(ViewBag.pagination.totalItemCount - (ViewBag.pagination.currentPage - 1) * ViewBag.pagination.itemPerPage - i)</td>
                             <td class="tit_area"><a href="view?idx=@ViewBag.list[i].idx">@ViewBag.list[i].formName</a></td>
-                            <td>@ViewBag.list[i].deployYn</td>
+                            <td>@ViewBag.list[i].fileName</td>
                             <td>@ViewBag.list[i].usagePurpose</td>
                             <td>@ViewBag.list[i].regDate.ToString("yyyy-MM-dd")</td>
                             <td>@ViewBag.list[i].deployYn</td>

@@ -15,44 +15,59 @@ namespace bmw_fs.Service.impl.CustomerService
 {
     public class DownLoadFormServiceImpl : DownLoadFormService
     {
-        DownLoadFormDao downloadFormDao = new DownLoadFormDao();
-        FilesService filesService = new FilesServiceImpl();
-        SequenceService sequenceService = new SequenceServiceImpl(); //시퀀스생성
+        private DownLoadFormDao downloadFormDao = new DownLoadFormDao();
+        private FilesService filesService = new FilesServiceImpl();
+        private SequenceService sequenceService = new SequenceServiceImpl(); //시퀀스생성
 
         public IList<DownLoadForm> findAll(DownLoadForm downloadForm)
         {
-            return downloadFormDao.findAll(downloadForm);
+            return this.downloadFormDao.findAll(downloadForm);
         }
 
         public int findAllCount(DownLoadForm downloadForm)
         {
-            return downloadFormDao.findAllCount(downloadForm);
+            return this.downloadFormDao.findAllCount(downloadForm);
         }
 
         public DownLoadForm findDownLoadForm(DownLoadForm downloadForm)
         {
-            return downloadFormDao.findDownloadForm(downloadForm);
+            DownLoadForm findDownLoadFormOne = this.downloadFormDao.findDownloadForm(downloadForm);
+
+            if(findDownLoadFormOne == null) throw new CustomException("데이터가 존재하지 않습니다.");
+
+            return findDownLoadFormOne;
         }
         
         public void insertDownLoadForm(HttpFileCollectionBase multipartFiles, DownLoadForm downloadForm)
         {
-            int masterIdx = sequenceService.getSequenceMasterIdx();
+            int masterIdx = this.sequenceService.getSequenceMasterIdx();
             downloadForm.idx = masterIdx;
             Mapper.Instance().BeginTransaction();
             validation(multipartFiles, downloadForm);
-            downloadFormDao.insertDownloadForm(downloadForm);
-            filesService.fileUpload(multipartFiles, "formFile", "pdf", 5 * 1024 * 1024, masterIdx, null);
+            this.downloadFormDao.insertDownloadForm(downloadForm);
+            this.filesService.fileUpload(multipartFiles, "formFile", "pdf", 5 * 1024 * 1024, masterIdx, null);
             Mapper.Instance().CommitTransaction();
         }
 
         public void updateDownLoadForm(HttpFileCollectionBase multipartFiles, DownLoadForm downloadForm)
         {
-            //throw new NotImplementedException();
+            findDownLoadForm(downloadForm);
+
+            Mapper.Instance().BeginTransaction();
+            this.filesService.deleteFileAndFileUpload(multipartFiles, "formFile", "pdf", 5 * 1024 * 1024, downloadForm.idx, downloadForm.fileIdxs);
+            validation(multipartFiles,downloadForm);
+            this.downloadFormDao.updateDownloadForm(downloadForm);
+            Mapper.Instance().CommitTransaction();
         }
 
         public void deleteDownLoadForm(DownLoadForm downloadForm)
         {
-          
+            findDownLoadForm(downloadForm);
+
+            Mapper.Instance().BeginTransaction();
+            this.downloadFormDao.deleteDownloadForm(downloadForm);
+            this.filesService.deleteRealFilesAndDataByFileMasterIdx(downloadForm.idx);
+            Mapper.Instance().CommitTransaction();
         }
 
         private void validation(HttpFileCollectionBase multipartFiles, DownLoadForm downloadForm)
@@ -60,8 +75,6 @@ namespace bmw_fs.Service.impl.CustomerService
             if (String.IsNullOrWhiteSpace(downloadForm.formName)) throw new CustomException("필수 값이 없습니다.");
             if (String.IsNullOrWhiteSpace(downloadForm.usagePurpose)) throw new CustomException("필수 값이 없습니다.");
             if (multipartFiles.Count < 0) throw new CustomException("필수 값이 없습니다.");
-
-            
         }
     }
 }
