@@ -7,13 +7,11 @@ using System.Web.Mvc;
 
 namespace bmw_fs.Models.CustomerService
 {
-    public class Faq :SearchInfo
+    public class DownLoadForm : SearchInfo
     {
         public int idx { get; set; }
-        public String category { get; set; }
-        public String ask { get; set; }
-        [AllowHtml]
-        public String question { get; set; }
+        public String formName { get; set; }
+        public String usagePurpose { get; set; }
         public String deployYn { get; set; }
         public String regId { get; set; }
         public DateTime regDate { get; set; }

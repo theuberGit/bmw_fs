@@ -4,21 +4,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace bmw_fs.Service.face.CustomerService
 {
-    interface FaqService
+    interface DownLoadFormService
     {
-        IList<Faq> findAll(Faq faq);
+        IList<DownLoadForm> findAll(DownLoadForm downloadForm);
 
-        int findAllCount(Faq faq);
+        int findAllCount(DownLoadForm downloadForm);
 
-        void insertFaq(Faq faq);
+        void insertDownLoadForm(HttpFileCollectionBase multipartFiles, DownLoadForm downloadForm);
 
-        Faq findFaq(Faq faq);
+        DownLoadForm findDownLoadForm(DownLoadForm downloadForm);
 
-        void updateFaq(Faq faq);
+        void updateDownLoadForm(HttpFileCollectionBase multipartFiles, DownLoadForm downloadForm);
 
-        void deleteFaq(Faq faq);
+        void deleteDownLoadForm(DownLoadForm downloadForm);
     }
 }

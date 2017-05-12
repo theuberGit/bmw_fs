@@ -9,66 +9,65 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace bmw_fs.Controllers.CustomerService
 {
     [Authorize]
     public class DownLoadFormController : Controller
     {
-        FaqService faqService = new FaqServiceImpl();
+        DownLoadFormService downLoadFormService = new DownLoadFormServiceImpl();
         SearchService searchService = new SearchServiceImpl();
 
-        public ActionResult list(Faq faq)
+        public ActionResult list(DownLoadForm downLoadForm)
         {
             searchService.setSearchSession(Request, Session);
-            searchService.setPagination(faq, 20, faqService.findAllCount(faq));
-            ViewBag.list = faqService.findAll(faq);
-            ViewBag.pagination = faq;
+            searchService.setPagination(downLoadForm, 20, downLoadFormService.findAllCount(downLoadForm));
+            ViewBag.list = downLoadFormService.findAll(downLoadForm);
+            ViewBag.pagination = downLoadForm;
 
             return View();
         }
 
-        public ActionResult register(Faq faq)
+        public ActionResult register(DownLoadForm downLoadForm)
         {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateInput(false)]
-        public RedirectToRouteResult registerProc(Faq faq)
-        {
-            faq.question = Sanitizer.GetSafeHtmlFragment(faq.question);
-            faqService.insertFaq(faq);
-
-            return RedirectToAction("list");
-        }
-
-        public ActionResult view(Faq faq)
-        {
-            ViewBag.item = faqService.findFaq(faq);
-            return View();
-        }
-
-        public ActionResult modify(Faq faq)
-        {
-            ViewBag.item = faqService.findFaq(faq);
             return View();
         }
 
         [HttpPost]
-        [ValidateInput(false)]
-        public RedirectToRouteResult modifyProc(Faq faq)
+        public RedirectToRouteResult registerProc(DownLoadForm downLoadForm)
         {
-            faq.question = Sanitizer.GetSafeHtmlFragment(faq.question);
-            faqService.updateFaq(faq);
+            HttpFileCollectionBase multipartfiles = Request.Files;
+            downLoadForm.regId = System.Web.HttpContext.Current.User.Identity.Name;
+            downLoadFormService.insertDownLoadForm(multipartfiles, downLoadForm);
+            return RedirectToAction("list", (RouteValueDictionary)Session["searchMap"]);
+        }
 
-            return RedirectToAction("list");
+        public ActionResult view(DownLoadForm downLoadForm)
+        {
+            ViewBag.item = downLoadFormService.findDownLoadForm(downLoadForm);
+            return View();
+        }
+
+        public ActionResult modify(DownLoadForm downLoadForm)
+        {
+            ViewBag.item = downLoadFormService.findDownLoadForm(downLoadForm);
+            return View();
         }
 
         [HttpPost]
-        public RedirectToRouteResult delete(Faq faq)
+        public RedirectToRouteResult modifyProc(DownLoadForm downLoadForm)
         {
-            faqService.deleteFaq(faq);
+            HttpFileCollectionBase multipartfiles = Request.Files;
+            downLoadForm.uptId = System.Web.HttpContext.Current.User.Identity.Name;
+            downLoadFormService.updateDownLoadForm(multipartfiles,downLoadForm);
+            return RedirectToAction("list", (RouteValueDictionary)Session["searchMap"]);
+        }
+
+        [HttpPost]
+        public RedirectToRouteResult delete(DownLoadForm downLoadForm)
+        {
+            downLoadFormService.deleteDownLoadForm(downLoadForm);
             return RedirectToAction("list");
         }
     }

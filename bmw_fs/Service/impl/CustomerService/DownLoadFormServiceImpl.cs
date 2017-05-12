@@ -13,56 +13,55 @@ using System.Text.RegularExpressions;
 
 namespace bmw_fs.Service.impl.CustomerService
 {
-    public class FaqServiceImpl : FaqService
+    public class DownLoadFormServiceImpl : DownLoadFormService
     {
-        FaqDao faqDao = new FaqDao();
-        SequenceService sequenceService = new SequenceServiceImpl();
+        DownLoadFormDao downloadFormDao = new DownLoadFormDao();
+        FilesService filesService = new FilesServiceImpl();
+        SequenceService sequenceService = new SequenceServiceImpl(); //시퀀스생성
 
-        public void deleteFaq(Faq faq)
+        public IList<DownLoadForm> findAll(DownLoadForm downloadForm)
         {
-            Mapper.Instance().BeginTransaction();
-            faqDao.deleteFaq(faq);
-            Mapper.Instance().CommitTransaction();
+            return downloadFormDao.findAll(downloadForm);
         }
 
-        public IList<Faq> findAll(Faq faq)
+        public int findAllCount(DownLoadForm downloadForm)
         {
-            return faqDao.findAll(faq);
+            return downloadFormDao.findAllCount(downloadForm);
         }
 
-        public int findAllCount(Faq faq)
+        public DownLoadForm findDownLoadForm(DownLoadForm downloadForm)
         {
-            return faqDao.findAllCount(faq);
-        }
-
-        public Faq findFaq(Faq faq)
-        {
-            return faqDao.findFaq(faq);
-        }
-
-        public void insertFaq(Faq faq)
-        {
-            int masterIdx = sequenceService.getSequenceMasterIdx();
-            faq.idx = masterIdx;
-            Mapper.Instance().BeginTransaction();
-            validation(faq);
-            faqDao.insertFaq(faq);
-            Mapper.Instance().CommitTransaction();
-        }
-
-        public void updateFaq(Faq faq)
-        {
-            Mapper.Instance().BeginTransaction();
-            validation(faq);
-            faqDao.updateFaq(faq);
-            Mapper.Instance().CommitTransaction();
+            return downloadFormDao.findDownloadForm(downloadForm);
         }
         
-        private void validation(Faq faq)
+        public void insertDownLoadForm(HttpFileCollectionBase multipartFiles, DownLoadForm downloadForm)
         {
-            if (String.IsNullOrWhiteSpace(faq.category)) throw new CustomException("필수 값이 없습니다.");
-            if (String.IsNullOrWhiteSpace(faq.ask)) throw new CustomException("필수 값이 없습니다.");
-            if (String.IsNullOrWhiteSpace(Regex.Replace(faq.question, "<.*?>", string.Empty))) throw new CustomException("필수 값이 없습니다.");
+            int masterIdx = sequenceService.getSequenceMasterIdx();
+            downloadForm.idx = masterIdx;
+            Mapper.Instance().BeginTransaction();
+            validation(multipartFiles, downloadForm);
+            downloadFormDao.insertDownloadForm(downloadForm);
+            filesService.fileUpload(multipartFiles, "formFile", "pdf", 5 * 1024 * 1024, masterIdx, null);
+            Mapper.Instance().CommitTransaction();
+        }
+
+        public void updateDownLoadForm(HttpFileCollectionBase multipartFiles, DownLoadForm downloadForm)
+        {
+            //throw new NotImplementedException();
+        }
+
+        public void deleteDownLoadForm(DownLoadForm downloadForm)
+        {
+          
+        }
+
+        private void validation(HttpFileCollectionBase multipartFiles, DownLoadForm downloadForm)
+        {
+            if (String.IsNullOrWhiteSpace(downloadForm.formName)) throw new CustomException("필수 값이 없습니다.");
+            if (String.IsNullOrWhiteSpace(downloadForm.usagePurpose)) throw new CustomException("필수 값이 없습니다.");
+            if (multipartFiles.Count < 0) throw new CustomException("필수 값이 없습니다.");
+
+            
         }
     }
 }

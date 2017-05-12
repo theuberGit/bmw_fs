@@ -368,10 +368,10 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\RecruitFaq - 복사본\list.cshtml" />
-    <Content Include="Views\RecruitFaq - 복사본\modify.cshtml" />
-    <Content Include="Views\RecruitFaq - 복사본\register.cshtml" />
-    <Content Include="Views\RecruitFaq - 복사본\view.cshtml" />
+    <Content Include="Views\DownloadForm\list.cshtml" />
+    <Content Include="Views\DownloadForm\modify.cshtml" />
+    <Content Include="Views\DownloadForm\register.cshtml" />
+    <Content Include="Views\DownloadForm\view.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

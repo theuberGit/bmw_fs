@@ -9,34 +9,34 @@ namespace bmw_fs.Dao.face.CustomerService
 {
     public class DownLoadFormDao
     {
-        public IList<Faq> findAll(Faq faq)
+        public IList<DownLoadForm> findAll(DownLoadForm downloadForm)
         {
-            return Mapper.Instance().QueryForList<Faq>("faq.findAll", faq);
+            return Mapper.Instance().QueryForList<DownLoadForm>("downloadForm.findAll", downloadForm);
         }
 
-        public int findAllCount(Faq faq)
+        public int findAllCount(DownLoadForm downloadForm)
         {
-            return Mapper.Instance().QueryForObject<int>("faq.findAllCount", faq);
+            return Mapper.Instance().QueryForObject<int>("downloadForm.findAllCount", downloadForm);
         }
 
-        public void insertFaq(Faq faq)
+        public void insertDownloadForm(DownLoadForm downloadForm)
         {
-            Mapper.Instance().Insert("faq.insertFaq", faq);
+            Mapper.Instance().Insert("downloadForm.insertDownloadForm", downloadForm);
         }
 
-        public Faq findFaq(Faq faq)
+        public DownLoadForm findDownloadForm(DownLoadForm downloadForm)
         {
-            return Mapper.Instance().QueryForObject<Faq>("faq.findFaq", faq);
+            return Mapper.Instance().QueryForObject<DownLoadForm>("downloadForm.findDownloadForm", downloadForm);
         }
 
-        public void updateFaq(Faq faq)
+        public void updateDownloadForm(DownLoadForm downloadForm)
         {
-            Mapper.Instance().Update("faq.updateFaq", faq);
+            Mapper.Instance().Update("downloadForm.updateDownloadForm", downloadForm);
         }
 
-        public void deleteFaq(Faq faq)
+        public void deleteDownloadForm(DownLoadForm downloadForm)
         {
-            Mapper.Instance().Delete("faq.deleteFaq", faq);
+            Mapper.Instance().Delete("downloadForm.deleteDownloadForm", downloadForm);
         }
 
     }

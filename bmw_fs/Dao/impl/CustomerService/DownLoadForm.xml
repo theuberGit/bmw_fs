@@ -1,17 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<sqlMap namespace ="faq" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+<sqlMap namespace ="downloadForm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
 
   <alias>
-    <typeAlias alias="FaqClass" type="bmw_fs.Models.CustomerService.Faq"/>
+    <typeAlias alias="DownLoadFormClass" type="bmw_fs.Models.CustomerService.DownLoadForm"/>
   </alias>
 
   <resultMaps>
-    <resultMap id="FaqMap" class="FaqClass">
+    <resultMap id="DownLoadFormMap" class="DownLoadFormClass">
       <result property="idx" column="IDX"/>
-      <result property="category" column="CATEGORY"/>
-      <result property="ask" column="ASK"/>
-      <result property="question" column="QUESTION"/>
+      <result property="formName" column="FORMNAME"/>
+      <result property="usagePurpose" column="USAGEPURPOSE"/>
       <result property="deployYn" column="DEPLOY_YN"/>
       <result property="regId" column="REG_ID"/>
       <result property="regDate" column="REG_DATE"/>
@@ -19,71 +18,68 @@
   </resultMaps>
 
   <statements>
-    <select id="findAll" resultMap="FaqMap">
+    <select id="findAll" resultMap="DownLoadFormMap">
       SELECT *
-      FROM (
-      SELECT
-      ROW_NUMBER() OVER(ORDER BY IDX DESC) AS RNUM
-      ,IDX
-      ,CATEGORY
-      ,ASK
-      ,QUESTION
-      ,DEPLOY_YN
-      ,REG_DATE
-      ,REG_ID
-      FROM BMW_FS_FAQ
-      WHERE 1=1
+           FROM (
+                  SELECT
+                           ROW_NUMBER() OVER(ORDER BY IDX DESC) AS RNUM
+                          ,IDX
+                          ,FORMNAME
+                          ,USAGEPURPOSE
+                          ,DEPLOY_YN
+                          ,REG_DATE
+                          ,REG_ID
+                   FROM BMW_FS_DOWNLOAD
+                  WHERE 1=1
       <isNotEmpty property="searchInput">
         <isNotEmpty property="searchOption">
-          <isEqual property="searchOption" compareValue="ask">
-            AND ASK LIKE '%'+#searchInput#+'%'
+          <isEqual property="searchOption" compareValue="formname">
+            AND FORMNAME LIKE '%'+#searchInput#+'%'
           </isEqual>
-          <isEqual property="searchOption" compareValue="question">
-            AND QUESTION LIKE '%'+#searchInput#+'%'
+          <isEqual property="searchOption" compareValue="usagepurpose">
+            AND USAGEPURPOSE LIKE '%'+#searchInput#+'%'
           </isEqual>
         </isNotEmpty>
       </isNotEmpty>
-      )t
+                )t
       WHERE 1=1
-      AND (RNUM BETWEEN #currentItem# AND #currentItemEnd# )
+        AND (RNUM BETWEEN #currentItem# AND #currentItemEnd# )
     </select>
 
     <select id="findAllCount" resultClass="int">
       SELECT COUNT(*)
-      FROM BMW_FS_FAQ
+      FROM BMW_FS_DOWNLOAD
       WHERE 1=1
       <isNotEmpty property="searchInput">
         <isNotEmpty property="searchOption">
-          <isEqual property="searchOption" compareValue="ask">
-            AND ASK LIKE '%'+#searchInput#+'%'
+          <isEqual property="searchOption" compareValue="formname">
+            AND FORMNAME LIKE '%'+#searchInput#+'%'
           </isEqual>
-          <isEqual property="searchOption" compareValue="question">
-            AND QUESTION LIKE '%'+#searchInput#+'%'
+          <isEqual property="searchOption" compareValue="usagepurpose">
+            AND USAGEPURPOSE LIKE '%'+#searchInput#+'%'
           </isEqual>
         </isNotEmpty>
       </isNotEmpty>
     </select>
 
-    <insert id="insertFaq">
-      INSERT INTO BMW_FS_FAQ(
-      IDX
-      ,CATEGORY
-      ,ASK
-      ,QUESTION
-      ,DEPLOY_YN
-      ,REG_ID
+    <insert id="insertDownloadForm">
+      INSERT INTO BMW_FS_DOWNLOAD(
+                                   IDX
+                                  ,FORMNAME
+                                  ,USAGEPURPOSE
+                                  ,DEPLOY_YN
+                                  ,REG_ID
       )
       VALUES (
-      #idx#
-      ,#category#
-      ,#ask#
-      ,#question#
-      ,#deployYn#
-      ,#regId#
+                                   #idx#
+                                  ,#formName#
+                                  ,#usagePurpose#
+                                  ,#deployYn#
+                                  ,#regId#
       )
     </insert>
 
-    <select id="findFaq" resultMap="FaqMap">
+    <select id="findDownloadForm" resultMap="DownLoadFormMap">
       SELECT IDX
       ,CATEGORY
       ,ASK
@@ -95,7 +91,7 @@
       WHERE IDX = #idx#
     </select>
 
-    <update id="updateFaq">
+    <update id="updateDownloadForm">
       UPDATE BMW_FS_FAQ
       SET CATEGORY = #category#
       ,ASK = #ask#
@@ -106,7 +102,7 @@
       WHERE IDX = #idx#;
     </update>
 
-    <delete id="deleteFaq">
+    <delete id="deleteDownloadForm">
       DELETE BMW_FS_FAQ
       WHERE IDX = #idx#;
     </delete>
