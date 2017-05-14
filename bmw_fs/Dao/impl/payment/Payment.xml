@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="payment" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+  <alias>
+    <typeAlias alias="PaymentClass" type="bmw_fs.Models.payment.Payment"/>
+  </alias>
+
+  <resultMaps>
+    <resultMap id="paymentMap" class="PaymentClass">
+      <result property="idx" column="IDX" />
+      <result property="brand" column="BRAND" />
+      <result property="series" column="SERIES" />
+      <result property="model" column="MODEL" />
+      <result property="modelName" column="MODELNAME" />
+      <result property="price" column="PRICE" />
+      <result property="item" column="ITEM" />
+      <result property="zanga" column="ZANGA" />
+      <result property="payment1" column="PAYMENT1" />
+      <result property="payment2" column="PAYMENT2" />
+      <result property="payment3" column="PAYMENT3" />
+      <result property="deployYn" column="DEPLOY_YN" />
+      <result property="regDate" column="REG_DATE" />
+      <result property="regId" column="REG_ID" />
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+
+    <select id="findAll" resultMap="paymentMap">
+      SELECT *
+      FROM (
+        SELECT
+          ROW_NUMBER() OVER(ORDER BY IDX DESC) AS RNUM
+        , IDX
+        , BRAND
+        , SERIES
+        , MODEL
+        , MODELNAME
+        , PRICE
+        , ITEM
+        , ZANGA
+        , PAYMENT1
+        , PAYMENT2
+        , PAYMENT3
+        , DEPLOY_YN
+        , REG_DATE
+        , REG_ID
+      FROM BMW_FS_PAYMENT
+      WHERE 1=1
+      <isNotEmpty property="brand">
+          AND BRAND LIKE '%'+#brand#+'%'
+      </isNotEmpty>
+      <isNotEmpty property="series">
+          AND SERIES LIKE '%'+#series#+'%'
+      </isNotEmpty>
+      <isNotEmpty property="model">
+          AND MODEL LIKE '%'+#model#+'%'
+      </isNotEmpty>
+      <isNotEmpty property="item">
+          AND ITEM LIKE '%'+#item#+'%'
+      </isNotEmpty>
+      )t
+      WHERE 1=1
+      AND (RNUM BETWEEN #currentItem# AND #currentItemEnd# )
+    </select>
+
+    <select id="findAllCount" resultClass="int">
+      SELECT COUNT(*)
+      FROM BMW_FS_PAYMENT
+      WHERE 1=1
+      <isNotEmpty property="brand">
+          AND BRAND LIKE '%'+#brand#+'%'
+      </isNotEmpty>
+      <isNotEmpty property="series">
+          AND SERIES LIKE '%'+#series#+'%'
+      </isNotEmpty>
+      <isNotEmpty property="model">
+          AND MODEL LIKE '%'+#model#+'%'
+      </isNotEmpty>
+      <isNotEmpty property="item">
+          AND ITEM LIKE '%'+#item#+'%'
+      </isNotEmpty>
+    </select>
+
+    <select id="findPayment" resultMap="paymentMap">
+      SELECT IDX
+      , BRAND
+      , SERIES
+      , MODEL
+      , MODELNAME
+      , PRICE
+      , ITEM
+      , ZANGA
+      , PAYMENT1
+      , PAYMENT2
+      , PAYMENT3
+      , DEPLOY_YN
+      , REG_DATE
+      , REG_ID
+      FROM BMW_FS_PAYMENT
+      WHERE IDX = #idx#
+    </select>
+
+    <insert id="insertPayment">
+      INSERT INTO BMW_FS_PAYMENT
+      (
+      IDX
+      , BRAND
+      , SERIES
+      , MODEL
+      , MODELNAME
+      , PRICE
+      , ITEM
+      , ZANGA
+      , PAYMENT1
+      , PAYMENT2
+      , PAYMENT3
+      , DEPLOY_YN
+      , REG_ID
+      )
+      VALUES (
+      #idx#
+      ,#brand#
+      ,#series#
+      ,#model#
+      ,#modelName#
+      ,#price#
+      ,#item#
+      ,#zanga#
+      ,#payment1#
+      ,#payment2#
+      ,#payment3#
+      ,#deployYn#
+      ,#regId#
+      )
+
+    </insert>
+
+    <update id="updatePayment">
+      UPDATE BMW_FS_PAYMENT
+      SET BRAND = #brand#
+      ,SERIES = #series#
+      ,MODEL = #model#
+      ,MODELNAME = #modelName#
+      ,PRICE = #price#
+      ,ITEM = #item#
+      ,ZANGA = #zanga#
+      ,PAYMENT1 = #payment1#
+      ,PAYMENT2 = #payment2#
+      ,PAYMENT3 = #payment3#
+      ,DEPLOY_YN  = #deployYn#
+      ,UPT_DATE = getDate()
+      ,UPT_ID = #uptId#
+      WHERE IDX = #idx#
+    </update>
+
+    <delete id="deletePayment">
+      DELETE FROM BMW_FS_PAYMENT
+      WHERE IDX = #idx#
+    </delete>
+
+  </statements>
+</sqlMap>

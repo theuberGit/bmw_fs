@@ -166,6 +166,7 @@
     <Compile Include="Controllers\catalog\CatalogController.cs" />
     <Compile Include="Controllers\legalNotice\ProductController.cs" />
     <Compile Include="Controllers\news\NewsController.cs" />
+    <Compile Include="Controllers\payment\PaymentController.cs" />
     <Compile Include="Controllers\recruit\RecruitFaqController.cs" />
     <Compile Include="Controllers\recruit\RecruitNoticeController.cs" />
     <Compile Include="Controllers\test\BoardController.cs" />
@@ -184,7 +185,9 @@
     <Compile Include="Dao\face\legalNotice\CreditDao.cs" />
     <Compile Include="Dao\face\legalNotice\GeneralDao.cs" />
     <Compile Include="Dao\face\legalNotice\PrivacyDao.cs" />
+    <Compile Include="Dao\face\legalNotice\ProductDao.cs" />
     <Compile Include="Dao\face\news\NewsDao.cs" />
+    <Compile Include="Dao\face\payment\PaymentDao.cs" />
     <Compile Include="Dao\face\recruit\RecruitFaqDao.cs" />
     <Compile Include="Dao\face\recruit\RecruitNoticeDao.cs" />
     <Compile Include="Global.asax.cs">
@@ -203,6 +206,7 @@
     <Compile Include="Models\catalog\Catalog.cs" />
     <Compile Include="Models\legalNotice\Product.cs" />
     <Compile Include="Models\news\News.cs" />
+    <Compile Include="Models\payment\Payment.cs" />
     <Compile Include="Models\recruit\RecruitFaq.cs" />
     <Compile Include="Models\recruit\RecruitNotice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -216,7 +220,9 @@
     <Compile Include="Service\face\legalNotice\CreditService.cs" />
     <Compile Include="Service\face\legalNotice\GeneralService.cs" />
     <Compile Include="Service\face\legalNotice\PrivacyService.cs" />
+    <Compile Include="Service\face\legalNotice\ProductService.cs" />
     <Compile Include="Service\face\news\NewsService.cs" />
+    <Compile Include="Service\face\payment\PaymentService.cs" />
     <Compile Include="Service\face\recruit\RecruitFaqService.cs" />
     <Compile Include="Service\face\recruit\RecruitNoticeService.cs" />
     <Compile Include="Service\impl\admin\MemberServiceImpl.cs" />
@@ -230,7 +236,9 @@
     <Compile Include="Service\impl\legalNotice\CreditServiceImpl.cs" />
     <Compile Include="Service\impl\legalNotice\GeneralServiceImpl.cs" />
     <Compile Include="Service\impl\legalNotice\PrivacyServiceImpl.cs" />
+    <Compile Include="Service\impl\legalNotice\ProductServiceImpl.cs" />
     <Compile Include="Service\impl\news\NewsServiceImpl.cs" />
+    <Compile Include="Service\impl\payment\PaymentServiceImpl.cs" />
     <Compile Include="Service\impl\recruit\RecruitFaqServiceImpl.cs" />
     <Compile Include="Service\impl\recruit\RecruitNoticeServiceImpl.cs" />
   </ItemGroup>
@@ -242,13 +250,16 @@
     <Content Include="Dao\impl\catalog\Catalog.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Dao\impl\legalNotice\Business.xml" />
     <Content Include="Dao\impl\legalNotice\Privacy.xml" />
+    <Content Include="Dao\impl\legalNotice\Product.xml" />
     <Content Include="Dao\impl\news\News.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Dao\impl\legalNotice\Credit.xml" />
     <Content Include="Dao\impl\legalNotice\General.xml" />
     <Content Include="Dao\impl\news\News.xml" />
+    <Content Include="Dao\impl\payment\Payment.xml" />
     <Content Include="Dao\impl\recruit\RecruitFaq.xml" />
     <Content Include="Dao\impl\recruit\RecruitNotice.xml" />
     <Content Include="favicon.ico" />
@@ -327,6 +338,10 @@
     <Content Include="resources\se\smart_editor2_inputarea_ie8.html" />
     <Content Include="Views\News\modify.cshtml" />
     <Content Include="Views\News\view.cshtml" />
+    <Content Include="Views\Payment\list.cshtml" />
+    <Content Include="Views\Payment\register.cshtml" />
+    <Content Include="Views\Payment\modify.cshtml" />
+    <Content Include="Views\Payment\view.cshtml" />
     <None Include="Views\Promotion\list.cshtml" />
     <None Include="Views\Promotion\modify.cshtml" />
     <None Include="Views\Promotion\view.cshtml" />

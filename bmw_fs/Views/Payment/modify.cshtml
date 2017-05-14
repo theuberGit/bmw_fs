@@ -1,0 +1,150 @@
+﻿@{
+    ViewBag.Title = "월 납입금 수정";
+}
+
+<div id="content" class="reg">
+    <div class="cont_top">
+        <h3>월 납입금 수정</h3>
+    </div>
+    <div class="cont_bottom">
+        <form method="post" enctype="multipart/form-data">
+            <table class="reg_table">
+                <caption>월 납입금 수정 테이블</caption>
+                <colgroup>
+                    <col width="130px">
+                    <col width="870px">
+                </colgroup>
+                <tr>
+                    <th scope="row"><label for="regId">작성자</label></th>
+                    <td>@HttpContext.Current.User.Identity.Name</td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="">* 분류</label></th>
+                    <td>
+                        <select name="brand" id="brand" title="분류">
+                            <option value="BMW">BMW</option>
+                            <option value="MINI">MINI</option>
+                        </select>
+                        <select name="series" id="series" title="분류">
+                            <option value=""></option>
+                            <option value="3 Series">3 Series</option>
+                        </select>
+                        <select name="model" id="model" title="분류">
+                            <option value=""></option>
+                            <option value="320">320</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="modelName">* 상세 모델</label></th>
+                    <td><input type="text" name="modelName" id="modelName" class="modelName" maxlength="50" title="상세모델" value="@ViewBag.item.modelName"/></td>
+                </tr>
+                <tr class="add_img_area">
+                    <th>* 차량 이미지</th>
+                    <td class="file_area">
+                        @if (ViewBag.carList.Count != 0)
+                        {
+                            for (int i = 0, size = ViewBag.carList.Count; i < size; i++)
+                            {
+                            <div class="car_list">
+                                <span class="file_src">@ViewBag.carList[i].originalFilename</span>
+                                <input type="file" class="input_file" name="carImg" id="carImg">
+                                <label for="carImg" class="btn_file">파일찾기</label>
+                                <input type="hidden" name="carIdxs" value="@ViewBag.carList[i].fileIdx" />
+                            </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="car_list">
+                                <span class="file_src"></span>
+                                <input type="file" class="input_file" name="carImg" id="carImg">
+                                <label for="carImg" class="btn_file">파일찾기</label>
+                            </div>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="price">* 차량가격</label></th>
+                    <td><input type="text" name="price" id="price" class="price" maxlength="50" title="차량가격" value="@ViewBag.item.price"/> 원</td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="item">* 상품 선택</label></th>
+                    <td>
+                        <select name="item" id="item" title="상품">
+                            <option value="잔가보장형 할부">잔가보자형 할부</option>
+                            <option value="일반 할부">일반 할부</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="zanga">잔가</label></th>
+                    <td><input type="text" name="zanga" id="zanga" class="zanga" maxlength="50" title="잔가" value="@ViewBag.item.zanga"/> %</td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="payment1">월 납입금 (선납 10%)</label></th>
+                    <td><input type="text" name="payment1" id="payment1" class="payment1" maxlength="50" title="월 납입금" value="@ViewBag.item.payment1"/> 원</td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="payment2">월 납입금 (선납 20%)</label></th>
+                    <td><input type="text" name="payment2" id="payment2" class="payment2" maxlength="50" title="월 납입금" value="@ViewBag.item.payment2"/> 원</td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="payment3">월 납입금 (선납 30%)</label></th>
+                    <td><input type="text" name="payment3" id="payment3" class="payment3" maxlength="50" title="월 납입금" value="@ViewBag.item.payment3"/> 원</td>
+                </tr>
+                <tr>
+                    <th><label for="">배포 *</label></th>
+                    <td class="radio_area">
+                        <label for="active"><input type="radio" name="deployYn" id="active" value="Y" title="배포 여부"> 배포</label>
+                        <label for="inactivity"><input type="radio" name="deployYn" id="inactivity" checked value="N" title="배포 여부"> 미배포</label>
+                    </td>
+                </tr>
+            </table>
+            <input type="hidden" name="uptId" id="uptId" value="@HttpContext.Current.User.Identity.Name" />
+            <input type="hidden" name="idx" value="@ViewBag.item.idx" />
+        </form>
+        <div class="btn_area">
+            <a href="list?@Session["searchString"]" class="btn_defualt btn_list">취소</a>
+            <a href="javascript:void(0);" class="btn_defualt btn_reg" onclick="modForm();">수정</a>
+            <a href="javascript:void(0);" class="btn_defualt btn_reg" onclick="delForm();">삭제</a>
+        </div>
+    </div>
+</div>
+<script>
+    $('select[name="brand"]').val('@ViewBag.item.brand');
+    $('select[name="series"]').val('@ViewBag.item.series');
+    $('select[name="model"]').val('@ViewBag.item.model');
+    $('select[name="item"]').val('@ViewBag.item.item');
+    if ('@ViewBag.item.deployYn' == 'Y')
+    {
+      $('#active').prop('checked', true);
+    }
+    else
+    {
+      $('#inactivity').prop('checked', true);
+    }
+    lnbSet(4, 1);
+    function modForm() {
+
+        if (!$('#brand').reqSelect()) return;
+        if (!$('#series').reqSelect()) return;
+        if (!$('#model').reqSelect()) return;
+        if (!$('#modelName').required()) return;
+        if ($('.file_src').text() === '') {
+            alert('차량 이미지를 등록하세요.');
+            return;
+        }
+        if (!$('#price').required()) return;
+        if (!$('#item').reqSelect()) return;
+
+        if (!confirm('수정하시겠습니까?')) return;
+
+        $('#content form').attr('action', 'modifyProc').submit();
+        }
+
+        function delForm() {
+        if (!confirm('삭제하시겠습니까?')) return;
+        $('#content form').attr('action', 'delete').submit();
+        }
+</script>
