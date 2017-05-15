@@ -68,5 +68,12 @@ namespace bmw_fs.Controllers.common
             return Redirect(callback + "?callback_func="+callback_func+file_result);
         }
 
+        [HttpPost]
+        public JsonResult fileDelete(String key)
+        {
+            Boolean isSuccess = filesService.deleteRealFilesAndDataByFileIdx(int.Parse(key));
+            return Json(isSuccess);
+        }
+
     }
 }

@@ -1,0 +1,303 @@
+﻿@{
+    ViewBag.Title = "웹 프로모션 등록";
+}
+<!doctype html>
+<head>
+<style>
+.reg .cont_bottom .reg_table td.file_area p{float:none; clear:both; padding-top:10px}
+.reg .cont_bottom .reg_table td.file_area p input[type="text"]{width:467px}
+.reg h4{margin-bottom:10px}
+
+.file_area{counter-reset:cnt1; }
+.file_src:after{counter-increment:cnt1; content:"이미지"counter(cnt1); color:#ccc;}
+.file_src.on:after{content:""; color:#666;}
+.thum_nail:after{content:"사이즈 307 * 233"; display:inline-block; padding: 7px 0 0 5px}
+.top_main_text:after{content:"사이즈 950 * 258 "; display:inline-block; padding: 7px 0 0 5px}
+</style>
+</head>
+		<div id="content" class="reg">
+			<div class="cont_top">
+				<h3>웹 프로모션</h3>
+			</div>
+			<div class="cont_bottom">
+                <form method="post" enctype="multipart/form-data">
+                    <table class="reg_table">
+                        <colgroup>
+                            <col width="130px" />
+                            <col width="*" />
+                        </colgroup>
+                        <tr>
+                            <th>작성자</th>
+                            <td>@HttpContext.Current.User.Identity.Name</td>
+                        </tr>
+                        <tr>
+                            <th><label for="startDate">게시 기간</label></th>
+                            <td><input type="date" id="startDate" name="startDate" title="게시 시작일"> ~ <input type="date" id="endDate" name="endDate" title="게시 종료일"></td>
+                        </tr>
+                        <tr>
+                            <th>영문 사이트</th>
+                            <td class="radio_area">
+                                <label for="engY"><input type="radio" name="engYn" id="engY" value="Y"> 있음</label>
+                                <label for="engN"><input type="radio" name="engYn" id="engN" value="N" checked> 없음</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><label for="">배포</label></th>
+                            <td class="radio_area">
+                                <label for="deployY"><input type="radio" name="deployYn" id="deployY" value="Y"> 배포</label>
+                                <label for="deployN"><input type="radio" name="deployYn" id="deployN" value="N" checked> 미배포</label>
+                            </td>
+                        </tr>
+                    </table>
+                    <h4>국문사이트</h4>
+                    <table class="reg_table">
+                        <colgroup>
+                            <col width="130px" />
+                            <col width="*" />
+                        </colgroup>
+                        <tr>
+                            <th><label for="tit">제목</label></th>
+                            <td><input type="text" class="tit" name="title" id="tit" title="국문 제목"></td>
+                        </tr>
+                        <tr class="add_img_area">
+                            <th>썸네일 이미지</th>
+                            <td class="file_area">
+                                <div class="thum_nail">
+                                    <span class="file_src"></span>
+                                    <input type="file" class="input_file" name="thumbNail" id="thumbNail">
+                                    <label for="thumbNail" class="btn_file">파일찾기</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="add_img_area">
+                            <th>본문 상단 이미지</th>
+                            <td class="file_area">
+                                <div class="top_main_text">
+                                    <span class="file_src"></span>
+                                    <input type="file" class="input_file" name="topMain" id="topMainText">
+                                    <label for="topMainText" class="btn_file">파일찾기</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="add_img_area kor">
+                            <th>본문 이미지</th>
+                            <td class="file_area">
+                                <div>
+                                    <span class="file_src"></span>
+                                    <input type="file" class="input_file" name="mainImg" id="file0">
+                                    <label for="file0" class="btn_file">파일찾기</label>
+                                    <button type="button" class="btn_add_file" id="btnAddFile">첨부파일 추가</button>
+                                    <p><label for="url0"><input type="text" name="mainImgLinks" id="url0" placeholder="이미지에 대한 링크 URL"></label></p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th rowspan="2"><label for="">상품 페이지 배너</label></th>
+                            <td class="radio_area">
+                                <label for="productBannerY"><input type="radio" name="productBannerYn" id="productBannerY" value="Y"> 배포</label>
+                                <label for="productBannerN"><input type="radio" name="productBannerYn" id="productBannerN" value="N" checked> 미배포</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="checkbox_area">
+                                <label for="productType1"><input type="checkbox" class="productTypeKor" id="productType1" name="productType1" value="Y" checked> 잔가보장형 상품</label>
+                                <label for="productType2"><input type="checkbox" class="productTypeKor" id="productType2" name="productType2" value="Y"> 일반 할부 상품</label>
+                            </td>
+                        </tr>
+                    </table>
+                    <h4 class="eng_site" style="display:none;">영문사이트</h4>
+                    <table class="reg_table eng_site" style="display:none;">
+                        <colgroup>
+                            <col width="130px" />
+                            <col width="*" />
+                        </colgroup>
+                        <tr>
+                            <th><label for="tit">제목</label></th>
+                            <td><input type="text" class="tit" id="titEng" name="titleEng" title="영문 제목"></td>
+                        </tr>
+                        <tr class="add_img_area">
+                            <th>썸네일 이미지</th>
+                            <td class="file_area">
+                                <div class="thum_nail">
+                                    <span class="file_src"></span>
+                                    <input type="file" class="input_file" name="engThumbNail" id="engThumbNail">
+                                    <label for="engThumbNail" class="btn_file">파일찾기</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="add_img_area">
+                            <th>본문 상단 이미지</th>
+                            <td class="file_area">
+                                <div class="top_main_text">
+                                    <span class="file_src"></span>
+                                    <input type="file" class="input_file" name="engTopMain" id="engTopMainText">
+                                    <label for="engTopMainText" class="btn_file">파일찾기</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="add_img_area eng">
+                            <th>본문 이미지</th>
+                            <td class="file_area">
+                                <div>
+                                    <span class="file_src"></span>
+                                    <input type="file" class="input_file" name="engMainImg" id="engfile0">
+                                    <label for="engfile0" class="btn_file">파일찾기</label>
+                                    <button type="button" class="btn_add_file" id="btnAddFile">첨부파일 추가</button>
+                                    <p><label for="engurl0"><input type="text" name="mainImgEngLinks" id="engurl0" placeholder="이미지에 대한 링크 URL"></label></p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th rowspan="2"><label for="">상품 페이지 배너</label></th>
+                            <td class="radio_area">
+                                <label for="productBannerEngY"><input type="radio" name="productBannerYnEng" id="productBannerEngY" value="Y"> 배포</label>
+                                <label for="productBannerEngN"><input type="radio" name="productBannerYnEng" id="productBannerEngN" value="N" checked> 미배포</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="checkbox_area">
+                                <label for="productType1Eng"><input type="checkbox" class="productTypeEng" name="productType1Eng" id="productType1Eng" value="Y" checked> 잔가보장형 상품</label>
+                                <label for="productType2Eng"><input type="checkbox" class="productTypeEng" name="productType2Eng" id="productType2Eng" value="Y"> 일반 할부 상품</label>
+                            </td>
+                        </tr>
+                    </table>
+                    </form>
+                    <div class="btn_area">
+                        <a href="list" class="btn_defualt btn_list">목록</a>
+                        <a href="javascript:void(0);" class="btn_defualt btn_reg" onclick="regForm();">등록</a>
+                    </div>
+</div>
+		</div>
+<script>
+    lnbSet(2, 1);
+    $('.productTypeKor').prop('disabled', true);//상품 배너 (국문) 체크박스
+    $('.productTypeEng').prop('disabled', true);//상품 배너(영문) 체크박스
+
+    function regForm() {
+        if (!validation()) return;
+        if (!confirm('등록하시겠습니까?')) return;
+        $('#content form').attr('action', 'registerProc').submit();
+    };
+
+    function validation() {
+        var mainImgFlagKor = false;
+        var mainImgFlagEng = false;
+
+        if (!$('#startDate').required()) return;
+        if (!$('#endDate').required()) return;
+        if (!$('#tit').required()) return;
+        if ($('#thumbNail').val() === '') {
+            alert('국문 썸네일을 등록하세요.');
+            return;
+        }
+        if ($('#topMainText').val() === '') {
+            alert('국문 본문 상단 이미지를 등록하세요.');
+            return;
+        }
+        $('input[name=mainImg]').each(function () {
+            if ($(this).val() === '') {
+                mainImgFlagKor = true;
+            }
+        });
+        if (mainImgFlagKor) {
+            alert('국문 본문 이미지를 등록하세요.');
+            return;
+        }
+        //if ($('#productBannerY').prop('checked')) {
+        //    if ($('#productType1:checked').length == 0) {
+        //        alert('상품 페이지 배너 종류를 선택하세요. (국문)');
+        //        return;
+        //    }
+        //}
+
+        if ($('#engY').prop('checked')) {
+            if (!$('#titEng').required()) return;
+            if ($('#engThumbNail').val() === '') {
+                alert('영문 썸네일을 등록하세요.');
+                return;
+            }
+            if ($('#engTopMainText').val() === '') {
+                alert('영문 본문 상단 이미지를 등록하세요.');
+                return;
+            }
+            $('input[name=engMainImg]').each(function () {
+                if ($(this).val() === '') {
+                    mainImgFlagEng = true;
+                }
+            });
+            if (mainImgFlagEng) {
+                alert('영문 본문 이미지를 등록하세요.');
+                return;
+            }
+            //if ($('#productBannerEngY').prop('checked')) {
+            //    if ($('.productTypeEng:checked').length == 0) {
+            //        alert('상품 페이지 배너 종류를 선택하세요. (영문)');
+            //        return;
+            //    }
+            //}
+        }
+        return true;
+    };
+
+(function($){
+	var $fileArea = $(".add_img_area").find('.file_area');
+
+	function deleteFile(){
+		$(this).parent("div").remove();
+	}
+	
+	$(".add_img_area").find(".file_area").on("change",".input_file",function(e){
+		var $parent = $(this).closest("div");
+		var val = $(this).val();
+		var valTit = val.split("\\");
+		var valTittext = valTit[valTit.length -1]
+		if(val != ""){
+			$parent.find(".file_src").text(valTittext).addClass("on");
+		};
+	});
+	
+	$(".add_img_area").each(function(index, item){
+		var cnt = 0;
+		$(item).find(".btn_add_file").on("click" , function(){
+			if($(item).find( "input[type='file']" ).length < 20){
+				cnt++;
+				if($(item).is(".kor")){
+                    var html = '<div><span class="file_src"></span><input type="file" class="input_file" id="file' + cnt + '" name="mainImg" /><label for="file' + cnt + '" class="btn_file">파일찾기</label><button type="button" class="btnDelete">첨부파일 삭제</button><p><label for="url' + cnt +'"><input type="text" name="mainImgLinks" id="url'+ cnt +'"placeholder="이미지에 대한 링크 URL"></label></p></div>';
+					console.log("kor", cnt);
+				}
+				if($(item).is(".eng")){
+                    var html = '<div><span class="file_src"></span><input type="file" class="input_file" id="engfile' + cnt + '" name="engMainImg" /><label for="engfile' + cnt + '" class="btn_file">파일찾기</label><button type="button" class="btnDelete">첨부파일 삭제</button><p><label for="engurl' + cnt +'"><input type="text" name="mainImgEngLinks" id="url'+ cnt +'"placeholder="이미지에 대한 링크 URL"></label></p></div>';
+					console.log("eng", cnt);
+				}
+				$(item).find(".file_area").append(html);
+			};
+		});
+		$fileArea.on("click" , ".btnDelete" ,deleteFile);
+    });
+
+    $('input[name=engYn]').change(function () {//영문 사이트 여부
+        if ($('#engY').prop('checked')) {
+            $('.eng_site').show();
+        } else if ($('#engN').prop('checked')) {
+            $('.eng_site').hide();
+        }
+    });
+
+    $('input[name=productBannerYn]').change(function () {//상품 페이지 배너 배포 Y (국문)
+        if ($('#productBannerY').prop('checked')) {
+            $('.productTypeKor').prop('disabled', false);
+        } else if ($('#productBannerN').prop('checked')) {
+            $('.productTypeKor').prop('disabled', true);
+        }
+    });
+
+    $('input[name=productBannerYnEng]').change(function () {//상품 페이지 배너 배포 Y (국문)
+        if ($('#productBannerEngY').prop('checked')) {
+            $('.productTypeEng').prop('disabled', false);
+        } else if ($('#productBannerEngN').prop('checked')) {
+            $('.productTypeEng').prop('disabled', true);
+        }
+    });
+
+})(jQuery);
+</script>

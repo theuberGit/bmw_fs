@@ -1,8 +1,8 @@
-<!doctype html>
+﻿@{
+    ViewBag.Title = "웹 프로모션 상세";
+}
+<!Doctype html>
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="../../resource/css/common.css">
-<title>Document</title>
 <style>
 .img_view{overflow:hidden; margin-bottom:30px; }
 .img_view > div{float:left;width:499.5px; text-align:center}
@@ -15,64 +15,12 @@
 .main_img_area dl dd a{color:blue; text-decoration:underline;}
 </style>
 </head>
-<body>
-<div id="wrap">
-	<div id="header">
-		<h1><a href=""><img src="../../resource/images/logo.png" alt=""></a></h1>
-		<div class="header_inner">
-			<h2>BMW FS 관리자</h2>
-			<div class="link_list">
-				<a href="#" class="on">관리자 관리</a>
-				<a href="#">미답변 1:1 문의 <span></span></a>
-				<a href="#">My Account</a>
-				<a href="#">로그인</a>
-			</div>
-		</div>
-	</div>
-	<div id="container">
-		<div id="lnb">
-			<ul class="menu_list">
-				<li class="sub_list on">
-					<a href="#">메인롤링 관리</a>
-					<ul>
-						<li><a href="#">웹 메인롤링</a></li>
-						<li><a href="#">모바일 메인롤링</a></li>
-					</ul>
-				</li>
-				<li class="sub_list">
-					<a href="#">프로모션 관리</a>
-					<ul>
-						<li><a href="#">웹 프로모션</a></li>
-						<li><a href="#">모바일 프로모션</a></li>
-					</ul>
-				</li>
-				<li><a href="#">배너 관리</a></li>
-				<li><a href="#">월납입금 관리</a></li>
-				<li><a href="#">뉴스 관리</a></li>
-				<li><a href="#">전시장 관리 </a></li>
-				<li><a href="#">법적 고지</a></li>
-				<li class="sub_list">
-					<a href="#">인재채용</a>
-					<ul>
-						<li><a href="#">채용 공고</a></li>
-						<li><a href="#">채용 FAQ</a></li>
-					</ul>
-				</li>
-				<li class="sub_list">
-					<a href="#">고객센터</a>
-					<ul>
-						<li><a href="#">FAQ</a></li>
-						<li><a href="#">1:1 문의</a></li>
-						<li><a href="#">다운로드 자료/양식</a></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
 		<div id="content" class="reg">
 			<div class="cont_top">
 				<h3>관리자 관리</h3>
 			</div>
 			<div class="cont_bottom">
+                <form method="post" enctype="multipart/form-data">
 				<table class="reg_table">
 					<colgroup>
 						<col width="130px" />
@@ -82,21 +30,24 @@
 					</colgroup>
 					<tr>
 						<th>작성자</th>
-						<td colspan="3">홍길동</td>
+						<td colspan="3">@ViewBag.item.regId</td>
 					</tr>
 					<tr>
 						<th>작성일</th>
-						<td>2017-03-20</td>
+						<td>@ViewBag.item.regDate</td>
 						<th>게시 기간</th>
-						<td>2017-03-20  ~  2017-04-30</td>
+						<td>@ViewBag.item.startDate  ~  @ViewBag.item.endDate</td>
 					</tr>
 					<tr>
-						<th>게시 위치</th>
-						<td>국문 </td>
+						<th>영문 사이트</th>
+						@if ("Y".Equals(ViewBag.item.engYn)) {<td>있음</td>}
+                        else {<td>없음</td>}
 						<th>배포</th>
 						<td>배포</td>
 					</tr>
 				</table>
+
+                <h4>국문사이트</h4>
 				<table class="reg_table">
 					<colgroup>
 						<col width="130px" />
@@ -104,57 +55,145 @@
 					</colgroup>
 					<tr>
 						<th>제목</th>
-						<td>당신의 첫 번째 드라이빙을 위한 특별한 혜택 월 20만원대로 BMW 3시리즈, 4시리즈를!</td>
+						<td>@ViewBag.item.title</td>
 					</tr>
 					<tr>
 						<th>썸네일 이미지</th>
-						<td>0501_my first bmw program_thum.jpg</td>
+                        @foreach (var file1 in ViewBag.thumbList)
+                        {
+                            <td>@file1.originalFilename</td>
+                        }
 					</tr>
 					<tr>
 						<th>본문 상단 이미지</th>
-						<td>0501_my first bmw program_top.jpg</td>
+						@foreach (var file2 in ViewBag.topMainList)
+                        {
+                            <td>@file2.originalFilename</td>
+                        }
 					</tr>
 					<tr>
 						<th>본문 이미지</th>
 						<td class="main_img_area">
-							<dl>
-								<dt>[이미지 <span>1</span>]</dt>
-								<dd> -  이미지 : <span>0501_my first bmw program_1.jpg</span></dd>
-								<dd> -  URL : <a href="https://www.bmwfs.co.kr/payment_calculator.html">https://www.bmwfs.co.kr/payment_calculator.html</a></dd>
-							</dl>
-							<dl>
-								<dt>[이미지 <span>2</span>]</dt>
-								<dd> -  이미지 : <span>0501_my first bmw program_2.jpg</span></dd>
-								<dd> -  URL : <a href="https://www.bmwfs.co.kr/payment_calculator.html">https://www.bmwfs.co.kr/payment_calculator.html</a></dd>
-							</dl>
-							<dl>
-								<dt>[이미지 <span>3</span>]</dt>
-								<dd> -  이미지 : <span>0501_my first bmw program_3.jpg</span></dd>
-								<dd> -  URL : <a href="https://www.bmwfs.co.kr/payment_calculator.html">https://www.bmwfs.co.kr/payment_calculator.html</a></dd>
-							</dl>
+                            @for (var i = 0; i < ViewBag.mainImgList.Count; i++)
+                            {
+                                <dl>
+                                    <dt>[이미지 <span>@(i+1)</span>]</dt>
+                                    <dd> -  이미지 : <span>@ViewBag.mainImgList[i].originalFilename</span></dd>
+                                    <dd> -  URL : <a href="@ViewBag.imgUrlList[i]">@ViewBag.imgUrlList[i]</a></dd>
+                                </dl>
+                            }
 						</td>
 					</tr>
-					
+                     <tr>
+                        <th>상품 페이지 배너</th>
+                        <td>
+                        @if ("N".Equals(ViewBag.item.productBannerYn))
+                        {
+                            <p>미배포</p>
+                        }
+                        else
+                        {
+                            if ("Y".Equals(ViewBag.item.productType1) && "Y".Equals(ViewBag.item.productType2))
+                            {
+                                <p>잔가보장형 상품, 일반 할부 상품</p>
+                            }
+                            if ("Y".Equals(ViewBag.item.productType1) && (ViewBag.item.productType2 == null))
+                            {
+                                <p>잔가보장형 상품</p>
+                            }
+                            if ("Y".Equals(ViewBag.item.productType2) && (ViewBag.item.productType1 == null))
+                            {
+                                <p>일반 할부 상품</p>
+                            }
+                        }
+                         </td>
+                     </tr>
 				</table>
 
-				<div class="btn_area">
-					<a href="list.html" class="btn_defualt btn_list">목록</a>
+                @if ("Y".Equals(ViewBag.item.engYn))
+                {
+                    <h4>영문사이트</h4>
+                    <table class="reg_table">
+                        <colgroup>
+                            <col width="130px" />
+                            <col width="870px" />
+                        </colgroup>
+                        <tr>
+                            <th>제목</th>
+                            <td>@ViewBag.item.titleEng</td>
+                        </tr>
+                        <tr>
+                            <th>썸네일 이미지</th>
+                            @foreach (var file1 in ViewBag.thumbEngList)
+                            {
+                                <td>@file1.originalFilename</td>
+                            }
+                        </tr>
+                        <tr>
+                            <th>본문 상단 이미지</th>
+                            @foreach (var file2 in ViewBag.topMainEngList)
+                            {
+                                <td>@file2.originalFilename</td>
+                            }
+                        </tr>
+                        <tr>
+                            <th>본문 이미지</th>
+                            <td class="main_img_area">
+                                @for (var i = 0; i < ViewBag.mainImgEngList.Count; i++)
+                                {
+                                    <dl>
+                                        <dt>[이미지 <span>@(i + 1)</span>]</dt>
+                                        <dd> -  이미지 : <span>@ViewBag.mainImgEngList[i].originalFilename</span></dd>
+                                        <dd> -  URL : <a href="@ViewBag.imgUrlEngList[i]">@ViewBag.imgUrlEngList[i]</a></dd>
+                                    </dl>
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>상품 페이지 배너</th>
+                            <td>
+                                @if ("N".Equals(ViewBag.item.productBannerYnEng))
+                                {
+                                    <p>미배포</p>
+                                }
+                                else
+                                {
+                                    if ("Y".Equals(ViewBag.item.productType1Eng) && "Y".Equals(ViewBag.item.productType2Eng))
+                                    {
+                                        <p>잔가보장형 상품, 일반 할부 상품</p>
+                                    }
+                                    if ("Y".Equals(ViewBag.item.productType1Eng) && (ViewBag.item.productType2Eng == null))
+                                    {
+                                        <p>잔가보장형 상품</p>
+                                    }
+                                    if ("Y".Equals(ViewBag.item.productType2Eng) && (ViewBag.item.productType1Eng == null))
+                                    {
+                                        <p>일반 할부 상품</p>
+                                    }
+                                }
+                            </td>
+                        </tr>
+                    </table>
+                }
+                <input type="hidden" name="idx" value="@ViewBag.item.idx" />
+				</form>
+                <div class="btn_area">
+			        <a href="list" class="btn_defualt btn_list">목록</a>
 					<div class="view_btn_area">
-						<a href="modify.html" class="btn_defualt btn_modifyt">수정</a>
+						<a href="javascript:void(0);" onclick="modForm();" class="btn_defualt btn_modifyt">수정</a>
 						<a href="#" class="btn_defualt btn_delete">삭제</a>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
-<script src="../../resource/js/lib/jquery-1.12.0.min.js"></script>
 <script>
+    lnbSet(2, 1);
+    function modForm() {
+        $('form').attr('action', 'modify').submit();
+    }
 (function(){
 	$(".btn_delete").click(function(){
 		confirm("삭제하시겠습니까?");
 	});
 })();
 </script>
-</body>
-</html>
