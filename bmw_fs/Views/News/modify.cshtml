@@ -171,6 +171,6 @@ if ('@ViewBag.item.deployYn' === 'Y') {//배포 여부 set
         }
         console.log($('input[name=thumbIdxs]').val());
         if (!confirm('수정하시겠습니까?')) return;
-        $('form').attr('action', 'modifyProc').submit();
+        $('#content form').attr('action', 'modifyProc').submit();
     };
 </script>

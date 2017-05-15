@@ -168,6 +168,7 @@
     <Compile Include="Controllers\legalNotice\ProductController.cs" />
     <Compile Include="Controllers\news\NewsController.cs" />
     <Compile Include="Controllers\payment\PaymentController.cs" />
+    <Compile Include="Controllers\promotion\PromotionController.cs" />
     <Compile Include="Controllers\recruit\RecruitFaqController.cs" />
     <Compile Include="Controllers\recruit\RecruitNoticeController.cs" />
     <Compile Include="Controllers\test\BoardController.cs" />
@@ -190,6 +191,7 @@
     <Compile Include="Dao\face\legalNotice\ProductDao.cs" />
     <Compile Include="Dao\face\news\NewsDao.cs" />
     <Compile Include="Dao\face\payment\PaymentDao.cs" />
+    <Compile Include="Dao\face\promotion\WebPromotionDao.cs" />
     <Compile Include="Dao\face\recruit\RecruitFaqDao.cs" />
     <Compile Include="Dao\face\recruit\RecruitNoticeDao.cs" />
     <Compile Include="Global.asax.cs">
@@ -210,6 +212,8 @@
     <Compile Include="Models\legalNotice\Product.cs" />
     <Compile Include="Models\news\News.cs" />
     <Compile Include="Models\payment\Payment.cs" />
+    <Compile Include="Models\promotion\PromotionUrl.cs" />
+    <Compile Include="Models\promotion\Promotion.cs" />
     <Compile Include="Models\recruit\RecruitFaq.cs" />
     <Compile Include="Models\recruit\RecruitNotice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -227,6 +231,7 @@
     <Compile Include="Service\face\legalNotice\ProductService.cs" />
     <Compile Include="Service\face\news\NewsService.cs" />
     <Compile Include="Service\face\payment\PaymentService.cs" />
+    <Compile Include="Service\face\promotion\WebPromotionService.cs" />
     <Compile Include="Service\face\recruit\RecruitFaqService.cs" />
     <Compile Include="Service\face\recruit\RecruitNoticeService.cs" />
     <Compile Include="Service\impl\admin\MemberServiceImpl.cs" />
@@ -244,6 +249,7 @@
     <Compile Include="Service\impl\legalNotice\ProductServiceImpl.cs" />
     <Compile Include="Service\impl\news\NewsServiceImpl.cs" />
     <Compile Include="Service\impl\payment\PaymentServiceImpl.cs" />
+    <Compile Include="Service\impl\promotion\WebPromotionServiceImpl.cs" />
     <Compile Include="Service\impl\recruit\RecruitFaqServiceImpl.cs" />
     <Compile Include="Service\impl\recruit\RecruitNoticeServiceImpl.cs" />
   </ItemGroup>
@@ -266,6 +272,9 @@
     <Content Include="Dao\impl\legalNotice\General.xml" />
     <Content Include="Dao\impl\news\News.xml" />
     <Content Include="Dao\impl\payment\Payment.xml" />
+    <Content Include="Dao\impl\promotion\webPromotion.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Dao\impl\recruit\RecruitFaq.xml" />
     <Content Include="Dao\impl\recruit\RecruitNotice.xml" />
     <Content Include="favicon.ico" />
@@ -348,10 +357,12 @@
     <Content Include="Views\Payment\register.cshtml" />
     <Content Include="Views\Payment\modify.cshtml" />
     <Content Include="Views\Payment\view.cshtml" />
+    <Content Include="Views\News\modify.cshtml" />
+    <Content Include="Views\News\view.cshtml" />
     <None Include="Views\Promotion\list.cshtml" />
     <None Include="Views\Promotion\modify.cshtml" />
     <None Include="Views\Promotion\view.cshtml" />
-    <None Include="Views\Promotion\write.cshtml" />
+    <None Include="Views\Promotion\register.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -377,10 +388,14 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SqlMap.config" />
+    <Content Include="SqlMap.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="providers.config" />
+    <Content Include="providers.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="resources\fonts\NanumBarunGothic.eot" />

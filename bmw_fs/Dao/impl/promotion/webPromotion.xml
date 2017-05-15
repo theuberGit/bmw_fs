@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="webPromotion" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+  <alias>
+    <typeAlias alias="PromotionClass" type="bmw_fs.Models.promotion.Promotion"/>
+    <typeAlias alias="PromotionUrlClass" type="bmw_fs.Models.promotion.PromotionUrl"/>
+  </alias>
+
+  <resultMaps>
+    <resultMap id="webPromotionListMap" class="PromotionClass">
+      <result property="idx" column="IDX" />
+      <result property="startDate" column="START_DATE" />
+      <result property="endDate" column="END_DATE" />
+      <result property="engYn" column="ENG_YN" />
+      <result property="title" column="TITLE" />
+      <result property="fileIdx" column="FILE_IDX" />
+    </resultMap>
+
+    <resultMap id="webPromotionMap" class="PromotionClass">
+      <result property="idx" column="IDX" />
+      <result property="startDate" column="START_DATE" />
+      <result property="endDate" column="END_DATE" />
+      <result property="deployYn" column="DEPLOY_YN" />
+      <result property="engYn" column="ENG_YN" />
+      <result property="title" column="TITLE" />
+      <result property="productBannerYn" column="PRODUCT_BANNER_YN" />
+      <result property="productType1" column="PRODUCT_TYPE1" />
+      <result property="productType2" column="PRODUCT_TYPE2" />
+      <result property="titleEng" column="TITLE_ENG" />
+      <result property="productBannerYnEng" column="PRODUCT_BANNER_YN_ENG" />
+      <result property="productType1Eng" column="PRODUCT_TYPE1_ENG" />
+      <result property="productType2Eng" column="PRODUCT_TYPE2_ENG" />
+      <result property="webYn" column="WEB_YN" />
+      <result property="regDate" column="REG_DATE" />
+      <result property="regId" column="REG_ID" />
+    </resultMap>
+    
+    <resultMap id="webPromotionUrlMap" class="PromotionUrlClass">
+      <result property="pIdx" column="P_IDX" />
+      <result property="fileIdx" column="FILE_IDX" />
+      <result property="url" column="URL" />
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+
+    <select id="findAll" resultMap="webPromotionListMap">
+      SELECT *
+      FROM (
+      SELECT
+      ROW_NUMBER() OVER(ORDER BY P.IDX DESC) AS RNUM
+      ,P.IDX
+      ,P.START_DATE
+      ,P.END_DATE
+      ,P.ENG_YN
+      ,P.TITLE
+      ,F.IDX AS FILE_IDX
+      FROM BMW_FS_PROMOTION P
+      LEFT JOIN BMW_FS_FILES_DATA F ON P.IDX = F.MASTER_IDX AND F.TYPE = 'thumbNail'
+      WHERE 1=1
+      AND P.WEB_YN = 'Y'
+      <isNotEmpty property="searchInput">
+              <isEqual property="searchOption" compareValue="title">
+                AND P.TITLE LIKE '%'+#searchInput#+'%'
+              </isEqual>
+            </isNotEmpty>
+          )t
+        WHERE 1=1
+        AND (RNUM BETWEEN #currentItem# AND #currentItemEnd# )
+    </select>
+
+    <select id="findAllCount" resultClass="int">
+      SELECT COUNT(*)
+      FROM BMW_FS_PROMOTION
+      WHERE 1=1
+        AND WEB_YN = 'Y'
+      <isNotEmpty property="searchInput">
+        <isEqual property="searchOption" compareValue="title">
+          AND TITLE LIKE '%'+#searchInput#+'%'
+        </isEqual>
+      </isNotEmpty>
+    </select>
+
+    <select id="findWebPromotion" resultMap="webPromotionMap">
+      SELECT IDX
+      ,START_DATE
+      ,END_DATE
+      ,ENG_YN
+      ,DEPLOY_YN
+      ,TITLE
+      ,PRODUCT_BANNER_YN
+      ,PRODUCT_TYPE1
+      ,PRODUCT_TYPE2
+      ,TITLE_ENG
+      ,PRODUCT_BANNER_YN_ENG
+      ,PRODUCT_TYPE1_ENG
+      ,PRODUCT_TYPE2_ENG
+      ,WEB_YN
+      ,REG_DATE
+      ,REG_ID
+      FROM BMW_FS_PROMOTION
+      WHERE IDX = #idx#
+    </select>
+
+    <insert id="insertWebPromotion">
+      INSERT INTO BMW_FS_PROMOTION
+      (
+      IDX
+      ,START_DATE
+      ,END_DATE
+      ,ENG_YN
+      ,DEPLOY_YN
+      ,TITLE
+      ,PRODUCT_BANNER_YN
+      ,PRODUCT_TYPE1
+      ,PRODUCT_TYPE2
+      ,TITLE_ENG
+      ,PRODUCT_BANNER_YN_ENG
+      ,PRODUCT_TYPE1_ENG
+      ,PRODUCT_TYPE2_ENG
+      ,WEB_YN
+      ,REG_ID
+      )
+      VALUES (
+      #idx#
+      ,#startDate#
+      ,#endDate#
+      ,#engYn#
+      ,#deployYn#
+      ,#title#
+      ,#productBannerYn#
+      ,#productType1#
+      ,#productType2#
+      ,#titleEng#
+      ,#productBannerYnEng#
+      ,#productType1Eng#
+      ,#productType2Eng#
+      ,#webYn#
+      ,#regId#
+      )
+    </insert>
+
+    <update id="updateWebPromotion">
+      UPDATE BMW_FS_PROMOTION
+      SET START_DATE = #startDate#
+      ,END_DATE = #endDate#
+      ,ENG_YN = #engYn#
+      ,DEPLOY_YN = #deployYn#
+      ,TITLE = #title#
+      ,PRODUCT_BANNER_YN = #productBannerYn#
+      ,PRODUCT_TYPE1 = #productType1#
+      ,PRODUCT_TYPE2 = #productType2#
+      ,TITLE_ENG = #titleEng#
+      ,PRODUCT_BANNER_YN_ENG = #productBannerYnEng#
+      ,PRODUCT_TYPE1_ENG = #productType1Eng#
+      ,PRODUCT_TYPE2_ENG = #productType2Eng#
+      ,WEB_YN = #webYn#
+      ,UPT_DATE = getDate()
+      ,UPT_ID = #uptId#
+      WHERE IDX = #idx#
+    </update>
+
+    <delete id="deleteWebPromotion">
+      DELETE FROM BMW_FS_PROMOTION
+      WHERE IDX = #idx#
+    </delete>
+
+    <insert id="insertWebPromotionUrl">
+      INSERT INTO BMW_FS_PROMOTION_URL
+      (
+      P_IDX
+      ,FILE_IDX
+      ,URL
+      )
+      VALUES (
+      #pIdx#
+      ,#fileIdx#
+      ,#url#
+      )
+    </insert>
+
+    <delete id="deleteWebPromotionUrl">
+      DELETE FROM BMW_FS_PROMOTION_URL
+      WHERE P_IDX = #pIdx#
+    </delete>
+    
+    <select id="findWebPromotionImgUrl" resultClass="string">
+      SELECT URL
+        FROM BMW_FS_PROMOTION_URL
+        WHERE FILE_IDX = #fileIdx#
+    </select>
+    
+  </statements>
+</sqlMap>

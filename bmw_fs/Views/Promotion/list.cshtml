@@ -1,212 +1,115 @@
-﻿<!doctype html>
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="../../resource/css/common.css">
-<title>Document</title>
-<style>
-.rolling .cont_bottom p{margin-bottom:15px}
-.rolling .rolling_list{overflow:hidden; display:none}
-.rolling .rolling_list.on{display:block;}
-.rolling .rolling_list li{float:left; margin:0 0 30px 50px;}
-.rolling .rolling_list li:first-child{margin-left:0;}
-.rolling .rolling_list li.rolling_list4{margin-left:0;}
-.rolling .rolling_list li a > span{display:block; margin-bottom:5px;}
-.tab{overflow:hidden; width:400px; margin-bottom:15px; border:1px solid #ccc}
-.tab li{float:left; }
-.tab li a{display:block; width:200px; height:37px; line-height:37px; text-align:center;}
-.tab li.on a{background-color:#ccc;}
-.img_area{position:relative; width:300px; height:214px; margin-bottom:10px;}
-.img_area img{position:absolute; left:0; top:0; width:100%;}
-.tit_area{font-weight:bold;}
-.country_area span{display:inline-block; width:40px; padding:2px 0; color:#fff; font-size:12px; background-color:#666; text-align:center}
+﻿@{
+    ViewBag.Title = "웹 프로모션 리스트";
+}
+<!DOCTYPE html>
 
-</style>
-</head>
-<body>
-<div id="wrap">
-	<div id="header">
-		<h1><a href="#"><img src="../../resource/images/logo.png" alt=""></a></h1>
-		<div class="header_inner">
-			<h2>BMW FS 관리자</h2>
-			<div class="link_list">
-				<a href="#" class="on">관리자 관리</a>
-				<a href="#">미답변 1:1 문의 <span></span></a>
-				<a href="#">My Account</a>
-				<a href="#">로그인</a>
-			</div>
-		</div>
-	</div>
-	<div id="container">
-		<div id="lnb">
-			<ul class="menu_list">
-				<li class="sub_list on">
-					<a href="#">메인롤링 관리</a>
-					<ul>
-						<li><a href="#">웹 메인롤링</a></li>
-						<li><a href="#">모바일 메인롤링</a></li>
-					</ul>
-				</li>
-				<li class="sub_list">
-					<a href="#">프로모션 관리</a>
-					<ul>
-						<li><a href="#">웹 프로모션</a></li>
-						<li><a href="#">모바일 프로모션</a></li>
-					</ul>
-				</li>
-				<li><a href="#">배너 관리</a></li>
-				<li><a href="#">월납입금 관리</a></li>
-				<li><a href="#">뉴스 관리</a></li>
-				<li><a href="#">전시장 관리 </a></li>
-				<li><a href="#">법적 고지</a></li>
-				<li class="sub_list">
-					<a href="#">인재채용</a>
-					<ul>
-						<li><a href="#">채용 공고</a></li>
-						<li><a href="#">채용 FAQ</a></li>
-					</ul>
-				</li>
-				<li class="sub_list">
-					<a href="#">고객센터</a>
-					<ul>
-						<li><a href="#">FAQ</a></li>
-						<li><a href="#">1:1 문의</a></li>
-						<li><a href="#">다운로드 자료/양식</a></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
 		<div id="content" class="rolling list">
 			<div class="cont_top">
 				<h3>웹 프로모션</h3>
 			</div>
-			<div class="cont_bottom">
-				<ul class="tab">
-					<li class="on"><a href="#">진행 중 프로모션</a></li>
-					<li><a href="#">종료된 프로모션</a></li>
-				</ul>
-				<ul class="rolling_list on">
-					<li>
-						<a href="view.html">
-							<span class="img_area"><img src="../../resource/dummy/test_img2.jpg" alt=""></span>
-							<span class="tit_area">1___2017 서울 모터쇼 티켓 이벤트</span>
-							<span class="date_area">2017-03-20 ~ 2017-04-03</span> 
-							<div class="country_area"><span class="kor">KOR</span> <span class="eng">ENG</span></div>
-						</a>
-					</li>
-					<li>
-						<a href="view.html">
-							<span class="img_area"><img src="../../resource/dummy/test_img2.jpg" alt=""></span>
-							<span class="tit_area">1___2017 서울 모터쇼 티켓 이벤트</span>
-							<span class="date_area">2017-03-20 ~ 2017-04-03</span> 
-							<div class="country_area"><span class="kor">KOR</span> <span class="eng">ENG</span></div>
-						</a>
-					</li>
-					<li>
-						<a href="view.html">
-							<span class="img_area"><img src="../../resource/dummy/test_img2.jpg" alt=""></span>
-							<span class="tit_area">1___2017 서울 모터쇼 티켓 이벤트</span>
-							<span class="date_area">2017-03-20 ~ 2017-04-03</span> 
-							<div class="country_area"><span class="kor">KOR</span> <span class="eng">ENG</span></div>
-						</a>
-					</li>
-					<li class="rolling_list4">
-						<a href="view.html">
-							<span class="img_area"><img src="../../resource/dummy/test_img2.jpg" alt=""></span>
-							<span class="tit_area">1___2017 서울 모터쇼 티켓 이벤트</span>
-							<span class="date_area">2017-03-20 ~ 2017-04-03</span> 
-							<div class="country_area"><span class="kor">KOR</span> <span class="eng">ENG</span></div>
-						</a>
-					</li>
-					<li>
-						<a href="view.html">
-							<span class="img_area"><img src="../../resource/dummy/test_img2.jpg" alt=""></span>
-							<span class="tit_area">1___2017 서울 모터쇼 티켓 이벤트</span>
-							<span class="date_area">2017-03-20 ~ 2017-04-03</span> 
-							<div class="country_area"><span class="kor">KOR</span> <span class="eng">ENG</span></div>
-						</a>
-					</li>
-					<li>
-						<a href="view.html">
-							<span class="img_area"><img src="../../resource/dummy/test_img2.jpg" alt=""></span>
-							<span class="tit_area">1___2017 서울 모터쇼 티켓 이벤트</span>
-							<span class="date_area">2017-03-20 ~ 2017-04-03</span> 
-							<div class="country_area"><span class="kor">KOR</span> <span class="eng">ENG</span></div>
-						</a>
-					</li>
-				</ul>
-				<ul class="rolling_list">
-					<li>
-						<a href="view.html">
-							<span class="img_area"><img src="../../resource/dummy/test_img2.jpg" alt=""></span>
-							<span class="tit_area">2___2017 서울 모터쇼 티켓 이벤트</span>
-							<span class="date_area">2017-03-20 ~ 2017-04-03</span> 
-							<div class="country_area"><span class="kor">KOR</span> <span class="eng">ENG</span></div>
-						</a>
-					</li>
-					<li>
-						<a href="view.html">
-							<span class="img_area"><img src="../../resource/dummy/test_img2.jpg" alt=""></span>
-							<span class="tit_area">2___2017 서울 모터쇼 티켓 이벤트</span>
-							<span class="date_area">2017-03-20 ~ 2017-04-03</span> 
-							<div class="country_area"><span class="kor">KOR</span> <span class="eng">ENG</span></div>
-						</a>
-					</li>
-					<li>
-						<a href="view.html">
-							<span class="img_area"><img src="../../resource/dummy/test_img2.jpg" alt=""></span>
-							<span class="tit_area">2___2017 서울 모터쇼 티켓 이벤트</span>
-							<span class="date_area">2017-03-20 ~ 2017-04-03</span> 
-							<div class="country_area"><span class="kor">KOR</span> <span class="eng">ENG</span></div>
-						</a>
-					</li>
-					<li class="rolling_list4">
-						<a href="view.html">
-							<span class="img_area"><img src="../../resource/dummy/test_img2.jpg" alt=""></span>
-							<span class="tit_area">2___2017 서울 모터쇼 티켓 이벤트</span>
-							<span class="date_area">2017-03-20 ~ 2017-04-03</span> 
-							<div class="country_area"><span class="kor">KOR</span> <span class="eng">ENG</span></div>
-						</a>
-					</li>
-					<li>
-						<a href="view.html">
-							<span class="img_area"><img src="../../resource/dummy/test_img2.jpg" alt=""></span>
-							<span class="tit_area">2___2017 서울 모터쇼 티켓 이벤트</span>
-							<span class="date_area">2017-03-20 ~ 2017-04-03</span> 
-							<div class="country_area"><span class="kor">KOR</span> <span class="eng">ENG</span></div>
-						</a>
-					</li>
-					<li>
-						<a href="view.html">
-							<span class="img_area"><img src="../../resource/dummy/test_img2.jpg" alt=""></span>
-							<span class="tit_area">2___2017 서울 모터쇼 티켓 이벤트</span>
-							<span class="date_area">2017-03-20 ~ 2017-04-03</span> 
-							<div class="country_area"><span class="kor">KOR</span> <span class="eng">ENG</span></div>
-						</a>
-					</li>
-				</ul>
-				<div id="paging">
-					<a href="#" class=""><img src="../../resource/images/btn_prev_prev.jpg" alt=""></a>
-					<a href="#" class=""><img src="../../resource/images/btn_prev.jpg" alt=""></a>
-					<span class="screen_out">현재페이지</span><em class="paging_box">1</em>
-					<a href="#" class="paging_box">2</a>
-					<a href="#" class="paging_box">3</a>
-					<a href="#" class="paging_box">4</a>
-					<a href="#" class="paging_box">5</a>
-					<a href="#" class="paging_box">6</a>
-					<a href="#" class="paging_box">7</a>
-					<a href="#" class="paging_box">8</a>
-					<a href="#" class="paging_box">9</a>
-					<a href="#" class="paging_box">10</a>
-					<a href="#" class=""><img src="../../resource/images/btn_next.jpg" alt=""></a>
-					<a href="#" class=""><img src="../../resource/images/btn_next_next.jpg" alt=""></a>
-				</div>
-				<a href="write.html" class="btn_defualt btn_reg">등록</a>
-			</div>
+            <form>
+                <div class="cont_bottom">
+                    <ul class="tab">
+                        <li class="on"><a href="#">진행 중 프로모션</a></li>
+                        <li><a href="#">종료된 프로모션</a></li>
+                    </ul>
+                    <ul class="rolling_list on">
+                    @for (var i = 0; i < ViewBag.list.Count; i++)
+                    {
+                        if (i == 3)
+                        {
+                            <li class="rolling_list4">
+                                <a href="view?idx=@ViewBag.list[i].idx">
+                                    <span class="img_area"><img src="/Files/imageView?fileIdx=@ViewBag.list[i].fileIdx" alt=""></span>
+                                    <span class="tit_area">@ViewBag.list[i].title</span>
+                                    <span class="date_area">@ViewBag.list[i].startDate ~ @ViewBag.list[i].endDate</span>
+                                    <div class="country_area">
+                                        <span class="kor">KOR</span>
+                                        @if ("Y".Equals(ViewBag.list[i].engYn))
+                                        {
+                                            <span class="eng">ENG</span>
+                                        }
+                                    </div>
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="view?idx=@ViewBag.list[i].idx">
+                                    <span class="img_area"><img src="/Files/imageView?fileIdx=@ViewBag.list[i].fileIdx" alt=""></span>
+                                    <span class="tit_area">@ViewBag.list[i].title</span>
+                                    <span class="date_area">@ViewBag.list[i].startDate ~ @ViewBag.list[i].endDate</span>
+                                    <div class="country_area">
+                                        <span class="kor">KOR</span>
+                                        @if ("Y".Equals(ViewBag.list[i].engYn))
+                                        {
+                                            <span class="eng">ENG</span>
+                                        }
+                                    </div>
+                                </a>
+                            </li>
+                        }
+                    }
+                    </ul>
+                    <ul class="rolling_list">
+                        <li>
+                            <a href="view.html">
+                                <span class="img_area"><img src="/resources/dummy/test_img2.jpg" alt=""></span>
+                                <span class="tit_area">2___2017 서울 모터쇼 티켓 이벤트</span>
+                                <span class="date_area">2017-03-20 ~ 2017-04-03</span>
+                                <div class="country_area"><span class="kor">KOR</span> <span class="eng">ENG</span></div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="view.html">
+                                <span class="img_area"><img src="/resources/dummy/test_img2.jpg" alt=""></span>
+                                <span class="tit_area">2___2017 서울 모터쇼 티켓 이벤트</span>
+                                <span class="date_area">2017-03-20 ~ 2017-04-03</span>
+                                <div class="country_area"><span class="kor">KOR</span> <span class="eng">ENG</span></div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="view.html">
+                                <span class="img_area"><img src="/resources/dummy/test_img2.jpg" alt=""></span>
+                                <span class="tit_area">2___2017 서울 모터쇼 티켓 이벤트</span>
+                                <span class="date_area">2017-03-20 ~ 2017-04-03</span>
+                                <div class="country_area"><span class="kor">KOR</span> <span class="eng">ENG</span></div>
+                            </a>
+                        </li>
+                        <li class="rolling_list4">
+                            <a href="view.html">
+                                <span class="img_area"><img src="/resources/dummy/test_img2.jpg" alt=""></span>
+                                <span class="tit_area">2___2017 서울 모터쇼 티켓 이벤트</span>
+                                <span class="date_area">2017-03-20 ~ 2017-04-03</span>
+                                <div class="country_area"><span class="kor">KOR</span> <span class="eng">ENG</span></div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="view.html">
+                                <span class="img_area"><img src="/resources/dummy/test_img2.jpg" alt=""></span>
+                                <span class="tit_area">2___2017 서울 모터쇼 티켓 이벤트</span>
+                                <span class="date_area">2017-03-20 ~ 2017-04-03</span>
+                                <div class="country_area"><span class="kor">KOR</span> <span class="eng">ENG</span></div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="view.html">
+                                <span class="img_area"><img src="/resources/dummy/test_img2.jpg" alt=""></span>
+                                <span class="tit_area">2___2017 서울 모터쇼 티켓 이벤트</span>
+                                <span class="date_area">2017-03-20 ~ 2017-04-03</span>
+                                <div class="country_area"><span class="kor">KOR</span> <span class="eng">ENG</span></div>
+                            </a>
+                        </li>
+                    </ul>
+                   @RenderPage("~/Views/Common/Pagination.cshtml")
+                    <a href="register" class="btn_defualt btn_reg">등록</a>
+                </div>
+            </form>
 		</div>
-	</div>
-</div>
-<script src="../../resource/js/lib/jquery-1.12.0.min.js"></script>
 <script>
+    lnbSet(2, 1);
+
 $(".tab").find("li").each(function(index , item){
 	$(item).find("a").click(function(){
 		$(this).parent("li").addClass("on").siblings("li").removeClass("on");
@@ -215,5 +118,3 @@ $(".tab").find("li").each(function(index , item){
 	})
 })
 </script>
-</body>
-</html>

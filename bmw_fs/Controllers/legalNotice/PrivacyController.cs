@@ -4,10 +4,6 @@ using bmw_fs.Service.face.privacy;
 using bmw_fs.Service.impl.common;
 using bmw_fs.Service.impl.privacy;
 using Microsoft.Security.Application;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace bmw_fs.Controllers.legalNotice

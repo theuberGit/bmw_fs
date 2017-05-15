@@ -12,7 +12,7 @@
                 <select name="searchOption" id="searchOption">
                     <option value="title"> 양식명 </option>
                 </select>
-                <input type="text" name="searchInput" value="@ViewBag.pagination.searchInput">
+                <input type="text" class="search_text" name="searchInput" value="@ViewBag.pagination.searchInput"><input type="text" style="display:none;" />
                 <button type="button" onclick="searchList();"></button>
             </div>
         </div>

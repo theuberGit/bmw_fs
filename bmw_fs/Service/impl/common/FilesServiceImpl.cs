@@ -71,6 +71,7 @@ namespace bmw_fs.Service.impl.common
         {
             IList<HttpPostedFileBase> files = multipartFiles.GetMultiple(inputFileName);
             Files fileItem = new Files();
+            IList<int> fileTmpIdxs = new List<int>();
             int idx = 0;
             foreach (var file in files)
             {
@@ -93,33 +94,63 @@ namespace bmw_fs.Service.impl.common
                     fileItem.savedFilename = replaceName;
                     fileItem.masterIdx = masterIdx;
                     fileItem.type = inputFileName;
-                    
-                    if (fileIdxs == null || fileIdxs.Count == 0 || fileIdxs.ElementAt(idx) == 0)
+                    if (fileIdxs == null || fileIdxs.Count == 0 || fileIdxs.Count <= idx)
                     {//새로 올리는 file인 경우, db에 file 정보 insert
-                        filesDao.insertFile(fileItem);
+                       int fileIdx =  filesDao.insertFile(fileItem);
+                        fileTmpIdxs.Add(fileIdx);//리턴해줄 fileIdxs
                     }
                     else
                     {//기존 file을 수정하는 경우, 해당 fileIdx로 update
                         fileItem.fileIdx = fileIdxs.ElementAt(idx);
+                        fileTmpIdxs.Add(fileIdxs[idx]);//리턴해줄 fileIdxs
                         filesDao.updateFile(fileItem);
                     }
                 }
+                else//기존 file은 있지만, 업데이트 이루어지지 않은 경우.
+                {
+                    fileTmpIdxs.Add(fileIdxs[idx]);//리턴해줄 fileIdxs
+                }
                 idx++;
             }
+
+            fileItem.fileIdxs = fileTmpIdxs;
             return fileItem;
         }
 
-        public void deleteFileAndFileUpload(HttpFileCollectionBase multipartFiles, String inputFileName, String allowType, long fileSize, int masterIdx, IList<int> fileIdxs)
+        public Files deleteFileAndFileUpload(HttpFileCollectionBase multipartFiles, String inputFileName, String allowType, long fileSize, int masterIdx, IList<int> fileIdxs)
         {
             IList<HttpPostedFileBase> files = multipartFiles.GetMultiple(inputFileName);
-            for(int i = 0, size = files.Count; i <size; i++)
+            Files fileItem = new Files();
+            IList<int> fileTmpIdxs = new List<int>();
+            for (int i = 0, size = files.Count; i <size; i++)
             {
-                if(files[i].ContentLength > 0 && fileIdxs.Count != 0 && fileIdxs.ElementAt(i) != 0) //파일이 교체됬을경우 : 파일있고 fileIdxs도 있는경우
-                {
-                    deleteRealFilesByFileIdx(fileIdxs.ElementAt(i));
+                if(fileIdxs.Count > i) { //새로 추가된 파일의 경우 fileIdx.ElementAt으로 접근할 수 X
+                    if (files[i].ContentLength > 0 && fileIdxs.Count != 0 && fileIdxs.ElementAt(i) != 0) //파일이 교체됬을경우 : 파일있고 fileIdxs도 있는경우
+                    {
+                        deleteRealFilesByFileIdx(fileIdxs.ElementAt(i));
+                    }
                 }
             }
-            fileUpload(multipartFiles, inputFileName, allowType, fileSize, masterIdx, fileIdxs);
+            fileItem = fileUpload(multipartFiles, inputFileName, allowType, fileSize, masterIdx, fileIdxs);
+            return fileItem;
+        }
+
+        public Boolean deleteRealFilesAndDataByFileIdx(int fileIdx)
+        {
+            Files files = new Files();
+            files.fileIdx = fileIdx;
+            files = filesDao.findAllByIdx(files);
+            if (files == null)
+            {
+                return false;
+            }
+            else
+            {
+                filesDao.deleteFileByFileIdx(files);
+                deleteRealFile(files);
+                return true;
+            }
+
         }
 
         public Boolean deleteRealFilesAndDataByFileMasterIdx(int masterIdx)
