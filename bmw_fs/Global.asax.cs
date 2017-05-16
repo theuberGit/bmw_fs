@@ -34,7 +34,7 @@ namespace bmw_fs
         }
 
         protected void Application_Error(object sender, EventArgs e)
-        {
+        {/*
             log4net.ILog logger = log4net.LogManager.GetLogger(typeof(MvcApplication));
 
             var lastError = Server.GetLastError();
@@ -65,7 +65,9 @@ namespace bmw_fs
                     Response.Redirect("/Error/Error500");
                 }
             }
+            */
         }
+        
     }
 
 }
