@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace ="showroom" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="showroomClass" type="bmw_fs.Models.Showroom.ShowRoom"/>
+  </alias>
+
+  <resultMaps>
+    <resultMap id="showroomMap" class="showroomClass">
+      <result property="idx" column="IDX"/>
+      <result property="brand" column="BRAND"/>
+      <result property="showroomName" column="SHOWROOM_NAME"/>
+      <result property="dealerName" column="DEALER_NAME"/>
+      <result property="location" column="LOCATION"/>
+      <result property="address" column="ADDRESS"/>
+      <result property="lat" column="LAT"/>
+      <result property="lng" column="LNG"/>
+      <result property="tel1" column="TEL1"/>
+      <result property="tel2" column="TEL2"/>
+      <result property="tel3" column="TEL3"/>
+      <result property="businessTime" column="BUSINESS_TIME"/>
+      <result property="deployYn" column="DEPLOY_YN"/>
+      <result property="regDate" column="REG_DATE"/>
+      <result property="regId" column="REG_ID"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="findAll" resultMap="showroomMap">
+      SELECT *
+      FROM (
+            SELECT
+                ROW_NUMBER() OVER(ORDER BY S.IDX DESC) AS RNUM
+                ,S.IDX
+                ,S.BRAND
+                ,S.LOCATION
+                ,S.SHOWROOM_NAME
+                ,S.ADDRESS
+                ,S.TEL1
+                ,S.TEL2
+                ,S.TEL3
+                ,S.DEPLOY_YN
+            FROM BMW_FS_SHOWROOM S
+              WHERE 1=1
+          <isNotEmpty property="searchInput">
+            <isNotEmpty property="searchOption">
+              <isEqual property="searchOption" compareValue="all">
+                AND (S.BRAND LIKE '%'+#searchInput#+'%' OR S.SHOWROOM_NAME LIKE '%'+#searchInput#+'%')
+              </isEqual>
+              <isEqual property="searchOption" compareValue="brand">
+                AND S.BRAND LIKE '%'+#searchInput#+'%'
+              </isEqual>
+              <isEqual property="searchOption" compareValue="showroomName">
+                AND S.SHOWROOM_NAME LIKE '%'+#searchInput#+'%'
+              </isEqual>
+            </isNotEmpty>
+          </isNotEmpty>
+            )t
+      WHERE 1=1
+        AND (RNUM BETWEEN #currentItem# AND #currentItemEnd# )
+    </select>
+
+    <select id="findAllCount" resultClass="int">
+      SELECT COUNT(1)
+      FROM BMW_FS_SHOWROOM S
+      WHERE 1=1
+      <isNotEmpty property="searchInput">
+        <isNotEmpty property="searchOption">
+          <isEqual property="searchOption" compareValue="all">
+            AND (S.BRAND LIKE '%'+#searchInput#+'%' OR S.SHOWROOM_NAME LIKE '%'+#searchInput#+'%')
+          </isEqual>
+          <isEqual property="searchOption" compareValue="brand">
+            AND S.BRAND LIKE '%'+#searchInput#+'%'
+          </isEqual>
+          <isEqual property="searchOption" compareValue="showroomName">
+            AND S.SHOWROOM_NAME LIKE '%'+#searchInput#+'%'
+          </isEqual>
+        </isNotEmpty>
+      </isNotEmpty>
+    </select>
+
+    <insert id="insertShowroom">
+      INSERT INTO BMW_FS_DOWNLOAD(
+                                   IDX
+                                  ,FORMNAME
+                                  ,USAGEPURPOSE
+                                  ,DEPLOY_YN
+                                  ,REG_ID
+      )
+      VALUES (
+                                   #idx#
+                                  ,#formName#
+                                  ,#usagePurpose#
+                                  ,#deployYn#
+                                  ,#regId#
+      )
+    </insert>
+
+    <select id="findShowroom" resultMap="showroomMap">
+      SELECT
+             IDX
+            ,FORMNAME
+            ,USAGEPURPOSE
+            ,DEPLOY_YN
+            ,REG_DATE
+            ,REG_ID
+      FROM BMW_FS_DOWNLOAD
+      WHERE IDX = #idx#
+    </select>
+
+    <update id="updateShowroom">
+      UPDATE BMW_FS_DOWNLOAD
+       SET FORMNAME = #formName#
+          ,USAGEPURPOSE = #usagePurpose#
+          ,DEPLOY_YN = #deployYn#
+          ,UPT_ID = #uptId#
+          ,UPT_DATE = getdate()
+      WHERE IDX = #idx#;
+    </update>
+
+    <delete id="deleteShowroom">
+      DELETE BMW_FS_DOWNLOAD
+      WHERE IDX = #idx#;
+    </delete>
+
+  </statements>
+</sqlMap>
