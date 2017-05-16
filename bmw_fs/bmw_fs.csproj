@@ -190,6 +190,7 @@
     <Compile Include="Dao\face\payment\PaymentDao.cs" />
     <Compile Include="Dao\face\recruit\RecruitFaqDao.cs" />
     <Compile Include="Dao\face\recruit\RecruitNoticeDao.cs" />
+    <Compile Include="Dao\face\rolling\RollingDao.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -209,6 +210,7 @@
     <Compile Include="Models\payment\Payment.cs" />
     <Compile Include="Models\recruit\RecruitFaq.cs" />
     <Compile Include="Models\recruit\RecruitNotice.cs" />
+    <Compile Include="Models\rollling\Rolling.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\face\admin\MemberService.cs" />
     <Compile Include="Service\face\board\BoardService.cs" />
@@ -225,6 +227,7 @@
     <Compile Include="Service\face\payment\PaymentService.cs" />
     <Compile Include="Service\face\recruit\RecruitFaqService.cs" />
     <Compile Include="Service\face\recruit\RecruitNoticeService.cs" />
+    <Compile Include="Service\face\rolling\RollingService.cs" />
     <Compile Include="Service\impl\admin\MemberServiceImpl.cs" />
     <Compile Include="Service\impl\board\BoardServiceImpl.cs" />
     <Compile Include="Service\impl\common\FilesServiceImpl.cs" />
@@ -241,6 +244,7 @@
     <Compile Include="Service\impl\payment\PaymentServiceImpl.cs" />
     <Compile Include="Service\impl\recruit\RecruitFaqServiceImpl.cs" />
     <Compile Include="Service\impl\recruit\RecruitNoticeServiceImpl.cs" />
+    <Compile Include="Service\impl\rolling\RollingServiceImpl.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dao\impl\admin\Member.xml" />
@@ -360,6 +364,10 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Rolling\list.cshtml" />
+    <Content Include="Views\Rolling\modify.cshtml" />
+    <Content Include="Views\Rolling\register.cshtml" />
+    <Content Include="Views\Rolling\view.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

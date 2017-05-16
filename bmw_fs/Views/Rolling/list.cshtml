@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "메인롤링 리스트";
+}
+
+<div id="content" class="list">
+    <form method="get">
+        <div class="cont_top">
+            <h3>메인롤링</h3>
+        </div>
+        <div class="cont_bottom">
+            <p>※ 좌측 이미지부터 순서대로 롤링됩니다.</p>
+            <table class="list_table">
+                <colgroup>
+                    <col width="60px" />
+                    <col width="*" />
+                    <col width="100px" />
+                    <col width="200px" />
+                    <col width="100px" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>접수 기간</th>
+                        <th>상태</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (ViewBag.list.Count == 0)
+                    {
+                        <tr>
+                            <td colspan="5">게시글이 없습니다.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @RenderPage("~/Views/Common/Pagination.cshtml")
+            <a href="register" class="btn_defualt btn_reg">등록</a>
+        </div>
+    </form>
+</div>
+<script>
+    lnbSet(8,1);
+    $('#searchOption').val('@ViewBag.pagination.searchOption');
+</script>
