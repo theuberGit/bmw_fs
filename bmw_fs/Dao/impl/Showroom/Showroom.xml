@@ -7,6 +7,18 @@
   </alias>
 
   <resultMaps>
+    <resultMap id="showroomMapByList" class="showroomClass">
+      <result property="idx" column="IDX"/>
+      <result property="brand" column="BRAND"/>
+      <result property="showroomName" column="SHOWROOM_NAME"/>
+      <result property="location" column="LOCATION"/>
+      <result property="address" column="ADDRESS"/>
+      <result property="tel1" column="TEL1"/>
+      <result property="tel2" column="TEL2"/>
+      <result property="tel3" column="TEL3"/>
+      <result property="deployYn" column="DEPLOY_YN"/>
+    </resultMap>
+    
     <resultMap id="showroomMap" class="showroomClass">
       <result property="idx" column="IDX"/>
       <result property="brand" column="BRAND"/>
@@ -27,7 +39,7 @@
   </resultMaps>
 
   <statements>
-    <select id="findAll" resultMap="showroomMap">
+    <select id="findAll" resultMap="showroomMapByList">
       SELECT *
       FROM (
             SELECT
@@ -44,9 +56,11 @@
             FROM BMW_FS_SHOWROOM S
               WHERE 1=1
           <isNotEmpty property="searchInput">
+            <isEmpty property="searchOption">
+              AND (S.BRAND LIKE '%'+#searchInput#+'%' OR S.SHOWROOM_NAME LIKE '%'+#searchInput#+'%')
+            </isEmpty>
             <isNotEmpty property="searchOption">
               <isEqual property="searchOption" compareValue="all">
-                AND (S.BRAND LIKE '%'+#searchInput#+'%' OR S.SHOWROOM_NAME LIKE '%'+#searchInput#+'%')
               </isEqual>
               <isEqual property="searchOption" compareValue="brand">
                 AND S.BRAND LIKE '%'+#searchInput#+'%'
@@ -81,19 +95,37 @@
     </select>
 
     <insert id="insertShowroom">
-      INSERT INTO BMW_FS_DOWNLOAD(
-                                   IDX
-                                  ,FORMNAME
-                                  ,USAGEPURPOSE
-                                  ,DEPLOY_YN
-                                  ,REG_ID
+      INSERT INTO BMW_FS_SHOWROOM(
+                   IDX
+                  ,BRAND
+                  ,SHOWROOM_NAME
+                  ,DEALER_NAME
+                  ,LOCATION
+                  ,ADDRESS
+                  ,LAT
+                  ,LNG
+                  ,TEL1
+                  ,TEL2
+                  ,TEL3
+                  ,BUSINESS_TIME
+                  ,DEPLOY_YN
+                  ,REG_ID
       )
       VALUES (
-                                   #idx#
-                                  ,#formName#
-                                  ,#usagePurpose#
-                                  ,#deployYn#
-                                  ,#regId#
+                   #idx#
+                  ,#brand#
+                  ,#showroomName#
+                  ,#dealerName#
+                  ,#location#
+                  ,#address#
+                  ,#lat#
+                  ,#lng#
+                  ,#tel1#
+                  ,#tel2#
+                  ,#tel3#
+                  ,#businessTime#
+                  ,#deployYn#
+                  ,#regId#
       )
     </insert>
 

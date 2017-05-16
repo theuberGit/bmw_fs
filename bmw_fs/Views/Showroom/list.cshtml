@@ -9,8 +9,8 @@
             <div class="search_box">
                 <select name="searchOption" id="searchOption" class="search_select">
                     <option value="">전체</option>
-                    <option value="">브랜드</option>
-                    <option value="">전시장명</option>
+                    <option value="brand">브랜드</option>
+                    <option value="showroomName">전시장명</option>
                 </select>
                 <input type="text" name="searchInput" class="search_text" value="@ViewBag.pagination.searchInput" /><input type="text" style="display: none;" />
                 <button type="button" class="submit_btn" onclick="searchList();"><img src="/resources/images/mgmt/btn_search.gif" alt="" /></button>
@@ -43,13 +43,13 @@
                     @for (var i = 0; i < ViewBag.list.Count; i++)
                     {
                         <tr>
-                            <td class="co1">@(ViewBag.pagination.totalItemCount - (ViewBag.pagination.currentPage - 1) * ViewBag.pagination.itemPerPage - i)</td>
-                            <td class="co2"></td>
-                            <td class="co3 tit_area"><a href="view?idx=@ViewBag.list[i].idx"></a></td>
-                            <td class="co4"></td>
-                            <td class="co5"></td>
-                            <td class="co6"></td>
-                            <td class="co7"></td>
+                            <td>@(ViewBag.pagination.totalItemCount - (ViewBag.pagination.currentPage - 1) * ViewBag.pagination.itemPerPage - i)</td>
+                            <td>@ViewBag.list[i].brand</td>
+                            <td>@ViewBag.list[i].location</td>
+                            <td class="tit_area"><a href="view?idx=@ViewBag.list[i].idx">@ViewBag.list[i].showroomName</a></td>
+                            <td>@ViewBag.list[i].address</td>
+                            <td>@ViewBag.list[i].tel1-@ViewBag.list[i].tel2-@ViewBag.list[i].tel3</td>
+                            <td>@ViewBag.list[i].deployYn</td>
                         </tr>
                     }
                     @if (ViewBag.list.Count == 0)

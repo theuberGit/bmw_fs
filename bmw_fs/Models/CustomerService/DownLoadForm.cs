@@ -18,6 +18,7 @@ namespace bmw_fs.Models.CustomerService
         public String uptId { get; set; }
         public DateTime uptDate { get; set; }
 
+        public int fileIdx { get; set; }
         public String fileName { get; set; }
         public IList<int> fileIdxs { get; set; }
     }
