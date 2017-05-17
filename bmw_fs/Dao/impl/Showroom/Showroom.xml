@@ -132,27 +132,46 @@
     <select id="findShowroom" resultMap="showroomMap">
       SELECT
              IDX
-            ,FORMNAME
-            ,USAGEPURPOSE
+            ,BRAND
+            ,SHOWROOM_NAME
+            ,DEALER_NAME
+            ,LOCATION
+            ,ADDRESS
+            ,LAT
+            ,LNG
+            ,TEL1
+            ,TEL2
+            ,TEL3
+            ,BUSINESS_TIME
             ,DEPLOY_YN
-            ,REG_DATE
             ,REG_ID
-      FROM BMW_FS_DOWNLOAD
+            ,REG_DATE
+      FROM BMW_FS_SHOWROOM
       WHERE IDX = #idx#
     </select>
 
     <update id="updateShowroom">
-      UPDATE BMW_FS_DOWNLOAD
-       SET FORMNAME = #formName#
-          ,USAGEPURPOSE = #usagePurpose#
+      UPDATE BMW_FS_SHOWROOM
+      SET
+          BRAND = #brand#
+          ,SHOWROOM_NAME = #showroomName#
+          ,DEALER_NAME = #dealerName#
+          ,LOCATION = #location#
+          ,ADDRESS = #address#
+          ,LAT = #lat#
+          ,LNG = #lng#
+          ,TEL1 = #tel1#
+          ,TEL2 = #tel2#
+          ,TEL3 = #tel3#
+          ,BUSINESS_TIME = #businessTime#
           ,DEPLOY_YN = #deployYn#
           ,UPT_ID = #uptId#
-          ,UPT_DATE = getdate()
+          ,UPT_DATE = GETDATE()
       WHERE IDX = #idx#;
     </update>
 
     <delete id="deleteShowroom">
-      DELETE BMW_FS_DOWNLOAD
+      DELETE BMW_FS_SHOWROOM
       WHERE IDX = #idx#;
     </delete>
 

@@ -1,58 +1,100 @@
 ﻿@{
-    ViewBag.Title = "FAQ 상세보기";
+    ViewBag.Title = "전시장 관리";
 }
-
-<head>
-    <script src="/resources/js/jquery-1.12.4.min.js"></script>
-    <script src="/resources/js/jquery-ui.min.js"></script>
-    <script src="/resources/js/jquery.cust.js"></script>
-    <script src="/resources/js/common.js"></script>
-</head>
 <div id="content" class="reg">
     <div class="cont_top">
-        <h3>FAQ</h3>
+        <h3>전시장 관리</h3>
     </div>
     <div class="cont_bottom">
         <form method="post">
+            <input type="hidden" name="idx" value="@ViewBag.item.idx" />
+            <input type="hidden" name="lat" id="lat" value="@ViewBag.item.lat" title="위도" />
+            <input type="hidden" name="lng" id="lng" value="@ViewBag.item.lng" title="경도" />
             <table class="reg_table">
-                <caption>FAQ 뷰 테이블</caption>
+                <caption>전시장 관리 자세히보기</caption>
                 <colgroup>
                     <col width="130px">
                     <col width="870px">
                 </colgroup>
                 <tr>
-                    <th scope="row"><label for="category">구분</label></th>
-                    <td>@ViewBag.item.category</td>
+                    <th scope="row"><label for="brand">브랜드 *</label></th>
+                    <td>
+                        @ViewBag.item.brand
+                    </td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="title">* 항목</label></th>
-                    <td>@ViewBag.item.ask</td>
+                    <th scope="row"><label for="showroomName">전시장명 *</label></th>
+                    <td>@ViewBag.item.showroomName</td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="contents">* 답변</label></th>
-                    <td>@ViewBag.item.question</td>
+                    <th scope="row"><label for="dealerName">딜러명 *</label></th>
+                    <td>@ViewBag.item.dealerName</td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="location">지역 *</label></th>
+                    <td>
+                        @ViewBag.item.location
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="address">주소 *</label></th>
+                    <td>@ViewBag.item.address</td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="">위치 좌표 *</label></th>
+                    <td>
+                        @ViewBag.item.lat
+                        /
+                        @ViewBag.item.lng
+                        <a href="javascript:void(0);" class="btn_small" onclick="javascript:showGoogleMap();">지도보기</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="tel1">전화번호 *</label></th>
+                    <td>
+                        @ViewBag.item.tel1-@ViewBag.item.tel2-@ViewBag.item.tel3
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="businessTime">영업시간 *</label></th>
+                    <td class="tdTextArea">@ViewBag.item.businessTime</td>
+                </tr>
+                <tr>
+                    <th><label for="">배포 *</label></th>
+                    <td class="radio_area">
+                        @if ("Y".Equals(@ViewBag.item.deployYn))
+                        {
+                            @:배포
+                        }
+                        else if ("N".Equals(@ViewBag.item.deployYn))
+                        {
+                            @:미배포
+                        }
+                    </td>
                 </tr>
             </table>
-            <input type="hidden" name="idx" value="@ViewBag.item.idx" />
         </form>
         <div class="btn_area">
             <a href="list?@Session["searchString"]" class="btn_defualt btn_list">목록</a>
-            <a href="javascript:void(0);" class="btn_defualt btn_reg" onclick="modForm();">수정</a>
-            <a href="javascript:void(0);" class="btn_defualt btn_reg" onclick="delForm();">삭제</a>
-        </div>
-        <div class="btn_area right">
-
+            <div class="view_btn_area">
+                <a href="modify?idx=@ViewBag.item.idx" class="btn_defualt btn_modifyt">수정</a>
+                <a href="javascript:void(0);" class="btn_defualt btn_delete" onclick="delForm();">삭제</a>
+            </div>
         </div>
     </div>
 </div>
 <script>
-    lnbSet(7, 3);
-    function modForm() {
-        $('form').attr('action', 'modify').submit();
-    }
-
+    lnbSet(9, 1);
     function delForm() {
         if (!confirm('삭제하시겠습니까?')) return;
-        $('form').attr('action', 'delete').submit();
-    }
+        $('#content form').attr('action', 'delete').submit();
+    };
+
+    function showGoogleMap() {
+        if (!$('#lat').required()) return;
+        if (!$('#lng').required()) return;
+
+        window.open('https://www.google.co.kr/maps/place/' + $('#lat').val() + '+' + $('#lng').val(), '_blank');
+
+    };
 </script>
