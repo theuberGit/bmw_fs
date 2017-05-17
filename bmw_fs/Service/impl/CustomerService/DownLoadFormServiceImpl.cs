@@ -45,7 +45,7 @@ namespace bmw_fs.Service.impl.CustomerService
             Mapper.Instance().BeginTransaction();
             validation(multipartFiles, downloadForm);
             this.downloadFormDao.insertDownloadForm(downloadForm);
-            this.filesService.fileUpload(multipartFiles, "formFile", "pdf", 5 * 1024 * 1024, masterIdx, null);
+            this.filesService.fileUpload(multipartFiles, "formFile", "pdf", 10 * 1024 * 1024, masterIdx, null);
             Mapper.Instance().CommitTransaction();
         }
 
@@ -54,7 +54,7 @@ namespace bmw_fs.Service.impl.CustomerService
             findDownLoadForm(downloadForm);
 
             Mapper.Instance().BeginTransaction();
-            this.filesService.deleteFileAndFileUpload(multipartFiles, "formFile", "pdf", 5 * 1024 * 1024, downloadForm.idx, downloadForm.fileIdxs);
+            this.filesService.deleteFileAndFileUpload(multipartFiles, "formFile", "pdf", 10 * 1024 * 1024, downloadForm.idx, downloadForm.fileIdxs);
             validation(multipartFiles,downloadForm);
             this.downloadFormDao.updateDownloadForm(downloadForm);
             Mapper.Instance().CommitTransaction();
