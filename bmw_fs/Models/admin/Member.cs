@@ -1,11 +1,12 @@
-﻿using System;
+﻿using bmw_fs.Models.common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace bmw_fs.Models.admin
 {
-    public class Member 
+    public class Member : SearchInfo
     {
         public int idx { get; set; }
         public String userId { get; set; }

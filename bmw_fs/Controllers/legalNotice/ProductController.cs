@@ -38,6 +38,7 @@ namespace bmw_fs.Controllers.legalNotice
         public RedirectToRouteResult registerProc(Product product)
         {
             product.contents = Sanitizer.GetSafeHtmlFragment(product.contents);
+            product.regId = System.Web.HttpContext.Current.User.Identity.Name;
             productService.insertProduct(product);
 
             return RedirectToAction("list");
@@ -57,10 +58,11 @@ namespace bmw_fs.Controllers.legalNotice
 
         [HttpPost]
         [ValidateInput(false)]
-        public RedirectToRouteResult modifyProc(Product prodcut)
+        public RedirectToRouteResult modifyProc(Product product)
         {
-            prodcut.contents = Sanitizer.GetSafeHtmlFragment(prodcut.contents);
-            productService.updateProduct(prodcut);
+            product.contents = Sanitizer.GetSafeHtmlFragment(product.contents);
+            product.uptId = System.Web.HttpContext.Current.User.Identity.Name;
+            productService.updateProduct(product);
 
             return RedirectToAction("list");
         }

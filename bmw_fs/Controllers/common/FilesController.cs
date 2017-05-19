@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace bmw_fs.Controllers.common
 {
+    [Authorize]
     public class FilesController : Controller
     {
         FilesService filesService = new FilesServiceImpl();

@@ -159,6 +159,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\CustomException.cs" />
     <Compile Include="Config\StringProperties.cs" />
+    <Compile Include="Controllers\admin\AdminController.cs" />
     <Compile Include="Controllers\CustomerService\DownLoadFormController.cs" />
     <Compile Include="Controllers\CustomerService\FaqController.cs" />
     <Compile Include="Controllers\legalNotice\BusinessController.cs" />
@@ -186,6 +187,7 @@
     <Compile Include="Dao\face\common\SequenceDao.cs" />
     <Compile Include="Common\Filter\TestFilter.cs" />
     <Compile Include="Dao\face\catalog\CatalogDao.cs" />
+    <Compile Include="Dao\face\CustomerService\ContactUsDao.cs" />
     <Compile Include="Dao\face\CustomerService\DownLoadFormDao.cs" />
     <Compile Include="Dao\face\CustomerService\FaqDao.cs" />
     <Compile Include="Dao\face\legalNotice\BusinessDao.cs" />
@@ -276,6 +278,7 @@
     <Content Include="Dao\impl\catalog\Catalog.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Dao\impl\CustomerService\ContactUs.xml" />
     <Content Include="Dao\impl\CustomerService\DownLoadForm.xml" />
     <Content Include="Dao\impl\CustomerService\Faq.xml" />
     <Content Include="Dao\impl\legalNotice\Business.xml" />
@@ -373,10 +376,14 @@
     <Content Include="Views\Payment\view.cshtml" />
     <Content Include="Views\News\modify.cshtml" />
     <Content Include="Views\News\view.cshtml" />
-    <Content Include="Views\MobilePromotion\list.cshtml" />
-    <Content Include="Views\MobilePromotion\modify.cshtml" />
-    <Content Include="Views\MobilePromotion\register.cshtml" />
-    <Content Include="Views\MobilePromotion\view.cshtml" />
+    <Content Include="Views\Admin\list.cshtml" />
+    <Content Include="Views\Admin\register.cshtml" />
+    <Content Include="Views\Admin\modify.cshtml" />
+    <Content Include="Views\Admin\view.cshtml" />
+    <Content Include="Views\Faq\list.cshtml" />
+    <Content Include="Views\Faq\modify.cshtml" />
+    <Content Include="Views\Faq\register.cshtml" />
+    <Content Include="Views\Faq\view.cshtml" />
     <None Include="Views\Promotion\list.cshtml" />
     <None Include="Views\Promotion\modify.cshtml" />
     <None Include="Views\Promotion\view.cshtml" />
