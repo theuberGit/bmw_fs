@@ -1,114 +1,78 @@
 ﻿@{
-    ViewBag.Title = "웹 프로모션 리스트";
+    ViewBag.Title = "모바일 프로모션 리스트";
 }
 <!DOCTYPE html>
 
-		<div id="content" class="rolling list">
-			<div class="cont_top">
-				<h3>웹 프로모션</h3>
-			</div>
-            <form>
-                <div class="cont_bottom">
-                    <ul class="tab">
-                        <li class="on"><a href="#">진행 중 프로모션</a></li>
-                        <li><a href="#">종료된 프로모션</a></li>
-                    </ul>
-                    <ul class="rolling_list on">
-                    @for (var i = 0; i < ViewBag.list.Count; i++)
+<div id="content" class="rolling list">
+    <div class="cont_top">
+        <h3>모바일 프로모션</h3>
+    </div>
+    <form>
+        <div class="cont_bottom">
+            <ul class="tab">
+                <li id="promotion_now" class="on"><a href="javascript:void(0);" onclick="searchPromotion('now');">진행 중 프로모션</a></li>
+                <li id="promotion_end"><a href="javascript:void(0);" onclick="searchPromotion('end');">종료된 프로모션</a></li>
+            </ul>
+            <ul class="rolling_list on">
+                @for (var i = 0; i < ViewBag.list.Count; i++)
+                {
+                    if (i == 3)
                     {
-                        if (i == 3)
-                        {
-                            <li class="rolling_list4">
-                                <a href="view?idx=@ViewBag.list[i].idx">
-                                    <span class="img_area"><img src="/Files/imageView?fileIdx=@ViewBag.list[i].fileIdx" alt=""></span>
-                                    <span class="tit_area">@ViewBag.list[i].title</span>
-                                    <span class="date_area">@ViewBag.list[i].startDate ~ @ViewBag.list[i].endDate</span>
-                                    <div class="country_area">
-                                        <span class="kor">KOR</span>
-                                        @if ("Y".Equals(ViewBag.list[i].engYn))
-                                        {
-                                            <span class="eng">ENG</span>
-                                        }
-                                    </div>
-                                </a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li>
-                                <a href="view?idx=@ViewBag.list[i].idx">
-                                    <span class="img_area"><img src="/Files/imageView?fileIdx=@ViewBag.list[i].fileIdx" alt=""></span>
-                                    <span class="tit_area">@ViewBag.list[i].title</span>
-                                    <span class="date_area">@ViewBag.list[i].startDate ~ @ViewBag.list[i].endDate</span>
-                                    <div class="country_area">
-                                        <span class="kor">KOR</span>
-                                        @if ("Y".Equals(ViewBag.list[i].engYn))
-                                        {
-                                            <span class="eng">ENG</span>
-                                        }
-                                    </div>
-                                </a>
-                            </li>
-                        }
-                    }
-                    </ul>
-                    <ul class="rolling_list">
-                        <li>
-                            <a href="view.html">
-                                <span class="img_area"><img src="/resources/dummy/test_img2.jpg" alt=""></span>
-                                <span class="tit_area">2___2017 서울 모터쇼 티켓 이벤트</span>
-                                <span class="date_area">2017-03-20 ~ 2017-04-03</span>
-                                <div class="country_area"><span class="kor">KOR</span> <span class="eng">ENG</span></div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="view.html">
-                                <span class="img_area"><img src="/resources/dummy/test_img2.jpg" alt=""></span>
-                                <span class="tit_area">2___2017 서울 모터쇼 티켓 이벤트</span>
-                                <span class="date_area">2017-03-20 ~ 2017-04-03</span>
-                                <div class="country_area"><span class="kor">KOR</span> <span class="eng">ENG</span></div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="view.html">
-                                <span class="img_area"><img src="/resources/dummy/test_img2.jpg" alt=""></span>
-                                <span class="tit_area">2___2017 서울 모터쇼 티켓 이벤트</span>
-                                <span class="date_area">2017-03-20 ~ 2017-04-03</span>
-                                <div class="country_area"><span class="kor">KOR</span> <span class="eng">ENG</span></div>
-                            </a>
-                        </li>
                         <li class="rolling_list4">
-                            <a href="view.html">
-                                <span class="img_area"><img src="/resources/dummy/test_img2.jpg" alt=""></span>
-                                <span class="tit_area">2___2017 서울 모터쇼 티켓 이벤트</span>
-                                <span class="date_area">2017-03-20 ~ 2017-04-03</span>
-                                <div class="country_area"><span class="kor">KOR</span> <span class="eng">ENG</span></div>
+                            <a href="view?idx=@ViewBag.list[i].idx">
+                                <span class="img_area"><img src="/Files/imageView?fileIdx=@ViewBag.list[i].fileIdx" alt=""></span>
+                                <span class="tit_area">@ViewBag.list[i].title</span>
+                                <span class="date_area">@ViewBag.list[i].startDate ~ @ViewBag.list[i].endDate</span>
+                                <div class="country_area">
+                                    <span class="kor">KOR</span>
+                                    @if ("Y".Equals(ViewBag.list[i].engYn))
+                                    {
+                                        <span class="eng">ENG</span>
+                                    }
+                                </div>
                             </a>
                         </li>
+                    }
+                    else
+                    {
                         <li>
-                            <a href="view.html">
-                                <span class="img_area"><img src="/resources/dummy/test_img2.jpg" alt=""></span>
-                                <span class="tit_area">2___2017 서울 모터쇼 티켓 이벤트</span>
-                                <span class="date_area">2017-03-20 ~ 2017-04-03</span>
-                                <div class="country_area"><span class="kor">KOR</span> <span class="eng">ENG</span></div>
+                            <a href="view?idx=@ViewBag.list[i].idx">
+                                <span class="img_area"><img src="/Files/imageView?fileIdx=@ViewBag.list[i].fileIdx" alt=""></span>
+                                <span class="tit_area">@ViewBag.list[i].title</span>
+                                <span class="date_area">@ViewBag.list[i].startDate ~ @ViewBag.list[i].endDate</span>
+                                <div class="country_area">
+                                    <span class="kor">KOR</span>
+                                    @if ("Y".Equals(ViewBag.list[i].engYn))
+                                    {
+                                        <span class="eng">ENG</span>
+                                    }
+                                </div>
                             </a>
                         </li>
-                        <li>
-                            <a href="view.html">
-                                <span class="img_area"><img src="/resources/dummy/test_img2.jpg" alt=""></span>
-                                <span class="tit_area">2___2017 서울 모터쇼 티켓 이벤트</span>
-                                <span class="date_area">2017-03-20 ~ 2017-04-03</span>
-                                <div class="country_area"><span class="kor">KOR</span> <span class="eng">ENG</span></div>
-                            </a>
-                        </li>
-                    </ul>
-                   @RenderPage("~/Views/Common/Pagination.cshtml")
-                    <a href="register" class="btn_defualt btn_reg">등록</a>
-                </div>
-            </form>
-		</div>
+                    }
+                }
+            </ul>
+            @RenderPage("~/Views/Common/Pagination.cshtml")
+            <a href="register" class="btn_defualt btn_reg">등록</a>
+        </div>
+        <input type="hidden" name="searchOption" id="searchOption" value="@ViewBag.pagination.searchOption" />
+    </form>
+</div>
 <script>
     lnbSet(2, 1);
+
+    function searchPromotion(status) {
+        $('#searchOption').val(status);
+        searchList();
+    };
+
+    if ('@ViewBag.pagination.searchOption' == 'now') {
+        $('#promotion_now').addClass('on');
+        $('#promotion_end').removeClass('on');
+    } else if ('@ViewBag.pagination.searchOption' == 'end') {
+        $('#promotion_end').addClass('on');
+        $('#promotion_now').removeClass('on');
+    }
 
 $(".tab").find("li").each(function(index , item){
 	$(item).find("a").click(function(){
