@@ -1,21 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<sqlMap namespace="webPromotion" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+<sqlMap namespace="promotion" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
   <alias>
     <typeAlias alias="PromotionClass" type="bmw_fs.Models.promotion.Promotion"/>
     <typeAlias alias="PromotionUrlClass" type="bmw_fs.Models.promotion.PromotionUrl"/>
   </alias>
 
   <resultMaps>
-    <resultMap id="webPromotionListMap" class="PromotionClass">
+    <resultMap id="promotionListMap" class="PromotionClass">
       <result property="idx" column="IDX" />
       <result property="startDate" column="START_DATE" />
       <result property="endDate" column="END_DATE" />
       <result property="engYn" column="ENG_YN" />
+      <result property="deployYn" column="DEPLOY_YN" />
       <result property="title" column="TITLE" />
       <result property="fileIdx" column="FILE_IDX" />
     </resultMap>
 
-    <resultMap id="webPromotionMap" class="PromotionClass">
+    <resultMap id="promotionMap" class="PromotionClass">
       <result property="idx" column="IDX" />
       <result property="category" column="CATEGORY" />
       <result property="startDate" column="START_DATE" />
@@ -38,7 +39,7 @@
       <result property="regId" column="REG_ID" />
     </resultMap>
     
-    <resultMap id="webPromotionUrlMap" class="PromotionUrlClass">
+    <resultMap id="promotionUrlMap" class="PromotionUrlClass">
       <result property="pIdx" column="P_IDX" />
       <result property="fileIdx" column="FILE_IDX" />
       <result property="url" column="URL" />
@@ -47,7 +48,7 @@
 
   <statements>
 
-    <select id="findAll" resultMap="webPromotionListMap">
+    <select id="findAll" resultMap="promotionListMap">
       SELECT *
       FROM (
       SELECT
@@ -57,16 +58,22 @@
       ,P.END_DATE
       ,P.ENG_YN
       ,P.TITLE
+      ,P.DEPLOY_YN
       ,F.IDX AS FILE_IDX
       FROM BMW_FS_PROMOTION P
       LEFT JOIN BMW_FS_FILES_DATA F ON P.IDX = F.MASTER_IDX AND F.TYPE = 'thumbNail'
       WHERE 1=1
-      AND P.WEB_YN = 'Y'
-      <isNotEmpty property="searchInput">
-              <isEqual property="searchOption" compareValue="title">
-                AND P.TITLE LIKE '%'+#searchInput#+'%'
+      AND P.WEB_YN = #webYn#
+      <isNotEmpty property="searchOption">
+              <isEqual property="searchOption" compareValue="now">
+                AND P.END_DATE &gt;= CONVERT(CHAR(10), getdate(), 23)
+                AND P.DEPLOY_YN = 'Y'
               </isEqual>
-            </isNotEmpty>
+              <isEqual property="searchOption" compareValue="end">
+                AND (P.END_DATE &lt; CONVERT(CHAR(10), getdate(), 23)
+                OR P.DEPLOY_YN = 'N')
+              </isEqual>
+     </isNotEmpty>
           )t
         WHERE 1=1
         AND (RNUM BETWEEN #currentItem# AND #currentItemEnd# )
@@ -76,15 +83,20 @@
       SELECT COUNT(*)
       FROM BMW_FS_PROMOTION
       WHERE 1=1
-        AND WEB_YN = 'Y'
-      <isNotEmpty property="searchInput">
-        <isEqual property="searchOption" compareValue="title">
-          AND TITLE LIKE '%'+#searchInput#+'%'
-        </isEqual>
-      </isNotEmpty>
+        AND WEB_YN = #webYn#
+      <isNotEmpty property="searchOption">
+              <isEqual property="searchOption" compareValue="now">
+                AND END_DATE &gt;= CONVERT(CHAR(10), getdate(), 23)
+                AND DEPLOY_YN = 'Y'
+              </isEqual>
+              <isEqual property="searchOption" compareValue="end">
+                AND (END_DATE &lt; CONVERT(CHAR(10), getdate(), 23)
+                OR DEPLOY_YN = 'N')
+              </isEqual>
+     </isNotEmpty>
     </select>
 
-    <select id="findWebPromotion" resultMap="webPromotionMap">
+    <select id="findWebPromotion" resultMap="promotionMap">
       SELECT IDX
       ,CATEGORY
       ,START_DATE

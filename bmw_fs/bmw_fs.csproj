@@ -169,6 +169,7 @@
     <Compile Include="Controllers\legalNotice\ProductController.cs" />
     <Compile Include="Controllers\news\NewsController.cs" />
     <Compile Include="Controllers\payment\PaymentController.cs" />
+    <Compile Include="Controllers\promotion\MobilePromotionController.cs" />
     <Compile Include="Controllers\promotion\PromotionController.cs" />
     <Compile Include="Controllers\recruit\RecruitFaqController.cs" />
     <Compile Include="Controllers\recruit\RecruitNoticeController.cs" />
@@ -194,7 +195,7 @@
     <Compile Include="Dao\face\legalNotice\ProductDao.cs" />
     <Compile Include="Dao\face\news\NewsDao.cs" />
     <Compile Include="Dao\face\payment\PaymentDao.cs" />
-    <Compile Include="Dao\face\promotion\WebPromotionDao.cs" />
+    <Compile Include="Dao\face\promotion\PromotionDao.cs" />
     <Compile Include="Dao\face\recruit\RecruitFaqDao.cs" />
     <Compile Include="Dao\face\recruit\RecruitNoticeDao.cs" />
     <Compile Include="Dao\face\Showroom\ShowroomDao.cs" />
@@ -286,7 +287,7 @@
     <Content Include="Dao\impl\legalNotice\Credit.xml" />
     <Content Include="Dao\impl\legalNotice\General.xml" />
     <Content Include="Dao\impl\payment\Payment.xml" />
-    <Content Include="Dao\impl\promotion\webPromotion.xml">
+    <Content Include="Dao\impl\promotion\Promotion.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Dao\impl\recruit\RecruitFaq.xml" />
