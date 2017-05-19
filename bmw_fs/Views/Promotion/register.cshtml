@@ -280,7 +280,7 @@
             $('.event_y').show();//버튼명 show
         } else {
             $('.event_y').find('input').val('');
-            $('.evt_bnt2').attr('data-flag', 'false');
+            $('.evt_btn2').attr('data-flag', 'false');
             $('.evt_btn2_eng').attr('data-flag', 'false');
             $('.evt_btn2').hide();
             $('.evt_btn2_eng').hide();
@@ -289,12 +289,12 @@
     });
 
     $('#evtBtnAdd').click(function () {//국문 버튼영역
-        $('.evt_bnt2').attr('data-flag', 'true');
+        $('.evt_btn2').attr('data-flag', 'true');
         $('.evt_btn2').show();
     });
     $('#evtBtnDel').click(function () {
         $('.evt_btn2').find('input').val('');
-        $('.evt_bnt2').attr('data-flag', 'false');
+        $('.evt_btn2').attr('data-flag', 'false');
         $('.evt_btn2').hide();
     });
 

@@ -17,7 +17,7 @@ namespace bmw_fs.Service.impl.promotion
 {
     public class WebPromotionServiceImpl : WebPromotionService
     {
-        WebPromotionDao webPromotionDao = new WebPromotionDao();
+        PromotionDao webPromotionDao = new PromotionDao();
         FilesService filesService = new FilesServiceImpl();
         SequenceService sequenceService = new SequenceServiceImpl();
 
@@ -25,7 +25,6 @@ namespace bmw_fs.Service.impl.promotion
         {
             int masterIdx = sequenceService.getSequenceMasterIdx();
             webPromotion.idx = masterIdx;
-            webPromotion.webYn = "Y";
             Mapper.Instance().BeginTransaction();
             validation(webPromotion);
             webPromotionDao.insertWebPromotion(webPromotion);
@@ -77,7 +76,6 @@ namespace bmw_fs.Service.impl.promotion
 
         public void updateWebPromotion(HttpFileCollectionBase multipartFiles, Promotion webPromotion)
         {
-            webPromotion.webYn = "Y";
             Mapper.Instance().BeginTransaction();
             filesService.deleteFileAndFileUpload(multipartFiles, "thumbNail", "jpg|png", 5 * 1024 * 1024, webPromotion.idx, webPromotion.thumbIdxs);//섬네일 (국문)
             Files files = filesService.deleteFileAndFileUpload(multipartFiles, "mainImg", "jpg|png", 5 * 1024 * 1024, webPromotion.idx, webPromotion.mainIdxs);//본문 (국문)
