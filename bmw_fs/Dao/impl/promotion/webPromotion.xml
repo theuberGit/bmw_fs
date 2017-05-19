@@ -17,19 +17,23 @@
 
     <resultMap id="webPromotionMap" class="PromotionClass">
       <result property="idx" column="IDX" />
+      <result property="category" column="CATEGORY" />
       <result property="startDate" column="START_DATE" />
       <result property="endDate" column="END_DATE" />
       <result property="deployYn" column="DEPLOY_YN" />
       <result property="engYn" column="ENG_YN" />
       <result property="title" column="TITLE" />
       <result property="productBannerYn" column="PRODUCT_BANNER_YN" />
-      <result property="productType1" column="PRODUCT_TYPE1" />
-      <result property="productType2" column="PRODUCT_TYPE2" />
       <result property="titleEng" column="TITLE_ENG" />
-      <result property="productBannerYnEng" column="PRODUCT_BANNER_YN_ENG" />
-      <result property="productType1Eng" column="PRODUCT_TYPE1_ENG" />
-      <result property="productType2Eng" column="PRODUCT_TYPE2_ENG" />
       <result property="webYn" column="WEB_YN" />
+      <result property="btn1Name" column="BTN1_NAME" />
+      <result property="btn2Name" column="BTN2_NAME" />
+      <result property="btn1Link" column="BTN1_LINK" />
+      <result property="btn2Link" column="BTN2_LINK" />
+      <result property="btn1NameEng" column="BTN1_NAME_ENG" />
+      <result property="btn2NameEng" column="BTN2_NAME_ENG" />
+      <result property="btn1LinkEng" column="BTN1_LINK_ENG" />
+      <result property="btn2LinkEng" column="BTN2_LINK_ENG" />
       <result property="regDate" column="REG_DATE" />
       <result property="regId" column="REG_ID" />
     </resultMap>
@@ -82,19 +86,23 @@
 
     <select id="findWebPromotion" resultMap="webPromotionMap">
       SELECT IDX
+      ,CATEGORY
       ,START_DATE
       ,END_DATE
       ,ENG_YN
       ,DEPLOY_YN
       ,TITLE
       ,PRODUCT_BANNER_YN
-      ,PRODUCT_TYPE1
-      ,PRODUCT_TYPE2
       ,TITLE_ENG
-      ,PRODUCT_BANNER_YN_ENG
-      ,PRODUCT_TYPE1_ENG
-      ,PRODUCT_TYPE2_ENG
       ,WEB_YN
+      ,BTN1_NAME
+      ,BTN2_NAME
+      ,BTN1_LINK
+      ,BTN2_LINK
+      ,BTN1_NAME_ENG
+      ,BTN2_NAME_ENG
+      ,BTN1_LINK_ENG
+      ,BTN2_LINK_ENG
       ,REG_DATE
       ,REG_ID
       FROM BMW_FS_PROMOTION
@@ -105,55 +113,67 @@
       INSERT INTO BMW_FS_PROMOTION
       (
       IDX
+      ,CATEGORY
       ,START_DATE
       ,END_DATE
       ,ENG_YN
       ,DEPLOY_YN
       ,TITLE
       ,PRODUCT_BANNER_YN
-      ,PRODUCT_TYPE1
-      ,PRODUCT_TYPE2
       ,TITLE_ENG
-      ,PRODUCT_BANNER_YN_ENG
-      ,PRODUCT_TYPE1_ENG
-      ,PRODUCT_TYPE2_ENG
       ,WEB_YN
+      ,BTN1_NAME
+      ,BTN2_NAME
+      ,BTN1_LINK
+      ,BTN2_LINK
+      ,BTN1_NAME_ENG
+      ,BTN2_NAME_ENG
+      ,BTN1_LINK_ENG
+      ,BTN2_LINK_ENG
       ,REG_ID
       )
       VALUES (
       #idx#
+      ,#category#
       ,#startDate#
       ,#endDate#
       ,#engYn#
       ,#deployYn#
       ,#title#
       ,#productBannerYn#
-      ,#productType1#
-      ,#productType2#
       ,#titleEng#
-      ,#productBannerYnEng#
-      ,#productType1Eng#
-      ,#productType2Eng#
       ,#webYn#
+      ,#btn1Name#
+      ,#btn2Name#
+      ,#btn1Link#
+      ,#btn2Link#
+      ,#btn1NameEng#
+      ,#btn2NameEng#
+      ,#btn1LinkEng#
+      ,#btn2LinkEng#
       ,#regId#
       )
     </insert>
 
     <update id="updateWebPromotion">
       UPDATE BMW_FS_PROMOTION
-      SET START_DATE = #startDate#
+      SET CATEGORY  = #category#
+      ,START_DATE = #startDate#
       ,END_DATE = #endDate#
       ,ENG_YN = #engYn#
       ,DEPLOY_YN = #deployYn#
       ,TITLE = #title#
       ,PRODUCT_BANNER_YN = #productBannerYn#
-      ,PRODUCT_TYPE1 = #productType1#
-      ,PRODUCT_TYPE2 = #productType2#
       ,TITLE_ENG = #titleEng#
-      ,PRODUCT_BANNER_YN_ENG = #productBannerYnEng#
-      ,PRODUCT_TYPE1_ENG = #productType1Eng#
-      ,PRODUCT_TYPE2_ENG = #productType2Eng#
       ,WEB_YN = #webYn#
+      ,BTN1_NAME = #btn1Name#
+      ,BTN2_NAME = #btn2Name#
+      ,BTN1_LINK = #btn1Link#
+      ,BTN2_LINK = #btn2Link#
+      ,BTN1_NAME_ENG = #btn1NameEng#
+      ,BTN2_NAME_ENG = #btn2NameEng#
+      ,BTN1_LINK_ENG = #btn1LinkEng#
+      ,BTN2_LINK_ENG = #btn2LinkEng#
       ,UPT_DATE = getDate()
       ,UPT_ID = #uptId#
       WHERE IDX = #idx#

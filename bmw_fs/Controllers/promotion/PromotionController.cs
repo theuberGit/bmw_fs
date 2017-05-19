@@ -52,13 +52,11 @@ namespace bmw_fs.Controllers.promotion
             Promotion item = webPromotionService.findWebPromotion(webPromotion);
             ViewBag.item = item;
             ViewBag.thumbList = filesService.findAllByMasterIdxAndType(item.idx, "thumbNail");
-            ViewBag.topMainList = filesService.findAllByMasterIdxAndType(item.idx, "topMain");
             IList<Files> mainImgList = filesService.findAllByMasterIdxAndType(item.idx, "mainImg");
             ViewBag.mainImgList = mainImgList;
             ViewBag.imgUrlList = webPromotionService.findWebPromotionImgUrl(webPromotion, mainImgList);
 
             ViewBag.thumbEngList = filesService.findAllByMasterIdxAndType(item.idx, "engThumbNail");
-            ViewBag.topMainEngList = filesService.findAllByMasterIdxAndType(item.idx, "engTopMain");
             IList<Files> mainImgEngList = filesService.findAllByMasterIdxAndType(item.idx, "engMainImg");
             ViewBag.mainImgEngList = mainImgEngList;
             ViewBag.imgUrlEngList = webPromotionService.findWebPromotionImgUrlEng(webPromotion, mainImgEngList);
@@ -71,13 +69,11 @@ namespace bmw_fs.Controllers.promotion
             Promotion item = webPromotionService.findWebPromotion(webPromotion);
             ViewBag.item = item;
             ViewBag.thumbList = filesService.findAllByMasterIdxAndType(item.idx, "thumbNail");
-            ViewBag.topMainList = filesService.findAllByMasterIdxAndType(item.idx, "topMain");
             IList<Files> mainImgList = filesService.findAllByMasterIdxAndType(item.idx, "mainImg");
             ViewBag.mainImgList = mainImgList;
             ViewBag.imgUrlList = webPromotionService.findWebPromotionImgUrl(webPromotion, mainImgList);
 
             ViewBag.thumbEngList = filesService.findAllByMasterIdxAndType(item.idx, "engThumbNail");
-            ViewBag.topMainEngList = filesService.findAllByMasterIdxAndType(item.idx, "engTopMain");
             IList<Files> mainImgEngList = filesService.findAllByMasterIdxAndType(item.idx, "engMainImg");
             ViewBag.mainImgEngList = mainImgEngList;
             ViewBag.imgUrlEngList = webPromotionService.findWebPromotionImgUrlEng(webPromotion, mainImgEngList);
