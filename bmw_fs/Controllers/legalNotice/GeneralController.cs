@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace bmw_fs.Controllers.legalNotice
 {
+    [Authorize]
     public class GeneralController : Controller
     {
         GeneralService generalService = new GeneralServiceImpl();

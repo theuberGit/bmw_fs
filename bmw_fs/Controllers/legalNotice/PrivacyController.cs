@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace bmw_fs.Controllers.legalNotice
 {
+    [Authorize]
     public class PrivacyController : Controller
     {
         PrivacyService privacyService = new PrivacyServiceImpl();
