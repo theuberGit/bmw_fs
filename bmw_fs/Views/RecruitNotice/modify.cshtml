@@ -34,7 +34,16 @@
                             <div class="attach_file">
                                 <span class="file_src">@ViewBag.filesList1[i].originalFilename</span>
                                 <input type="file" class="input_file" name="files" id="attachFile">
-                                <label for="attachFile" class="btn_file">파일찾기</label>
+                                @if (@ViewBag.filesList1[i].originalFilename != null)
+                                {
+                                    <label for="attachFile" style="display:none;" class="btn_file btn_file_txt">파일찾기</label>
+                                    <label for="" class="btn_file del_file_txt">삭제</label>
+                                }
+                                else
+                                {
+                                    <label for="attachFile" class="btn_file btn_file_txt">파일찾기</label>
+                                    <label for="" style="display:none;" class="btn_file del_file_txt">삭제</label>
+                                }
                                 <input type="hidden" name="fileIdxs" value="@ViewBag.filesList1[i].fileIdx" />
                             </div>
                         }

@@ -94,7 +94,7 @@ namespace bmw_fs.Service.impl.common
                     fileItem.savedFilename = replaceName;
                     fileItem.masterIdx = masterIdx;
                     fileItem.type = inputFileName;
-                    if (fileIdxs == null || fileIdxs.Count == 0 || fileIdxs.Count <= idx)
+                    if (fileIdxs == null || fileIdxs.Count == 0 || fileIdxs.Count <= idx || fileIdxs[idx] <= 0)
                     {//새로 올리는 file인 경우, db에 file 정보 insert
                        int fileIdx =  filesDao.insertFile(fileItem);
                         fileTmpIdxs.Add(fileIdx);//리턴해줄 fileIdxs
@@ -108,7 +108,10 @@ namespace bmw_fs.Service.impl.common
                 }
                 else//기존 file은 있지만, 업데이트 이루어지지 않은 경우.
                 {
-                    fileTmpIdxs.Add(fileIdxs[idx]);//리턴해줄 fileIdxs
+                    if(fileIdxs != null)
+                    {
+                        fileTmpIdxs.Add(fileIdxs[idx]);//리턴해줄 fileIdxs
+                    }
                 }
                 idx++;
             }
@@ -128,6 +131,10 @@ namespace bmw_fs.Service.impl.common
                     if (files[i].ContentLength > 0 && fileIdxs.Count != 0 && fileIdxs.ElementAt(i) != 0) //파일이 교체됬을경우 : 파일있고 fileIdxs도 있는경우
                     {
                         deleteRealFilesByFileIdx(fileIdxs.ElementAt(i));
+                    }
+                    if (fileIdxs[i] < 0 ) // 파일이 삭제만 된 경우
+                    {
+                        deleteRealFilesAndDataByFileIdx(fileIdxs.ElementAt(i) * -1);
                     }
                 }
             }
