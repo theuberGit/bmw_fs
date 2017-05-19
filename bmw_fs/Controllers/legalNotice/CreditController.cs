@@ -39,6 +39,7 @@ namespace bmw_fs.Controllers.legalNotice
         public RedirectToRouteResult registerProc(Credit credit)
         {
             credit.contents = Sanitizer.GetSafeHtmlFragment(credit.contents);
+            credit.regId = System.Web.HttpContext.Current.User.Identity.Name;
             creditService.insertCredit(credit);
             return RedirectToAction("list");
         }
@@ -64,6 +65,7 @@ namespace bmw_fs.Controllers.legalNotice
         public RedirectToRouteResult modifyProc(Credit credit)
         {
             credit.contents = Sanitizer.GetSafeHtmlFragment(credit.contents);
+            credit.uptId = System.Web.HttpContext.Current.User.Identity.Name;
             creditService.updateCredit(credit);
             return RedirectToAction("list");
         }
