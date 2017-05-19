@@ -285,7 +285,6 @@
     </Content>
     <Content Include="Dao\impl\legalNotice\Credit.xml" />
     <Content Include="Dao\impl\legalNotice\General.xml" />
-    <Content Include="Dao\impl\news\News.xml" />
     <Content Include="Dao\impl\payment\Payment.xml" />
     <Content Include="Dao\impl\promotion\webPromotion.xml">
       <SubType>Designer</SubType>
@@ -367,14 +366,16 @@
     <Content Include="resources\se\SmartEditor2_noframe.html" />
     <Content Include="resources\se\smart_editor2_inputarea.html" />
     <Content Include="resources\se\smart_editor2_inputarea_ie8.html" />
-    <Content Include="Views\News\modify.cshtml" />
-    <Content Include="Views\News\view.cshtml" />
     <Content Include="Views\Payment\list.cshtml" />
     <Content Include="Views\Payment\register.cshtml" />
     <Content Include="Views\Payment\modify.cshtml" />
     <Content Include="Views\Payment\view.cshtml" />
     <Content Include="Views\News\modify.cshtml" />
     <Content Include="Views\News\view.cshtml" />
+    <Content Include="Views\MobilePromotion\list.cshtml" />
+    <Content Include="Views\MobilePromotion\modify.cshtml" />
+    <Content Include="Views\MobilePromotion\register.cshtml" />
+    <Content Include="Views\MobilePromotion\view.cshtml" />
     <None Include="Views\Promotion\list.cshtml" />
     <None Include="Views\Promotion\modify.cshtml" />
     <None Include="Views\Promotion\view.cshtml" />

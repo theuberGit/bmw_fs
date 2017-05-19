@@ -31,7 +31,6 @@ namespace bmw_fs.Service.impl.promotion
             webPromotionDao.insertWebPromotion(webPromotion);
 
             filesService.fileUpload(multipartFiles, "thumbNail", "jpg|png", 5 * 1024 * 1024, masterIdx, null);//섬네일 (국문)
-            filesService.fileUpload(multipartFiles, "topMain", "jpg|png", 5 * 1024 * 1024, masterIdx, null);//본문상단 (국문)
             Files files =  filesService.fileUpload(multipartFiles, "mainImg", "jpg|png", 5 * 1024 * 1024, masterIdx, null);//본문 (국문)
 
             PromotionUrl promotionUrl = new PromotionUrl();
@@ -47,7 +46,6 @@ namespace bmw_fs.Service.impl.promotion
             {
                 PromotionUrl promotionUrlEng = new PromotionUrl();
                 filesService.fileUpload(multipartFiles, "engThumbNail", "jpg|png", 5 * 1024 * 1024, masterIdx, null);//섬네일 (영문)
-                filesService.fileUpload(multipartFiles, "engTopMain", "jpg|png", 5 * 1024 * 1024, masterIdx, null);//본문상단 (영문)
                 Files filesEng = filesService.fileUpload(multipartFiles, "engMainImg", "jpg|png", 5 * 1024 * 1024, masterIdx, null);//본문 (영문)
                 for (int j = 0; j < filesEng.fileIdxs.Count; j++)
                 {
@@ -82,7 +80,6 @@ namespace bmw_fs.Service.impl.promotion
             webPromotion.webYn = "Y";
             Mapper.Instance().BeginTransaction();
             filesService.deleteFileAndFileUpload(multipartFiles, "thumbNail", "jpg|png", 5 * 1024 * 1024, webPromotion.idx, webPromotion.thumbIdxs);//섬네일 (국문)
-            filesService.deleteFileAndFileUpload(multipartFiles, "topMain", "jpg|png", 5 * 1024 * 1024, webPromotion.idx, webPromotion.fileIdxs);//본문상단 (국문)
             Files files = filesService.deleteFileAndFileUpload(multipartFiles, "mainImg", "jpg|png", 5 * 1024 * 1024, webPromotion.idx, webPromotion.mainIdxs);//본문 (국문)
 
             PromotionUrl promotionUrl = new PromotionUrl();
@@ -97,7 +94,6 @@ namespace bmw_fs.Service.impl.promotion
             if ("Y".Equals(webPromotion.engYn))
             {
                 filesService.deleteFileAndFileUpload(multipartFiles, "engThumbNail", "jpg|png", 5 * 1024 * 1024, webPromotion.idx, webPromotion.engThumbIdxs);//섬네일 (영문)
-                filesService.deleteFileAndFileUpload(multipartFiles, "engTopMain", "jpg|png", 5 * 1024 * 1024, webPromotion.idx, webPromotion.engFileIdxs);//본문상단 (영문)
                 Files filesEng = filesService.deleteFileAndFileUpload(multipartFiles, "engMainImg", "jpg|png", 5 * 1024 * 1024, webPromotion.idx, webPromotion.engMainIdxs);//본문 (영문)
 
                 PromotionUrl promotionUrlEng = new PromotionUrl();
@@ -113,10 +109,9 @@ namespace bmw_fs.Service.impl.promotion
             {
                 //영문사이트 파일 삭제
                 filesService.deleteRealFilesAndDataByFileMasterIdxAndTp(webPromotion.idx, "engThumbNail");
-                filesService.deleteRealFilesAndDataByFileMasterIdxAndTp(webPromotion.idx, "engTopMain");
                 filesService.deleteRealFilesAndDataByFileMasterIdxAndTp(webPromotion.idx, "engMainImg");
             }
-            //validation(webPromotion);
+            validation(webPromotion);
             this.webPromotionDao.updateWebPromotion(webPromotion);
             Mapper.Instance().CommitTransaction();
         }
@@ -124,16 +119,26 @@ namespace bmw_fs.Service.impl.promotion
         public void deleteWebPromotion(Promotion webPromotion)
         {
             Mapper.Instance().BeginTransaction();
+            PromotionUrl promotionUrl = new PromotionUrl();
+            promotionUrl.pIdx = webPromotion.idx;
             this.webPromotionDao.deleteWebPromotion(webPromotion);
-            filesService.deleteRealFilesAndDataByFileMasterIdx(webPromotion.idx);
+            filesService.deleteRealFilesAndDataByFileMasterIdx(webPromotion.idx);//파일 삭제
+            webPromotionDao.deleteWebPromotionUrl(promotionUrl);//관련 url 삭제
             Mapper.Instance().CommitTransaction();
         }
 
         private void validation(Promotion webPromotion)
         {
-            //if (String.IsNullOrWhiteSpace(news.type)) throw new CustomException("필수 값이 없습니다.(구분)");
-            //if (String.IsNullOrWhiteSpace(news.title)) throw new CustomException("필수 값이 없습니다.(제목)");
-            //if (String.IsNullOrWhiteSpace(Regex.Replace(news.contents, "<.*?>", string.Empty))) throw new CustomException("필수 값이 없습니다.(내용)");
+            if (String.IsNullOrWhiteSpace(webPromotion.startDate)) throw new CustomException("필수 값이 없습니다.(게시 시작일)");
+            if (String.IsNullOrWhiteSpace(webPromotion.endDate)) throw new CustomException("필수 값이 없습니다.(게시 종료일)");
+            if (String.IsNullOrWhiteSpace(webPromotion.engYn)) throw new CustomException("필수 값이 없습니다.(영문사이트 여부)");
+            if (String.IsNullOrWhiteSpace(webPromotion.deployYn)) throw new CustomException("필수 값이 없습니다.(배포 여부)");
+            if (String.IsNullOrWhiteSpace(webPromotion.title)) throw new CustomException("필수 값이 없습니다.(제목)");
+            if (String.IsNullOrWhiteSpace(webPromotion.productBannerYn)) throw new CustomException("필수 값이 없습니다.(상품페이지 배너 여부)");
+            if ("Y".Equals(webPromotion.engYn))
+            {
+                if (String.IsNullOrWhiteSpace(webPromotion.titleEng)) throw new CustomException("필수 값이 없습니다.(영문 제목)");
+            }
         }
 
         public IList<string> findWebPromotionImgUrl(Promotion webPromotion, IList<Files> mainImgList)
