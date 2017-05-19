@@ -241,7 +241,7 @@
     <Compile Include="Service\face\legalNotice\ProductService.cs" />
     <Compile Include="Service\face\news\NewsService.cs" />
     <Compile Include="Service\face\payment\PaymentService.cs" />
-    <Compile Include="Service\face\promotion\WebPromotionService.cs" />
+    <Compile Include="Service\face\promotion\PromotionService.cs" />
     <Compile Include="Service\face\recruit\RecruitFaqService.cs" />
     <Compile Include="Service\face\recruit\RecruitNoticeService.cs" />
     <Compile Include="Service\face\rolling\RollingService.cs" />
@@ -262,7 +262,7 @@
     <Compile Include="Service\impl\legalNotice\ProductServiceImpl.cs" />
     <Compile Include="Service\impl\news\NewsServiceImpl.cs" />
     <Compile Include="Service\impl\payment\PaymentServiceImpl.cs" />
-    <Compile Include="Service\impl\promotion\WebPromotionServiceImpl.cs" />
+    <Compile Include="Service\impl\promotion\PromotionServiceImpl.cs" />
     <Compile Include="Service\impl\recruit\RecruitFaqServiceImpl.cs" />
     <Compile Include="Service\impl\recruit\RecruitNoticeServiceImpl.cs" />
     <Compile Include="Service\impl\Showroom\ShowroomServiceImpl.cs" />

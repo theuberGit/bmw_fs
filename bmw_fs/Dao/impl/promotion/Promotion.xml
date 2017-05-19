@@ -96,7 +96,7 @@
      </isNotEmpty>
     </select>
 
-    <select id="findWebPromotion" resultMap="promotionMap">
+    <select id="findPromotion" resultMap="promotionMap">
       SELECT IDX
       ,CATEGORY
       ,START_DATE
@@ -121,7 +121,7 @@
       WHERE IDX = #idx#
     </select>
 
-    <insert id="insertWebPromotion">
+    <insert id="insertPromotion">
       INSERT INTO BMW_FS_PROMOTION
       (
       IDX
@@ -167,7 +167,7 @@
       )
     </insert>
 
-    <update id="updateWebPromotion">
+    <update id="updatePromotion">
       UPDATE BMW_FS_PROMOTION
       SET CATEGORY  = #category#
       ,START_DATE = #startDate#
@@ -191,12 +191,12 @@
       WHERE IDX = #idx#
     </update>
 
-    <delete id="deleteWebPromotion">
+    <delete id="deletePromotion">
       DELETE FROM BMW_FS_PROMOTION
       WHERE IDX = #idx#
     </delete>
 
-    <insert id="insertWebPromotionUrl">
+    <insert id="insertPromotionUrl">
       INSERT INTO BMW_FS_PROMOTION_URL
       (
       P_IDX
@@ -210,12 +210,12 @@
       )
     </insert>
 
-    <delete id="deleteWebPromotionUrl">
+    <delete id="deletePromotionUrl">
       DELETE FROM BMW_FS_PROMOTION_URL
       WHERE P_IDX = #pIdx#
     </delete>
     
-    <select id="findWebPromotionImgUrl" resultClass="string">
+    <select id="findPromotionImgUrl" resultClass="string">
       SELECT URL
         FROM BMW_FS_PROMOTION_URL
         WHERE FILE_IDX = #fileIdx#

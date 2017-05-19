@@ -7,9 +7,9 @@ namespace bmw_fs.Dao.face.promotion
 {
     public class PromotionDao
     {
-        public void insertWebPromotion(Promotion webPromotion)
+        public void insertPromotion(Promotion webPromotion)
         {
-           Mapper.Instance().Insert("promotion.insertWebPromotion", webPromotion);
+           Mapper.Instance().Insert("promotion.insertPromotion", webPromotion);
         }
 
         public IList<Promotion> findAll(Promotion webPromotion)
@@ -22,34 +22,34 @@ namespace bmw_fs.Dao.face.promotion
             return Mapper.Instance().QueryForObject<int>("promotion.findAllCount", webPromotion);
         }
 
-        public Promotion findWebPromotion(Promotion webPromotion)
+        public Promotion findPromotion(Promotion webPromotion)
         {
-            return Mapper.Instance().QueryForObject<Promotion>("promotion.findWebPromotion", webPromotion);
+            return Mapper.Instance().QueryForObject<Promotion>("promotion.findPromotion", webPromotion);
         }
 
-        public void updateWebPromotion(Promotion webPromotion)
+        public void updatePromotion(Promotion webPromotion)
         {
-            Mapper.Instance().Update("promotion.updateWebPromotion", webPromotion);
+            Mapper.Instance().Update("promotion.updatePromotion", webPromotion);
         }
 
-        public void deleteWebPromotion(Promotion webPromotion)
+        public void deletePromotion(Promotion webPromotion)
         {
-            Mapper.Instance().Delete("promotion.deleteWebPromotion", webPromotion);
+            Mapper.Instance().Delete("promotion.deletePromotion", webPromotion);
         }
 
-        public void insertWebPromotionUrl(PromotionUrl promotionUrl)
+        public void insertPromotionUrl(PromotionUrl promotionUrl)
         {
-            Mapper.Instance().Insert("promotion.insertWebPromotionUrl", promotionUrl);
+            Mapper.Instance().Insert("promotion.insertPromotionUrl", promotionUrl);
         }
 
-        public String findWebPromotionImgUrl(Promotion webPromotion)
+        public String findPromotionImgUrl(Promotion webPromotion)
         {
-           return  Mapper.Instance().QueryForObject<String>("promotion.findWebPromotionImgUrl", webPromotion);
+           return  Mapper.Instance().QueryForObject<String>("promotion.findPromotionImgUrl", webPromotion);
         }
 
-        public void deleteWebPromotionUrl(PromotionUrl promotionUrl)
+        public void deletePromotionUrl(PromotionUrl promotionUrl)
         {
-            Mapper.Instance().Delete("promotion.deleteWebPromotionUrl", promotionUrl);
+            Mapper.Instance().Delete("promotion.deletePromotionUrl", promotionUrl);
         }
     }
 }
