@@ -90,7 +90,7 @@
                             <option value="054">054</option>
                             <option value="055">055</option>
                             <option value="064">064</option>
-                            <option value="없음">없음</option>
+                            <option value="-">없음</option>
                         </select>
                         -
                         <input type="text" name="tel2" id="tel2" class="telNum" maxlength="4" value="" title="전화번호 중간"  />
@@ -122,6 +122,29 @@
 
     $(document).ready(function () {
         $(".telNum").keyup(function () { $(this).val($(this).val().replace(/[^0-9]/g, "")); }); //숫자만 입력가능
+
+        $('#tel1').change(function () {
+            if ($(this).val() == '-') {
+                $('#tel2').attr('disabled', true);
+                $('#tel2').val('');
+                $('#tel3').attr('disabled', true);
+                $('#tel3').val('');
+            }
+            else {
+                $('#tel2').attr('disabled', false);
+                $('#tel2').val('');
+                $('#tel3').attr('disabled', false);
+                $('#tel3').val('');
+            }
+        });
+
+        if ($('#tel1').val() == '-') {
+            $('#tel2').attr('disabled', true);
+            $('#tel2').val('');
+            $('#tel3').attr('disabled', true);
+            $('#tel3').val('');
+        }
+
     });
 
 
@@ -133,11 +156,13 @@
         if (!$('#address').required()) return;
         if (!$('#lat').required()) return;
         if (!$('#lng').required()) return;
-        if (!$('#tel1').required()) return;
-        if (!$('#tel2').required()) return;
-        if (!$('#tel3').required()) return;
+        if ($('#tel1').val() != '-') {
+            if (!$('#tel1').required()) return;
+            if (!$('#tel2').required()) return;
+            if (!$('#tel3').required()) return;
+        }
         if (!$('#businessTime').required()) return;
-
+            
         if (!confirm('등록하시겠습니까?')) return;
         $('#content form').attr('action', 'registerProc').submit();
     };

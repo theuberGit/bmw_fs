@@ -48,7 +48,14 @@
                             <td>@ViewBag.list[i].location</td>
                             <td class="tit_area"><a href="view?idx=@ViewBag.list[i].idx">@ViewBag.list[i].showroomName</a></td>
                             <td>@ViewBag.list[i].address</td>
-                            <td>@ViewBag.list[i].tel1-@ViewBag.list[i].tel2-@ViewBag.list[i].tel3</td>
+                            @if ("-".Equals(@ViewBag.list[i].tel1))
+                            {
+                                <td>-</td>
+                            }
+                            else
+                            {
+                                <td>@ViewBag.list[i].tel1-@ViewBag.list[i].tel2-@ViewBag.list[i].tel3</td>
+                            }
                             <td>@ViewBag.list[i].deployYn</td>
                         </tr>
                     }
