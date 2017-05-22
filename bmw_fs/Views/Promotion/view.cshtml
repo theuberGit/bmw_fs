@@ -32,6 +32,11 @@
 						<th>작성자</th>
 						<td colspan="3">@ViewBag.item.regId</td>
 					</tr>
+                    <tr>
+						<th>카테고리</th>
+						@if ("P".Equals(ViewBag.item.category)) {<td>프로모션</td>}
+                        else if("E".Equals(ViewBag.item.category)){<td>이벤트</td>}
+					</tr>
 					<tr>
 						<th>작성일</th>
 						<td>@ViewBag.item.regDate</td>
@@ -65,13 +70,6 @@
                         }
 					</tr>
 					<tr>
-						<th>본문 상단 이미지</th>
-						@foreach (var file2 in ViewBag.topMainList)
-                        {
-                            <td>@file2.originalFilename</td>
-                        }
-					</tr>
-					<tr>
 						<th>본문 이미지</th>
 						<td class="main_img_area">
                             @for (var i = 0; i < ViewBag.mainImgList.Count; i++)
@@ -84,6 +82,30 @@
                             }
 						</td>
 					</tr>
+                    @if ("E".Equals(ViewBag.item.category))
+                    {
+                    <tr>
+                        <th>버튼</th>
+                        <td class="main_img_area">
+                            @if (!"".Equals(ViewBag.item.btn1Name))
+                            {
+                                <dl>
+                                    <dt>[버튼 1]</dt>
+                                    <dd> -  버튼명 : <span>@ViewBag.item.btn1Name</span></dd>
+                                    <dd> -  URL : <a href="@ViewBag.item.btn1Link">@ViewBag.item.btn1Link</a></dd>
+                                </dl>
+                            }
+                            @if (!"".Equals(ViewBag.item.btn2Name))
+                            {
+                                <dl>
+                                    <dt>[버튼 2]</dt>
+                                    <dd> -  버튼명 : <span>@ViewBag.item.btn2Name</span></dd>
+                                    <dd> -  URL : <a href="@ViewBag.item.btn2Link">@ViewBag.item.btn2Link</a></dd>
+                                </dl>
+                            }
+                        </td>
+                    </tr>
+                    }
                      <tr>
                         <th>상품 페이지 배너</th>
                         <td>
@@ -93,18 +115,7 @@
                         }
                         else
                         {
-                            if ("Y".Equals(ViewBag.item.productType1) && "Y".Equals(ViewBag.item.productType2))
-                            {
-                                <p>잔가보장형 상품, 일반 할부 상품</p>
-                            }
-                            if ("Y".Equals(ViewBag.item.productType1) && (ViewBag.item.productType2 == null))
-                            {
-                                <p>잔가보장형 상품</p>
-                            }
-                            if ("Y".Equals(ViewBag.item.productType2) && (ViewBag.item.productType1 == null))
-                            {
-                                <p>일반 할부 상품</p>
-                            }
+                            <p>배포</p>
                         }
                          </td>
                      </tr>
@@ -130,13 +141,6 @@
                             }
                         </tr>
                         <tr>
-                            <th>본문 상단 이미지</th>
-                            @foreach (var file2 in ViewBag.topMainEngList)
-                            {
-                                <td>@file2.originalFilename</td>
-                            }
-                        </tr>
-                        <tr>
                             <th>본문 이미지</th>
                             <td class="main_img_area">
                                 @for (var i = 0; i < ViewBag.mainImgEngList.Count; i++)
@@ -149,30 +153,30 @@
                                 }
                             </td>
                         </tr>
-                        <tr>
-                            <th>상품 페이지 배너</th>
-                            <td>
-                                @if ("N".Equals(ViewBag.item.productBannerYnEng))
-                                {
-                                    <p>미배포</p>
-                                }
-                                else
-                                {
-                                    if ("Y".Equals(ViewBag.item.productType1Eng) && "Y".Equals(ViewBag.item.productType2Eng))
+                        @if ("E".Equals(ViewBag.item.category))
+                        {
+                            <tr>
+                                <th>버튼</th>
+                                <td class="main_img_area">
+                                    @if (!"".Equals(ViewBag.item.btn1NameEng))
                                     {
-                                        <p>잔가보장형 상품, 일반 할부 상품</p>
+                                        <dl>
+                                            <dt>[버튼 1]</dt>
+                                            <dd> -  버튼명 : <span>@ViewBag.item.btn1NameEng</span></dd>
+                                            <dd> -  URL : <a href="@ViewBag.item.btn1LinkEng">@ViewBag.item.btn1LinkEng</a></dd>
+                                        </dl>
                                     }
-                                    if ("Y".Equals(ViewBag.item.productType1Eng) && (ViewBag.item.productType2Eng == null))
+                                    @if (!"".Equals(ViewBag.item.btn2NameEng))
                                     {
-                                        <p>잔가보장형 상품</p>
+                                        <dl>
+                                            <dt>[버튼 2]</dt>
+                                            <dd> -  버튼명 : <span>@ViewBag.item.btn2NameEng</span></dd>
+                                            <dd> -  URL : <a href="@ViewBag.item.btn2LinkEng">@ViewBag.item.btn2LinkEng</a></dd>
+                                        </dl>
                                     }
-                                    if ("Y".Equals(ViewBag.item.productType2Eng) && (ViewBag.item.productType1Eng == null))
-                                    {
-                                        <p>일반 할부 상품</p>
-                                    }
-                                }
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                        }
                     </table>
                 }
                 <input type="hidden" name="idx" value="@ViewBag.item.idx" />
@@ -193,7 +197,10 @@
     }
 (function(){
 	$(".btn_delete").click(function(){
-		confirm("삭제하시겠습니까?");
+        if (!confirm('삭제하시겠습니까?')) {
+            return;
+        }
+        $('form').attr('action', 'delete').submit();
 	});
 })();
 </script>

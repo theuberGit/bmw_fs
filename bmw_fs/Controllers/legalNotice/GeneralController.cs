@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace bmw_fs.Controllers.legalNotice
 {
+    [Authorize]
     public class GeneralController : Controller
     {
         GeneralService generalService = new GeneralServiceImpl();
@@ -37,6 +38,7 @@ namespace bmw_fs.Controllers.legalNotice
         public RedirectToRouteResult registerProc(General general)
         {
             general.contents = Sanitizer.GetSafeHtmlFragment(general.contents);
+            general.regId = System.Web.HttpContext.Current.User.Identity.Name;
             generalService.insertGeneral(general);
             return RedirectToAction("list");
         }
@@ -62,6 +64,7 @@ namespace bmw_fs.Controllers.legalNotice
         public RedirectToRouteResult modifyProc(General general)
         {
             general.contents = Sanitizer.GetSafeHtmlFragment(general.contents);
+            general.uptId = System.Web.HttpContext.Current.User.Identity.Name;
             generalService.updateGeneral(general);
             return RedirectToAction("list");
         }

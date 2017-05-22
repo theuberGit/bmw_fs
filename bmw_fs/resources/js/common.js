@@ -1,15 +1,29 @@
-﻿$(function () {    
+﻿$(function () {  
     $(".add_img_area").find(".file_area").on("change", ".input_file", function (e) {
         var $parent = $(this).closest("div");
         var val = $(this).val();
         var valTit = val.split("\\");
-        var valTittext = valTit[valTit.length - 1]
+        var valTittext = valTit[valTit.length - 1];
+       
         if (val != "") {
             $parent.find(".file_src").text(valTittext).addClass("on");
             $('.btn_file_txt').hide();//하나의 파일에 대해 삭제 및 파일찾기 trigger가 필요할 때 파일추가 버튼에 .btn_file_txt 클래스 추가
             $('.del_file_txt').show();//하나의 파일에 대해 삭제 및 파일찾기 trigger가 필요할 때 삭제 버튼에 .btn_file_txt 클래스 추가
+        } else {
+            $parent.find(".file_src").text('').addClass("on");
+            $('.btn_file_txt').show();//하나의 파일에 대해 삭제 및 파일찾기 trigger가 필요할 때 파일추가 버튼에 .btn_file_txt 클래스 추가
+            $('.del_file_txt').hide();//하나의 파일에 대해 삭제 및 파일찾기 trigger가 필요할 때 삭제 버튼에 .btn_file_txt 클래스 추가
         };
     });    
+
+    
+    $(document).on('click', '.del_file_txt', function () { //file delete button click
+        $(this).hide();
+        $(this).siblings('.file_src').text('');
+        $(this).siblings('.btn_file_txt').show();
+        $inputFile = $(this).siblings('input[type="hidden"]');
+        $inputFile.val($inputFile.val() * -1);
+    });
 
     $('.search_text').keyup(function (e) {
         if (e.keyCode === 13) {

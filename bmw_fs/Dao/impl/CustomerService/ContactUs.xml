@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace ="contactUs" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="ContactUsClass" type="bmw_fs.Models.CustomerService.ContactUs"/>
+  </alias>
+
+  <resultMaps>
+
+    <resultMap id="ContactUsMapByList" class="ContactUsClass">
+      <result property="idx" column="IDX"/>
+      <result property="category" column="CATEGORY"/>
+      <result property="title" column="TITLE"/>
+      <result property="regId" column="REG_ID"/>
+      <result property="regDate" column="REG_DATE"/>
+      <result property="status" column="STATUS"/>
+    </resultMap>
+    
+  </resultMaps>
+
+  <statements>
+    <select id="findAll" resultMap="ContactUsMapByList">
+      SELECT *
+      FROM (
+              SELECT
+                    ROW_NUMBER() OVER(ORDER BY D.IDX DESC) AS RNUM
+                   ,IDX
+                   ,CATEGORY
+                   ,TITLE
+                   ,REG_ID
+                   ,REG_DATE
+                   ,STATUS
+              FROM BMW_FS_CONTACT_US
+              WHERE 1=1
+              <isNotEmpty property="searchInput">
+                <isNotEmpty property="searchOption">
+                  <isEqual property="searchOption" compareValue="title">
+                    AND TITLE LIKE '%'+#searchInput#+'%'
+                  </isEqual>
+                  <isEqual property="searchOption" compareValue="regId">
+                    AND REG_ID LIKE '%'+#searchInput#+'%'
+                  </isEqual>
+                </isNotEmpty>
+              </isNotEmpty>
+            )t
+      WHERE 1=1
+        AND (RNUM BETWEEN #currentItem# AND #currentItemEnd# )
+    </select>
+
+    
+  </statements>
+</sqlMap>

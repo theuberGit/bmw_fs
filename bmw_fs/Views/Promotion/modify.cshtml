@@ -11,7 +11,8 @@
 .file_area{counter-reset:cnt1; }
 .file_src.on:after{content:""; color:#666;}
 .thum_nail:after{content:"사이즈 307 * 233"; display:inline-block; padding: 7px 0 0 5px}
-.top_main_text:after{content:"사이즈 950 * 258 "; display:inline-block; padding: 7px 0 0 5px}
+.reg .cont_bottom .reg_table .event_btn_area input[type="text"]{margin-bottom: 10px; width: 467px;}
+.evt_btn_button{display: inline-block; width: 35px; height: 36.5px; line-height: 35px; border: 1px solid #c8c8c8; text-align: center; cursor: pointer; margin-left: 7px;}
 </style>
 </head>
 		<div id="content" class="reg">
@@ -28,6 +29,13 @@
                         <tr>
                             <th>작성자</th>
                             <td>@ViewBag.item.regId</td>
+                        </tr>
+                        <tr>
+                            <th>카테고리</th>
+                            <td class="radio_area">
+                                <label for="categoryP"><input type="radio" name="category" id="categoryP" value="P"> 프로모션</label>
+                                <label for="categoryE"><input type="radio" name="category" id="categoryE" value="E"> 이벤트</label>
+                            </td>
                         </tr>
                         <tr>
                             <th><label for="startDate">게시 기간</label></th>
@@ -83,31 +91,6 @@
                                  }
                             </td>
                         </tr>
-                        <tr class="add_img_area">
-                            <th>본문 상단 이미지</th>
-                            <td class="file_area">
-                                 @if (ViewBag.topMainList.Count != 0)
-                                 {
-                                     for (int i = 0, size = ViewBag.topMainList.Count; i < size; i++)
-                                     {
-                                        <div class="top_main_text">
-                                            <span class="file_src">@ViewBag.topMainList[i].originalFilename</span>
-                                            <input type="file" class="input_file" name="topMain" id="topMainText">
-                                            <label for="topMainText" class="btn_file">파일찾기</label>
-                                            <input type="hidden" name="fileIdxs" value="@ViewBag.topMainList[i].fileIdx" />
-                                        </div>
-                                     }
-                                 }
-                                 else
-                                 {
-                                    <div class="top_main_text">
-                                        <span class="file_src"></span>
-                                        <input type="file" class="input_file" name="topMain" id="topMainText">
-                                        <label for="topMainText" class="btn_file">파일찾기</label>
-                                    </div>
-                                 }
-                            </td>
-                        </tr>
                         <tr class="add_img_area kor">
                             <th>본문 이미지</th>
                             <td class="file_area">
@@ -143,17 +126,52 @@
                                  }
                             </td>
                         </tr>
+                        @if ("E".Equals(ViewBag.item.category))
+                        {
+                            <tr class="event_y">
+                                <th><label for="">버튼 *</label></th>
+                                <td class="event_btn_area">
+                                    <div class="evt_btn1">
+                                        <input type="text" class="evt_btn_input" name="btn1Name" id="btn1Name" title="버튼명" placeholder="버튼명" value="@ViewBag.item.btn1Name"><button type="button" class="evt_btn_button" id="evtBtnAdd"> + </button>
+                                        <p><input type="text" class="evt_btn_input" name="btn1Link" id="btn1Link" title="버튼에 대한 링크 URL" placeholder="버튼에 대한 링크 URL" value="@ViewBag.item.btn1Link"></p>
+                                    </div>
+                                    @if (ViewBag.item.btn2Name != null) {
+                                        <div class="evt_btn2" data-flag="true">
+                                            <input type="text" class="evt_btn_input" name="btn2Name" id="btn2Name" title="버튼명" placeholder="버튼명" value="@ViewBag.item.btn2Name"><button type="button" class="evt_btn_button" id="evtBtnDel"> - </button>
+                                            <p><input type="text" class="evt_btn_input" name="btn2Link" id="btn2Link" title="버튼에 대한 링크 URL" placeholder="버튼에 대한 링크 URL" value="@ViewBag.item.btn2Link"></p>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="evt_btn2" data-flag="false" style="display:none;">
+                                            <input type="text" class="evt_btn_input" name="btn2Name" id="btn2Name" title="버튼명" placeholder="버튼명"><button type="button" class="evt_btn_button" id="evtBtnDel"> - </button>
+                                            <p><input type="text" class="evt_btn_input" name="btn2Link" id="btn2Link" title="버튼에 대한 링크 URL" placeholder="버튼에 대한 링크 URL"></p>
+                                        </div>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr class="event_y" style="display:none;">
+                                <th><label for="">버튼 *</label></th>
+                                <td class="event_btn_area">
+                                    <div class="evt_btn1">
+                                        <input type="text" class="evt_btn_input" name="btn1Name" id="btn1Name" title="버튼명" placeholder="버튼명"><button type="button" class="evt_btn_button" id="evtBtnAdd"> + </button>
+                                        <p><input type="text" class="evt_btn_input" name="btn1Link" id="btn1Link" title="버튼에 대한 링크 URL" placeholder="버튼에 대한 링크 URL"></p>
+                                    </div>
+                                    <div class="evt_btn2" data-flag="false" style="display:none;">
+                                        <input type="text" class="evt_btn_input" name="btn2Name" id="btn2Name" title="버튼명" placeholder="버튼명"><button type="button" class="evt_btn_button" id="evtBtnDel"> - </button>
+                                        <p><input type="text" class="evt_btn_input" name="btn2Link" id="btn2Link" title="버튼에 대한 링크 URL" placeholder="버튼에 대한 링크 URL"></p>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
                         <tr>
                             <th rowspan="2"><label for="">상품 페이지 배너</label></th>
                             <td class="radio_area">
                                 <label for="productBannerY"><input type="radio" name="productBannerYn" id="productBannerY" value="Y"> 배포</label>
                                 <label for="productBannerN"><input type="radio" name="productBannerYn" id="productBannerN" value="N"> 미배포</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="checkbox_area">
-                                <label for="productType1"><input type="checkbox" class="productTypeKor" id="productType1" name="productType1" value="Y"> 잔가보장형 상품</label>
-                                <label for="productType2"><input type="checkbox" class="productTypeKor" id="productType2" name="productType2" value="Y"> 일반 할부 상품</label>
                             </td>
                         </tr>
                     </table>
@@ -192,31 +210,6 @@
                             }
                             </td>
                         </tr>
-                        <tr class="add_img_area">
-                            <th>본문 상단 이미지</th>
-                            <td class="file_area">
-                                @if (ViewBag.topMainEngList.Count != 0)
-                                {
-                                     for (int i = 0, size = ViewBag.topMainEngList.Count; i < size; i++)
-                                        {
-                                        <div class="top_main_text">
-                                            <span class="file_src">@ViewBag.topMainEngList[i].originalFilename</span>
-                                            <input type="file" class="input_file" name="engTopMain" id="engTopMainText">
-                                            <label for="engTopMainText" class="btn_file">파일찾기</label>
-                                            <input type="hidden" name="engFileIdxs" value="@ViewBag.topMainEngList[i].fileIdx" />
-                                        </div>
-                                    }
-                                }
-                                else
-                                {
-                                    <div class="top_main_text">
-                                        <span class="file_src"></span>
-                                        <input type="file" class="input_file" name="engTopMain" id="engTopMainText">
-                                        <label for="engTopMainText" class="btn_file">파일찾기</label>
-                                    </div>
-                                }
-                            </td>
-                        </tr>
                         <tr class="add_img_area eng">
                             <th>본문 이미지</th>
                             <td class="file_area">
@@ -252,19 +245,48 @@
                                  }
                             </td>
                         </tr>
-                        <tr>
-                            <th rowspan="2"><label for="">상품 페이지 배너</label></th>
-                            <td class="radio_area">
-                                <label for="productBannerEngY"><input type="radio" name="productBannerYnEng" id="productBannerEngY" value="Y"> 배포</label>
-                                <label for="productBannerEngN"><input type="radio" name="productBannerYnEng" id="productBannerEngN" value="N"> 미배포</label>
+                        @if ("E".Equals(ViewBag.item.category))
+                        {
+                        <tr class="event_y">
+                            <th><label for="">버튼 *</label></th>
+                            <td class="event_btn_area">
+                                <div class="evt_btn1_eng">
+                                    <input type="text" class="evt_btn_input" name="btn1NameEng" id="btn1NameEng" title="버튼명" placeholder="버튼명" value="@ViewBag.item.btn1NameEng"><button type="button" class="evt_btn_button" id="evtBtnAddEng"> + </button>
+                                    <p><input type="text" class="evt_btn_input" name="btn1LinkEng" id="btn1LinkEng" title="버튼에 대한 링크 URL" placeholder="버튼에 대한 링크 URL" value="@ViewBag.item.btn1LinkEng"></p>
+                                </div>
+                                @if (ViewBag.item.btn2NameEng != null)
+                                {
+                                    <div class="evt_btn2_eng" data-flag="true">
+                                        <input type="text" class="evt_btn_input" name="btn2NameEng" id="btn2NameEng" title="버튼명" placeholder="버튼명" value="@ViewBag.item.btn2NameEng"><button type="button" class="evt_btn_button" id="evtBtnDelEng"> - </button>
+                                        <p><input type="text" class="evt_btn_input" name="btn2LinkEng" id="btn2LinkEng" title="버튼에 대한 링크 URL" placeholder="버튼에 대한 링크 URL" value="@ViewBag.item.btn2LinkEng"></p>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="evt_btn2_eng" data-flag="false" style="display:none;">
+                                        <input type="text" class="evt_btn_input" name="btn2NameEng" id="btn2NameEng" title="버튼명" placeholder="버튼명"><button type="button" class="evt_btn_button" id="evtBtnDelEng"> - </button>
+                                        <p><input type="text" class="evt_btn_input" name="btn2LinkEng" id="btn2LinkEng" title="버튼에 대한 링크 URL" placeholder="버튼에 대한 링크 URL"></p>
+                                    </div>
+                                }
                             </td>
                         </tr>
-                        <tr>
-                            <td class="checkbox_area">
-                                <label for="productType1Eng"><input type="checkbox" class="productTypeEng" name="productType1Eng" id="productType1Eng" value="Y"> 잔가보장형 상품</label>
-                                <label for="productType2Eng"><input type="checkbox" class="productTypeEng" name="productType2Eng" id="productType2Eng" value="Y"> 일반 할부 상품</label>
-                            </td>
-                        </tr>
+                        }
+                        else
+                        {
+                            <tr class="event_y" style="display:none;">
+                                <th><label for="">버튼 *</label></th>
+                                <td class="event_btn_area">
+                                    <div class="evt_btn1_eng">
+                                        <input type="text" class="evt_btn_input" name="btn1NameEng" id="btn1NameEng" title="버튼명" placeholder="버튼명"><button type="button" class="evt_btn_button" id="evtBtnAddEng"> + </button>
+                                        <p><input type="text" class="evt_btn_input" name="btn1LinkEng" id="btn1LinkEng" title="버튼에 대한 링크 URL" placeholder="버튼에 대한 링크 URL"></p>
+                                    </div>
+                                    <div class="evt_btn2_eng" data-flag="false" style="display:none;">
+                                        <input type="text" class="evt_btn_input" name="btn2NameEng" id="btn2NameEng" title="버튼명" placeholder="버튼명"><button type="button" class="evt_btn_button" id="evtBtnDelEng"> - </button>
+                                        <p><input type="text" class="evt_btn_input" name="btn2LinkEng" id="btn2LinkEng" title="버튼에 대한 링크 URL" placeholder="버튼에 대한 링크 URL"></p>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
                     </table>
                     <input type="hidden" name="idx" value="@ViewBag.item.idx"/>
                     </form>
@@ -277,6 +299,12 @@
 <script>
     lnbSet(2, 1);
     //value setting (kor)
+    if ('@ViewBag.item.category' === 'P') {
+        $('#categoryP').prop('checked', true);
+    } else if ('@ViewBag.item.category' === 'E') {
+        $('#categoryE').prop('checked', true);
+    }
+
     if('@ViewBag.item.engYn' === 'Y'){
      $('#engY').prop('checked', true);
     }else{
@@ -292,40 +320,13 @@
     }else{
        $('#productBannerN').prop('checked', true);
     }
-    if ('@ViewBag.item.productBannerYn' === 'Y') {
-        if ('@ViewBag.item.productType1' === 'Y') {
-            $('#productType1').prop('checked', true);
-        }
-        if ('@ViewBag.item.productType2' === 'Y') {
-            $('#productType2').prop('checked', true);
-        }
-    } else {
-        $('#productType1').prop('checked', true);
-        $('.productTypeKor').prop('disabled', true);//상품 배너(국문) 체크박스
-    }
     //value setting (eng)
     if ('@ViewBag.item.engYn' === 'Y') {
         $('.eng_site').show();
-        if('@ViewBag.item.productBannerYn' === 'Y'){
-            $('#productBannerEngY').prop('checked', true);
-        }else{
-            $('#productBannerEngN').prop('checked', true);
-        }
-        if ('@ViewBag.item.productBannerYnEng' === 'Y') {
-            if ('@ViewBag.item.productType1Eng' === 'Y') {
-                $('#productType1Eng').prop('checked', true);
-            }
-            if ('@ViewBag.item.productType2Eng' === 'Y') {
-                $('#productType2Eng').prop('checked', true);
-            }
-        }
-    } else {
-        $('#productType1Eng').prop('checked', true);
-        $('.productTypeEng').prop('disabled', true);//상품 배너(영문) 체크박스
     }
 
     function modForm() {
-        //if (!validation()) return;
+        if (!validation()) return;
         if (!confirm('수정하시겠습니까?')) return;
         $('#content form').attr('action', 'modifyProc').submit();
     };
@@ -337,16 +338,17 @@
         if (!$('#startDate').required()) return;
         if (!$('#endDate').required()) return;
         if (!$('#tit').required()) return;
-        if ($('#thumbNail').val() === '') {
+        //if ($('#thumbNail').val() === '') {
+        //    alert('국문 썸네일을 등록하세요.');
+        //    return;
+        //}
+        if ($('#thumbNail').parent().find('.file_src').text() === '') {
             alert('국문 썸네일을 등록하세요.');
             return;
         }
-        if ($('#topMainText').val() === '') {
-            alert('국문 본문 상단 이미지를 등록하세요.');
-            return;
-        }
+
         $('input[name=mainImg]').each(function () {
-            if ($(this).val() === '') {
+            if ($(this).parent().find('.file_src').text() === '') {
                 mainImgFlagKor = true;
             }
         });
@@ -354,25 +356,25 @@
             alert('국문 본문 이미지를 등록하세요.');
             return;
         }
-        //if ($('#productBannerY').prop('checked')) {
-        //    if ($('.productType:checked').length == 0) {
-        //        alert('상품 페이지 배너 종류를 선택하세요. (국문)');
-        //        return;
-        //    }
-        //}
+
+        if ($('#categoryE').prop('checked')) {//이벤트 등록시 버튼 필수값 체크
+            if (!$('#btn1Name').required()) return;
+            if (!$('#btn1Link').required()) return;
+
+            if ($('.evt_btn2').attr('data-flag') === 'true') {
+                if (!$('#btn2Name').required()) return;
+                if (!$('#btn2Link').required()) return;
+            }
+        }
 
         if ($('#engY').prop('checked')) {
             if (!$('#titEng').required()) return;
-            if ($('#engThumbNail').val() === '') {
+            if ($('#engThumbNail').parent().find('.file_src').text() === '') {
                 alert('영문 썸네일을 등록하세요.');
                 return;
             }
-            if ($('#engTopMainText').val() === '') {
-                alert('영문 본문 상단 이미지를 등록하세요.');
-                return;
-            }
             $('input[name=engMainImg]').each(function () {
-                if ($(this).val() === '') {
+                if ($(this).parent().find('.file_src').text() === '') {
                     mainImgFlagEng = true;
                 }
             });
@@ -380,18 +382,21 @@
                 alert('영문 본문 이미지를 등록하세요.');
                 return;
             }
-            //if ($('#productBannerEngY').prop('checked')) {
-            //    if ($('.productTypeEng:checked').length == 0) {
-            //        alert('상품 페이지 배너 종류를 선택하세요. (영문)');
-            //        return;
-            //    }
-            //}
+            if ($('#categoryE').prop('checked')) {//이벤트 등록시 버튼 필수값 체크
+                if (!$('#btn1NameEng').required()) return;
+                if (!$('#btn1LinkEng').required()) return;
+
+                if ($('.evt_btn2_eng').attr('data-flag') === 'true') {
+                    if (!$('#btn2NameEng').required()) return;
+                    if (!$('#btn2LinkEng').required()) return;
+                }
+            }
         }
         return true;
     };
 
     function deleteFile(obj) {
-        //실제 파일 삭제 
+        //실제 파일 삭제
         if (!confirm('파일을 삭제하시겠습니까?')) return;
         $obj = $(obj);
         $fileKey = $obj.attr('data-key');
@@ -466,20 +471,37 @@
         }
     });
 
-    $('input[name=productBannerYn]').change(function () {//상품 페이지 배너 배포 Y (국문)
-        if ($('#productBannerY').prop('checked')) {
-            $('.productTypeKor').prop('disabled', false);
-        } else if ($('#productBannerN').prop('checked')) {
-            $('.productTypeKor').prop('disabled', true);
+    $('input[name=category]').change(function () {//카테고리 변경시
+        if ($('#categoryE').prop('checked')) {
+            $('.event_y').show();//버튼명 show
+        } else {
+            $('.event_y').find('input').val('');
+            $('.evt_btn2').attr('data-flag', 'false');
+            $('.evt_btn2_eng').attr('data-flag', 'false');
+            $('.evt_btn2').hide();
+            $('.evt_btn2_eng').hide();
+            $('.event_y').hide();//버튼명 hide
         }
     });
 
-    $('input[name=productBannerYnEng]').change(function () {//상품 페이지 배너 배포 Y (국문)
-        if ($('#productBannerEngY').prop('checked')) {
-            $('.productTypeEng').prop('disabled', false);
-        } else if ($('#productBannerEngN').prop('checked')) {
-            $('.productTypeEng').prop('disabled', true);
-        }
+    $('#evtBtnAdd').click(function () {//국문 버튼영역
+        $('.evt_btn2').attr('data-flag', 'true');
+        $('.evt_btn2').show();
+    });
+    $('#evtBtnDel').click(function () {
+        $('.evt_btn2').find('input').val('');
+        $('.evt_btn2').attr('data-flag', 'false');
+        $('.evt_btn2').hide();
+    });
+
+    $('#evtBtnAddEng').click(function () {//영문 버튼영역
+        $('.evt_btn2_eng').attr('data-flag', 'true');
+        $('.evt_btn2_eng').show();
+    });
+    $('#evtBtnDelEng').click(function () {
+        $('.evt_btn2_eng').find('input').val('');
+        $('.evt_btn2_eng').attr('data-flag', 'false');
+        $('.evt_btn2_eng').hide();
     });
 
 })(jQuery);

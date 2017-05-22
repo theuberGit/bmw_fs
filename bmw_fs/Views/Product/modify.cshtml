@@ -39,8 +39,7 @@
                     <th scope="row"><label for="contents">* 내용</label></th>
                     <td><textarea rows="20" cols="30" id="contents" name="contents">@Html.Raw(@ViewBag.item.contents)</textarea></td>
                 </tr>
-            </table>
-            <input type="hidden" name="uptId" id="uptId" value="@HttpContext.Current.User.Identity.Name" />
+            </table>            
             <input type="hidden" name="idx" value="@ViewBag.item.idx" />
         </form>
         <div class="btn_area">

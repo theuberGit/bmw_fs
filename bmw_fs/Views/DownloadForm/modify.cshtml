@@ -1,0 +1,91 @@
+﻿<div id="content" class="reg">
+    <div class="cont_top">
+        <h3>다운로드 자료/양식</h3>
+    </div>
+    <div class="cont_bottom">
+        <form method="post" enctype="multipart/form-data">
+            <input type="hidden" name="idx" value="@ViewBag.item.idx" />
+            <table class="reg_table">
+                <colgroup>
+                    <col width="130px" />
+                    <col width="870px" />
+                </colgroup>
+                <tr>
+                    <th>작성자 </th>
+                    <td>@ViewBag.item.regId</td>
+                </tr>
+                <tr>
+                    <th><label for="">양식명 *</label></th>
+                    <td><input type="text" name="formName" id="formName" class="input_long_type" title="양식명" value="@ViewBag.item.formName" maxlength="50"></td>
+                </tr>
+                <tr>
+                    <th><label for="">이용 용도 *</label></th>
+                    <td><textarea name="usagePurpose" id="usagePurpose" title="이용 용도">@ViewBag.item.usagePurpose</textarea></td>
+                </tr>
+                <tr class="add_img_area">
+                    <th>첨부파일 *</th>
+                    <td class="file_area">
+                        @if (ViewBag.files.Count > 0)
+                        {
+                            for (int i = 0, size = ViewBag.files.Count; i < size; i++)
+                            {
+                                <div class="main_img">
+                                    <span class="file_src">@ViewBag.files[i].originalFilename</span>
+                                    <input type="file" class="input_file" name="formFile" id="formFile" title="첨부파일">
+                                    <label for="formFile" class="btn_file">찾아보기</label>
+                                    <input type="hidden" name="fileIdxs" value="@ViewBag.files[i].fileIdx" />
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="main_img">
+                                <span class="file_src"></span>
+                                <input type="file" class="input_file" name="formFile" id="formFile" title="첨부파일">
+                                <label for="formFile" class="btn_file">찾아보기</label>
+                                <input type="hidden" name="fileIdxs" />
+                            </div>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="deployY">배포*</label></th>
+                    <td class="radio_area">
+                        <label for="deployY"><input type="radio" name="deployYn" id="deployY" value="Y" title="배포 여부"> 배포</label>
+                        <label for="deployN"><input type="radio" name="deployYn" id="deployN" checked value="N" title="배포 여부"> 미배포</label>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <div class="btn_area">
+            <a href="list" class="btn_defualt btn_list">목록</a>
+            <a href="javascript:void(0);" class="btn_defualt btn_reg" onclick="modForm();">수정</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        lnbSet(9, 3);
+
+        if ('@ViewBag.item.deployYn' === 'Y') {
+            $('#deployY').prop('checked', true);
+        }
+        else {
+            $('#deployN').prop('checked', true);
+        }
+
+    });
+    function modForm() {
+        if (!$('#formName').required()) return;
+        if (!$('#usagePurpose').required()) return;
+
+        if (Number('@ViewBag.files.Count') === 0) {
+            if (!$('#formFile').required()) return;
+        }
+
+        if (!confirm('수정하시겠습니까')) return;
+
+        $('#content form').attr('action', 'modifyProc').submit();
+    };
+</script>

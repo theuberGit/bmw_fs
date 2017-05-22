@@ -40,6 +40,7 @@ namespace bmw_fs.Controllers.legalNotice
         {
             HttpFileCollectionBase multipartfiles = Request.Files;
             business.contents = Sanitizer.GetSafeHtmlFragment(business.contents);
+            business.regId = System.Web.HttpContext.Current.User.Identity.Name;
             businessService.insertBusiness(multipartfiles, business);
             return RedirectToAction("list");
         }
@@ -66,6 +67,7 @@ namespace bmw_fs.Controllers.legalNotice
         {
             HttpFileCollectionBase multipartRequest = Request.Files;
             business.contents = Sanitizer.GetSafeHtmlFragment(business.contents);
+            business.uptId = System.Web.HttpContext.Current.User.Identity.Name;
             businessService.updateBusiness(multipartRequest, business);
             return RedirectToAction("list");
         }
