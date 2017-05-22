@@ -1,4 +1,4 @@
-﻿using bmw_fs.Models.rollling;
+﻿using bmw_fs.Models.rolling;
 using IBatisNet.DataMapper;
 using System;
 using System.Collections.Generic;
@@ -24,19 +24,19 @@ namespace bmw_fs.Dao.face.rolling
             Mapper.Instance().Insert("rolling.insertRollingt", rolling);
         }
 
-        public Rolling findRolling(Rolling rolling)
-        {
-            return Mapper.Instance().QueryForObject<Rolling>("rolling.findCredit", rolling);
-        }
+        //public Rolling findRolling(Rolling rolling)
+        //{
+        //    return Mapper.Instance().QueryForObject<Rolling>("rolling.findCredit", rolling);
+        //}
 
-        public void updateRolling(Rolling rolling)
-        {
-            Mapper.Instance().Update("rolling.updateRolling", rolling);
-        }
+        //public void updateRolling(Rolling rolling)
+        //{
+        //    Mapper.Instance().Update("rolling.updateRolling", rolling);
+        //}
 
-        public void deleteRolling(Rolling rolling)
-        {
-            Mapper.Instance().Delete("rolling.deleteRolling", rolling);
-        }
+        //public void deleteRolling(Rolling rolling)
+        //{
+        //    Mapper.Instance().Delete("rolling.deleteRolling", rolling);
+        //}
     }
 }

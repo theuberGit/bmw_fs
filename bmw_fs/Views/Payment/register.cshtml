@@ -15,28 +15,27 @@
                 </colgroup>
                 <tr>
                     <th scope="row"><label for="regId">작성자</label></th>
-                    <td>@HttpContext.Current.User.Identity.Name<input type="hidden" name="regId" id="regId" value="@HttpContext.Current.User.Identity.Name" /></td>
+                    <td>@HttpContext.Current.User.Identity.Name</td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="">* 분류</label></th>
                     <td>
-                        <select name="brand" id="brand" title="분류">
+                        <select name="brand" id="brand"class="category_select" title="브랜드">
+                            <option value="">구분</option>
                             <option value="BMW">BMW</option>
                             <option value="MINI">MINI</option>
                         </select>
-                        <select name="series" id="series"  title="분류">
-                            <option value=""></option>
-                            <option value="3 Series">3 Series</option>
+                        <select name="series" id="series" class="category_select" title="시리즈">
+                            <option value="">구분</option>                    
                         </select>
-                        <select name="model" id="model"  title="분류">
-                            <option value=""></option>
-                            <option value="320">320</option>
+                        <select name="model" id="model" class="category_select" title="모델">
+                            <option value="">구분</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="modelName">* 상세 모델</label></th>
-                    <td><input type="text" name="modelName" id="modelName" class="modelName" maxlength="50" title="상세모델" /></td>
+                    <td><input type="text" name="modelName" id="modelName" class="modelName input_long_type" maxlength="50" title="상세모델" /></td>
                 </tr>
                 <tr class="add_img_area">
                     <th>* 차량 이미지</th>
@@ -50,13 +49,13 @@
                 </tr>
                 <tr>
                     <th scope="row"><label for="price">* 차량가격</label></th>
-                    <td><input type="text" name="price" id="price" class="price" maxlength="50" title="차량가격" /> 원</td>
+                    <td><input type="text" name="price" id="price" class="price" maxlength="50" title="차량가격" onkeyup="inputNumberFormat(this)" /> 원</td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="item">* 상품 선택</label></th>
                     <td>
                         <select name="item" id="item" title="상품">
-                            <option value="잔가보장형 할부">잔가보자형 할부</option>
+                            <option value="잔가보장형 할부">잔가보장형 할부</option>
                             <option value="일반 할부">일반 할부</option>
                         </select>
                     </td>
@@ -67,15 +66,15 @@
                 </tr>
                 <tr>
                     <th scope="row"><label for="payment1">월 납입금 (선납 10%)</label></th>
-                    <td><input type="text" name="payment1" id="payment1" class="payment1" maxlength="50" title="월 납입금" /> 원</td>
+                    <td><input type="text" name="payment1" id="payment1" class="payment1" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span id="result1"></span></td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="payment2">월 납입금 (선납 20%)</label></th>
-                    <td><input type="text" name="payment2" id="payment2" class="payment2" maxlength="50" title="월 납입금" /> 원</td>
+                    <td><input type="text" name="payment2" id="payment2" class="payment2" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span id="result2"></span></td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="payment3">월 납입금 (선납 30%)</label></th>
-                    <td><input type="text" name="payment3" id="payment3" class="payment3" maxlength="50" title="월 납입금" /> 원</td>
+                    <td><input type="text" name="payment3" id="payment3" class="payment3" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span id="result3"></span></td>
                 </tr>
                 <tr>
                     <th><label for="">배포 *</label></th>
@@ -85,6 +84,7 @@
                     </td>
                 </tr>
             </table>
+            <input type="hidden" name="regId" id="regId" value="@HttpContext.Current.User.Identity.Name" />
         </form>
         <div class="btn_area">
             <a href="list?@Session["searchString"]" class="btn_defualt btn_list">목록</a>
@@ -93,12 +93,142 @@
     </div>
 </div>
 <script>
+    //브랜드 셀렉트값 변경시
+    $(document).on('change', '#brand', function () {
+        console.log($(this));
+        $seriesSelect = $(this).siblings('.category_select').eq(0);
+        $modelSelect = $(this).siblings('.category_select').eq(1);
+        var series = "";
+        var model = "";
+        //시리즈 초기화
+        $seriesSelect.html(series);
+        //모델 초기화
+        $modelSelect.html(model);
+        var val = $(this).val();
+
+        if (val == "BMW") {
+
+            series += '<option value="">구분</option>';
+            series += '<option value="1 Series">1 Series</option>';
+            series += '<option value="Active Tourer">Active Tourer</option>';
+            series += '<option value="3 Series">3 Series</option>';
+            series += '<option value="4 Series">4 Series</option>';
+            series += '<option value="5 Series">5 Series</option>';
+            series += '<option value="6 Series">6 Series</option>';
+            series += '<option value="7 Series">7 Series</option>';
+            series += '<option value="X">X</option>';
+            series += '<option value="GT">GT</option>';
+            series += '<option value="M">M</option>';
+            series += '<option value="Z">Z</option>';
+            series += '<option value="i">i</option>';
+
+            model += '<option value="">구분</option>';
+        } else if (val == "MINI") {
+            series += '<option value="">구분</option>';
+            series += '<option value="MINI">MINI</option>';
+
+            model += '<option value="">구분</option>';
+        } else {
+            series += '<option value="">구분</option>';
+        }
+        $('#series').append(series);
+        $('#model').append(model);
+    });
+    //시리즈 셀렉트값 변경시
+    $(document).on("change", "#series", function (e) {
+
+        $modelSelect = $(this).siblings('.category_select').eq(1);
+        var model = "";
+        //모델 초기화
+        $modelSelect.html(model);
+        var val = $(this).val();
+
+        model = '<option value="">구분</option>';
+        if (val == "1 Series") {
+            model += '<option value="118">118</option>';
+        } else if (val == "Active Tourer") {
+            model += '<option value="Active Tourer">Active Tourer</option>';
+        } else if (val == "3 Series") {
+            model += '<option value="320">320</option>';
+            model += '<option value="328">328</option>';
+        } else if (val == "4 Series") {
+            model += '<option value="420">420</option>';
+            model += '<option value="428">428</option>';
+            model += '<option value="435">435</option>';
+        } else if (val == "5 Series") {
+            model += '<option value="520">520</option>';
+            model += '<option value="528">528</option>';
+            model += '<option value="530">530</option>';
+        } else if (val == "6 Series") {
+            model += '<option value="640">640</option>';
+        } else if (val == "7 Series") {
+            model += '<option value="730">730</option>';
+            model += '<option value="740">740</option>';
+            model += '<option value="750">750</option>';
+        } else if (val == "X") {
+            model += '<option value="X1">X1</option>';
+            model += '<option value="X2">X2</option>';
+            model += '<option value="X3">X3</option>';
+            model += '<option value="X4">X4</option>';
+            model += '<option value="X5">X5</option>';
+            model += '<option value="X6">X6</option>';
+        } else if (val == "GT") {
+            model += '<option value="GT">GT</option>';
+        } else if (val == "M") {
+            model += '<option value="M2">M2</option>';
+            model += '<option value="M3">M3</option>';
+            model += '<option value="M4">M4</option>';
+            model += '<option value="M5">M5</option>';
+            model += '<option value="M6">M6</option>';
+        } else if (val == "Z") {
+            model += '<option value="Z4">Z4</option>';
+        } else if (val == "i") {
+            model += '<option value="i3">i3</option>';
+            model += '<option value="i8">i8</option>';
+        } else {
+            model += '';
+        }
+        $('#model').append(model);
+    });
+    //일반할부 선택시 잔가 필드 비활성화
+    $(document).on('change', '#item', function () {
+        //item 선택값
+        var val = $(this).val();
+        var zanga = document.getElementById('zanga');
+        if (val == "일반 할부") {
+            $('#zanga').val("");
+            zanga.disabled = true;
+        } else {
+            zanga.disabled = false;
+        }
+    });
+    //가격입력시 선납금 계산
+    $(document).on('change', '#price', function () {
+
+        var val = $(this).val();
+        //선납계산을 위해 콤마제거
+        var num = unComma(val);
+
+        //if (!$('#price').isnum()) {
+        //    $('#price').val("");
+        //    return;
+        //}
+        //선납 계산
+        var result1 = num * 0.1;
+        var result2 = num * 0.2;
+        var result3 = num * 0.3;
+        //선납금 표시할때 콤마 추가
+        $('#result1').text("(" + addComma(parseInt(result1)) + "원)");
+        $('#result2').text("(" + addComma(parseInt(result2)) + "원)");
+        $('#result3').text("(" + addComma(parseInt(result3)) + "원)");
+    });
     lnbSet(4, 1);
     function regForm() {
-
         if (!$('#brand').reqSelect()) return;
         if (!$('#series').reqSelect()) return;
-        if (!$('#model').reqSelect()) return;
+        if ($('select[name="brand"]').val() == "BMW") {
+            if (!$('#model').reqSelect()) return;
+        }
         if (!$('#modelName').required()) return;
         if ($('#carImg').val() == '') {
             alert('차량 이미지를 등록하세요.');
@@ -106,6 +236,9 @@
         }
         if (!$('#price').required()) return;
         if (!$('#item').reqSelect()) return;
+        if ($('select[name="item"]').val() == "잔가보장형 할부") {
+            if (!$('#zanga').required()) return;
+        }
 
         if (!confirm('등록하시겠습니까?')) return;
 

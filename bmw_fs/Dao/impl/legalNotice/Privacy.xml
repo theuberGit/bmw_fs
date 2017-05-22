@@ -1,8 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-
-
 <sqlMap namespace="privacy" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
-
   <alias>
     <typeAlias alias="PrivacyClass" type="bmw_fs.Models.legalNotice.Privacy"/>
   </alias>

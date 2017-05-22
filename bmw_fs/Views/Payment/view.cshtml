@@ -41,7 +41,11 @@
                 </tr>
                 <tr>
                     <th scope="row"><label for="zanga">잔가</label></th>
-                    <td>@ViewBag.item.zanga  %</td>
+                    <td>
+                        @if (ViewBag.item.zanga != 0){
+                         @ViewBag.item.zanga <span>%</span>
+                        }
+                    </td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="payment1">월 납입금 (선납 10%)</label></th>
