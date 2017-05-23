@@ -17,7 +17,7 @@ namespace bmw_fs.Controllers.legalNotice
         public ActionResult list(Privacy privacy)
         {
             searchService.setSearchSession(Request, Session);
-            searchService.setPagination(privacy, 10, privacyService.findAllCount(privacy));
+            searchService.setPagination(privacy, 20, privacyService.findAllCount(privacy));
             ViewBag.list = privacyService.findAll(privacy);
             ViewBag.pagination = privacy;
             return View();

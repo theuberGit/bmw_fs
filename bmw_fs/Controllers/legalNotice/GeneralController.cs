@@ -21,7 +21,7 @@ namespace bmw_fs.Controllers.legalNotice
         public ActionResult list(General general)
         {
             searchService.setSearchSession(Request, Session);
-            searchService.setPagination(general, 10, generalService.findAllCount(general));
+            searchService.setPagination(general, 20, generalService.findAllCount(general));
             ViewBag.list = generalService.findAll(general);
             ViewBag.pagination = general;
 
