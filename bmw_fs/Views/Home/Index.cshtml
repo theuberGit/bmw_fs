@@ -1,21 +1,4 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
-
-@if (Request.IsAuthenticated)
-{
-    <form method="post" action="/login/LogOff">
-        <a href="#" onclick="logout();">로그아웃</a>
-        @Html.AntiForgeryToken()
-    </form>
-}
-else
-{
-    <a href="/Login/Login">로그인</a>
-}
-
-<div> @HttpContext.Current.User.Identity.Name</div>
-<ul>
+﻿<ul>
     @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("MASTER"))
     {
         <li>@Html.ActionLink("관리자", "master", "member")</li>
@@ -26,12 +9,3 @@ else
     }
 
 </ul>
-12345
-
-<div style="margin-top:100px;">index</div>
-<script>
-    function logout() {
-        $('form').submit();
-    }
-
-</script>

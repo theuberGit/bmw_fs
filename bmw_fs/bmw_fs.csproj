@@ -410,8 +410,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Rolling\modify.cshtml" />
     <Content Include="Views\Rolling\register.cshtml" />
@@ -470,12 +468,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Login\Login.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Member\master.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Member\list.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Error\Error500.cshtml" />
