@@ -41,6 +41,9 @@
         <isEqual property="searchOption" compareValue="status">
           AND ACTIVE_YN LIKE '%'+#searchInput#+'%'
         </isEqual>
+        <isEqual property="searchOption" compareValue="role">
+          AND ROLE LIKE '%'+#searchInput#+'%'
+        </isEqual>
       </isNotEmpty>
       )t
       WHERE 1=1
@@ -57,6 +60,9 @@
         </isEqual>
         <isEqual property="searchOption" compareValue="status">
           AND ACTIVE_YN LIKE '%'+#searchInput#+'%'
+        </isEqual>
+        <isEqual property="searchOption" compareValue="role">
+          AND ROLE LIKE '%'+#searchInput#+'%'
         </isEqual>
       </isNotEmpty>
     </select>
@@ -88,18 +94,26 @@
         AND PASSWORD = #password#
     </select>
 
+    <select id="findMemberDuplicated" resultClass="int">
+      SELECT COUNT(*)
+        FROM BMW_FS_ADMIN_MEMBER
+      WHERE USER_ID = #userId#
+    </select>
+
     <insert id="insertMember">
       INSERT INTO BMW_FS_ADMIN_MEMBER (
                    USER_ID
                   ,PASSWORD
                   ,ROLE
                   ,REG_ID
+                  ,ACTIVE_YN
                   )
       VALUES (
                   #userId#
                  ,#password#
                  ,#role#
                  ,#regId#
+                 ,#activeYn#
                   )
     </insert>
 
@@ -108,7 +122,11 @@
             SET ROLE = #role#
                  ,UPT_ID = #uptId#
                  ,UPT_DATE = GETDATE()
-        WHERE IDX = #idx#
+              <isNotEmpty property="password">
+                ,PASSWORD = #password#
+              </isNotEmpty>
+                ,ACTIVE_YN = #activeYn#
+      WHERE IDX = #idx#
     </update>
 
     <delete id="deleteMember">

@@ -24,6 +24,9 @@ namespace bmw_fs.Service.face.admin
         void deleteMember(Member member);
 
         void updateLoginDate(Member member);
-        
+
+        bool findMemberDuplicated(Member member);
+
+
     }
 }
