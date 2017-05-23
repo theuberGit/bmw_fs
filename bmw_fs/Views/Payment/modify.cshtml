@@ -1,7 +1,6 @@
 ﻿@{
     ViewBag.Title = "월 납입금 수정";
 }
-
 <div id="content" class="reg">
     <div class="cont_top">
         <h3>월 납입금 수정</h3>
@@ -21,86 +20,176 @@
                 <tr>
                     <th scope="row"><label for="">* 분류</label></th>
                     <td>
-                        <select name="brand" id="brand" title="분류">
+                        <select name="brand" id="brand" class="category_select" title="브랜드">
+                            <option value="">구분</option>
                             <option value="BMW">BMW</option>
                             <option value="MINI">MINI</option>
                         </select>
-                        <select name="series" id="series" title="분류">
-                            <option value=""></option>
+                        <select name="series" id="series" class="category_select" title="BMW시리즈">
+                            <option value="">구분</option>
+                        @if (ViewBag.item.brand == "BMW")
+                        {
+                            <option value="1 Series">1 Series</option>
+                            <option value="Active Tourer">Active Tourer</option>
                             <option value="3 Series">3 Series</option>
-                        </select>
-                        <select name="model" id="model" title="분류">
-                            <option value=""></option>
-                            <option value="320">320</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="modelName">* 상세 모델</label></th>
-                    <td><input type="text" name="modelName" id="modelName" class="modelName" maxlength="50" title="상세모델" value="@ViewBag.item.modelName"/></td>
-                </tr>
-                <tr class="add_img_area">
-                    <th>* 차량 이미지</th>
-                    <td class="file_area">
-                        @if (ViewBag.carList.Count != 0)
+                            <option value="4 Series">4 Series</option>
+                            <option value="5 Series">5 Series</option>
+                            <option value="6 Series">6 Series</option>
+                            <option value="7 Series">7 Series</option>
+                            <option value="X">X</option>
+                            <option value="GT">GT</option>
+                            <option value="M">M</option>
+                            <option value="Z">Z</option>
+                            <option value="i">i</option>
+                        }
+                        @if (ViewBag.item.brand == "MINI")
                         {
-                            for (int i = 0, size = ViewBag.carList.Count; i < size; i++)
+                            <option value="MINI">MINI</option>
+                        }
+                        </select>
+                        <select name="model" id="model" class="category_select" title="모델">
+                            <option value="">구분</option>
+                            @if (ViewBag.item.series == "1 Series")
                             {
-                            <div class="car_list">
-                                <span class="file_src">@ViewBag.carList[i].originalFilename</span>
-                                <input type="file" class="input_file" name="carImg" id="carImg">
-                                <label for="carImg" class="btn_file">파일찾기</label>
-                                <input type="hidden" name="carIdxs" value="@ViewBag.carList[i].fileIdx" />
-                            </div>
+                                <option value="118">118</option>
                             }
-                        }
-                        else
-                        {
-                            <div class="car_list">
-                                <span class="file_src"></span>
-                                <input type="file" class="input_file" name="carImg" id="carImg">
-                                <label for="carImg" class="btn_file">파일찾기</label>
-                            </div>
-                        }
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="price">* 차량가격</label></th>
-                    <td><input type="text" name="price" id="price" class="price" maxlength="50" title="차량가격" value="@ViewBag.item.price"/> 원</td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="item">* 상품 선택</label></th>
-                    <td>
-                        <select name="item" id="item" title="상품">
-                            <option value="잔가보장형 할부">잔가보자형 할부</option>
-                            <option value="일반 할부">일반 할부</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="zanga">잔가</label></th>
-                    <td><input type="text" name="zanga" id="zanga" class="zanga" maxlength="50" title="잔가" value="@ViewBag.item.zanga"/> %</td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="payment1">월 납입금 (선납 10%)</label></th>
-                    <td><input type="text" name="payment1" id="payment1" class="payment1" maxlength="50" title="월 납입금" value="@ViewBag.item.payment1"/> 원</td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="payment2">월 납입금 (선납 20%)</label></th>
-                    <td><input type="text" name="payment2" id="payment2" class="payment2" maxlength="50" title="월 납입금" value="@ViewBag.item.payment2"/> 원</td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="payment3">월 납입금 (선납 30%)</label></th>
-                    <td><input type="text" name="payment3" id="payment3" class="payment3" maxlength="50" title="월 납입금" value="@ViewBag.item.payment3"/> 원</td>
-                </tr>
-                <tr>
-                    <th><label for="">배포 *</label></th>
-                    <td class="radio_area">
-                        <label for="active"><input type="radio" name="deployYn" id="active" value="Y" title="배포 여부"> 배포</label>
-                        <label for="inactivity"><input type="radio" name="deployYn" id="inactivity" checked value="N" title="배포 여부"> 미배포</label>
-                    </td>
-                </tr>
-            </table>
+                            @if (ViewBag.item.series == "Active Tourer")
+                            {
+                                <option value="Active Tourer">Active Tourer</option>
+                            }
+                            @if (ViewBag.item.series == "3 Series")
+                            {
+                                <option value="320">320</option>
+                                <option value="328">328</option>
+                            }
+                            @if (ViewBag.item.series == "4 Series")
+                            {
+                                <option value="420">420</option>
+                                <option value="428">428</option>
+                                <option value="435">435</option>
+                            }
+                            @if (ViewBag.item.series == "5 Series")
+                            {
+                                <option value="520">520</option>
+                                <option value="528">528</option>
+                                <option value="530">530</option>
+                            }
+                            @if (ViewBag.item.series == "6 Series")
+                            {
+                                <option value="640">640</option>
+                            }
+                            @if (ViewBag.item.series == "7 Series")
+                            {
+                                <option value="730">730</option>
+                                <option value="740">740</option>
+                                <option value="750">750</option>
+                            }
+                            @if (ViewBag.item.series == "X")
+                            {
+                                <option value="X1">X1</option>
+                                <option value="X2">X2</option>
+                                <option value="X3">X3</option>
+                                <option value="X4">X4</option>
+                                <option value="X5">X5</option>
+                                <option value="X6">X6</option>
+                            }
+                            @if (ViewBag.item.series == "GT")
+                            {
+                                <option value="GT">GT</option>
+                            }
+                            @if (ViewBag.item.series == "M")
+                            {
+                                <option value="M2">M2</option>
+                                <option value="M3">M3</option>
+                                <option value="M4">M4</option>
+                                <option value="M5">M5</option>
+                                <option value="M6">M6</option>
+                            }
+                            @if (ViewBag.item.series == "Z")
+                            {
+                                <option value="Z4">Z4</option>
+                            }
+                            @if (ViewBag.item.series == "i")
+                            {
+                                <option value="i3">i3</option>
+                                <option value="i8">i8</option>
+                            }
+                            </select>
+                            </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label for="modelName">* 상세 모델</label></th>
+                                <td><input type="text" name="modelName" id="modelName" class="modelName" maxlength="50" title="상세모델" value="@ViewBag.item.modelName" /></td>
+                            </tr>
+                            <tr class="add_img_area">
+                                <th>* 차량 이미지</th>
+                                <td class="file_area">
+                                    @if (ViewBag.carList.Count != 0)
+                                    {
+                                        for (int i = 0, size = ViewBag.carList.Count; i < size; i++)
+                                        {
+                                            <div class="car_list">
+                                                <span class="file_src">@ViewBag.carList[i].originalFilename</span>
+                                                <input type="file" class="input_file" name="carImg" id="carImg">
+                                                <label for="carImg" class="btn_file">파일찾기</label>
+                                                <input type="hidden" name="carIdxs" value="@ViewBag.carList[i].fileIdx" />
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="car_list">
+                                            <span class="file_src"></span>
+                                            <input type="file" class="input_file" name="carImg" id="carImg">
+                                            <label for="carImg" class="btn_file">파일찾기</label>
+                                        </div>
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label for="price">* 차량가격</label></th>
+                                <td><input type="text" name="price" id="price" class="price" maxlength="50" title="차량가격"  onkeyup="inputNumberFormat(this)" value="@ViewBag.item.price" /> 원</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label for="item">* 상품 선택</label></th>
+                                <td>
+                                    <select name="item" id="item" title="상품">
+                                        <option value="잔가보장형 할부">잔가보장형 할부</option>
+                                        <option value="일반 할부">일반 할부</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label for="zanga">잔가</label></th>
+                                <td>
+                                @if (ViewBag.item.zanga != 0)
+                                {
+                                    <input type="text" name="zanga" id="zanga" class="zanga" maxlength="50" title="잔가" value="@ViewBag.item.zanga" /><span>%</span>
+                                }else { 
+                                    <input type="text" name="zanga" id="zanga" class="zanga" maxlength="50" title="잔가" value="" disabled/><span>%</span>
+                                }
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label for="payment1">월 납입금 (선납 10%)</label></th>
+                                <td><input type="text" name="payment1" id="payment1" class="payment1" maxlength="50" title="월 납입금"  onkeyup="inputNumberFormat(this)" value="@ViewBag.item.payment1" /> 원 <span id="result1"></span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label for="payment2">월 납입금 (선납 20%)</label></th>
+                                <td><input type="text" name="payment2" id="payment2" class="payment2" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.payment2" /> 원 <span id="result2"></span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label for="payment3">월 납입금 (선납 30%)</label></th>
+                                <td><input type="text" name="payment3" id="payment3" class="payment3" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.payment3" /> 원 <span id="result3"></span></td>
+                            </tr>
+                            <tr>
+                                <th><label for="">배포 *</label></th>
+                                <td class="radio_area">
+                                    <label for="active"><input type="radio" name="deployYn" id="active" value="Y" title="배포 여부"> 배포</label>
+                                    <label for="inactivity"><input type="radio" name="deployYn" id="inactivity" checked value="N" title="배포 여부"> 미배포</label>
+                                </td>
+                            </tr>
+                        </table>
             <input type="hidden" name="uptId" id="uptId" value="@HttpContext.Current.User.Identity.Name" />
             <input type="hidden" name="idx" value="@ViewBag.item.idx" />
         </form>
@@ -116,6 +205,12 @@
     $('select[name="series"]').val('@ViewBag.item.series');
     $('select[name="model"]').val('@ViewBag.item.model');
     $('select[name="item"]').val('@ViewBag.item.item');
+
+    var num = unComma('@ViewBag.item.price');
+    $('#result1').text("(" + addComma(parseInt(num*0.1)) + "원)");
+    $('#result2').text("(" + addComma(parseInt(num*0.2)) + "원)");
+    $('#result3').text("(" + addComma(parseInt(num*0.3)) + "원)");
+    //배포여부
     if ('@ViewBag.item.deployYn' == 'Y')
     {
       $('#active').prop('checked', true);
@@ -124,19 +219,149 @@
     {
       $('#inactivity').prop('checked', true);
     }
+    //브랜드 셀렉트값 변경시
+    $(document).on('change', '#brand', function () {
+        $seriesSelect = $(this).siblings('.category_select').eq(0);
+        $modelSelect = $(this).siblings('.category_select').eq(1);
+        var series = "";
+        var model = "";
+        //시리즈 초기화
+        $seriesSelect.html(series);
+        //모델 초기화
+        $modelSelect.html(model);
+        var val = $(this).val();
+    if (val == "BMW") {
+        series += '<option value="">구분</option>';
+        series += '<option value="1 Series">1 Series</option>';
+        series += '<option value="Active Tourer">Active Tourer</option>';
+        series += '<option value="3 Series">3 Series</option>';
+        series += '<option value="4 Series">4 Series</option>';
+        series += '<option value="5 Series">5 Series</option>';
+        series += '<option value="6 Series">6 Series</option>';
+        series += '<option value="7 Series">7 Series</option>';
+        series += '<option value="X">X</option>';
+        series += '<option value="GT">GT</option>';
+        series += '<option value="M">M</option>';
+        series += '<option value="Z">Z</option>';
+        series += '<option value="i">i</option>';
+
+        model += '<option value="">구분</option>';
+    } else if (val == "MINI") {
+        series += '<option value="">구분</option>';
+        series += '<option value="MINI">MINI</option>';
+
+        model += '<option value="">구분</option>';
+    } else {
+        series += '<option value="">구분</option>';
+        model += '<option value="">구분</option>';
+    }
+    $('#series').append(series);
+    $('#model').append(model);
+
+    });
+    //시리즈 셀렉트값 변경시
+    $(document).on("change", "#series", function (e) {
+
+        $modelSelect = $(this).siblings('.category_select').eq(1);
+        var model = "";
+        //모델 초기화
+        $modelSelect.html(model);
+        var val = $(this).val();
+
+        model = '<option value="">구분</option>';
+        if (val == "1 Series") {
+            model += '<option value="118">118</option>';
+        } else if (val == "Active Tourer") {
+            model += '<option value="Active Tourer">Active Tourer</option>';
+        } else if (val == "3 Series") {
+            model += '<option value="320">320</option>';
+            model += '<option value="328">328</option>';
+        } else if (val == "4 Series") {
+            model += '<option value="420">420</option>';
+            model += '<option value="428">428</option>';
+            model += '<option value="435">435</option>';
+        } else if (val == "5 Series") {
+            model += '<option value="520">520</option>';
+            model += '<option value="528">528</option>';
+            model += '<option value="530">530</option>';
+        } else if (val == "6 Series") {
+            model += '<option value="640">640</option>';
+        } else if (val == "7 Series") {
+            model += '<option value="730">730</option>';
+            model += '<option value="740">740</option>';
+            model += '<option value="750">750</option>';
+        } else if (val == "X") {
+            model += '<option value="X1">X1</option>';
+            model += '<option value="X2">X2</option>';
+            model += '<option value="X3">X3</option>';
+            model += '<option value="X4">X4</option>';
+            model += '<option value="X5">X5</option>';
+            model += '<option value="X6">X6</option>';
+        } else if (val == "GT") {
+            model += '<option value="GT">GT</option>';
+        } else if (val == "M") {
+            model += '<option value="M2">M2</option>';
+            model += '<option value="M3">M3</option>';
+            model += '<option value="M4">M4</option>';
+            model += '<option value="M5">M5</option>';
+            model += '<option value="M6">M6</option>';
+        } else if (val == "Z") {
+            model += '<option value="Z4">Z4</option>';
+        } else if (val == "i") {
+            model += '<option value="i3">i3</option>';
+            model += '<option value="i8">i8</option>';
+        } else {
+            model += '';
+        }
+        $('#model').append(model);
+    });
+    //일반할부 선택시 잔가 필드 비활성화
+    $(document).on('change', '#item', function () {
+        //item 선택값
+        var val = $(this).val();
+        var zanga = document.getElementById('zanga');
+        if (val == "일반 할부") {
+            $('#zanga').val("");
+            zanga.disabled = true;
+        } else {
+            zanga.disabled = false;
+        }
+    });
+    //가격입력시 선납금 계산
+    $(document).on('change', '#price', function () {
+        console.log("가격입력");
+        var val = $(this).val();
+        console.log("가격:"+val);
+        //선납계산을 위해 콤마제거
+        var num = unComma(val);
+        //선납 계산
+        var result1 = num * 0.1;
+        var result2 = num * 0.2;
+        var result3 = num * 0.3;
+        //선납금 표시할때 콤마 추가
+        $('#result1').text("(" + addComma(parseInt(result1)) + "원)");
+        $('#result2').text("(" + addComma(parseInt(result2)) + "원)");
+        $('#result3').text("(" + addComma(parseInt(result3)) + "원)");
+    });
+
     lnbSet(4, 1);
     function modForm() {
 
         if (!$('#brand').reqSelect()) return;
         if (!$('#series').reqSelect()) return;
-        if (!$('#model').reqSelect()) return;
+        if ($('select[name="brand"]').val() == "BMW") {
+            if (!$('#model').reqSelect()) return;
+        }
         if (!$('#modelName').required()) return;
-        if ($('.file_src').text() === '') {
+        if ($('.file_src').text() == '') {
             alert('차량 이미지를 등록하세요.');
             return;
         }
         if (!$('#price').required()) return;
         if (!$('#item').reqSelect()) return;
+        if ($('select[name="item"]').val() == "잔가보장형 할부") {
+            if (!$('#zanga').required()) return;
+        }
 
         if (!confirm('수정하시겠습니까?')) return;
 

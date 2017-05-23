@@ -3,9 +3,9 @@
 }
 <div id="content" class="reg">
     <div class="cont_top">
-        <h3>채용 공고</h3>
+        <h3>메인롤링</h3>
     </div>
-    <div class="cont_bottom">
+    <div class="cont_bottom rolling">
         <form method="post" enctype="multipart/form-data">
             <table class="reg_table">
                 <colgroup>
@@ -22,7 +22,7 @@
                 </tr>
                 <tr>
                     <th><label for="sdate">게시 기간 *</label></th>
-                    <td><input type="date" id="sdate" name="startDate"> ~ <input type="date" id="edate" name="endDate"></td>
+                    <td><input type="date" id="sdate" name="startDate" title="게시 시작일"> ~ <input type="date" id="edate" name="endDate"title="게시 종료일"></td>
                 </tr>
                 <tr>
                     <th><label for="">영문 사이트 *</label></th>
@@ -66,37 +66,36 @@
                 </tr>
                 <tr>
                     <th><label for="korButtonUrl">버튼 URL *</label></th>
-                    <td><input type="text" name="korButtonUrl" id="korButtonUrl" class="input_long_type" title="버튼명" maxlength="100"></td>
-                </tr>
-                <tr>
-                    <th><label for="">영문 사이트 *</label></th>
-                    <td class="radio_area">
-                        <label for="y"><input type="radio" name="engSite" id="y" value="Y" title="영문 사이트"> 있음</label>
-                        <label for="n"><input type="radio" name="engSite" id="n" checked value="N" title="영문 사이트"> 없음</label>
-                    </td>
-                </tr>
-                <tr>
-                    <th><label for="order">순서 *</label></th>
-                    <td><input type="text" name="order" id="order" class="tel_num_input" title="순서"></td>
-                </tr>
-                <tr>
-                    <th><label for="">배포</label></th>
-                    <td class="radio_area">
-                        <label for="active"><input type="radio" name="deployYn" id="active" value="Y" title="배포 여부"> 배포</label>
-                        <label for="inactivity"><input type="radio" name="deployYn" id="inactivity" checked value="N" title="배포 여부"> 미배포</label>
-                    </td>
-                </tr>
-                <tr class="add_img_area">
-                    <th>첨부파일</th>
-                    <td class="file_area">
-                        <div class="attach_file">
-                            <span class="file_src"></span>
-                            <input type="file" class="input_file" name="files" id="attachFile">
-                            <label for="attachFile" class="btn_file">파일찾기</label>
-                        </div>
-                    </td>
+                    <td><input type="text" name="korButtonUrl" id="korButtonUrl" class="input_long_type" title="버튼 URL" maxlength="100"></td>
                 </tr>
             </table>
+            <div class="rolling_list">
+                <table class="reg_table">
+                    <colgroup>
+                        <col width="130px" />
+                        <col width="870px" />
+                    </colgroup>
+                    <tr class="add_img_area">
+                        <th>롤링 이미지 (영문)*</th>
+                        <td class="file_area">
+                            <div class="attach_file">
+                                <span class="file_src"></span>
+                                <input type="file" class="input_file" name="files" id="attachFile">
+                                <label for="attachFile" class="btn_file">파일찾기</label>   사이즈 1400*600
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><label for="engButtonName">버튼명 *</label></th>
+                        <td><input type="text" name="engButtonName" id="engButtonName" class="input_long_type" title="버튼명" maxlength="100"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="engButtonUrl">버튼 URL *</label></th>
+                        <td><input type="text" name="engButtonUrl" id="engButtonUrl" class="input_long_type" title="버튼 URL" maxlength="100"></td>
+                    </tr>
+                </table>
+            </div>
+            <input type="hidden" name="regId" id="regId" value="@HttpContext.Current.User.Identity.Name" />
         </form>
         <div class="btn_area">
             <a href="list" class="btn_defualt btn_list">목록</a>
@@ -104,20 +103,13 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="/resources/se/js/HuskyEZCreator.js"></script>
-<script type="text/javascript" src="/resources/js/smarteditor.js"></script>
 <script>
-    lnbSet(8, 1);
+    lnbSet(1, 1);
 
     function regForm() {
     if (!$('#title').required()) return;
     if (!$('#sdate').required()) return;
     if (!$('#edate').required()) return;
-    editor_object.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
-    if ($('#contents').val().trim().replace(/<p>/gi, '').replace(/<\/p>/gi, '').replace(/<br>/gi, '').replace(/&nbsp;/gi, '').replace(/ /gi, '') == '') {
-        alert('내용을 입력하세요.');
-        return;
-    }
     if (!confirm('등록하시겠습니까')) return;
     $('#content form').attr('action', 'registerProc').submit();
 };

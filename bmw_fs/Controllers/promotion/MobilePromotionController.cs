@@ -18,7 +18,7 @@ namespace bmw_fs.Controllers.promotion
     [Authorize]
     public class MobilePromotionController : Controller
     {
-        WebPromotionService webPromotionService = new WebPromotionServiceImpl();
+        PromotionService webPromotionService = new PromotionServiceImpl();
         SearchService searchService = new SearchServiceImpl();
         FilesService filesService = new FilesServiceImpl();
         
@@ -45,40 +45,40 @@ namespace bmw_fs.Controllers.promotion
             HttpFileCollectionBase multipartfiles = Request.Files;
             mobilePromotion.webYn = "N";
             mobilePromotion.regId = System.Web.HttpContext.Current.User.Identity.Name;
-            webPromotionService.insertWebPromotion(multipartfiles, mobilePromotion);
+            webPromotionService.insertPromotion(multipartfiles, mobilePromotion);
             return RedirectToAction("list", (RouteValueDictionary)Session["searchMap"]);
         }
 
         public ActionResult view(Promotion mobilePromotion)
         {
-            Promotion item = webPromotionService.findWebPromotion(mobilePromotion);
+            Promotion item = webPromotionService.findPromotion(mobilePromotion);
             ViewBag.item = item;
             ViewBag.thumbList = filesService.findAllByMasterIdxAndType(item.idx, "thumbNail");
             IList<Files> mainImgList = filesService.findAllByMasterIdxAndType(item.idx, "mainImg");
             ViewBag.mainImgList = mainImgList;
-            ViewBag.imgUrlList = webPromotionService.findWebPromotionImgUrl(mobilePromotion, mainImgList);
+            ViewBag.imgUrlList = webPromotionService.findPromotionImgUrl(mobilePromotion, mainImgList);
 
             ViewBag.thumbEngList = filesService.findAllByMasterIdxAndType(item.idx, "engThumbNail");
             IList<Files> mainImgEngList = filesService.findAllByMasterIdxAndType(item.idx, "engMainImg");
             ViewBag.mainImgEngList = mainImgEngList;
-            ViewBag.imgUrlEngList = webPromotionService.findWebPromotionImgUrlEng(mobilePromotion, mainImgEngList);
+            ViewBag.imgUrlEngList = webPromotionService.findPromotionImgUrlEng(mobilePromotion, mainImgEngList);
 
             return View();
         }
 
         public ActionResult modify(Promotion mobilePromotion)
         {
-            Promotion item = webPromotionService.findWebPromotion(mobilePromotion);
+            Promotion item = webPromotionService.findPromotion(mobilePromotion);
             ViewBag.item = item;
             ViewBag.thumbList = filesService.findAllByMasterIdxAndType(item.idx, "thumbNail");
             IList<Files> mainImgList = filesService.findAllByMasterIdxAndType(item.idx, "mainImg");
             ViewBag.mainImgList = mainImgList;
-            ViewBag.imgUrlList = webPromotionService.findWebPromotionImgUrl(mobilePromotion, mainImgList);
+            ViewBag.imgUrlList = webPromotionService.findPromotionImgUrl(mobilePromotion, mainImgList);
 
             ViewBag.thumbEngList = filesService.findAllByMasterIdxAndType(item.idx, "engThumbNail");
             IList<Files> mainImgEngList = filesService.findAllByMasterIdxAndType(item.idx, "engMainImg");
             ViewBag.mainImgEngList = mainImgEngList;
-            ViewBag.imgUrlEngList = webPromotionService.findWebPromotionImgUrlEng(mobilePromotion, mainImgEngList);
+            ViewBag.imgUrlEngList = webPromotionService.findPromotionImgUrlEng(mobilePromotion, mainImgEngList);
             return View();
         }
 
@@ -89,14 +89,14 @@ namespace bmw_fs.Controllers.promotion
             HttpFileCollectionBase multipartRequest = Request.Files;
             mobilePromotion.webYn = "N";
             mobilePromotion.uptId = System.Web.HttpContext.Current.User.Identity.Name;
-            webPromotionService.updateWebPromotion(multipartRequest, mobilePromotion);
+            webPromotionService.updatePromotion(multipartRequest, mobilePromotion);
             return RedirectToAction("list", (RouteValueDictionary)Session["searchMap"]);
         }
 
         [HttpPost]
         public RedirectToRouteResult delete(Promotion mobilePromotion)
         {
-            webPromotionService.deleteWebPromotion(mobilePromotion);
+            webPromotionService.deletePromotion(mobilePromotion);
             return RedirectToAction("list");
         }
     }

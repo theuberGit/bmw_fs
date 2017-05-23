@@ -176,6 +176,7 @@
     <Compile Include="Controllers\recruit\RecruitFaqController.cs" />
     <Compile Include="Controllers\recruit\RecruitNoticeController.cs" />
     <Compile Include="Controllers\showroom\ShowroomController.cs" />
+    <Compile Include="Controllers\rolling\RollingController.cs" />
     <Compile Include="Controllers\test\BoardController.cs" />
     <Compile Include="Controllers\common\ErrorController.cs" />
     <Compile Include="Controllers\common\FilesController.cs" />
@@ -228,7 +229,7 @@
     <Compile Include="Models\recruit\RecruitFaq.cs" />
     <Compile Include="Models\recruit\RecruitNotice.cs" />
     <Compile Include="Models\Showroom\ShowRoom.cs" />
-    <Compile Include="Models\rollling\Rolling.cs" />
+    <Compile Include="Models\rolling\Rolling.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\face\admin\MemberService.cs" />
     <Compile Include="Service\face\board\BoardService.cs" />
@@ -246,7 +247,7 @@
     <Compile Include="Service\face\legalNotice\ProductService.cs" />
     <Compile Include="Service\face\news\NewsService.cs" />
     <Compile Include="Service\face\payment\PaymentService.cs" />
-    <Compile Include="Service\face\promotion\WebPromotionService.cs" />
+    <Compile Include="Service\face\promotion\PromotionService.cs" />
     <Compile Include="Service\face\recruit\RecruitFaqService.cs" />
     <Compile Include="Service\face\recruit\RecruitNoticeService.cs" />
     <Compile Include="Service\face\rolling\RollingService.cs" />
@@ -268,7 +269,7 @@
     <Compile Include="Service\impl\legalNotice\ProductServiceImpl.cs" />
     <Compile Include="Service\impl\news\NewsServiceImpl.cs" />
     <Compile Include="Service\impl\payment\PaymentServiceImpl.cs" />
-    <Compile Include="Service\impl\promotion\WebPromotionServiceImpl.cs" />
+    <Compile Include="Service\impl\promotion\PromotionServiceImpl.cs" />
     <Compile Include="Service\impl\recruit\RecruitFaqServiceImpl.cs" />
     <Compile Include="Service\impl\recruit\RecruitNoticeServiceImpl.cs" />
     <Compile Include="Service\impl\Showroom\ShowroomServiceImpl.cs" />
@@ -286,7 +287,7 @@
     <Content Include="Dao\impl\CustomerService\DownLoadForm.xml" />
     <Content Include="Dao\impl\CustomerService\Faq.xml" />
     <Content Include="Dao\impl\legalNotice\Business.xml" />
-    <Content Include="Dao\impl\legalNotice\Privacy.xml" />
+    <EmbeddedResource Include="Dao\impl\legalNotice\Privacy.xml" />
     <Content Include="Dao\impl\legalNotice\Product.xml" />
     <Content Include="Dao\impl\news\News.xml">
       <SubType>Designer</SubType>
@@ -300,6 +301,9 @@
     <Content Include="Dao\impl\recruit\RecruitFaq.xml" />
     <Content Include="Dao\impl\recruit\RecruitNotice.xml" />
     <Content Include="Dao\impl\Showroom\Showroom.xml" />
+    <Content Include="Dao\impl\rolling\Rolling.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
@@ -393,7 +397,9 @@
     <None Include="Views\Promotion\modify.cshtml" />
     <None Include="Views\Promotion\view.cshtml" />
     <None Include="Views\Promotion\register.cshtml" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -407,7 +413,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Rolling\list.cshtml" />
     <Content Include="Views\Rolling\modify.cshtml" />
     <Content Include="Views\Rolling\register.cshtml" />
     <Content Include="Views\Rolling\view.cshtml" />
@@ -419,6 +424,7 @@
     <Content Include="Views\Showroom\modify.cshtml" />
     <Content Include="Views\Showroom\register.cshtml" />
     <Content Include="Views\Showroom\view.cshtml" />
+    <Content Include="Views\Rolling\list.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -185,6 +185,18 @@
 		return (oldCheck || newCheck)
 	}
 })(jQuery);
+//콤마추가
+function addComma(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+//콤마풀기
+function unComma(x) {
+    return x.replace(/[^\d]+/g, '');
+}
+//input box에 사용자가 입력시 자동 콤마 삽입
+function inputNumberFormat(obj) {
+    obj.value = addComma(unComma(obj.value));
+}
 function isValidJumin(num) {
 	var pattern = /^([0-9]{6})-?([0-9]{7})$/;
 	if (!pattern.test(num))
