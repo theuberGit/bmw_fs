@@ -35,8 +35,11 @@
         FROM BMW_FS_ADMIN_MEMBER
         WHERE 1=1
       <isNotEmpty property="searchInput">
-        <isEqual property="searchOption" compareValue="userId">
+        <isEqual property="searchOption" compareValue="id">
           AND USER_ID LIKE '%'+#searchInput#+'%'
+        </isEqual>
+        <isEqual property="searchOption" compareValue="status">
+          AND ACTIVE_YN LIKE '%'+#searchInput#+'%'
         </isEqual>
       </isNotEmpty>
       )t
@@ -49,8 +52,11 @@
       FROM BMW_FS_ADMIN_MEMBER
       WHERE 1=1
       <isNotEmpty property="searchInput">
-        <isEqual property="searchOption" compareValue="userId">
+        <isEqual property="searchOption" compareValue="id">
           AND USER_ID LIKE '%'+#searchInput#+'%'
+        </isEqual>
+        <isEqual property="searchOption" compareValue="status">
+          AND ACTIVE_YN LIKE '%'+#searchInput#+'%'
         </isEqual>
       </isNotEmpty>
     </select>
