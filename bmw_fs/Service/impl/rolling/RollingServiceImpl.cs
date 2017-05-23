@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using bmw_fs.Models.rollling;
+using bmw_fs.Models.rolling;
 using IBatisNet.DataMapper;
 using bmw_fs.Dao.face.rolling;
 using bmw_fs.Service.face.common;
@@ -19,14 +19,6 @@ namespace bmw_fs.Service.impl.rolling
         FilesService filesService = new FilesServiceImpl();
         SequenceService sequenceService = new SequenceServiceImpl();
 
-        public void deleteRolling(Rolling rolling)
-        {
-            Mapper.Instance().BeginTransaction();
-            this.rollingDao.deleteRolling(rolling);
-            filesService.deleteRealFilesAndDataByFileMasterIdx(rolling.idx);
-            Mapper.Instance().CommitTransaction();
-        }
-
         public IList<Rolling> findAll(Rolling rolling)
         {
             return rollingDao.findAll(rolling);
@@ -37,31 +29,39 @@ namespace bmw_fs.Service.impl.rolling
             return rollingDao.findAllCount(rolling);
         }
 
-        public Rolling findRolling(Rolling rolling)
-        {
-            return rollingDao.findRolling(rolling);
-        }
-
         public void insertRolling(HttpFileCollectionBase multipartFiles, Rolling rolling)
         {
             int masterIdx = sequenceService.getSequenceMasterIdx();
             rolling.idx = masterIdx;
             Mapper.Instance().BeginTransaction();
             validation(rolling);
-           this.rollingDao.insertRolling(rolling);
+            this.rollingDao.insertRolling(rolling);
             filesService.fileUpload(multipartFiles, "KRImg", "jpg|png", 5 * 1024 * 1024, masterIdx, null);
             filesService.fileUpload(multipartFiles, "ERImg", "jpg|png", 5 * 1024 * 1024, masterIdx, null);
             Mapper.Instance().CommitTransaction();
         }
 
-        public void updateRollingt(HttpFileCollectionBase multipartFiles, Rolling rolling)
-        {
-            Mapper.Instance().BeginTransaction();
-            filesService.deleteFileAndFileUpload(multipartFiles, "KRImg", "jpg|png", 5 * 1024 * 1024, rolling.idx, rolling.rollingIdx);
-            validation(rolling);
-            this.rollingDao.updateRolling(rolling);
-            Mapper.Instance().CommitTransaction();
-        }
+        //public Rolling findRolling(Rolling rolling)
+        //{
+        //    return rollingDao.findRolling(rolling);
+        //}
+
+        //public void updateRollingt(HttpFileCollectionBase multipartFiles, Rolling rolling)
+        //{
+        //    Mapper.Instance().BeginTransaction();
+        //    filesService.deleteFileAndFileUpload(multipartFiles, "KRImg", "jpg|png", 5 * 1024 * 1024, rolling.idx, rolling.rollingIdx);
+        //    validation(rolling);
+        //    this.rollingDao.updateRolling(rolling);
+        //    Mapper.Instance().CommitTransaction();
+        //}
+
+        //public void deleteRolling(Rolling rolling)
+        //{
+        //    Mapper.Instance().BeginTransaction();
+        //    this.rollingDao.deleteRolling(rolling);
+        //    filesService.deleteRealFilesAndDataByFileMasterIdx(rolling.idx);
+        //    Mapper.Instance().CommitTransaction();
+        //}
 
         public void validation(Rolling rolling)
         {

@@ -49,14 +49,14 @@ namespace bmw_fs.Service.impl.payment
             Mapper.Instance().BeginTransaction();
             validation(payment);
             paymentDao.insertPayment(payment);
-            filesService.fileUpload(multipartFiles, "carImg", "jpg|png", 5 * 1024 * 1024, masterIdx, null);
+            filesService.fileUpload(multipartFiles, "carImg", "jpg|png", 10 * 1024 * 1024, masterIdx, null);
             Mapper.Instance().CommitTransaction();
         }
 
         public void updatePayment(HttpFileCollectionBase multipartFiles, Payment payment)
         {
             Mapper.Instance().BeginTransaction();
-            filesService.deleteFileAndFileUpload(multipartFiles, "carImg", "jpg|png", 5 * 1024 * 1024, payment.idx, payment.carIdxs);
+            filesService.deleteFileAndFileUpload(multipartFiles, "carImg", "jpg|png|gif", 10 * 1024 * 1024, payment.idx, payment.carIdxs);
             validation(payment);
             this.paymentDao.updatePayment(payment);
             Mapper.Instance().CommitTransaction();

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace bmw_fs.Models.rollling
+namespace bmw_fs.Models.rolling
 {
     public class Rolling : SearchInfo
     {
@@ -25,6 +25,10 @@ namespace bmw_fs.Models.rollling
         public String uptId { get; set; }
         public DateTime uptDate { get; set; }
 
-        public IList<int> rollingIdx { get; set; }
+        public int fileIdx { get; set; }
+
+        public IList<int> thumbIdxs { get; set; }
+
+        public IList<int> engthumbIdxs { get; set; }
     }
 }

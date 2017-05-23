@@ -21,7 +21,7 @@ namespace bmw_fs.Controllers.admin
         public ActionResult list(Member member)
         {
             searchService.setSearchSession(Request, Session);
-            searchService.setPagination(member, 10, memberService.findAllCount(member));
+            searchService.setPagination(member, 20, memberService.findAllCount(member));
             ViewBag.list = memberService.findAll(member);
             ViewBag.pagination = member;
             ViewBag.today = DateTime.Now;

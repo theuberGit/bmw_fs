@@ -41,14 +41,14 @@ namespace bmw_fs.Service.impl.legalNotice
             Mapper.Instance().BeginTransaction();
             validation(business);
             businessDao.insertBusiness(business);
-            filesService.fileUpload(multipartFiles, "file", "jpg|png", 5 * 1024 * 1024, masterIdx, null);
+            filesService.fileUpload(multipartFiles, "file", "jpg|png|gif", 10 * 1024 * 1024, masterIdx, null);
             Mapper.Instance().CommitTransaction();
         }
 
         public void updateBusiness(HttpFileCollectionBase multipartFiles, Business business)
         {
             Mapper.Instance().BeginTransaction();
-            filesService.deleteFileAndFileUpload(multipartFiles, "file", "jpg|png", 5 * 1024 * 1024, business.idx, business.fileIdxs);
+            filesService.deleteFileAndFileUpload(multipartFiles, "file", "jpg|png|gif", 10 * 1024 * 1024, business.idx, business.fileIdxs);
             validation(business);
             businessDao.updateBusiness(business);
             Mapper.Instance().CommitTransaction();

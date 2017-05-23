@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="rolling" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+  <alias>
+    <typeAlias alias="RollingClass" type="bmw_fs.Models.rolling.Rolling"/>
+  </alias>
+
+  <resultMaps>
+    <resultMap id="RollingListMap" class="RollingClass">
+      <result property="idx" column="IDX" />
+      <result property="title" column="TITLE" />
+      <result property="startDate" column="START_DATE" />
+      <result property="endDate" column="END_DATE" />
+      <result property="engSite" column="ENGSITE" />
+      <result property="order" column="ORDER" />
+      <result property="fileIdx" column="FILE_IDX" />
+    </resultMap>
+
+    <resultMap id="RollingMap" class="RollingClass">
+      <result property="idx" column="IDX" />
+      <result property="title" column="TITLE" />
+      <result property="startDate" column="START_DATE" />
+      <result property="endDate" column="END_DATE" />
+      <result property="engSite" column="ENGSITE" />
+      <result property="order" column="ORDER" />
+      <result property="deployYn" column="DEPLOY_YN" />
+      <result property="gubun" column="GUBUN" />
+      <result property="korButtonName" column="KOR_BUTTON_NAME" />
+      <result property="KorButtonUrl" column="KOR_BUTTON_URL" />
+      <result property="engButtonName" column="ENG_BUTTON_NAME" />
+      <result property="engButtonUrl" column="ENG_BUTTON_URL" />
+      <result property="regDate" column="REG_DATE" />
+      <result property="regId" column="REG_ID" />
+    </resultMap>
+  </resultMaps>
+
+
+  <statements>
+    <select id="findAll" resultMap="RollingListMap">
+      SELECT *
+       FROM (
+        SELECT
+        ROW_NUMBER() OVER(ORDER BY P.IDX DESC) AS RNUM
+        ,P.IDX
+        ,P.START_DATE
+        ,P.END_DATE
+        ,P.ENGSITE
+        ,P.TITLE
+        ,F.IDX AS FILE_IDX
+          FROM BMW_FS_ROLLING P
+          LEFT JOIN BMW_FS_FILES_DATA F ON P.IDX = F.MASTER_IDX AND F.TYPE = 'KRImg'
+        WHERE 1=1
+        AND P.GUBUN = 'W'
+        )t
+      WHERE 1=1
+      AND (RNUM BETWEEN #currentItem# AND #currentItemEnd# )
+    </select>
+
+    <select id="findAllCount" resultClass="int">
+      SELECT COUNT(*)
+        FROM BMW_FS_ROLLING
+      WHERE 1=1
+        AND GUBUN = 'W'
+    </select>
+    
+    <insert id="insertRolling" >
+      INSERT INTO BMW_FS_ROLLING
+      (
+      IDX
+      ,TITLE
+      ,START_DATE
+      ,END_DATE
+      ,ENGSITE
+      ,ORDER
+      ,DEPLOY_YN
+      ,GUBUN
+      ,KOR_BUTTON_NAME
+      ,KOR_BUTTON_URL
+      ,ENG_BUTTON_NAME
+      ,ENG_BUTTON_URL
+      ,REG_ID
+      )
+      VALUES (
+      #idx#
+      ,#title#
+      ,#startDate#
+      ,#endDate#
+      ,#engSIte#
+      ,#order#
+      ,#deployYn#
+      ,#gubun#
+      ,#korButtonName#
+      ,#korButtonUrl#
+      ,#engButtonName#
+      ,#engButtonUrl#
+      ,#regId#
+      )
+    </insert>
+
+
+  </statements>
+  
+  
+</sqlMap>

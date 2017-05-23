@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace ="inquiry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="InquiryClass" type="bmw_fs.Models.CustomerService.Inquiry"/>
+  </alias>
+
+  <resultMaps>
+
+    <resultMap id="InquiryMapByList" class="InquiryClass">
+      <result property="idx" column="IDX"/>
+      <result property="category" column="CATEGORY"/>
+      <result property="title" column="TITLE"/>
+      <result property="author" column="AUTHOR"/>
+      <result property="status" column="STATUS"/>
+      <result property="regDate" column="REG_DATE"/>
+    </resultMap>
+
+    <resultMap id="InquiryMap" class="InquiryClass">
+      <result property="idx" column="IDX"/>
+      <result property="category" column="CATEGORY"/>
+      <result property="title" column="TITLE"/>
+      <result property="author" column="AUTHOR"/>
+      <result property="status" column="STATUS"/>
+      <result property="regDate" column="REG_DATE"/>
+    </resultMap>
+    
+  </resultMaps>
+
+  <statements>
+    <select id="findAll" resultMap="InquiryMapByList">
+      SELECT *
+      FROM (
+              SELECT
+                    ROW_NUMBER() OVER(ORDER BY IDX DESC) AS RNUM
+                   ,IDX
+                   ,CATEGORY
+                   ,TITLE
+                   ,AUTHOR
+                   ,STATUS
+                   ,REG_DATE
+              FROM BMW_FS_INQUIRY
+              WHERE 1=1
+                  AND DEL_YN = 'N'
+              <isNotEmpty property="searchInput">
+                <isNotEmpty property="searchOption">
+                  <isEqual property="searchOption" compareValue="title">
+                    AND TITLE LIKE '%'+#searchInput#+'%'
+                  </isEqual>
+                  <isEqual property="searchOption" compareValue="author">
+                    AND AUTHOR LIKE '%'+#searchInput#+'%'
+                  </isEqual>
+                </isNotEmpty>
+              </isNotEmpty>
+            )t
+      WHERE 1=1
+        AND (RNUM BETWEEN #currentItem# AND #currentItemEnd# )
+    </select>
+
+    <select id="findAllCount" resultClass="int">
+      SELECT COUNT(*)
+        FROM BMW_FS_INQUIRY
+      WHERE 1=1
+          AND DEL_YN = 'N'
+        <isNotEmpty property="searchInput">
+          <isNotEmpty property="searchOption">
+            <isEqual property="searchOption" compareValue="title">
+              AND TITLE LIKE '%'+#searchInput#+'%'
+            </isEqual>
+            <isEqual property="searchOption" compareValue="author">
+              AND AUTHOR LIKE '%'+#searchInput#+'%'
+            </isEqual>
+          </isNotEmpty>
+      </isNotEmpty>
+    </select>
+
+    <select id="findInquiry" resultMap="InquiryMap">
+      SELECT IDX
+                ,CATEGORY
+                ,TITLE
+                ,AUTHOR
+                ,CONTENTS
+                ,REPLY_CONTENTS
+                ,STATUS
+                ,EMAIL
+                ,REPLY
+                ,REG_DATE
+      FROM BMW_FS_INQUIRY
+      WHERE IDX = #idx#
+          AND DEL_YN = 'N'
+    </select>
+
+    <update id="updateInquiry">
+      UPDATE BMW_FS_INQUIRY
+            SET REPLY_CONTENTS = #replyContents#
+                 ,REPLY_REG_ID = #replyRegId#
+                 ,REPLY_REG_DATE = GETDATE()
+      WHERE IDX = #idx#
+    </update>
+    
+    <update id="updateInquirySendMail">
+      UPDATE BMW_FS_INQUIRY
+            SET SEND_MAIL_DATE = GETDATE()
+                 ,SEND_MAIL_ID = #sendMailId#
+                 ,STATUS = #status#
+      WHERE IDX = #idx#
+    </update>
+
+    <update id="deleteInquiry">
+        UPDATE BMW_FS_INQUIRY
+            SET DEL_YN = 'Y'
+        WHERE IDX = #idx#
+    </update>
+
+    
+  </statements>
+</sqlMap>
