@@ -3,14 +3,8 @@
 }
 <head>
     <style>
-     .file_area > div {margin-bottom: 10px;}
-     .file_area > div > .file_src, .file_area > div > .btn_file, .file_area > div > button {float: left; margin-left: 10px;}
-     .file_area > div .file_src {overflow: hidden; display: block; width: 532px; height: 35px; margin-left: 0; padding: 0 6px; line-height: 39px; font-size: 13px; border: 1px solid #c7c7c7; text-overflow: ellipsis; white-space: nowrap; word-wrap: normal;}
-     .file_area input[type="file"] {width: 0; height: 0; text-indent: -9999px;}
      .btn_file {display: inline-block; width: 120px; height: 35px; line-height: 35px; border: 1px solid #c8c8c8; text-align: center; cursor: pointer;}
      .file_area button {display: inline-block; width: 120px; height: 37px; border: 1px solid #c8c8c8}
-     .reg .cont_bottom .reg_table td input[type="text"].input_long_type {width: 670px;}
-     .reg .cont_bottom .reg_table td textarea {width: 666px; height: 300px; padding: 5px; resize: none;}
     </style>
 </head>
 <div id="content" class="reg">
@@ -117,7 +111,7 @@
 <script type="text/javascript" src="/resources/se/js/HuskyEZCreator.js"></script>
 <script type="text/javascript" src="/resources/js/smarteditor.js"></script>
 <script>
-    lnbSet(5, 0);
+lnbSet(5, 0);
 if ('@ViewBag.item.type' === 'N') {//일반 or 공지 set
   $('#notice').prop('checked', true);
 } else {
@@ -128,50 +122,43 @@ if ('@ViewBag.item.deployYn' === 'Y') {//배포 여부 set
 } else {
   $('#inactivity').prop('checked', true);
 }
-    $('.del_file_txt').click(function () {//썸네일 삭제 버튼 click
+$('.del_file_txt').click(function () {//썸네일 삭제 버튼 click
+    $(this).hide();
+    $('.thumb_file_nm').text('');
+    $('#thumNail').val('');
+    $('.btn_file_txt').show();
+});
+
+$('.btn_file_txt').click(function () {//썸네일 파일찾기 버튼 click
+    if ($('.thumb_file_nm').text() != '') {
         $(this).hide();
         $('.thumb_file_nm').text('');
-        $('#thumNail').val('');
-        $('.btn_file_txt').show();
-    });
-
-    $('.btn_file_txt').click(function () {//썸네일 파일찾기 버튼 click
-        if ($('.thumb_file_nm').text() != '') {
-            $(this).hide();
-            $('.thumb_file_nm').text('');
-            $('.del_file_txt').show();
+        $('.del_file_txt').show();
+     }
+});
+function modifyProc() {
+    if (!$('#title').required()) return;
+    editor_object.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
+    if ($('#contents').val().trim().replace(/<p>/gi, '').replace(/<\/p>/gi, '').replace(/<br>/gi, '').replace(/&nbsp;/gi, '').replace(/ /gi, '') == '') {
+        alert('내용을 입력하세요.');
+        return;
+    }
+    if ($('#normal').prop('checked')) {//일반 게시물일 경우
+        if ($('#thumNail').val() === '' && $('.thumb_file_nm').text() === '') {
+            alert('섬네일이미지를 등록하세요.');
+            return false;
         }
-    });
-
-    //$('#thumNail').change(function () {//썸네일 file change 
-    //    if ($(this).val() != '') {
-    //        $('.del_file_txt').show();
-    //    }
-    //});
-
-    function modifyProc() {
-        if (!$('#title').required()) return;
-        editor_object.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
-        if ($('#contents').val().trim().replace(/<p>/gi, '').replace(/<\/p>/gi, '').replace(/<br>/gi, '').replace(/&nbsp;/gi, '').replace(/ /gi, '') == '') {
-            alert('내용을 입력하세요.');
-            return;
-        }
-        if ($('#normal').prop('checked')) {//일반 게시물일 경우
-            if ($('#thumNail').val() === '' && $('.thumb_file_nm').text() === '') {
-                alert('섬네일이미지를 등록하세요.');
-                return false;
-            }
-        }
-        if ($('.main_src').text() === '') {
-            alert('본문이미지를 등록하세요.');
-            return;
-        }
+    }
+    if ($('.main_src').text() === '') {
+        alert('본문이미지를 등록하세요.');
+        return;
+    }
         
-        if ($('.thumb_file_nm').text() === '' && $('input[name=thumbIdxs]').val() !== -1) {// -1 : 새로등록, 0 : 기존파일 삭제
-            $('input[name=thumbIdxs]').val(0);
-        }
-        console.log($('input[name=thumbIdxs]').val());
-        if (!confirm('수정하시겠습니까?')) return;
-        $('#content form').attr('action', 'modifyProc').submit();
-    };
+    if ($('.thumb_file_nm').text() === '' && $('input[name=thumbIdxs]').val() !== -1) {// -1 : 새로등록, 0 : 기존파일 삭제
+        $('input[name=thumbIdxs]').val(0);
+    }
+
+    if (!confirm('수정하시겠습니까?')) return;
+    $('#content form').attr('action', 'modifyProc').submit();
+};
 </script>
