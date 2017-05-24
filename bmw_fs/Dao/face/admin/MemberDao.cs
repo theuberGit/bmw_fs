@@ -29,6 +29,11 @@ namespace bmw_fs.Dao.face.admin
             return Mapper.Instance().QueryForObject<Member>("member.findMemberForLogin", member);
         }
 
+        public int findMemberDuplicated(Member member)
+        {
+            return Mapper.Instance().QueryForObject<int>("member.findMemberDuplicated", member);
+        }
+
         public void insertMember(Member member)
         {
             Mapper.Instance().Insert("member.insertMember", member);

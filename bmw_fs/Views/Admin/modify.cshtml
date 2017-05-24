@@ -4,6 +4,7 @@
     </div>
     <div class="cont_bottom">
         <form method="post" enctype="multipart/form-data">
+            <input type="hidden" name="idx" value="@ViewBag.item.idx" />
             <table class="reg_table">
                 <colgroup>
                     <col width="130px" />
@@ -26,16 +27,16 @@
                     <td>
                         <select name="role" id="role">
                             <option value="MASTER">MASTER</option>
-                            <option value="IT">IT 팀</option>
-                            <option value="MSS">MSS 팀</option>
-                            <option value="COMPLIANCE">COMPLIANCE 팀</option>
-                            <option value="HR">HR 팀</option>
-                            <option value="CIC">CIC 팀</option>
+                            <option value="IT">IT</option>
+                            <option value="MSS">MSS</option>
+                            <option value="COMPLIANCE">COMPLIANCE</option>
+                            <option value="HR">HR</option>
+                            <option value="CIC">CIC</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
-                    <th><label for=active"">상태</label></th>
+                    <th><label for="active">상태</label></th>
                     <td class="radio_area">
                         <label for="active"><input type="radio" name="activeYn" id="active" value="Y" checked title="상태"> 활성</label>
                         <label for="inactivity"><input type="radio" name="activeYn" id="inactivity" value="N" title="상태"> 비활성</label>
@@ -53,10 +54,19 @@
     lnbSet(1, 1);
 
     function modForm() {
-        if (!$('#pass').required()) return;
-        if (!$('#passOk').required()) return;
+        if ($('#pass').val().trim() != '') {
+            if (!$('#pass').isvalidpwd()) return;
+            if (!$('#passOk').required()) return;
+            if ($('#pass').val() != $('#passOk').val()) {
+                alert('비밀번호가 일치하지 않습니다.');
+                return;
+            }
+        }
 
-        if (!confirm('등록하시겠습니까')) return;
-        $('#content form').attr('action', 'registerProc').submit();
+        if (!confirm('수정하시겠습니까')) return;
+        $('#content form').attr('action', 'modifyProc').submit();
     };
+
+    $('#role').val('@ViewBag.item.role');
+    $('input[name="activeYn"][value="@ViewBag.item.activeYn"]').prop('checked', true);
 </script>

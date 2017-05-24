@@ -1,4 +1,5 @@
-﻿using bmw_fs.Dao.face.admin;
+﻿using bmw_fs.Common;
+using bmw_fs.Dao.face.admin;
 using bmw_fs.Models.admin;
 using bmw_fs.Service.face.admin;
 using System;
@@ -32,13 +33,20 @@ namespace bmw_fs.Service.impl.admin
             return memberDao.findMemberForLogin(member);
         }
 
+        public bool findMemberDuplicated(Member member)
+        {
+            return memberDao.findMemberDuplicated(member) > 0 ? true : false;
+        }
+
         public void insertMember(Member member)
         {
+            regValidation(member);
             memberDao.insertMember(member);
         }
 
         public void updateMember(Member member)
         {
+            modValidation(member);
             memberDao.updateMember(member);
         }
 
@@ -50,6 +58,20 @@ namespace bmw_fs.Service.impl.admin
         public void updateLoginDate(Member member)
         {
             memberDao.updateLoginDate(member);
+        }
+
+        private void regValidation(Member member)
+        {
+            if (String.IsNullOrWhiteSpace(member.userId)) throw new CustomException("필수 값이 없습니다.");
+            if (String.IsNullOrWhiteSpace(member.password)) throw new CustomException("필수 값이 없습니다.");
+            if (String.IsNullOrWhiteSpace(member.role)) throw new CustomException("필수 값이 없습니다.");
+            if (String.IsNullOrWhiteSpace(member.activeYn)) throw new CustomException("필수 값이 없습니다.");
+        }
+
+        private void modValidation(Member member)
+        {
+            if (String.IsNullOrWhiteSpace(member.role)) throw new CustomException("필수 값이 없습니다.");
+            if (String.IsNullOrWhiteSpace(member.activeYn)) throw new CustomException("필수 값이 없습니다.");
         }
     }
 }
