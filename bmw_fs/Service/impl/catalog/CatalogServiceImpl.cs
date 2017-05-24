@@ -25,7 +25,7 @@ namespace bmw_fs.Service.impl.catalog
             Mapper.Instance().BeginTransaction();
             validation(catalog);
             catalogDao.insertCatalog(catalog);
-            filesService.fileUpload(multipartFiles, "file", "jpg|png", 5 * 1024 * 1024, masterIdx, null);
+            filesService.fileUpload(multipartFiles, "file", "pdf", 10 * 1024 * 1024, masterIdx, null);
             Mapper.Instance().CommitTransaction();
         }
 
@@ -47,7 +47,7 @@ namespace bmw_fs.Service.impl.catalog
         public void updateCatalog(HttpFileCollectionBase multipartFiles, Catalog catalog)
         {
             Mapper.Instance().BeginTransaction();
-            filesService.deleteFileAndFileUpload(multipartFiles, "file", "jpg|png", 5 * 1024 * 1024, catalog.idx, catalog.fileIdxs);
+            filesService.deleteFileAndFileUpload(multipartFiles, "file", "pdf", 10 * 1024 * 1024, catalog.idx, catalog.fileIdxs);
             validation(catalog);
             this.catalogDao.updateCatalog(catalog);
             Mapper.Instance().CommitTransaction();

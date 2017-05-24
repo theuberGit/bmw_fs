@@ -406,40 +406,6 @@
             $('#content form').append(html);
         }
     };
-    //function deleteFile(obj) {
-    //    //실제 파일 삭제
-    //    if (!confirm('파일을 삭제하시겠습니까?')) return;
-    //    $obj = $(obj);
-    //    $fileKey = $obj.attr('data-key');
-    //    if (!$fileKey == '') {
-    //        $.ajax({
-    //            url: '/Files/fileDelete',
-    //            data: { 'key': $fileKey },
-    //            dataType: 'json',
-    //            timeout: 10000,
-    //            cache: false,
-    //            type: 'POST',
-    //            beforeSend: function () {
-    //                //$.blockUI(_BLOCKUI_OPTION);
-    //            },
-    //            complete: function () {
-    //                //$.unblockUI();
-    //            },
-    //            error: function (x, e) {
-    //                alert('요청하신 작업을 수행하던 중 예상치 않게 중지되었습니다.\n\n다시 시도해 주십시오.');
-    //            },
-    //            success: function (data) {
-    //                if (!data) {
-    //                    alert('파일이 존재하지 않습니다.');
-    //                    return;
-    //                }
-    //                return;
-    //            }
-    //        });
-    //    }
-    //    $obj.parent("div").remove();
-
-    //};
 
 (function($){
 	var $fileArea = $(".add_img_area").find('.file_area');
