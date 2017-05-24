@@ -26,12 +26,12 @@ namespace bmw_fs.Controllers.recruit
             ViewBag.pagination = recruitFaq;
             ViewBag.today = DateTime.Now;
 
-            return View();
+            return View("~/Views/Recruit/RecruitFaq/list.cshtml");
         }
 
         public ActionResult register()
         {
-            return View();
+            return View("~/Views/Recruit/RecruitFaq/register.cshtml");
         }
 
         [HttpPost]
@@ -50,7 +50,7 @@ namespace bmw_fs.Controllers.recruit
         {
             RecruitFaq item = recruitFaqService.findRecruitFaq(recruitFaq);
             ViewBag.item = item;
-            return View();
+            return View("~/Views/Recruit/RecruitFaq/view.cshtml");
         }
 
         public ActionResult modify(RecruitFaq recruitFaq)
@@ -58,7 +58,7 @@ namespace bmw_fs.Controllers.recruit
             RecruitFaq item = recruitFaqService.findRecruitFaq(recruitFaq);
             ViewBag.item = item;            
 
-            return View();
+            return View("~/Views/Recruit/RecruitFaq/modify.cshtml");
         }
         [HttpPost]
         [ValidateInput(false)]

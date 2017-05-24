@@ -28,7 +28,7 @@ namespace bmw_fs.Controllers.CustomerService
             ViewBag.pagination = inquiry;
             ViewBag.today = DateTime.Now;
 
-            return View();
+            return View("~/Views/CustomerService/Inquiry/list.cshtml");
         }
 
 
@@ -37,7 +37,7 @@ namespace bmw_fs.Controllers.CustomerService
             Inquiry item = inquiryService.findInquiry(inquiry);
             ViewBag.item = item;            
 
-            return View();
+            return View("~/Views/CustomerService/Inquiry/view.cshtml");
         }
 
         public ActionResult reply(Inquiry inquiry)
@@ -45,7 +45,7 @@ namespace bmw_fs.Controllers.CustomerService
             Inquiry item = inquiryService.findInquiry(inquiry);
             ViewBag.item = item;
             
-            return View();
+            return View("~/Views/CustomerService/Inquiry/reply.cshtml");
         }
 
         [HttpPost]

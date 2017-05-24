@@ -27,12 +27,12 @@ namespace bmw_fs.Controllers.catalog
             searchService.setPagination(catalog, 20, catalogService.findAllCount(catalog));
             ViewBag.list = catalogService.findAll(catalog);
             ViewBag.pagination = catalog;
-            return View();
+            return View("~/Views/Promotion/Catalog/list.cshtml");
         }
 
         public ActionResult register()
         {
-            return View();
+            return View("~/Views/Promotion/Catalog/register.cshtml");
         }
 
         [HttpPost]
@@ -50,7 +50,7 @@ namespace bmw_fs.Controllers.catalog
             Catalog item = catalogService.findCatalog(catalog);
             ViewBag.item = item;
             ViewBag.files = filesService.findAllByMasterIdxAndType(item.idx, "file");
-            return View();
+            return View("~/Views/Promotion/Catalog/view.cshtml");
         }
 
         public ActionResult modify(Catalog catalog)
@@ -58,7 +58,7 @@ namespace bmw_fs.Controllers.catalog
             Catalog item = catalogService.findCatalog(catalog);
             ViewBag.item = item;
             ViewBag.files = filesService.findAllByMasterIdxAndType(item.idx, "file");
-            return View();
+            return View("~/Views/Promotion/Catalog/modify.cshtml");
         }
 
         [HttpPost]

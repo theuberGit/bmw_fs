@@ -167,7 +167,7 @@
     <Compile Include="Controllers\legalNotice\CreditController.cs" />
     <Compile Include="Controllers\legalNotice\GeneralController.cs" />
     <Compile Include="Controllers\legalNotice\PrivacyController.cs" />
-    <Compile Include="Controllers\catalog\CatalogController.cs" />
+    <Compile Include="Controllers\promotion\CatalogController.cs" />
     <Compile Include="Controllers\legalNotice\ProductController.cs" />
     <Compile Include="Controllers\news\NewsController.cs" />
     <Compile Include="Controllers\payment\PaymentController.cs" />
@@ -388,19 +388,19 @@
     <Content Include="Views\Admin\register.cshtml" />
     <Content Include="Views\Admin\modify.cshtml" />
     <Content Include="Views\Admin\view.cshtml" />
-    <Content Include="Views\Faq\list.cshtml" />
-    <Content Include="Views\Faq\modify.cshtml" />
-    <Content Include="Views\Faq\register.cshtml" />
-    <Content Include="Views\Faq\view.cshtml" />
-    <Content Include="Views\Inquiry\list.cshtml" />
-    <Content Include="Views\MobilePromotion\list.cshtml" />
-    <Content Include="Views\MobilePromotion\modify.cshtml" />
-    <Content Include="Views\MobilePromotion\register.cshtml" />
-    <Content Include="Views\MobilePromotion\view.cshtml" />
-    <None Include="Views\Promotion\list.cshtml" />
-    <None Include="Views\Promotion\modify.cshtml" />
-    <None Include="Views\Promotion\view.cshtml" />
-    <None Include="Views\Promotion\register.cshtml" />
+    <Content Include="Views\CustomerService\Faq\list.cshtml" />
+    <Content Include="Views\CustomerService\Faq\modify.cshtml" />
+    <Content Include="Views\CustomerService\Faq\register.cshtml" />
+    <Content Include="Views\CustomerService\Faq\view.cshtml" />
+    <Content Include="Views\CustomerService\Inquiry\list.cshtml" />
+    <Content Include="Views\Promotion\MobilePromotion\list.cshtml" />
+    <Content Include="Views\Promotion\MobilePromotion\modify.cshtml" />
+    <Content Include="Views\Promotion\MobilePromotion\register.cshtml" />
+    <Content Include="Views\Promotion\MobilePromotion\view.cshtml" />
+    <None Include="Views\Promotion\Promotion\list.cshtml" />
+    <None Include="Views\Promotion\Promotion\modify.cshtml" />
+    <None Include="Views\Promotion\Promotion\view.cshtml" />
+    <None Include="Views\Promotion\Promotion\register.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -414,14 +414,14 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Index.cshtml" />
     <Content Include="Views\Rolling\modify.cshtml" />
     <Content Include="Views\Rolling\register.cshtml" />
     <Content Include="Views\Rolling\view.cshtml" />
-    <Content Include="Views\DownloadForm\list.cshtml" />
-    <Content Include="Views\DownloadForm\modify.cshtml" />
-    <Content Include="Views\DownloadForm\register.cshtml" />
-    <Content Include="Views\DownloadForm\view.cshtml" />
+    <Content Include="Views\CustomerService\DownloadForm\list.cshtml" />
+    <Content Include="Views\CustomerService\DownloadForm\modify.cshtml" />
+    <Content Include="Views\CustomerService\DownloadForm\register.cshtml" />
+    <Content Include="Views\CustomerService\DownloadForm\view.cshtml" />
     <Content Include="Views\Showroom\list.cshtml" />
     <Content Include="Views\Showroom\modify.cshtml" />
     <Content Include="Views\Showroom\register.cshtml" />
@@ -430,7 +430,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Files\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -491,11 +490,11 @@
     <Content Include="Views\Privacy\register.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\RecruitNotice\list.cshtml" />
-    <Content Include="Views\RecruitNotice\register.cshtml" />
+    <Content Include="Views\Recruit\RecruitNotice\list.cshtml" />
+    <Content Include="Views\Recruit\RecruitNotice\register.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\RecruitNotice\modify.cshtml" />
+    <Content Include="Views\Recruit\RecruitNotice\modify.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Privacy\view.cshtml" />
@@ -504,31 +503,31 @@
     <Content Include="Views\Privacy\modify.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\RecruitNotice\view.cshtml" />
+    <Content Include="Views\Recruit\RecruitNotice\view.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\RecruitFaq\list.cshtml" />
+    <Content Include="Views\Recruit\RecruitFaq\list.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\RecruitFaq\register.cshtml" />
+    <Content Include="Views\Recruit\RecruitFaq\register.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\RecruitFaq\view.cshtml" />
+    <Content Include="Views\Recruit\RecruitFaq\view.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\RecruitFaq\modify.cshtml" />
+    <Content Include="Views\Recruit\RecruitFaq\modify.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Catalog\list.cshtml" />
+    <Content Include="Views\Promotion\Catalog\list.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Catalog\modify.cshtml" />
+    <Content Include="Views\Promotion\Catalog\modify.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Catalog\register.cshtml" />
+    <Content Include="Views\Promotion\Catalog\register.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Catalog\view.cshtml" />
+    <Content Include="Views\Promotion\Catalog\view.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Credit\list.cshtml" />
