@@ -85,9 +85,12 @@ namespace bmw_fs.Service.impl.promotion
             promotionDao.deletePromotionUrl(promotionUrl);//기존 이미지url 삭제(국/영문)
             for (int i = 0; i < files.fileIdxs.Count; i++)
             {
-                promotionUrl.fileIdx = files.fileIdxs[i];
-                promotionUrl.url = promotion.mainImgLinks[i];
-                promotionDao.insertPromotionUrl(promotionUrl);//국문 본문 이미지 링크 INSERT
+                if(files.fileIdxs[i] > -1)
+                {
+                    promotionUrl.fileIdx = files.fileIdxs[i];
+                    promotionUrl.url = promotion.mainImgLinks[i];
+                    promotionDao.insertPromotionUrl(promotionUrl);//국문 본문 이미지 링크 INSERT
+                }
             }
             if ("Y".Equals(promotion.engYn))
             {
@@ -98,9 +101,12 @@ namespace bmw_fs.Service.impl.promotion
                 promotionUrlEng.pIdx = promotion.idx;
                 for (int i = 0; i < filesEng.fileIdxs.Count; i++)
                 {
-                    promotionUrlEng.fileIdx = filesEng.fileIdxs[i];
-                    promotionUrlEng.url = promotion.mainImgEngLinks[i];
-                    promotionDao.insertPromotionUrl(promotionUrlEng);//영문 본문 이미지 링크 INSERT
+                    if (filesEng.fileIdxs[i] > -1)
+                    {
+                        promotionUrlEng.fileIdx = filesEng.fileIdxs[i];
+                        promotionUrlEng.url = promotion.mainImgEngLinks[i];
+                        promotionDao.insertPromotionUrl(promotionUrlEng);//영문 본문 이미지 링크 INSERT
+                    }
                 }
             }
             else

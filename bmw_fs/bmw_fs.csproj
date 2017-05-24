@@ -393,6 +393,10 @@
     <Content Include="Views\Faq\register.cshtml" />
     <Content Include="Views\Faq\view.cshtml" />
     <Content Include="Views\Inquiry\list.cshtml" />
+    <Content Include="Views\MobilePromotion\list.cshtml" />
+    <Content Include="Views\MobilePromotion\modify.cshtml" />
+    <Content Include="Views\MobilePromotion\register.cshtml" />
+    <Content Include="Views\MobilePromotion\view.cshtml" />
     <None Include="Views\Promotion\list.cshtml" />
     <None Include="Views\Promotion\modify.cshtml" />
     <None Include="Views\Promotion\view.cshtml" />
