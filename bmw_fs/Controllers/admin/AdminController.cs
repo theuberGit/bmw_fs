@@ -77,5 +77,26 @@ namespace bmw_fs.Controllers.admin
             return RedirectToAction("list");
         }
 
+        [HttpPost]
+        public ActionResult isDuplicated(Member member)
+        {
+            int caseCode = 0;
+            if (memberService.findMemberDuplicated(member))
+            {
+                caseCode = -1;  //중복
+            }
+            else if (false) //TODO AD에서 아이디 검색
+            {
+                caseCode = -2; // AD CHECK
+            }
+            else
+            {
+                caseCode = 1;
+            }
+            
+
+            return Json(caseCode, JsonRequestBehavior.DenyGet);
+        }
+
     }
 }

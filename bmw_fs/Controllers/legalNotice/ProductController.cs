@@ -22,7 +22,7 @@ namespace bmw_fs.Controllers.legalNotice
         public ActionResult list(Product product)
         {
             searchService.setSearchSession(Request, Session);
-            searchService.setPagination(product, 10, productService.findAllCount(product));
+            searchService.setPagination(product, 20, productService.findAllCount(product));
             ViewBag.list = productService.findAll(product);
             ViewBag.pagination = product;
                 

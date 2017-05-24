@@ -11,7 +11,7 @@
                 </colgroup>
                 <tr>
                     <th><label for="id">ID *</label></th>
-                    <td><input type="text" name="userId" id="id" class="" title="ID" maxlength="25"></td>
+                    <td><input type="text" name="userId" id="id" class="" title="ID" maxlength="25"> <a href="javascript:void(0);" class="btn_defualt" id="btn_overlap" onclick="duplicationCheck();">check</a></td>
                 </tr>
                 <tr>
                     <th><label for="pass">비밀번호 *</label></th>
@@ -26,16 +26,16 @@
                     <td>
                         <select name="role" id="role">
                             <option value="MASTER">MASTER</option>
-                            <option value="IT">IT 팀</option>
-                            <option value="MSS">MSS 팀</option>
-                            <option value="COMPLIANCE">COMPLIANCE 팀</option>
-                            <option value="HR">HR 팀</option>
-                            <option value="CIC">CIC 팀</option>
+                            <option value="IT">IT</option>
+                            <option value="MSS">MSS</option>
+                            <option value="COMPLIANCE">COMPLIANCE</option>
+                            <option value="HR">HR</option>
+                            <option value="CIC">CIC</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
-                    <th><label for=active"">상태</label></th>
+                    <th><label for="active">상태</label></th>
                     <td class="radio_area">
                         <label for="active"><input type="radio" name="activeYn" id="active" value="Y" checked title="상태"> 활성</label>
                         <label for="inactivity"><input type="radio" name="activeYn" id="inactivity"  value="N" title="상태"> 비활성</label>
@@ -51,10 +51,52 @@
 </div>
 <script>
     lnbSet(1, 1);
+    var isDuplicated = true;
+    function duplicationCheck() {
+        if (!$('#id').required()) return;
+        $.ajax({
+            url: 'isDuplicated',
+            data: { 'userId' : $('#id').val() },
+            dataType: 'json',
+            timeout: 10000,
+            cache: false,
+            type: 'POST',
+            beforeSend: function () {
+                //$.blockUI(_BLOCKUI_OPTION);
+            },
+            complete: function () {
+                //$.unblockUI();
+            },
+            error: function (x, e) {
+                alert('요청하신 작업을 수행하던 중 예상치 않게 중지되었습니다.\n\n다시 시도해 주십시오.');
+            },
+            success: function (data) {
+                if (data == -1){
+                    alert('동일한 관리자 ID가 존재합니다.');
+                    isDuplicated = true;
+                    return;
+                } else if (data == 1){
+                    alert('등록 가능합니다.');
+                    isDuplicated = false;
+                    return;
+                } else if (data == -2) {
+                    alert('내부 ID가 존재하지 않습니다.');
+                    isDuplicated = true;
+                    return;
+                }
+                return;
+            }
+        });
+    };
 
     function regForm() {
         if (!$('#id').required()) return;
+        if (isDuplicated) {
+            alert('아이디를 검증하세요.');
+            return;
+        }
         if (!$('#pass').required()) return;
+        if (!$('#pass').isvalidpwd()) return; 
         if (!$('#passOk').required()) return;
         if ($('#pass').val() != $('#passOk').val()) {
             alert('비밀번호가 일치하지 않습니다.');
@@ -64,4 +106,8 @@
         if (!confirm('등록하시겠습니까')) return;
         $('#content form').attr('action', 'registerProc').submit();
     };
+
+    $('#id').change(function () {
+        isDuplicated = true;
+    });
 </script>
