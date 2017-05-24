@@ -22,6 +22,8 @@ namespace bmw_fs.Models.CustomerService
         public String delYn { get; set; }
         public String replyContents{ get; set; }
         public String mailSendId { get; set; }
+        public DateTime startDate { get; set; }
+        public DateTime endDate { get; set; }
 
     }
 }

@@ -3,6 +3,7 @@
         <div class="cont_top">
             <h3>1:1 문의</h3>
             <div class="search_box">
+                <span class="date"><input type="date" name="startDate" /> ~ <input type="date" name="endDate" /></span>
                 <select name="searchOption" id="searchOption">
                     <option value="">선택</option>
                     <option value="title">항목</option>                    
@@ -60,7 +61,7 @@
                 </tbody>
             </table>
             @RenderPage("~/Views/Common/Pagination.cshtml")
-            <a href="register" class="btn_defualt btn_reg">등록</a>
+            <a href="register" class="btn_defualt btn_reg">엑셀 다운로드</a>
         </div>
     </form>
 </div>
