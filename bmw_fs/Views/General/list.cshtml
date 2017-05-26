@@ -13,7 +13,7 @@
                     <option value="contents">내용</option>
                 </select>
                 <input type="text" name="searchInput" class="search_text" value="@ViewBag.pagination.searchInput" /><input type="text" style="display: none;" />
-                <button type="button" class="submit_btn" onclick="searchList();"><img src="/resources/images/mgmt/btn_search.gif" alt="" /></button>
+                <button type="button" onclick="searchList();"></button>
             </div>
         </div>
         <div class="cont_bottom">
@@ -22,6 +22,7 @@
                 <colgroup>
                     <col width="60px" />
                     <col width="*" />
+                    <col width="100px" />
                     <col width="200px" />
                     <col width="200px" />
                 </colgroup>
@@ -29,6 +30,7 @@
                     <tr>
                         <th scope="col">No.</th>
                         <th scope="col">제목</th>
+                        <th scope="col">파일</th>
                         <th scope="col">작성자</th>
                         <th scope="col">등록일</th>
                     </tr>
@@ -39,14 +41,22 @@
                         <tr>
                             <td class="co1">@(ViewBag.pagination.totalItemCount - (ViewBag.pagination.currentPage - 1) * ViewBag.pagination.itemPerPage - i)</td>
                             <td class="co2 tit_area"><a href="view?idx=@ViewBag.list[i].idx">@ViewBag.list[i].title</a></td>
-                            <td class="co3">@ViewBag.list[i].regId</td>
-                            <td class="co4">@ViewBag.list[i].regDate</td>
+                        @if(@ViewBag.list[i].fileCount > 0)
+                        {
+                            <td class="co3"><img src="~/resources/images/BMW-save_24.png" /></td>
+                        }
+                        else
+                        {
+                            <td class="co3"><p>-</p></td>
+                        }
+                            <td class="co4">@ViewBag.list[i].regId</td>
+                            <td class="co5">@ViewBag.list[i].regDate</td>
                         </tr>
                     }
                     @if (ViewBag.list.Count == 0)
                     {
                         <tr>
-                            <td colspan="4">게시글이 없습니다.</td>
+                            <td colspan="5">게시글이 없습니다.</td>
                         </tr>
                     }
                 </tbody>
@@ -58,6 +68,6 @@
     </form>
 </div>
 <script>
-    lnbSet(7, 5);
+    lnbSet(6, 5);
     $('#searchOption').val('@ViewBag.pagination.searchOption');
 </script>

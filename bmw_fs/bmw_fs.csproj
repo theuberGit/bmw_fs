@@ -307,6 +307,7 @@
     </Content>
     <Content Include="resources\css\common.css" />
     <Content Include="resources\css\mgmt.css" />
+    <Content Include="resources\images\BMW-save_24.png" />
     <Content Include="resources\images\btn_next.jpg" />
     <Content Include="resources\images\btn_next_next.jpg" />
     <Content Include="resources\images\btn_prev.jpg" />
@@ -319,6 +320,7 @@
     <Content Include="resources\images\mgmt\list_prev.gif" />
     <Content Include="resources\images\mgmt\list_rew.gif" />
     <Content Include="resources\images\mgmt\table_bg.png" />
+    <Content Include="resources\images\plus.jpg" />
     <Content Include="resources\js\common.js" />
     <Content Include="resources\js\jquery-1.12.4.min.js" />
     <Content Include="resources\js\jquery-ui.min.js" />

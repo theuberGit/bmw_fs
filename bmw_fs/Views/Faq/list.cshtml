@@ -1,6 +1,16 @@
 ﻿@{
     ViewBag.Title = "FAQ 리스트";
 }
+<style>
+
+/* list_area */
+.list_area{width:998px; border:1px solid #ccc;margin-top:10px;display:inline-block;}
+.list_area {overflow:hidden;}
+.list_area li{float:left; padding:5px 0;}
+.list_area li a{display:block; padding:0 14px; font-size:13px; border-left:1px solid #ccc;}
+.list_area ul li:nth-child(1) a{border-left:0px;}
+.list_area li.on a{font-weight:bold}
+</style>
 
 <div id="content" class="list">
     <form method="get">
@@ -13,11 +23,23 @@
                     <option value="question">답변</option>
                 </select>
                 <input type="text" name="searchInput" class="search_text" value="@ViewBag.pagination.searchInput" /><input type="text" style="display: none;" />
-                <button type="button" class="submit_btn" onclick="searchList();"><img src="/resources/images/mgmt/btn_search.gif" alt="" /></button>
+                <button type="button" onclick="searchList();"></button>
             </div>
         </div>
         <div class="cont_bottom">
-
+            <div class="list_area">
+                <ul>
+                    <li><a href="list?category=leaseIntro">리스 소개</a></li>
+                    <li><a href="list?category=contract">계약/등록</a></li>
+                    <li><a href="list?category=finance">금융조건의 변경</a></li>
+                    <li><a href="list?category=cost">비용/서류</a></li>
+                    <li><a href="list?category=process">리스 승계 만기 시 처리</a></li>
+                    <li><a href="list?category=insurance">보험</a></li>
+                    <li><a href="list?category=overdue">연체</a></li>
+                    <li><a href="list?category=accounting">회계처리</a></li>
+                    <li><a href="list?category=homepage">홈페이지 이용 관련</a></li>
+                </ul>
+            </div>
             <table class="list_table">
                 <colgroup>
                     <col width="60px" />
@@ -40,7 +62,7 @@
                     {
                         <tr>
                             <td class="co1">@(ViewBag.pagination.totalItemCount - (ViewBag.pagination.currentPage - 1) * ViewBag.pagination.itemPerPage - i)</td>
-                            <td class="co3">@ViewBag.list[i].category</td>
+                            <td class="co3">@ViewBag.list[i].categoryName</td>
                             <td class="co2 tit_area"><a href="view?idx=@ViewBag.list[i].idx">@ViewBag.list[i].ask</a></td>
                             <td class="co3">@ViewBag.list[i].regDate</td>
                             <td class="co4">@ViewBag.list[i].deployYn</td>
@@ -61,6 +83,6 @@
     </form>
 </div>
 <script>
-    lnbSet(9, 1);
+    lnbSet(8, 1);
     $('#searchOption').val('@ViewBag.pagination.searchOption');
 </script>

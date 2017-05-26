@@ -15,6 +15,10 @@
                     <col width="870px">
                 </colgroup>
                 <tr>
+                    <th>작성자 </th>
+                    <td>@ViewBag.item.regId</td>
+                </tr>
+                <tr>
                     <th scope="row"><label for="category">분류</label></th>
                     <td>@ViewBag.item.brand @ViewBag.item.series @ViewBag.item.model</td>
                 </tr>
@@ -77,7 +81,7 @@
     </div>
 </div>
 <script>
-    lnbSet(4, 1);
+    lnbSet(3, 0);
     function modForm() {
         $('form').attr('action', 'modify').submit();
     }

@@ -21,6 +21,10 @@
                     <col width="870px">
                 </colgroup>
                 <tr>
+                    <th>작성자 </th>
+                    <td>@ViewBag.item.regId</td>
+                </tr>
+                <tr>
                     <th scope="row"><label for="title">* 제목</label></th>
                     <td>@ViewBag.item.title</td>
                 </tr>
@@ -42,7 +46,7 @@
     </div>
 </div>
 <script>
-    lnbSet(7, 2);
+    lnbSet(6, 2);
     function modForm() {
         $('form').attr('action', 'modify').submit();
     }

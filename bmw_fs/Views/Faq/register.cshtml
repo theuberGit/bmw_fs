@@ -14,22 +14,22 @@
                     <col width="870px">
                 </colgroup>
                 <tr>
-                    <th scope="row"><label for="regId">작성자</label></th>
-                    <td>@HttpContext.Current.User.Identity.Name<input type="hidden" name="regId" id="regId" value="@HttpContext.Current.User.Identity.Name" /></td>
+                    <th scope="row">작성자</th>
+                    <td>@HttpContext.Current.User.Identity.Name</td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="category">구분</label></th>
                     <td>
                         <select name="category" id="category">
-                            <option value="리스 소개">리스 소개</option>
-                            <option value="계약/등록">계약/등록</option>
-                            <option value="금융조건의 변경">금융조건의 변경</option>
-                            <option value="비용/서류">비용/서류 </option>
-                            <option value="리스 승계 만기 시 처리">리스 승계 만기 시 처리</option>
-                            <option value="보험">보험</option>
-                            <option value="연체">연체</option>
-                            <option value="회계처리">회계처리</option>
-                            <option value="홈페이지 이용 관련">홈페이지 이용 관련</option>
+                            <option value="leaseIntro">리스 소개</option>
+                            <option value="contract">계약/등록</option>
+                            <option value="finance">금융조건의 변경</option>
+                            <option value="cost">비용/서류 </option>
+                            <option value="process">리스 승계 만기 시 처리</option>
+                            <option value="insurance">보험</option>
+                            <option value="overdue">연체</option>
+                            <option value="accounting">회계처리</option>
+                            <option value="homepage">홈페이지 이용 관련</option>
                         </select>
                     </td>
                 </tr>
@@ -57,7 +57,7 @@
     </div>
 </div>
 <script>
-    lnbSet(9, 1);
+    lnbSet(8, 1);
     function regForm() {
 
         if (!confirm('등록하시겠습니까?')) return;

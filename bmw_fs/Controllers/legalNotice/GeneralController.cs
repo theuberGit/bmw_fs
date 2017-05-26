@@ -17,6 +17,7 @@ namespace bmw_fs.Controllers.legalNotice
     {
         GeneralService generalService = new GeneralServiceImpl();
         SearchService searchService = new SearchServiceImpl();
+        FilesService filesService = new FilesServiceImpl();
 
         public ActionResult list(General general)
         {
@@ -37,9 +38,10 @@ namespace bmw_fs.Controllers.legalNotice
         [ValidateInput(false)]
         public RedirectToRouteResult registerProc(General general)
         {
+            HttpFileCollectionBase multipartfiles = Request.Files;
             general.contents = Sanitizer.GetSafeHtmlFragment(general.contents);
             general.regId = System.Web.HttpContext.Current.User.Identity.Name;
-            generalService.insertGeneral(general);
+            generalService.insertGeneral(multipartfiles, general);
             return RedirectToAction("list");
         }
 
@@ -47,7 +49,7 @@ namespace bmw_fs.Controllers.legalNotice
         {
             General item = generalService.findGeneral(general);
             ViewBag.item = item;
-
+            ViewBag.files = filesService.findAllByMasterIdxAndType(item.idx, "file");
             return View();
         }
 
@@ -55,7 +57,7 @@ namespace bmw_fs.Controllers.legalNotice
         {
             General item = generalService.findGeneral(general);
             ViewBag.item = item;
-
+            ViewBag.files = filesService.findAllByMasterIdxAndType(item.idx, "file");
             return View();
         }
 
@@ -63,9 +65,10 @@ namespace bmw_fs.Controllers.legalNotice
         [ValidateInput(false)]
         public RedirectToRouteResult modifyProc(General general)
         {
+            HttpFileCollectionBase multipartRequest = Request.Files;
             general.contents = Sanitizer.GetSafeHtmlFragment(general.contents);
             general.uptId = System.Web.HttpContext.Current.User.Identity.Name;
-            generalService.updateGeneral(general);
+            generalService.updateGeneral(multipartRequest, general);
             return RedirectToAction("list");
         }
 

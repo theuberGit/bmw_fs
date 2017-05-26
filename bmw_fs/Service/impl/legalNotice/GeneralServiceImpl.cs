@@ -18,6 +18,7 @@ namespace bmw_fs.Service.impl.legalNotice
     {
         GeneralDao generalDao = new GeneralDao();
         SequenceService sequenceService = new SequenceServiceImpl();
+        FilesService filesService = new FilesServiceImpl();
 
         public IList<General> findAll(General general)
         {
@@ -34,18 +35,26 @@ namespace bmw_fs.Service.impl.legalNotice
            return generalDao.findGeneral(general);
         }
 
-        public void insertGeneral(General general)
+        public void insertGeneral(HttpFileCollectionBase multipartFiles, General general)
         {
             int masterIdx = sequenceService.getSequenceMasterIdx();
             general.idx = masterIdx;
             Mapper.Instance().BeginTransaction();
             generalDao.insertGeneral(general);
+            filesService.fileUpload(multipartFiles, "file", "pdf", 10 * 1024 * 1024, masterIdx, null);
             Mapper.Instance().CommitTransaction();
         }
 
-        public void updateGeneral(General general)
+        public void updateGeneral(HttpFileCollectionBase multipartFiles, General general)
         {
             Mapper.Instance().BeginTransaction();
+            if (general.fileIdxs != null) { // 처음등록시 파일을 올렸던 경우 
+            filesService.deleteFileAndFileUpload(multipartFiles, "file", "pdf", 10 * 1024 * 1024, general.idx, general.fileIdxs);
+            }else if (general.fileIdxs == null) // 처음등록시 파일이 없었던 경우 새로 올림
+            {
+                filesService.fileUpload(multipartFiles, "file", "pdf", 10 * 1024 * 1024, general.idx, null);
+            }
+
             generalDao.updateGeneral(general);
             Mapper.Instance().CommitTransaction();
         }

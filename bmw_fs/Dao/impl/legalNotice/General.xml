@@ -8,10 +8,21 @@
   </alias>
 
   <resultMaps>
+    <resultMap id="generaListMap" class="GeneralClass">
+      <result property="idx" column="IDX" />
+      <result property="title" column="TITLE" />
+      <result property="contents" column="CONTENTS" />
+      <result property="regDate" column="REG_DATE" />
+      <result property="regId" column="REG_ID" />
+      <result property="fileCount" column="FILE_COUNT" />
+    </resultMap>
+    
+    
     <resultMap id="generalMap" class="GeneralClass">
       <result property="idx" column="IDX" />
       <result property="title" column="TITLE" />
       <result property="contents" column="CONTENTS" />
+      <result property="deployYn" column="DEPLOY_YN" />
       <result property="regDate" column="REG_DATE" />
       <result property="regId" column="REG_ID" />
     </resultMap>
@@ -19,28 +30,35 @@
 
   <statements>
 
-    <select id="findAll" resultMap="generalMap">
+    <select id="findAll" resultMap="generaListMap">
       SELECT *
       FROM (
       SELECT
-      ROW_NUMBER() OVER(ORDER BY IDX DESC) AS RNUM
-      ,IDX
-      ,TITLE
-      ,CONTENTS
-      ,REG_DATE
-      ,REG_ID
-      FROM BMW_FS_GENERAL
+      ROW_NUMBER() OVER(ORDER BY G.IDX DESC) AS RNUM
+      ,G.IDX
+      ,G.TITLE
+      ,G.CONTENTS
+      ,G.REG_DATE
+      ,G.REG_ID
+      ,COUNT(FD.ORIGINAL_FILENAME) AS FILE_COUNT
+      FROM BMW_FS_GENERAL G
+      LEFT JOIN BMW_FS_FILES_DATA FD ON G.IDX = FD.MASTER_IDX
       WHERE 1=1
       <isNotEmpty property="searchInput">
         <isNotEmpty property="searchOption">
           <isEqual property="searchOption" compareValue="title">
-            AND TITLE LIKE '%'+#searchInput#+'%'
+            AND G.TITLE LIKE '%'+#searchInput#+'%'
           </isEqual>
           <isEqual property="searchOption" compareValue="contents">
-            AND CONTENTS LIKE '%'+#searchInput#+'%'
+            AND G.CONTENTS LIKE '%'+#searchInput#+'%'
           </isEqual>
         </isNotEmpty>
       </isNotEmpty>
+      GROUP BY G.IDX
+                ,TITLE
+                ,CONTENTS
+                ,G.REG_DATE
+                ,REG_ID
       )t
       WHERE 1=1
       AND (RNUM BETWEEN #currentItem# AND #currentItemEnd# )
@@ -67,12 +85,14 @@
       IDX
       ,TITLE
       ,CONTENTS
+      ,DEPLOY_YN
       ,REG_ID
       )
       VALUES (
       #idx#
       ,#title#
       ,#contents#
+      ,#deployYn#
       ,#regId#
       )
     </insert>
@@ -81,6 +101,7 @@
       SELECT IDX
       ,TITLE
       ,CONTENTS
+      ,DEPLOY_YN
       ,REG_DATE
       ,REG_ID
       FROM BMW_FS_GENERAL
@@ -91,6 +112,7 @@
       UPDATE BMW_FS_GENERAL
       SET TITLE = #title#
       ,CONTENTS = #contents#
+      ,DEPLOY_YN = #deployYn#
       ,UPT_ID = #uptId#
       ,UPT_DATE = getdate()
       WHERE IDX = #idx#;

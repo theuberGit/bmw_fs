@@ -14,7 +14,7 @@
                     <col width="870px">
                 </colgroup>
                 <tr>
-                    <th scope="row"><label for="regId">작성자</label></th>
+                    <th scope="row">작성자</th>
                     <td>@HttpContext.Current.User.Identity.Name</td>
                 </tr>
                 <tr>
@@ -30,7 +30,7 @@
                 </tr>
                 <tr>
                     <th scope="row"><label for="title">* 제목</label></th>
-                    <td><input type="text" name="title" id="title" class="title" maxlength="50" value="" /></td>
+                    <td><input type="text" name="title" id="title" class="input_long_type" maxlength="50" value="" /></td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="contents">* 내용</label></th>
@@ -47,7 +47,7 @@
 <script type="text/javascript" src="/resources/se/js/HuskyEZCreator.js"></script>
 <script type="text/javascript" src="/resources/js/smarteditor.js"></script>
 <script>
-    lnbSet(7, 3);
+    lnbSet(6, 3);
     function regForm() {
 
         if (!confirm('등록하시겠습니까?')) return;
