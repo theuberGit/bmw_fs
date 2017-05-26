@@ -1,6 +1,17 @@
 ﻿@{
     ViewBag.Title = "경영공시 등록";
 }
+<style>
+.add_file_area .file_area div { padding-bottom: 20px; }
+.reg .cont_bottom .reg_table td.file_area p{float:none; clear:both; padding-top:10px}
+.reg .cont_bottom .reg_table td.file_area p input[type="text"]{width:467px}
+.reg h4{margin-bottom:10px}
+
+.file_area{counter-reset:cnt1; }
+.file_src:after{counter-increment:cnt1; content:"파일"counter(cnt1); color:#ccc;}
+.file_src.on:after{content:""; color:#666;}
+.reg .cont_bottom .reg_table .event_btn_area input[type="text"]{margin-bottom: 10px; width: 467px;}
+</style>
 <div id="content" class="reg">
     <div class="cont_top">
         <h3>경영공시 등록</h3>
@@ -14,24 +25,25 @@
                     <col width="870px">
                 </colgroup>
                 <tr>
-                    <th scope="row"><label for="regId">작성자</label></th>
+                    <th scope="row">작성자</th>
                     <td>@HttpContext.Current.User.Identity.Name</td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="title">* 제목</label></th>
-                    <td><input type="text" name="title" id="title" class="title" maxlength="50" value="" /></td>
+                    <td><input type="text" name="title" id="title" class="input_long_type" maxlength="50" value="" /></td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="contents">* 내용</label></th>
                     <td><textarea rows="20" cols="30" id="contents" name="contents"></textarea> </td>
                 </tr>
-                <tr class="add_img_area">
-                    <th>파일 *</th>
+                <tr class="add_file_area">
+                    <th>첨부파일 </th>
                     <td class="file_area">
-                        <div class="thum_nail">
+                        <div>
                             <span class="file_src"></span>
-                            <input type="file" class="input_file" name="file" id="file">
-                            <label for="file" class="btn_file">파일찾기</label>
+                            <input type="file" class="input_file" name="file" id="file0">
+                            <label for="file0" class="btn_file">파일찾기</label>
+                            <button type="button" class="btn_add_file" id="btnAddFile">파일 추가</button>
                         </div>
                     </td>
                 </tr>
@@ -53,13 +65,44 @@
 <script type="text/javascript" src="/resources/se/js/HuskyEZCreator.js"></script>
 <script type="text/javascript" src="/resources/js/smarteditor.js"></script>
 <script>
-    lnbSet(7, 4);
-    function regForm() {
+    lnbSet(6, 4);
+    (function ($) {
+        var $fileArea = $(".add_file_area").find('.file_area');
 
-        if (!confirm('등록하시겠습니까?')) return;
+        function deleteFile() {
+            $(this).parent("div").remove();
+        }
+
+        $(".add_file_area").find(".file_area").on("change", ".input_file", function (e) {
+            var $parent = $(this).closest("div");
+            var val = $(this).val();
+            var valTit = val.split("\\");
+            var valTittext = valTit[valTit.length - 1]
+            if (val != "") {
+                $parent.find(".file_src").text(valTittext).addClass("on");
+            };
+        });
+
+        $(".add_file_area").each(function (index, item) {
+            var cnt = 0;
+            $(item).find(".btn_add_file").on("click", function () {
+                if ($(item).find("input[type='file']").length < 10) {
+                    cnt++;
+                    var html = '<div><span class="file_src"></span><input type="file" class="input_file" id="file' + cnt + '" name="file" /><label for="file' + cnt + '" class="btn_file">파일찾기</label><button type="button" class="btnDelete">파일 삭제</button></div>';
+                    console.log("cnt", cnt);
+                    $(item).find(".file_area").append(html);
+                };
+            });
+            $fileArea.on("click", ".btnDelete", deleteFile);
+        });
+    })(jQuery);
+    function regForm() {
         if (!$('#title').required()) return;
         editor_object.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
         if (!$('#contents').required()) return;
+        if (!$('input[name=deployYn]').reqRadio()) return;
+
+        if (!confirm('등록하시겠습니까?')) return;
         $('#content form').attr('action', 'registerProc').submit();
     };
 

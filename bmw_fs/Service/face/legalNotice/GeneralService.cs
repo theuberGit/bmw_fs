@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace bmw_fs.Service.face.legalNotice
 {
@@ -15,9 +16,9 @@ namespace bmw_fs.Service.face.legalNotice
 
         General findGeneral(General general);
 
-        void insertGeneral(General general);
+        void insertGeneral(HttpFileCollectionBase multipartFiles, General general);
 
-        void updateGeneral(General general);
+        void updateGeneral(HttpFileCollectionBase multipartFiles, General general);
 
         void deleteGeneral(General general);
     }

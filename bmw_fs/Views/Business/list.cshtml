@@ -13,7 +13,7 @@
                     <option value="contents">내용</option>
                 </select>
                 <input type="text" name="searchInput" class="search_text" value="@ViewBag.pagination.searchInput" /><input type="text" style="display: none;" />
-                <button type="button" class="submit_btn" onclick="searchList();"></button>
+                <button type="button" onclick="searchList();"></button>
             </div>
         </div>
         <div class="cont_bottom">
@@ -22,7 +22,7 @@
                 <colgroup>
                     <col width="60px" />
                     <col width="*" />
-                    <col width="200px" />
+                    <col width="100px" />
                     <col width="100px" />
                     <col width="200px" />
                 </colgroup>
@@ -41,7 +41,11 @@
                         <tr>
                             <td class="co1">@(ViewBag.pagination.totalItemCount - (ViewBag.pagination.currentPage - 1) * ViewBag.pagination.itemPerPage - i)</td>
                             <td class="co2 tit_area"><a href="view?idx=@ViewBag.list[i].idx">@ViewBag.list[i].title</a></td>
-                            <td class="co3"> <a href="/Files/fileDownloadByMIdx?masterIdx=@ViewBag.list[i].idx">@ViewBag.list[i].fileName</a></td>
+                        @if( ViewBag.list[i].fileCount > 0){
+                            <td class="co3"><img src="~/resources/images/BMW-save_24.png" /></td>
+                        }else{ 
+                            <td class="co3"><p>-</p></td>
+                        }
                             <td class="co4">@ViewBag.list[i].regId</td>
                             <td class="co5">@ViewBag.list[i].regDate</td>
                         </tr>
@@ -61,6 +65,6 @@
     </form>
 </div>
 <script>
-    lnbSet(7, 4);
+    lnbSet(6, 4);
     $('#searchOption').val('@ViewBag.pagination.searchOption');
 </script>

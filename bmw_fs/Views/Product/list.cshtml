@@ -13,7 +13,7 @@
                     <option value="contents">내용</option>
                 </select>
                 <input type="text" name="searchInput" class="search_text" value="@ViewBag.pagination.searchInput" /><input type="text" style="display: none;" />
-                <button type="button" class="submit_btn" onclick="searchList();"></button>
+                <button type="button" onclick="searchList();"></button>
             </div>
         </div>
         <div class="cont_bottom">
@@ -61,6 +61,6 @@
     </form>
 </div>
 <script>
-    lnbSet(7, 3);
+    lnbSet(6, 3);
     $('#searchOption').val('@ViewBag.pagination.searchOption');
 </script>

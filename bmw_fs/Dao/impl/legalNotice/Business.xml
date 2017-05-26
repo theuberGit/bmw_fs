@@ -15,7 +15,7 @@
       <result property="deployYn" column="DEPLOY_YN" />
       <result property="regDate" column="REG_DATE" />
       <result property="regId" column="REG_ID" />
-      <result property="fileName" column="FILE_NAME" />
+      <result property="fileCount" column="FILE_COUNT" />
     </resultMap>
 
     <resultMap id="businessMap" class="BusinessClass">
@@ -34,28 +34,33 @@
       SELECT *
       FROM (
       SELECT
-      ROW_NUMBER() OVER(ORDER BY BUS.IDX DESC) AS RNUM
-      ,BUS.IDX
-      ,BUS.TITLE
-      ,BUS.CONTENTS
-      ,BUS.DEPLOY_YN
-      ,BUS.REG_DATE
-      ,BUS.REG_ID
-      ,FD.ORIGINAL_FILENAME AS FILE_NAME
-      FROM BMW_FS_BUSINESS BUS
-      LEFT JOIN BMW_FS_FILES_DATA FD
-      ON BUS.IDX = FD.MASTER_IDX
+      ROW_NUMBER() OVER(ORDER BY B.IDX DESC) AS RNUM
+      ,B.IDX
+      ,B.TITLE
+      ,B.CONTENTS
+      ,B.DEPLOY_YN
+      ,B.REG_DATE
+      ,B.REG_ID
+      ,COUNT(FD.ORIGINAL_FILENAME) AS FILE_COUNT
+      FROM BMW_FS_BUSINESS B
+      LEFT JOIN BMW_FS_FILES_DATA FD ON B.IDX = FD.MASTER_IDX
       WHERE 1=1
       <isNotEmpty property="searchInput">
         <isNotEmpty property="searchOption">
           <isEqual property="searchOption" compareValue="title">
-            AND BUS.TITLE LIKE '%'+#searchInput#+'%'
+            AND B.TITLE LIKE '%'+#searchInput#+'%'
           </isEqual>
           <isEqual property="searchOption" compareValue="contents">
-            AND BUS.CONTENTS LIKE '%'+#searchInput#+'%'
+            AND B.CONTENTS LIKE '%'+#searchInput#+'%'
           </isEqual>
         </isNotEmpty>
       </isNotEmpty>
+      GROUP BY B.IDX
+              ,TITLE
+              ,CONTENTS
+              ,DEPLOY_YN
+              ,B.REG_DATE
+              ,REG_ID
       )t
       WHERE 1=1
       AND (RNUM BETWEEN #currentItem# AND #currentItemEnd# )

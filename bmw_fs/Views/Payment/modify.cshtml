@@ -14,7 +14,7 @@
                     <col width="870px">
                 </colgroup>
                 <tr>
-                    <th scope="row"><label for="regId">작성자</label></th>
+                    <th scope="row">작성자</th>
                     <td>@HttpContext.Current.User.Identity.Name</td>
                 </tr>
                 <tr>
@@ -27,93 +27,9 @@
                         </select>
                         <select name="series" id="series" class="category_select" title="BMW시리즈">
                             <option value="">구분</option>
-                        @if (ViewBag.item.brand == "BMW")
-                        {
-                            <option value="1 Series">1 Series</option>
-                            <option value="Active Tourer">Active Tourer</option>
-                            <option value="3 Series">3 Series</option>
-                            <option value="4 Series">4 Series</option>
-                            <option value="5 Series">5 Series</option>
-                            <option value="6 Series">6 Series</option>
-                            <option value="7 Series">7 Series</option>
-                            <option value="X">X</option>
-                            <option value="GT">GT</option>
-                            <option value="M">M</option>
-                            <option value="Z">Z</option>
-                            <option value="i">i</option>
-                        }
-                        @if (ViewBag.item.brand == "MINI")
-                        {
-                            <option value="MINI">MINI</option>
-                        }
                         </select>
                         <select name="model" id="model" class="category_select" title="모델">
                             <option value="">구분</option>
-                            @if (ViewBag.item.series == "1 Series")
-                            {
-                                <option value="118">118</option>
-                            }
-                            @if (ViewBag.item.series == "Active Tourer")
-                            {
-                                <option value="Active Tourer">Active Tourer</option>
-                            }
-                            @if (ViewBag.item.series == "3 Series")
-                            {
-                                <option value="320">320</option>
-                                <option value="328">328</option>
-                            }
-                            @if (ViewBag.item.series == "4 Series")
-                            {
-                                <option value="420">420</option>
-                                <option value="428">428</option>
-                                <option value="435">435</option>
-                            }
-                            @if (ViewBag.item.series == "5 Series")
-                            {
-                                <option value="520">520</option>
-                                <option value="528">528</option>
-                                <option value="530">530</option>
-                            }
-                            @if (ViewBag.item.series == "6 Series")
-                            {
-                                <option value="640">640</option>
-                            }
-                            @if (ViewBag.item.series == "7 Series")
-                            {
-                                <option value="730">730</option>
-                                <option value="740">740</option>
-                                <option value="750">750</option>
-                            }
-                            @if (ViewBag.item.series == "X")
-                            {
-                                <option value="X1">X1</option>
-                                <option value="X2">X2</option>
-                                <option value="X3">X3</option>
-                                <option value="X4">X4</option>
-                                <option value="X5">X5</option>
-                                <option value="X6">X6</option>
-                            }
-                            @if (ViewBag.item.series == "GT")
-                            {
-                                <option value="GT">GT</option>
-                            }
-                            @if (ViewBag.item.series == "M")
-                            {
-                                <option value="M2">M2</option>
-                                <option value="M3">M3</option>
-                                <option value="M4">M4</option>
-                                <option value="M5">M5</option>
-                                <option value="M6">M6</option>
-                            }
-                            @if (ViewBag.item.series == "Z")
-                            {
-                                <option value="Z4">Z4</option>
-                            }
-                            @if (ViewBag.item.series == "i")
-                            {
-                                <option value="i3">i3</option>
-                                <option value="i8">i8</option>
-                            }
                             </select>
                             </td>
                             </tr>
@@ -201,11 +117,7 @@
     </div>
 </div>
 <script>
-    $('select[name="brand"]').val('@ViewBag.item.brand');
-    $('select[name="series"]').val('@ViewBag.item.series');
-    $('select[name="model"]').val('@ViewBag.item.model');
-    $('select[name="item"]').val('@ViewBag.item.item');
-
+    lnbSet(3, 0);
     var num = unComma('@ViewBag.item.price');
     $('#result1').text("(" + addComma(parseInt(num*0.1)) + "원)");
     $('#result2').text("(" + addComma(parseInt(num*0.2)) + "원)");
@@ -315,6 +227,14 @@
         }
         $('#model').append(model);
     });
+    //브랜드,모델,시리즈 값
+    $('select[name="brand"]').val('@ViewBag.item.brand');
+    $('#brand').trigger('change');
+    $('select[name="series"]').val('@ViewBag.item.series');
+    $('#series').trigger('change');
+    $('select[name="model"]').val('@ViewBag.item.model');
+    $('select[name="item"]').val('@ViewBag.item.item');
+
     //일반할부 선택시 잔가 필드 비활성화
     $(document).on('change', '#item', function () {
         //item 선택값
@@ -343,8 +263,6 @@
         $('#result2').text("(" + addComma(parseInt(result2)) + "원)");
         $('#result3').text("(" + addComma(parseInt(result3)) + "원)");
     });
-
-    lnbSet(4, 1);
     function modForm() {
 
         if (!$('#brand').reqSelect()) return;

@@ -21,8 +21,12 @@
                     <col width="870px">
                 </colgroup>
                 <tr>
+                    <th>작성자 </th>
+                    <td>@ViewBag.item.regId</td>
+                </tr>
+                <tr>
                     <th scope="row"><label for="title">* 제목</label></th>
-                    <td><input type="text" name="title" id="title" value="@ViewBag.item.title" /></td>
+                    <td><input type="text" name="title" id="title" class="input_long_type" value="@ViewBag.item.title" /></td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="contents">* 내용</label></th>
@@ -41,7 +45,7 @@
 <script type="text/javascript" src="/resources/se/js/HuskyEZCreator.js"></script>
 <script type="text/javascript" src="/resources/js/smarteditor.js"></script>
 <script>
-    lnbSet(7, 2);
+    lnbSet(6, 2);
         function modForm() {
         if (!confirm('수정하시겠습니까?')) return;
         if (!$('#title').required()) return;

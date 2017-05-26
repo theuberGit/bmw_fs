@@ -43,6 +43,9 @@
           </isEqual>
         </isNotEmpty>
       </isNotEmpty>
+      <isNotEmpty property="category">
+        AND category = #category#
+      </isNotEmpty>
       )t
       WHERE 1=1
       AND (RNUM BETWEEN #currentItem# AND #currentItemEnd# )
@@ -61,6 +64,9 @@
             AND QUESTION LIKE '%'+#searchInput#+'%'
           </isEqual>
         </isNotEmpty>
+      </isNotEmpty>
+      <isNotEmpty property="category">
+        AND category = #category#
       </isNotEmpty>
     </select>
 
