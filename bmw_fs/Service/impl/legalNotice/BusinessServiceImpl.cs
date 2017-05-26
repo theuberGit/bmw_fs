@@ -41,14 +41,21 @@ namespace bmw_fs.Service.impl.legalNotice
             Mapper.Instance().BeginTransaction();
             validation(business);
             businessDao.insertBusiness(business);
-            filesService.fileUpload(multipartFiles, "file", "jpg|png|gif", 10 * 1024 * 1024, masterIdx, null);
+            filesService.fileUpload(multipartFiles, "file", "pdf", 10 * 1024 * 1024, masterIdx, null);
             Mapper.Instance().CommitTransaction();
         }
 
         public void updateBusiness(HttpFileCollectionBase multipartFiles, Business business)
         {
             Mapper.Instance().BeginTransaction();
-            filesService.deleteFileAndFileUpload(multipartFiles, "file", "jpg|png|gif", 10 * 1024 * 1024, business.idx, business.fileIdxs);
+            if (business.fileIdxs != null)
+            { // 처음등록시 파일을 올렸던 경우 
+                filesService.deleteFileAndFileUpload(multipartFiles, "file", "pdf", 10 * 1024 * 1024, business.idx, business.fileIdxs);
+            }
+            else if (business.fileIdxs == null) // 처음등록시 파일이 없었던 경우 새로 올림
+            {
+                filesService.fileUpload(multipartFiles, "file", "pdf", 10 * 1024 * 1024, business.idx, null);
+            }
             validation(business);
             businessDao.updateBusiness(business);
             Mapper.Instance().CommitTransaction();

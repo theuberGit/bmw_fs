@@ -38,6 +38,7 @@ namespace bmw_fs.Controllers.CustomerService
         public RedirectToRouteResult registerProc(Faq faq)
         {
             faq.question = Sanitizer.GetSafeHtmlFragment(faq.question);
+            faq.regId = System.Web.HttpContext.Current.User.Identity.Name;
             faqService.insertFaq(faq);
 
             return RedirectToAction("list");

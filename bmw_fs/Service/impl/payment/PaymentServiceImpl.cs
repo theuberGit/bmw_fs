@@ -49,7 +49,7 @@ namespace bmw_fs.Service.impl.payment
             Mapper.Instance().BeginTransaction();
             validation(payment);
             paymentDao.insertPayment(payment);
-            filesService.fileUpload(multipartFiles, "carImg", "jpg|png", 10 * 1024 * 1024, masterIdx, null);
+            filesService.fileUpload(multipartFiles, "carImg", "jpg|png|gif", 10 * 1024 * 1024, masterIdx, null);
             Mapper.Instance().CommitTransaction();
         }
 
@@ -65,7 +65,6 @@ namespace bmw_fs.Service.impl.payment
         {
             if (String.IsNullOrWhiteSpace(payment.brand)) throw new CustomException("필수 값이 없습니다.(브랜드)");
             if (String.IsNullOrWhiteSpace(payment.series)) throw new CustomException("필수 값이 없습니다.(시리즈)");
-            if (String.IsNullOrWhiteSpace(payment.model)) throw new CustomException("필수 값이 없습니다.(모델)");
             if (String.IsNullOrWhiteSpace(payment.modelName)) throw new CustomException("필수 값이 없습니다.(모델명)");
             if (String.IsNullOrWhiteSpace(payment.price)) throw new CustomException("필수 값이 없습니다.(가격)");
             if (String.IsNullOrWhiteSpace(payment.item)) throw new CustomException("필수 값이 없습니다.(상품)");

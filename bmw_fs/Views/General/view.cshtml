@@ -21,12 +21,29 @@
                     <col width="870px">
                 </colgroup>
                 <tr>
+                    <th>작성자 </th>
+                    <td>@ViewBag.item.regId</td>
+                </tr>
+                <tr>
                     <th scope="row"><label for="title">* 제목</label></th>
                     <td>@ViewBag.item.title</td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="contents">* 내용</label></th>
                     <td>@Html.Raw(@ViewBag.item.contents)</td>
+                </tr>
+                <tr class="add_img_area">
+                    <th>파일</th>
+                    <td class="file_area">
+                        @foreach (var file in ViewBag.files)
+                        {
+                            <div><a href="/Files/fileDownload?fileIdx=@file.fileIdx">@file.originalFilename</a></div>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="">배포</label></th>
+                    <td class="radio_area">@ViewBag.item.deployYn</td>
                 </tr>
             </table>
             <input type="hidden" name="idx" value="@ViewBag.item.idx" />
@@ -42,7 +59,7 @@
     </div>
 </div>
 <script>
-    lnbSet(7, 5);
+    lnbSet(6, 5);
     function modForm() {
         $('form').attr('action', 'modify').submit();
     }

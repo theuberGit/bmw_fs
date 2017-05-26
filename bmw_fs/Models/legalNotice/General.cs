@@ -13,9 +13,13 @@ namespace bmw_fs.Models.legalNotice
         public String title { get; set; }
         [AllowHtml]
         public String contents { get; set; }
+        public String deployYn { get; set; }
         public String regId { get; set; }
         public DateTime regDate { get; set; }
         public String uptId { get; set; }
         public DateTime uptDate { get; set; }
+        public int fileCount { get; set; }
+
+        public IList<int> fileIdxs { get; set; }
     }
 }
