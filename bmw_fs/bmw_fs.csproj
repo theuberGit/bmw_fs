@@ -283,7 +283,9 @@
     <Content Include="Dao\impl\catalog\Catalog.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Dao\impl\CustomerService\Inquiry.xml" />
+    <Content Include="Dao\impl\CustomerService\Inquiry.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Dao\impl\CustomerService\DownLoadForm.xml" />
     <Content Include="Dao\impl\CustomerService\Faq.xml" />
     <Content Include="Dao\impl\legalNotice\Business.xml" />
@@ -397,6 +399,7 @@
     <Content Include="Views\Promotion\MobilePromotion\modify.cshtml" />
     <Content Include="Views\Promotion\MobilePromotion\register.cshtml" />
     <Content Include="Views\Promotion\MobilePromotion\view.cshtml" />
+    <Content Include="Views\CustomerService\Inquiry\view.cshtml" />
     <None Include="Views\Promotion\Promotion\list.cshtml" />
     <None Include="Views\Promotion\Promotion\modify.cshtml" />
     <None Include="Views\Promotion\Promotion\view.cshtml" />

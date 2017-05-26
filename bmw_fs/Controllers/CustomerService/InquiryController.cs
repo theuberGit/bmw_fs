@@ -40,12 +40,23 @@ namespace bmw_fs.Controllers.CustomerService
             return View("~/Views/CustomerService/Inquiry/view.cshtml");
         }
 
-        public ActionResult reply(Inquiry inquiry)
+        [HttpPost]
+        [ValidateInput(false)]
+        public RedirectToRouteResult reply(Inquiry inquiry)
         {
-            Inquiry item = inquiryService.findInquiry(inquiry);
-            ViewBag.item = item;
-            
-            return View("~/Views/CustomerService/Inquiry/reply.cshtml");
+            inquiry.replyRegId = System.Web.HttpContext.Current.User.Identity.Name;
+            inquiryService.updateInquiry(inquiry);            
+            return RedirectToAction("view", new { idx = inquiry.idx });
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public RedirectToRouteResult sendMail(Inquiry inquiry)
+        {
+            inquiry.replyRegId = System.Web.HttpContext.Current.User.Identity.Name;
+            inquiry.mailSendId = System.Web.HttpContext.Current.User.Identity.Name;
+            inquiryService.updateInquirySendMail(inquiry);
+            return RedirectToAction("view", new { idx = inquiry.idx });
         }
 
         [HttpPost]
