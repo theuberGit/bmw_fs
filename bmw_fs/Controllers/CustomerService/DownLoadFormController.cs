@@ -27,12 +27,12 @@ namespace bmw_fs.Controllers.CustomerService
             ViewBag.list = this.downLoadFormService.findAll(downLoadForm);
             ViewBag.pagination = downLoadForm;
 
-            return View();
+            return View("~/Views/CustomerService/DownloadForm/list.cshtml");
         }
 
         public ActionResult register(DownLoadForm downLoadForm)
         {
-            return View();
+            return View("~/Views/CustomerService/DownloadForm/register.cshtml");
         }
 
         [HttpPost]
@@ -49,7 +49,7 @@ namespace bmw_fs.Controllers.CustomerService
             DownLoadForm item = this.downLoadFormService.findDownLoadForm(downLoadForm);
             ViewBag.item = item;
             ViewBag.files = this.filesService.findAllByMasterIdxAndType(item.idx, "formFile");
-            return View();
+            return View("~/Views/CustomerService/DownloadForm/view.cshtml");
         }
 
         public ActionResult modify(DownLoadForm downLoadForm)
@@ -57,7 +57,7 @@ namespace bmw_fs.Controllers.CustomerService
             DownLoadForm item = this.downLoadFormService.findDownLoadForm(downLoadForm);
             ViewBag.item = item;
             ViewBag.files = this.filesService.findAllByMasterIdxAndType(item.idx, "formFile");
-            return View();
+            return View("~/Views/CustomerService/DownloadForm/modify.cshtml");
         }
 
         [HttpPost]

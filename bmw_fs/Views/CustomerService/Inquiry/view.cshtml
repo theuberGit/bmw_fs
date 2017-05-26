@@ -1,0 +1,86 @@
+﻿<div id="content" class="reg">
+    <div class="cont_top">
+        <h3>1:1 문의</h3>
+    </div>
+    <div class="cont_bottom">
+        <form method="post" enctype="multipart/form-data">
+            <input type="hidden" name="idx" value="@ViewBag.item.idx" />
+            <table class="reg_table">
+                <colgroup>
+                    <col width="130px" />
+                    <col width="370px" />
+                    <col width="130px" />
+                    <col width="370px" />
+                </colgroup>
+                <tr>
+                    <th>제목</th>
+                    <td colspan="3">@ViewBag.item.title</td>
+                </tr>
+                <tr>
+                    <th>카테고리</th>
+                    <td>@ViewBag.item.categoryName</td>
+                    <th>작성일</th>
+                    <td>@ViewBag.item.regDate.ToString("yyyy-MM-dd hh:mm")</td>
+                </tr>
+                <tr>
+                    <th>작성자</th>
+                    <td>@ViewBag.item.author</td>
+                    <th>이메일</th>
+                    <td>@ViewBag.item.email</td>
+                </tr>
+                <tr>
+                    <th><label for="">내용</label></th>
+                    <td colspan="3">@Html.Raw(@ViewBag.item.contents)</td>
+                </tr>
+                <tr>
+                    <th><label for="replyContents">답변</label></th>                    
+                    @if ("W".Equals(ViewBag.item.status))
+                    {
+                    <td colspan="3">
+                        <textarea name="replyContents" id="replyContents">@ViewBag.item.replyContents</textarea>
+                    </td>
+                    }
+                    else if ("F".Equals(ViewBag.item.status))
+                    {
+                        <td colspan="3" class="contents">
+                            @ViewBag.item.replyContents      
+                        </td>
+                    }
+                </tr>
+                @if ("F".Equals(ViewBag.item.status))
+                {
+                    <tr>
+                        <th><label for="replyContents">답변 메일 발송</label></th>
+                        <td colspan="3">@ViewBag.item.mailSendDate.ToString("yyyy-MM-dd hh:mm")</td>
+                    </tr>
+                }
+            </table>
+        </form>
+        <div class="btn_area">
+            <a href="list?@Session["searchString"]" class="btn_defualt btn_list">목록</a>
+            <div class="view_btn_area">
+                <a href="javascript:void(0);" class="btn_defualt btn_delete" onclick="delForm();">문의글 삭제</a>
+                    @if ("W".Equals(ViewBag.item.status))
+                    {
+                        <a href="javascript:void(0);" class="btn_defualt btn_modify" onclick="saveReply();">답변 저장</a>
+                        <a href="javascript:void(0);" class="btn_defualt btn_modify" onclick="sendMail();">메일 발송</a>
+                    }                
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    lnbSet(8, 1);
+    function delForm() {
+        if (!confirm('삭제하시겠습니까?')) return;
+        $('#content form').attr('action', 'delete').submit();
+    };
+    function saveReply() {
+        if (!confirm('저장하시겠습니까?')) return;
+        $('#content form').attr('action', 'reply').submit();
+    };
+    function sendMail() {
+        if (!confirm('메일을 발송하시겠습니까?')) return;
+        $('#content form').attr('action', 'sendMail').submit();
+    };
+</script>

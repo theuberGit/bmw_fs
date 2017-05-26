@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "모바일 프로모션 수정";
+    ViewBag.Title = "웹 프로모션 수정";
 }
 <!doctype html>
 <head>
@@ -17,7 +17,7 @@
 </head>
 		<div id="content" class="reg">
 			<div class="cont_top">
-				<h3>모바일 프로모션</h3>
+				<h3>웹 프로모션</h3>
 			</div>
 			<div class="cont_bottom">
                 <form method="post" enctype="multipart/form-data">
@@ -107,7 +107,7 @@
                                             }
                                             else
                                             {
-                                                <button type="button" class="btnDelete" data-key="@ViewBag.mainImgList[i].fileIdx" onclick="deleteFile(this);">첨부파일 삭제</button>
+                                                <button type="button" class="btnDelete" data-name="mainIdxs" data-key="@ViewBag.mainImgList[i].fileIdx" onclick="deleteFile(this);">첨부파일 삭제</button>
                                             }
                                             <p><label for="url@(i)"><input type="text" name="mainImgLinks" id="url@(i)" placeholder="이미지에 대한 링크 URL" value="@ViewBag.imgUrlList[i]"></label></p>
                                             <input type="hidden" name="mainIdxs" value="@ViewBag.mainImgList[i].fileIdx" />
@@ -156,13 +156,13 @@
                             <tr class="event_y" style="display:none;">
                                 <th><label for="">버튼 *</label></th>
                                 <td class="event_btn_area">
-                                    <div class="evt_btn1_eng">
-                                        <input type="text" class="evt_btn_input" name="btn1NameEng" id="btn1NameEng" title="버튼명" placeholder="버튼명"><button type="button" class="evt_btn_button" id="evtBtnAddEng"> + </button>
-                                        <p><input type="text" class="evt_btn_input" name="btn1LinkEng" id="btn1LinkEng" title="버튼에 대한 링크 URL" placeholder="버튼에 대한 링크 URL"></p>
+                                    <div class="evt_btn1">
+                                        <input type="text" class="evt_btn_input" name="btn1Name" id="btn1Name" title="버튼명" placeholder="버튼명"><button type="button" class="evt_btn_button" id="evtBtnAdd"> + </button>
+                                        <p><input type="text" class="evt_btn_input" name="btn1Link" id="btn1Link" title="버튼에 대한 링크 URL" placeholder="버튼에 대한 링크 URL"></p>
                                     </div>
-                                    <div class="evt_btn2_eng" data-flag="false" style="display:none;">
-                                        <input type="text" class="evt_btn_input" name="btn2NameEng" id="btn2NameEng" title="버튼명" placeholder="버튼명"><button type="button" class="evt_btn_button" id="evtBtnDelEng"> - </button>
-                                        <p><input type="text" class="evt_btn_input" name="btn2LinkEng" id="btn2LinkEng" title="버튼에 대한 링크 URL" placeholder="버튼에 대한 링크 URL"></p>
+                                    <div class="evt_btn2" data-flag="false" style="display:none;">
+                                        <input type="text" class="evt_btn_input" name="btn2Name" id="btn2Name" title="버튼명" placeholder="버튼명"><button type="button" class="evt_btn_button" id="evtBtnDel"> - </button>
+                                        <p><input type="text" class="evt_btn_input" name="btn2Link" id="btn2Link" title="버튼에 대한 링크 URL" placeholder="버튼에 대한 링크 URL"></p>
                                     </div>
                                 </td>
                             </tr>
@@ -226,7 +226,7 @@
                                             }
                                             else
                                             {
-                                                <button type="button" class="btnDelete" data-key="@ViewBag.mainImgEngList[i].fileIdx" onclick="deleteFile(this);">첨부파일 삭제</button>
+                                                <button type="button" class="btnDelete" data-name="engMainIdxs" data-key="@ViewBag.mainImgEngList[i].fileIdx" onclick="deleteFile(this);">첨부파일 삭제</button>
                                             }
                                             <p><label for="engurl@(i)"><input type="text" name="mainImgEngLinks" id="engurl@(i)" placeholder="이미지에 대한 링크 URL" value="@ViewBag.imgUrlEngList[i]"></label></p>
                                             <input type="hidden" name="engMainIdxs" value="@ViewBag.mainImgEngList[i].fileIdx" />
@@ -240,7 +240,7 @@
                                         <input type="file" class="input_file" name="engMainImg" id="engfile0">
                                         <label for="engfile0" class="btn_file">파일찾기</label>
                                         <button type="button" class="btn_add_file" id="btnAddFile">첨부파일 추가</button>
-                                        <p><label for="engurl0"><input type="text" name="mainImgEngLinks" id="engurl0" placeholder="이미지에 대한 링크 URL"></label></p>
+                                        <p><label for="engurl0"><input type="text" name="mainImgEngLinks" id="engurl0" placeholder="이미지에 대한 링크 URL"/></label></p>
                                     </div>
                                  }
                             </td>
@@ -338,10 +338,6 @@
         if (!$('#startDate').required()) return;
         if (!$('#endDate').required()) return;
         if (!$('#tit').required()) return;
-        //if ($('#thumbNail').val() === '') {
-        //    alert('국문 썸네일을 등록하세요.');
-        //    return;
-        //}
         if ($('#thumbNail').parent().find('.file_src').text() === '') {
             alert('국문 썸네일을 등록하세요.');
             return;
@@ -396,39 +392,54 @@
     };
 
     function deleteFile(obj) {
-        //실제 파일 삭제
         if (!confirm('파일을 삭제하시겠습니까?')) return;
         $obj = $(obj);
         $fileKey = $obj.attr('data-key');
-        if (!$fileKey == '') {
-            $.ajax({
-                url: '/Files/fileDelete',
-                data: { 'key': $fileKey },
-                dataType: 'json',
-                timeout: 10000,
-                cache: false,
-                type: 'POST',
-                beforeSend: function () {
-                    //$.blockUI(_BLOCKUI_OPTION);
-                },
-                complete: function () {
-                    //$.unblockUI();
-                },
-                error: function (x, e) {
-                    alert('요청하신 작업을 수행하던 중 예상치 않게 중지되었습니다.\n\n다시 시도해 주십시오.');
-                },
-                success: function (data) {
-                    if (!data) {
-                        alert('파일이 존재하지 않습니다.');
-                        return;
-                    }
-                    return;
-                }
-            });
-        }
         $obj.parent("div").remove();
-
+        if ($fileKey != '') {
+            var html = '<input type="hidden" name="' + $obj.attr("data-name") + '" value="' + ($fileKey * -1) + '">';
+            if ($obj.attr("data-name") == 'mainIdxs') {
+                html += '<input type="file" style="display:none;" class="input_file" name="mainImg" />';
+            } else {
+                html += '<input type="file" style="display:none;" class="input_file" name="engMainImg" />';
+            }
+            $('#content form').append(html);
+        }
     };
+    //function deleteFile(obj) {
+    //    //실제 파일 삭제
+    //    if (!confirm('파일을 삭제하시겠습니까?')) return;
+    //    $obj = $(obj);
+    //    $fileKey = $obj.attr('data-key');
+    //    if (!$fileKey == '') {
+    //        $.ajax({
+    //            url: '/Files/fileDelete',
+    //            data: { 'key': $fileKey },
+    //            dataType: 'json',
+    //            timeout: 10000,
+    //            cache: false,
+    //            type: 'POST',
+    //            beforeSend: function () {
+    //                //$.blockUI(_BLOCKUI_OPTION);
+    //            },
+    //            complete: function () {
+    //                //$.unblockUI();
+    //            },
+    //            error: function (x, e) {
+    //                alert('요청하신 작업을 수행하던 중 예상치 않게 중지되었습니다.\n\n다시 시도해 주십시오.');
+    //            },
+    //            success: function (data) {
+    //                if (!data) {
+    //                    alert('파일이 존재하지 않습니다.');
+    //                    return;
+    //                }
+    //                return;
+    //            }
+    //        });
+    //    }
+    //    $obj.parent("div").remove();
+
+    //};
 
 (function($){
 	var $fileArea = $(".add_img_area").find('.file_area');
@@ -454,7 +465,7 @@
 					console.log("kor", cnt);
 				}
 				if($(item).is(".eng")){
-                    var html = '<div><span class="file_src"></span><input type="file" class="input_file" id="engfile' + cnt + '" name="engMainImg" /><label for="engfile' + cnt + '" class="btn_file">파일찾기</label><button type="button" class="btnDelete" data-key="" onclick="deleteFile(this); >첨부파일 삭제</button><p><label for="engurl' + cnt +'"><input type="text" name="mainImgEngLinks" id="url'+ cnt +'"placeholder="이미지에 대한 링크 URL"></label></p></div>';
+                    var html = '<div><span class="file_src"></span><input type="file" class="input_file" id="engfile' + cnt + '" name="engMainImg" /><label for="engfile' + cnt + '" class="btn_file">파일찾기</label><button type="button" class="btnDelete" data-key="" onclick="deleteFile(this);">첨부파일 삭제</button><p><label for="engurl' + cnt +'"><input type="text" name="mainImgEngLinks" id="url'+ cnt +'"placeholder="이미지에 대한 링크 URL"></label></p></div>';
 					console.log("eng", cnt);
 				}
 				$(item).find(".file_area").append(html);

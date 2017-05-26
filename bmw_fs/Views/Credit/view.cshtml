@@ -37,11 +37,10 @@
         </form>
         <div class="btn_area">
             <a href="list?@Session["searchString"]" class="btn_defualt btn_list">목록</a>
-            <a href="javascript:void(0);" class="btn_defualt btn_reg" onclick="modForm();">수정</a>
-            <a href="javascript:void(0);" class="btn_defualt btn_reg" onclick="delForm();">삭제</a>
-        </div>
-        <div class="btn_area right">
-
+            <div class="view_btn_area">
+                <a href="javascript:void(0);" class="btn_defualt btn_modify" onclick="modForm();">수정</a>
+                <a href="javascript:void(0);" class="btn_defualt btn_delete" onclick="delForm();">삭제</a>
+            </div>
         </div>
     </div>
 </div>

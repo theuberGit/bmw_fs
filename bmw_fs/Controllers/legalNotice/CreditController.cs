@@ -22,7 +22,7 @@ namespace bmw_fs.Controllers.legalNotice
         public ActionResult list(Credit credit)
         {
             searchService.setSearchSession(Request, Session);
-            searchService.setPagination(credit, 10, creditService.findAllCount(credit));
+            searchService.setPagination(credit, 20, creditService.findAllCount(credit));
             ViewBag.list = creditService.findAll(credit);
             ViewBag.pagination = credit;
 

@@ -1,18 +1,6 @@
 ﻿@{
     ViewBag.Title = "뉴스 등록";
 }
-<head>
-    <style>
-     .file_area > div {margin-bottom: 10px;}
-     .file_area > div > .file_src, .file_area > div > .btn_file, .file_area > div > button {float: left; margin-left: 10px;}
-     .file_area > div .file_src {overflow: hidden; display: block; width: 532px; height: 35px; margin-left: 0; padding: 0 6px; line-height: 39px; font-size: 13px; border: 1px solid #c7c7c7; text-overflow: ellipsis; white-space: nowrap; word-wrap: normal;}
-     .file_area input[type="file"] {width: 0; height: 0; text-indent: -9999px;}
-     .btn_file {display: block; width: 120px; height: 35px; line-height: 35px; border: 1px solid #c8c8c8; text-align: center; cursor: pointer;}
-     .file_area button {display: block; width: 120px; height: 37px; border: 1px solid #c8c8c8}
-     .reg .cont_bottom .reg_table td input[type="text"].input_long_type {width: 670px;}
-     .reg .cont_bottom .reg_table td textarea {width: 666px; height: 300px; padding: 5px; resize: none;}
-    </style>
-</head>
 <div id="content" class="reg">
     <div class="cont_top">
         <h3>뉴스 관리</h3>
@@ -81,7 +69,7 @@
 <script type="text/javascript" src="/resources/se/js/HuskyEZCreator.js"></script>
 <script type="text/javascript" src="/resources/js/smarteditor.js"></script>
 <script>
-    lnbSet(5, 0);
+lnbSet(5, 0);
 (function(){
 	$(".add_img_area").find(".file_area").on("change",".input_file",function(e){
 		var $parent = $(this).closest("div");
@@ -94,25 +82,24 @@
 	});
 })();
 
-    function regForm() {
-            
-            if (!$('#title').required()) return;
-            editor_object.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
-            if ($('#contents').val().trim().replace(/<p>/gi, '').replace(/<\/p>/gi, '').replace(/<br>/gi, '').replace(/&nbsp;/gi, '').replace(/ /gi, '') == '') {
-                alert('내용을 입력하세요.');
-                return;
-            }
-            if ($('#normal').prop('checked')) {//일반 게시물일 경우
-                if ($('#thumNail').val() === '') {
-                    alert('섬네일이미지를 등록하세요.');
-                    return;
-                }
-            }
-            if ($('#mainImg').val() === '') {
-                alert('본문이미지를 등록하세요.');
-                return;
-            }
-            if (!confirm('등록하시겠습니까?')) return;
-            $('#content form').attr('action', 'registerProc').submit();
-        };
-    </script>
+function regForm() {
+    if (!$('#title').required()) return;
+    editor_object.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
+    if ($('#contents').val().trim().replace(/<p>/gi, '').replace(/<\/p>/gi, '').replace(/<br>/gi, '').replace(/&nbsp;/gi, '').replace(/ /gi, '') == '') {
+        alert('내용을 입력하세요.');
+        return;
+    }
+    if ($('#normal').prop('checked')) {//일반 게시물일 경우
+        if ($('#thumNail').val() === '') {
+            alert('섬네일이미지를 등록하세요.');
+            return;
+        }
+    }
+    if ($('#mainImg').val() === '') {
+        alert('본문이미지를 등록하세요.');
+        return;
+    }
+    if (!confirm('등록하시겠습니까?')) return;
+    $('#content form').attr('action', 'registerProc').submit();
+};
+</script>

@@ -10,7 +10,7 @@ namespace bmw_fs.Models.common
         public Pagination()
         {
             this.page = 1;
-            this.nextPage = 10;
+            this.nextPage = 5;
             this.itemPerPage = 10;
         }
         public int itemPerPage { get; set; }

@@ -75,7 +75,7 @@ namespace bmw_fs.Service.impl.common
             int idx = 0;
             foreach (var file in files)
             {
-                if(file.ContentLength != 0)
+                if (file.ContentLength != 0)
                 {
                     String fileName = file.FileName;
                     int typeIndex = fileName.LastIndexOf(".")+1;
@@ -113,7 +113,10 @@ namespace bmw_fs.Service.impl.common
                         fileTmpIdxs.Add(fileIdxs[idx]);//리턴해줄 fileIdxs
                     }
                 }
-                idx++;
+                if(fileIdxs != null && fileIdxs[idx] >= 0)
+                {
+                    idx++;
+                }
             }
 
             fileItem.fileIdxs = fileTmpIdxs;

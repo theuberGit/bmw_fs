@@ -1,0 +1,86 @@
+﻿<style>
+    .list .cont_bottom .list_table tbody tr td .wait{color:red;}
+</style>
+<div id="content" class="list">
+    <form method="get">
+        <div class="cont_top">
+            <h3>1:1 문의</h3>
+            <div class="search_box">
+                <span class="date"><input type="date" name="startDate" value="@ViewBag.pagination.startDate" /> ~ <input type="date" name="endDate" value="@ViewBag.pagination.endDate" /></span>
+                <select name="searchOption" id="searchOption">
+                    <option value="">선택</option>
+                    <option value="title">항목</option>                    
+                </select>
+                <input type="text" class="search_text" name="searchInput" value="@ViewBag.pagination.searchInput"><input type="text" style="display:none;" />
+                <button type="button" onclick="searchList();"></button>
+            </div>           
+            <div class="list_area">
+                <ul>
+                    <li class="on"><a href="list">전체</a></li>
+                    <li><a href="list?category=product">상품 문의</a></li>
+                    <li><a href="list?category=purchase">차량구입 문의</a></li>
+                    <li><a href="list?category=contract">계약관련 문의</a></li>
+                    <li><a href="list?category=arrears">연체 문의</a></li>
+                    <li><a href="list?category=refinancing">재금융 문의</a></li>
+                    <li><a href="list?category=etc">기타 </a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="cont_bottom">
+            <table class="list_table">
+                <colgroup>
+                    <col width="60px" />
+                    <col width="100px" />
+                    <col width="*" />
+                    <col width="100px" />
+                    <col width="70px" />
+                    <col width="100px" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>카테고리</th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>상태</th>
+                        <th>작성일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (var i = 0; i < ViewBag.list.Count; i++)
+                    {
+                        <tr>
+                            <td>@(ViewBag.pagination.totalItemCount - (ViewBag.pagination.currentPage - 1) * ViewBag.pagination.itemPerPage - i)</td>
+                            <td>@ViewBag.list[i].categoryName</td>
+                            <td class="tit_area"><a href="view?idx=@ViewBag.list[i].idx">@ViewBag.list[i].title</a></td>
+                            <td>@ViewBag.list[i].author</td>
+                            <td>
+                                @if ("W".Equals(ViewBag.list[i].status))
+                                {
+                                   <span class="wait">접수중</span>
+                                }
+                                else if ("F".Equals(ViewBag.list[i].status))
+                                {
+                                    <span>답변완료</span>
+                                }
+                            </td>
+                            <td>@ViewBag.list[i].regDate.ToString("yyyy-MM-dd")</td>
+                        </tr>
+                    }
+                    @if (ViewBag.list.Count == 0)
+                    {
+                        <tr>
+                            <td colspan="6">게시글이 없습니다.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @RenderPage("~/Views/Common/Pagination.cshtml")
+            <a href="register" class="btn_defualt btn_reg">엑셀 다운로드</a>
+        </div>
+    </form>
+</div>
+<script>
+    lnbSet(8,2);
+    $('#searchOption').val('@ViewBag.pagination.searchOption');
+</script>

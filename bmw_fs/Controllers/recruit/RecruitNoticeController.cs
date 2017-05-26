@@ -23,17 +23,17 @@ namespace bmw_fs.Controllers.recruit
         public ActionResult list(RecruitNotice recruitNotice)
         {
             searchService.setSearchSession(Request, Session);
-            searchService.setPagination(recruitNotice, 10, recruitNoticeService.findAllCount(recruitNotice));
+            searchService.setPagination(recruitNotice, 20, recruitNoticeService.findAllCount(recruitNotice));
             ViewBag.list = recruitNoticeService.findAll(recruitNotice);
             ViewBag.pagination = recruitNotice;
             ViewBag.today = DateTime.Now;
 
-            return View();
+            return View("~/Views/Recruit/RecruitNotice/list.cshtml");
         }
 
         public ActionResult register()
         {
-            return View();
+            return View("~/Views/Recruit/RecruitNotice/register.cshtml");
         }
 
         [HttpPost]
@@ -55,7 +55,7 @@ namespace bmw_fs.Controllers.recruit
             ViewBag.item = item;
             ViewBag.filesList1 = filesServce.findAllByMasterIdxAndType(item.idx, "files");
 
-            return View();
+            return View("~/Views/Recruit/RecruitNotice/view.cshtml");
         }
 
         public ActionResult modify(RecruitNotice recruitNotice)
@@ -64,7 +64,7 @@ namespace bmw_fs.Controllers.recruit
             ViewBag.item = item;
             ViewBag.filesList1 = filesServce.findAllByMasterIdxAndTypeForUpload(item.idx, "files");
 
-            return View();
+            return View("~/Views/Recruit/RecruitNotice/modify.cshtml");
         }
         [HttpPost]
         [ValidateInput(false)]

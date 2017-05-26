@@ -29,12 +29,12 @@ namespace bmw_fs.Controllers.promotion
             searchService.setPagination(webPromotion, 6, webPromotionService.findAllCount(webPromotion));
             ViewBag.list = webPromotionService.findAll(webPromotion);
             ViewBag.pagination = webPromotion;
-            return View();
+            return View("~/Views/Promotion/Promotion/list.cshtml");
         }
 
         public ActionResult register()
         {
-            return View();
+            return View("~/Views/Promotion/Promotion/register.cshtml");
         }
 
         [HttpPost]
@@ -63,7 +63,7 @@ namespace bmw_fs.Controllers.promotion
             ViewBag.mainImgEngList = mainImgEngList;
             ViewBag.imgUrlEngList = webPromotionService.findPromotionImgUrlEng(webPromotion, mainImgEngList);
 
-            return View();
+            return View("~/Views/Promotion/Promotion/view.cshtml");
         }
 
         public ActionResult modify(Promotion webPromotion)
@@ -79,7 +79,7 @@ namespace bmw_fs.Controllers.promotion
             IList<Files> mainImgEngList = filesService.findAllByMasterIdxAndType(item.idx, "engMainImg");
             ViewBag.mainImgEngList = mainImgEngList;
             ViewBag.imgUrlEngList = webPromotionService.findPromotionImgUrlEng(webPromotion, mainImgEngList);
-            return View();
+            return View("~/Views/Promotion/Promotion/modify.cshtml");
         }
 
         [HttpPost]

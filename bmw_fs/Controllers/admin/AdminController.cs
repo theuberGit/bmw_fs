@@ -21,7 +21,7 @@ namespace bmw_fs.Controllers.admin
         public ActionResult list(Member member)
         {
             searchService.setSearchSession(Request, Session);
-            searchService.setPagination(member, 10, memberService.findAllCount(member));
+            searchService.setPagination(member, 20, memberService.findAllCount(member));
             ViewBag.list = memberService.findAll(member);
             ViewBag.pagination = member;
             ViewBag.today = DateTime.Now;
@@ -75,6 +75,27 @@ namespace bmw_fs.Controllers.admin
         {
             memberService.deleteMember(member);
             return RedirectToAction("list");
+        }
+
+        [HttpPost]
+        public ActionResult isDuplicated(Member member)
+        {
+            int caseCode = 0;
+            if (memberService.findMemberDuplicated(member))
+            {
+                caseCode = -1;  //중복
+            }
+            else if (false) //TODO AD에서 아이디 검색
+            {
+                caseCode = -2; // AD CHECK
+            }
+            else
+            {
+                caseCode = 1;
+            }
+            
+
+            return Json(caseCode, JsonRequestBehavior.DenyGet);
         }
 
     }
