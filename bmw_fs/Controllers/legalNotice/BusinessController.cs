@@ -26,12 +26,12 @@ namespace bmw_fs.Controllers.legalNotice
             ViewBag.list = businessService.findAll(business);
             ViewBag.pagination = business;
 
-            return View();
+            return View("~/Views/LegalNotice/Business/list.cshtml");
         }
 
         public ActionResult register()
         {
-            return View();
+            return View("~/Views/LegalNotice/Business/register.cshtml");
         }
 
         [HttpPost]
@@ -50,7 +50,7 @@ namespace bmw_fs.Controllers.legalNotice
             Business item = businessService.findBusiness(business);
             ViewBag.item = item;
             ViewBag.files = filesService.findAllByMasterIdxAndType(item.idx, "file");
-            return View();
+            return View("~/Views/LegalNotice/Business/view.cshtml");
         }
 
         public ActionResult modify(Business business)
@@ -58,7 +58,7 @@ namespace bmw_fs.Controllers.legalNotice
             Business item = businessService.findBusiness(business);
             ViewBag.item = item;
             ViewBag.files = filesService.findAllByMasterIdxAndType(item.idx, "file");
-            return View();
+            return View("~/Views/LegalNotice/Business/modify.cshtml");
         }
 
         [HttpPost]

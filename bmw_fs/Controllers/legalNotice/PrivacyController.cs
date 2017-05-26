@@ -20,12 +20,12 @@ namespace bmw_fs.Controllers.legalNotice
             searchService.setPagination(privacy, 20, privacyService.findAllCount(privacy));
             ViewBag.list = privacyService.findAll(privacy);
             ViewBag.pagination = privacy;
-            return View();
+            return View("~/Views/LegalNotice/Privacy/list.cshtml");
         }
 
         public ActionResult register()
         {
-            return View();
+            return View("~/Views/LegalNotice/Privacy/register.cshtml");
         }
 
         [HttpPost]
@@ -43,7 +43,7 @@ namespace bmw_fs.Controllers.legalNotice
             Privacy item =  privacyService.findPrivacy(privacy);
             ViewBag.item = item;
 
-            return View();
+            return View("~/Views/LegalNotice/Privacy/view.cshtml");
         }
 
         public ActionResult modify(Privacy privacy)
@@ -51,7 +51,7 @@ namespace bmw_fs.Controllers.legalNotice
             Privacy item = privacyService.findPrivacy(privacy);
             ViewBag.item = item;
 
-            return View();
+            return View("~/Views/LegalNotice/Privacy/modify.cshtml");
         }
 
         [HttpPost]

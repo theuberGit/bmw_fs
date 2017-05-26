@@ -491,8 +491,8 @@
     <Content Include="Views\News\register.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Privacy\list.cshtml" />
-    <Content Include="Views\Privacy\register.cshtml" />
+    <Content Include="Views\LegalNotice\Privacy\list.cshtml" />
+    <Content Include="Views\LegalNotice\Privacy\register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Recruit\RecruitNotice\list.cshtml" />
@@ -502,10 +502,10 @@
     <Content Include="Views\Recruit\RecruitNotice\modify.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Privacy\view.cshtml" />
+    <Content Include="Views\LegalNotice\Privacy\view.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Privacy\modify.cshtml" />
+    <Content Include="Views\LegalNotice\Privacy\modify.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Recruit\RecruitNotice\view.cshtml" />
@@ -535,52 +535,52 @@
     <Content Include="Views\Promotion\Catalog\view.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Credit\list.cshtml" />
+    <Content Include="Views\LegalNotice\Credit\list.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Credit\register.cshtml" />
+    <Content Include="Views\LegalNotice\Credit\register.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Credit\modify.cshtml" />
+    <Content Include="Views\LegalNotice\Credit\modify.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Credit\view.cshtml" />
+    <Content Include="Views\LegalNotice\Credit\view.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\General\list.cshtml" />
+    <Content Include="Views\LegalNotice\General\list.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\General\modify.cshtml" />
+    <Content Include="Views\LegalNotice\General\modify.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\General\register.cshtml" />
+    <Content Include="Views\LegalNotice\General\register.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\General\view.cshtml" />
+    <Content Include="Views\LegalNotice\General\view.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Product\list.cshtml" />
+    <Content Include="Views\LegalNotice\Product\list.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Product\modify.cshtml" />
+    <Content Include="Views\LegalNotice\Product\modify.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Product\register.cshtml" />
+    <Content Include="Views\LegalNotice\Product\register.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Product\view.cshtml" />
+    <Content Include="Views\LegalNotice\Product\view.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Business\list.cshtml" />
+    <Content Include="Views\LegalNotice\Business\list.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Business\modify.cshtml" />
+    <Content Include="Views\LegalNotice\Business\modify.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Business\register.cshtml" />
+    <Content Include="Views\LegalNotice\Business\register.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Business\view.cshtml" />
+    <Content Include="Views\LegalNotice\Business\view.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
