@@ -6,9 +6,12 @@ using bmw_fs.Service.impl.CustomerService;
 using Microsoft.Security.Application;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace bmw_fs.Controllers.CustomerService
 {
@@ -75,6 +78,30 @@ namespace bmw_fs.Controllers.CustomerService
         {
             inquiryService.deleteInquiry(inquiry);
             return RedirectToAction("list");
+        }
+
+        public ActionResult excelDownload(Inquiry inquiry)
+        {
+            GridView grid = new GridView();            
+            grid.DataSource = inquiryService.downloadExcel(inquiry);
+            grid.DataBind();
+
+            Response.ClearContent();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment; filename=Inquiry.xls");
+            Response.ContentType = "application/ms-excel";
+
+            Response.Charset = "";
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htw = new HtmlTextWriter(sw);          
+
+            grid.RenderControl(htw);
+
+            Response.Output.Write(sw.ToString());
+            Response.Flush();
+            Response.End();
+
+            return Content(sw.ToString(), "application/ms-excel");
         }
     }
 }
