@@ -23,8 +23,7 @@ namespace bmw_fs.Controllers.recruit
             searchService.setSearchSession(Request, Session);
             searchService.setPagination(recruitFaq, 20, recruitFaqService.findAllCount(recruitFaq));
             ViewBag.list = recruitFaqService.findAll(recruitFaq);
-            ViewBag.pagination = recruitFaq;
-            ViewBag.today = DateTime.Now;
+            ViewBag.pagination = recruitFaq;            
 
             return View("~/Views/Recruit/RecruitFaq/list.cshtml");
         }
