@@ -13,7 +13,7 @@ using System.Web.Mvc;
 
 namespace bmw_fs.Controllers.legalNotice
 {
-    [Authorize]
+    [Authorize(Roles = "MASTER, COMPLIANCE")]
     public class ProductController : Controller
     {
         ProductService productService = new ProductServiceImpl();

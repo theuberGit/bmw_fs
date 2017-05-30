@@ -14,7 +14,7 @@ using System.Web.Routing;
 
 namespace bmw_fs.Controllers.news
 {
-    [Authorize]
+    [Authorize(Roles = "MASTER, MSS")]
     public class NewsController : Controller
     {
         NewsService newsService = new NewsServiceImpl();

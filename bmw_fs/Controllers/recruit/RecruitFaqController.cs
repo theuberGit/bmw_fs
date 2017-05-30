@@ -12,7 +12,7 @@ using System.Web.Routing;
 
 namespace bmw_fs.Controllers.recruit
 {
-    [Authorize]
+    [Authorize(Roles = "MASTER, HR")]
     public class RecruitFaqController : Controller
     {
         SearchService searchService = new SearchServiceImpl();

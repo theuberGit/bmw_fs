@@ -15,7 +15,7 @@ using System.Web.UI.WebControls;
 
 namespace bmw_fs.Controllers.CustomerService
 {
-    [Authorize]
+    [Authorize(Roles = "MASTER, CIC")]
     public class InquiryController : Controller
     {
         

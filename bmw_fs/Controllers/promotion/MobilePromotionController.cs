@@ -15,7 +15,7 @@ using System.Web.Routing;
 
 namespace bmw_fs.Controllers.promotion
 {
-    [Authorize]
+    [Authorize(Roles = "MASTER, MSS")]
     public class MobilePromotionController : Controller
     {
         PromotionService webPromotionService = new PromotionServiceImpl();

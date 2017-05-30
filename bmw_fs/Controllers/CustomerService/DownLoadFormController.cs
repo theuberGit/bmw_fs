@@ -13,7 +13,7 @@ using System.Web.Routing;
 
 namespace bmw_fs.Controllers.CustomerService
 {
-    [Authorize]
+    [Authorize(Roles = "MASTER, CIC")]
     public class DownLoadFormController : Controller
     {
         private DownLoadFormService downLoadFormService = new DownLoadFormServiceImpl();

@@ -155,7 +155,12 @@
         placeholder();
         function login() {
             $('form').submit();
-        }       
+        }
+        $('#password').keyup(function (e) {
+            if (e.keyCode == 13) {
+                login();
+            }
+        });
     </script>
 </body>
 </html>

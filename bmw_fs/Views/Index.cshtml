@@ -1,11 +1,1 @@
-﻿<ul>
-    @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("MASTER"))
-    {
-        <li>@Html.ActionLink("관리자", "master", "member")</li>
-    }
-    @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("UBER"))
-    {
-        <li>@Html.ActionLink("위버", "list", "member")</li>
-    }
-
-</ul>
+﻿
