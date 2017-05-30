@@ -22,7 +22,7 @@ namespace bmw_fs.Controllers.login
         public ActionResult Login(String returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return View();
+            return View("~/Views/Login.cshtml");
         }
 
         [HttpPost]
@@ -32,7 +32,7 @@ namespace bmw_fs.Controllers.login
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return View("~/Views/Login.cshtml", model);
             }
 
             Member member = new Member();
@@ -64,7 +64,7 @@ namespace bmw_fs.Controllers.login
             else
             {
                 ModelState.AddModelError("", "Invalid login attempt.");
-                return View(model);
+                return View("~/Views/Login.cshtml", model);
             }
         }
 

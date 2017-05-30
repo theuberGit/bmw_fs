@@ -13,7 +13,7 @@ using System.Web.Routing;
 
 namespace bmw_fs.Controllers.catalog
 {
-    [Authorize]
+    [Authorize(Roles = "MASTER, MSS")]
     public class CatalogController : Controller
     {
         CatalogService catalogService = new CatalogServiceImpl();

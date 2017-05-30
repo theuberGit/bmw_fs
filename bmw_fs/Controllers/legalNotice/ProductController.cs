@@ -13,7 +13,7 @@ using System.Web.Mvc;
 
 namespace bmw_fs.Controllers.legalNotice
 {
-    [Authorize]
+    [Authorize(Roles = "MASTER, COMPLIANCE")]
     public class ProductController : Controller
     {
         ProductService productService = new ProductServiceImpl();
@@ -26,11 +26,11 @@ namespace bmw_fs.Controllers.legalNotice
             ViewBag.list = productService.findAll(product);
             ViewBag.pagination = product;
                 
-            return View();
+            return View("~/Views/LegalNotice/Product/list.cshtml");
         }
         public ActionResult register(Product product)
         {
-            return View();
+            return View("~/Views/LegalNotice/Product/register.cshtml");
         }
 
         [HttpPost]
@@ -47,13 +47,13 @@ namespace bmw_fs.Controllers.legalNotice
         public ActionResult view(Product product)
         {
             ViewBag.item = productService.findProduct(product);
-            return View();
+            return View("~/Views/LegalNotice/Product/view.cshtml");
         }
 
         public ActionResult modify(Product product)
         {
             ViewBag.item = productService.findProduct(product);
-            return View();
+            return View("~/Views/LegalNotice/Product/modify.cshtml");
         }
 
         [HttpPost]

@@ -9,7 +9,7 @@ using System.Web.Routing;
 
 namespace bmw_fs.Controllers.payment
 {
-    [Authorize]
+    [Authorize(Roles = "MASTER, MSS")]
     public class PaymentController : Controller
     {
         PaymentService paymentService = new PaymentServiceImpl();

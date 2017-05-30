@@ -12,7 +12,7 @@ using System.Web.Mvc;
 
 namespace bmw_fs.Controllers.legalNotice
 {
-    [Authorize]
+    [Authorize(Roles = "MASTER, COMPLIANCE")]
     public class GeneralController : Controller
     {
         GeneralService generalService = new GeneralServiceImpl();
@@ -26,12 +26,12 @@ namespace bmw_fs.Controllers.legalNotice
             ViewBag.list = generalService.findAll(general);
             ViewBag.pagination = general;
 
-            return View();
+            return View("~/Views/LegalNotice/General/list.cshtml");
         }
 
         public ActionResult register()
         {
-            return View();
+            return View("~/Views/LegalNotice/General/register.cshtml");
         }
 
         [HttpPost]
@@ -50,7 +50,7 @@ namespace bmw_fs.Controllers.legalNotice
             General item = generalService.findGeneral(general);
             ViewBag.item = item;
             ViewBag.files = filesService.findAllByMasterIdxAndType(item.idx, "file");
-            return View();
+            return View("~/Views/LegalNotice/General/view.cshtml");
         }
 
         public ActionResult modify(General general)
@@ -58,7 +58,7 @@ namespace bmw_fs.Controllers.legalNotice
             General item = generalService.findGeneral(general);
             ViewBag.item = item;
             ViewBag.files = filesService.findAllByMasterIdxAndType(item.idx, "file");
-            return View();
+            return View("~/Views/LegalNotice/General/modify.cshtml");
         }
 
         [HttpPost]

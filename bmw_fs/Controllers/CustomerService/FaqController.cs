@@ -12,7 +12,7 @@ using System.Web.Mvc;
 
 namespace bmw_fs.Controllers.CustomerService
 {
-    [Authorize]
+    [Authorize(Roles = "MASTER, CIC")]
     public class FaqController : Controller
     {
         FaqService faqService = new FaqServiceImpl();

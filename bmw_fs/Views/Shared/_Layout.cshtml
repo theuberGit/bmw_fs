@@ -38,6 +38,8 @@
         <div id="container">
             <div id="lnb">
                 <ul class="menu_list">
+                    @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("MASTER") || HttpContext.Current.User.IsInRole("IT")))
+                    {
                     <li class="sub_list">
                         <a href="#">관리자 관리</a>
                         <ul>
@@ -45,6 +47,9 @@
                             <li><a href="#">관리자 로그 관리</a></li>
                         </ul>
                     </li>
+                    }
+                    @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("MASTER") || HttpContext.Current.User.IsInRole("MSS")))
+                    {
                     <li class="sub_list">
                         <a href="#">프로모션 관리</a>
                         <ul>
@@ -56,6 +61,9 @@
                     <li><a href="/Payment/list">월납입금 관리</a></li>
                     <li><a href="/News/list">뉴스 관리</a></li>
                     <li><a href="/Showroom/list">전시장 관리 </a></li>
+                    }
+                    @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("MASTER") || HttpContext.Current.User.IsInRole("COMPLIANCE")))
+                    {
                     <li class="sub_list">
                         <a href="#">법적 고지</a>
                         <ul>
@@ -66,6 +74,9 @@
                             <li><a href="/general/list">일반공시</a></li>
                         </ul>
                     </li>
+                    }
+                    @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("MASTER") || HttpContext.Current.User.IsInRole("HR")))
+                    {
                     <li class="sub_list">
                         <a href="#">인재채용</a>
                         <ul>
@@ -73,6 +84,9 @@
                             <li><a href="/Recruitfaq/list">채용 FAQ</a></li>
                         </ul>
                     </li>
+                    }
+                    @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("MASTER") || HttpContext.Current.User.IsInRole("CIC")))
+                    {
                     <li class="sub_list">
                         <a href="#">고객센터</a>
                         <ul>
@@ -81,6 +95,7 @@
                             <li><a href="/DownloadForm/list">다운로드 자료/양식</a></li>
                         </ul>
                     </li>
+                    }
                 </ul>
             </div>
             @RenderBody()
