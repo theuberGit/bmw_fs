@@ -18,7 +18,7 @@ namespace bmw_fs.Controllers.recruit
     {
         RecruitNoticeService recruitNoticeService = new RecruitNoticeServiceImpl();
         SearchService searchService = new SearchServiceImpl();
-        FilesService filesServce = new FilesServiceImpl();
+        FilesService filesService = new FilesServiceImpl();
 
         public ActionResult list(RecruitNotice recruitNotice)
         {
@@ -53,7 +53,7 @@ namespace bmw_fs.Controllers.recruit
         {
             RecruitNotice item = recruitNoticeService.findRecruitNotice(recruitNotice);
             ViewBag.item = item;
-            ViewBag.filesList1 = filesServce.findAllByMasterIdxAndType(item.idx, "files");
+            ViewBag.filesList1 = filesService.findAllByMasterIdxAndType(item.idx, "files");
 
             return View("~/Views/Recruit/RecruitNotice/view.cshtml");
         }
@@ -62,7 +62,7 @@ namespace bmw_fs.Controllers.recruit
         {
             RecruitNotice item = recruitNoticeService.findRecruitNotice(recruitNotice);
             ViewBag.item = item;
-            ViewBag.filesList1 = filesServce.findAllByMasterIdxAndTypeForUpload(item.idx, "files");
+            ViewBag.filesList1 = filesService.findAllByMasterIdxAndTypeForUpload(item.idx, "files");
 
             return View("~/Views/Recruit/RecruitNotice/modify.cshtml");
         }
