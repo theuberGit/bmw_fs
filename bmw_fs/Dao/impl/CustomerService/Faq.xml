@@ -10,8 +10,8 @@
     <resultMap id="FaqMap" class="FaqClass">
       <result property="idx" column="IDX"/>
       <result property="category" column="CATEGORY"/>
-      <result property="ask" column="ASK"/>
       <result property="question" column="QUESTION"/>
+      <result property="answer" column="ANSWER"/>
       <result property="deployYn" column="DEPLOY_YN"/>
       <result property="regId" column="REG_ID"/>
       <result property="regDate" column="REG_DATE"/>
@@ -26,8 +26,8 @@
       ROW_NUMBER() OVER(ORDER BY IDX DESC) AS RNUM
       ,IDX
       ,CATEGORY
-      ,ASK
       ,QUESTION
+      ,ANSWER
       ,DEPLOY_YN
       ,REG_DATE
       ,REG_ID
@@ -35,8 +35,8 @@
       WHERE 1=1
       <isNotEmpty property="searchInput">
         <isNotEmpty property="searchOption">
-          <isEqual property="searchOption" compareValue="ask">
-            AND ASK LIKE '%'+#searchInput#+'%'
+          <isEqual property="searchOption" compareValue="answer">
+            AND ANSWER LIKE '%'+#searchInput#+'%'
           </isEqual>
           <isEqual property="searchOption" compareValue="question">
             AND QUESTION LIKE '%'+#searchInput#+'%'
@@ -57,8 +57,8 @@
       WHERE 1=1
       <isNotEmpty property="searchInput">
         <isNotEmpty property="searchOption">
-          <isEqual property="searchOption" compareValue="ask">
-            AND ASK LIKE '%'+#searchInput#+'%'
+          <isEqual property="searchOption" compareValue="answer">
+            AND ANSWER LIKE '%'+#searchInput#+'%'
           </isEqual>
           <isEqual property="searchOption" compareValue="question">
             AND QUESTION LIKE '%'+#searchInput#+'%'
@@ -74,16 +74,16 @@
       INSERT INTO BMW_FS_FAQ(
       IDX
       ,CATEGORY
-      ,ASK
       ,QUESTION
+      ,ANSWER
       ,DEPLOY_YN
       ,REG_ID
       )
       VALUES (
       #idx#
       ,#category#
-      ,#ask#
       ,#question#
+      ,#answer#
       ,#deployYn#
       ,#regId#
       )
@@ -92,8 +92,8 @@
     <select id="findFaq" resultMap="FaqMap">
       SELECT IDX
       ,CATEGORY
-      ,ASK
       ,QUESTION
+      ,ANSWER
       ,DEPLOY_YN
       ,REG_DATE
       ,REG_ID
@@ -104,8 +104,8 @@
     <update id="updateFaq">
       UPDATE BMW_FS_FAQ
       SET CATEGORY = #category#
-      ,ASK = #ask#
       ,QUESTION = #question#
+      ,ANSWER = #answer#
       ,DEPLOY_YN = #deployYn#
       ,UPT_ID = #uptId#
       ,UPT_DATE = getdate()

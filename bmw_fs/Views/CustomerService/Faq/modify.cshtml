@@ -2,12 +2,6 @@
     ViewBag.Title = "FAQ 수정";
 }
 
-<head>
-    <script src="/resources/js/jquery-1.12.4.min.js"></script>
-    <script src="/resources/js/jquery-ui.min.js"></script>
-    <script src="/resources/js/jquery.cust.js"></script>
-    <script src="/resources/js/common.js"></script>
-</head>
 <div id="content" class="reg">
     <div class="cont_top">
         <h3>FAQ 수정</h3>
@@ -42,11 +36,11 @@
                 </tr>
                 <tr>
                     <th scope="row"><label for="title">* 항목</label></th>
-                    <td><input type="text" name="ask" id="ask" value="@ViewBag.item.ask" /></td>
+                    <td><input type="text" name="question" id="question" value="@ViewBag.item.question" /></td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="contents">* 답변</label></th>
-                    <td><textarea rows="20" cols="30" id="question" name="question">@ViewBag.item.question</textarea></td>
+                    <td><textarea rows="20" cols="30" id="answer" name="answer">@ViewBag.item.answer</textarea></td>
                 </tr>
                 <tr>
                     <th><label for="">배포 *</label></th>
@@ -78,8 +72,8 @@ $('#inactivity').prop('checked', true);
 lnbSet(8, 1);
 function modForm() {
 if (!confirm('수정하시겠습니까?')) return;
-if (!$('#ask').required()) return;
-if (!$('#question').required()) return;
+    if (!$('#question').required()) return;
+    if (!$('#answer').required()) return;
 $('#content form').attr('action', 'modifyProc').submit();
 }
 
