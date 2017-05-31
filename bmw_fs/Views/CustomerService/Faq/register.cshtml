@@ -34,12 +34,12 @@
                     </td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="ask">* 항목</label></th>
-                    <td><input type="text" name="ask" id="ask" class="ask" maxlength="50" value="" /></td>
+                    <th scope="row"><label for="question">* 항목</label></th>
+                    <td><input type="text" name="question" id="question" class="question" maxlength="50" value="" /></td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="question">* 답변</label></th>
-                    <td><textarea rows="20" cols="30" id="question" name="question"></textarea> </td>
+                    <th scope="row"><label for="answer">* 답변</label></th>
+                    <td><textarea rows="20" cols="30" id="answer" name="answer"></textarea> </td>
                 </tr>
                 <tr>
                     <th><label for="">배포 *</label></th>
@@ -61,8 +61,8 @@
     function regForm() {
 
         if (!confirm('등록하시겠습니까?')) return;
-        if (!$('#ask').required()) return;
         if (!$('#question').required()) return;
+        if (!$('#answer').required()) return;
         $('#content form').attr('action', 'registerProc').submit();
     };
 

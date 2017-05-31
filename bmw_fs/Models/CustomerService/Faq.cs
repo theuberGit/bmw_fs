@@ -11,9 +11,9 @@ namespace bmw_fs.Models.CustomerService
     {
         public int idx { get; set; }
         public String category { get; set; }
-        public String ask { get; set; }
-        [AllowHtml]
         public String question { get; set; }
+        [AllowHtml]
+        public String answer { get; set; }
         public String deployYn { get; set; }
         public String regId { get; set; }
         public DateTime regDate { get; set; }
