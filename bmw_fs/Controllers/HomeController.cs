@@ -12,7 +12,7 @@ namespace bmw_fs.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return View("~/Views/Index.cshtml");
         }
     }
 }

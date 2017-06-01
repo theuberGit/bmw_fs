@@ -1,4 +1,5 @@
-﻿using bmw_fs.Dao.face.recruit;
+﻿using bmw_fs.Common;
+using bmw_fs.Dao.face.recruit;
 using bmw_fs.Models.recruit;
 using bmw_fs.Service.face.common;
 using bmw_fs.Service.face.recruit;
@@ -6,6 +7,7 @@ using bmw_fs.Service.impl.common;
 using IBatisNet.DataMapper;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 
@@ -24,6 +26,7 @@ namespace bmw_fs.Service.impl.recruit
 
         public void insertRecruitNotice(HttpFileCollectionBase multipartFiles, RecruitNotice recruitNotice)
         {
+            validation(recruitNotice);
             int masterIdx = sequenceService.getSequenceMasterIdx();
             recruitNotice.idx = masterIdx;
             Mapper.Instance().BeginTransaction();
@@ -44,6 +47,7 @@ namespace bmw_fs.Service.impl.recruit
 
         public void updateRecruitNotice(HttpFileCollectionBase multipartFiles, RecruitNotice recruitNotice)
         {
+            validation(recruitNotice);
             Mapper.Instance().BeginTransaction();
             filesService.deleteFileAndFileUpload(multipartFiles, "files", "jpg|png", 5 * 1024 * 1024, recruitNotice.idx, recruitNotice.fileIdxs);
             recruitNoticeDao.updateRecruitNotice(recruitNotice);
@@ -56,6 +60,14 @@ namespace bmw_fs.Service.impl.recruit
             recruitNoticeDao.deleteRecruitNotice(recruitNotice);
             filesService.deleteRealFilesAndDataByFileMasterIdx(recruitNotice.idx);
             Mapper.Instance().CommitTransaction();
+        }
+
+        private void validation(RecruitNotice recruitNotice)
+        {
+            if (String.IsNullOrWhiteSpace(recruitNotice.title)) throw new CustomException("필수 값이 없습니다.");
+            if (String.IsNullOrWhiteSpace(recruitNotice.contents)) throw new CustomException("필수 값이 없습니다.");
+            if (recruitNotice.startDate == DateTime.MinValue) throw new CustomException("필수 값이 없습니다.");
+            if (recruitNotice.endDate  == DateTime.MinValue) throw new CustomException("필수 값이 없습니다.");
         }
 
     }

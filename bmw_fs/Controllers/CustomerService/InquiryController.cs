@@ -6,13 +6,16 @@ using bmw_fs.Service.impl.CustomerService;
 using Microsoft.Security.Application;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace bmw_fs.Controllers.CustomerService
 {
-    [Authorize]
+    [Authorize(Roles = "MASTER, CIC")]
     public class InquiryController : Controller
     {
         
@@ -28,7 +31,7 @@ namespace bmw_fs.Controllers.CustomerService
             ViewBag.pagination = inquiry;
             ViewBag.today = DateTime.Now;
 
-            return View();
+            return View("~/Views/CustomerService/Inquiry/list.cshtml");
         }
 
 
@@ -37,15 +40,26 @@ namespace bmw_fs.Controllers.CustomerService
             Inquiry item = inquiryService.findInquiry(inquiry);
             ViewBag.item = item;            
 
-            return View();
+            return View("~/Views/CustomerService/Inquiry/view.cshtml");
         }
 
-        public ActionResult reply(Inquiry inquiry)
+        [HttpPost]
+        [ValidateInput(false)]
+        public RedirectToRouteResult reply(Inquiry inquiry)
         {
-            Inquiry item = inquiryService.findInquiry(inquiry);
-            ViewBag.item = item;
-            
-            return View();
+            inquiry.replyRegId = System.Web.HttpContext.Current.User.Identity.Name;
+            inquiryService.updateInquiry(inquiry);            
+            return RedirectToAction("view", new { idx = inquiry.idx });
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public RedirectToRouteResult sendMail(Inquiry inquiry)
+        {
+            inquiry.replyRegId = System.Web.HttpContext.Current.User.Identity.Name;
+            inquiry.mailSendId = System.Web.HttpContext.Current.User.Identity.Name;
+            inquiryService.updateInquirySendMail(inquiry);
+            return RedirectToAction("view", new { idx = inquiry.idx });
         }
 
         [HttpPost]
@@ -64,6 +78,30 @@ namespace bmw_fs.Controllers.CustomerService
         {
             inquiryService.deleteInquiry(inquiry);
             return RedirectToAction("list");
+        }
+
+        public ActionResult excelDownload(Inquiry inquiry)
+        {
+            GridView grid = new GridView();            
+            grid.DataSource = inquiryService.downloadExcel(inquiry);
+            grid.DataBind();
+
+            Response.ClearContent();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment; filename=Inquiry.xls");
+            Response.ContentType = "application/ms-excel";
+
+            Response.Charset = "";
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htw = new HtmlTextWriter(sw);          
+
+            grid.RenderControl(htw);
+
+            Response.Output.Write(sw.ToString());
+            Response.Flush();
+            Response.End();
+
+            return Content(sw.ToString(), "application/ms-excel");
         }
     }
 }

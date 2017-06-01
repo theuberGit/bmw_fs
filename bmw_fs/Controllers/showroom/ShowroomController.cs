@@ -13,7 +13,7 @@ using System.Web.Routing;
 
 namespace bmw_fs.Controllers.Showroom
 {
-    [Authorize]
+    [Authorize(Roles = "MASTER, MSS")]
     public class ShowroomController : Controller
     {
         private ShowroomService showroomService = new ShowroomServiceImpl();

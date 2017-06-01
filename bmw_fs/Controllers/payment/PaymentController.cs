@@ -9,7 +9,7 @@ using System.Web.Routing;
 
 namespace bmw_fs.Controllers.payment
 {
-    [Authorize]
+    [Authorize(Roles = "MASTER, MSS")]
     public class PaymentController : Controller
     {
         PaymentService paymentService = new PaymentServiceImpl();
@@ -20,7 +20,7 @@ namespace bmw_fs.Controllers.payment
         public ActionResult list(Payment payment)
         {
             searchService.setSearchSession(Request, Session);
-            searchService.setPagination(payment, 20, paymentService.findAllCount(payment));
+            searchService.setPagination(payment, paymentService.findAllCount(payment), paymentService.findAllCount(payment));
             ViewBag.list = paymentService.findAll(payment);
             ViewBag.pagination = payment;
             ViewBag.noticeList = paymentService.findAll(payment);

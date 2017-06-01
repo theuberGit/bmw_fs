@@ -20,5 +20,9 @@ namespace bmw_fs.Service.face.CustomerService
         void updateInquirySendMail(Inquiry inquiry);
 
         void deleteInquiry(Inquiry inquiry);
+
+        IList<Inquiry> findAllExcel(Inquiry inquiry);
+
+        Object downloadExcel(Inquiry inquiry);
     }
 }

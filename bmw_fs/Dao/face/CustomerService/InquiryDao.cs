@@ -38,5 +38,11 @@ namespace bmw_fs.Dao.face.CustomerService
         {
             Mapper.Instance().Delete("inquiry.deleteInquiry", inquiry);
         }
+
+        public IList<Inquiry> findAllExcel(Inquiry inquiry)
+        {
+            return Mapper.Instance().QueryForList<Inquiry>("inquiry.findAllExcel", inquiry);
+        }
+
     }
 }

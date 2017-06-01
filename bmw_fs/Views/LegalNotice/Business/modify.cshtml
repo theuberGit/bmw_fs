@@ -1,0 +1,179 @@
+﻿@{
+    ViewBag.Title = "경영공시 수정";
+}
+<style>
+.add_file_area .file_area div { padding-bottom: 20px; }
+.reg .cont_bottom .reg_table td.file_area p{float:none; clear:both; padding-top:10px}
+.reg .cont_bottom .reg_table td.file_area p input[type="text"]{width:467px}
+.reg h4{margin-bottom:10px}
+
+.file_area{counter-reset:cnt1; }
+.file_src.on:after{content:""; color:#666;}
+.reg .cont_bottom .reg_table .event_btn_area input[type="text"]{margin-bottom: 10px; width: 467px;}
+</style>
+<div id="content" class="reg">
+    <div class="cont_top">
+        <h3>경영공시 수정</h3>
+    </div>
+    <div class="cont_bottom">
+        <form method="post" enctype="multipart/form-data">
+            <table class="reg_table">
+                <caption>경영공시 수정 테이블</caption>
+                <colgroup>
+                    <col width="130px">
+                    <col width="870px">
+                </colgroup>
+                <tr>
+                    <th>작성자 </th>
+                    <td>@ViewBag.item.regId</td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="title">* 제목</label></th>
+                    <td><input type="text" name="title" id="title"  class="input_long_type" value="@ViewBag.item.title" /></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="contents">* 내용</label></th>
+                    <td><textarea rows="20" cols="30" id="contents" name="contents">@Html.Raw(@ViewBag.item.contents)</textarea></td>
+                </tr>
+                <tr class="add_file_area">
+                    <th>첨부파일</th>
+                    <td class="file_area">
+                        @if (ViewBag.files.Count != 0)
+                        {
+                            for (int i = 0, size = ViewBag.files.Count; i < size; i++)
+                            {
+                                <div>
+                                    <span class="file_src">@ViewBag.files[i].originalFilename</span>
+                                    <input type="file" class="input_file" name="file" id="file">
+                                    <label for="file" class="btn_file">파일찾기</label>
+                                    @if (i == 0)
+                                    {
+                                        <button type="button" class="btn_add_file" id="btnAddFile">파일 추가</button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="btnDelete" data-key="@ViewBag.files[i].fileIdx" onclick="deleteFile(this);">파일 삭제</button>
+                                    }
+                                    <input type="hidden" name="fileIdxs" value="@ViewBag.files[i].fileIdx" />
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div>
+                                <span class="file_src"></span>
+                                <input type="file" class="input_file" name="file" id="file">
+                                <label for="file" class="btn_file">파일찾기</label>
+                            </div>
+                        }
+
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="">배포 *</label></th>
+                    <td class="radio_area">
+                        <label for="active"><input type="radio" name="deployYn" id="active" value="Y" title="배포 여부"> 배포</label>
+                        <label for="inactivity"><input type="radio" name="deployYn" id="inactivity" checked value="N" title="배포 여부"> 미배포</label>
+                    </td>
+                </tr>
+            </table>
+            <input type="hidden" name="idx" value="@ViewBag.item.idx" />
+        </form>
+        <div class="btn_area">
+            <a href="list?@Session["searchString"]" class="btn_defualt btn_list">취소</a>
+            <a href="javascript:void(0);" class="btn_defualt btn_reg" onclick="modForm();">수정</a>
+            <a href="javascript:void(0);" class="btn_defualt btn_reg" onclick="delForm();">삭제</a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/resources/se/js/HuskyEZCreator.js"></script>
+<script type="text/javascript" src="/resources/js/smarteditor.js"></script>
+<script>
+    if ('@ViewBag.item.deployYn' === 'Y')
+    {
+      $('#active').prop('checked', true);
+    }
+    else
+    {
+      $('#inactivity').prop('checked', true);
+    }
+    lnbSet(6, 4);
+    (function ($) {
+        var $fileArea = $(".add_file_area").find('.file_area');
+
+        function deleteFile() {
+            $(this).parent("div").remove();
+        }
+
+        $(".add_file_area").find(".file_area").on("change", ".input_file", function (e) {
+            var $parent = $(this).closest("div");
+            var val = $(this).val();
+            var valTit = val.split("\\");
+            var valTittext = valTit[valTit.length - 1]
+            if (val != "") {
+                $parent.find(".file_src").text(valTittext).addClass("on");
+            };
+        });
+
+        $(".add_file_area").each(function (index, item) {
+            var cnt = 0;
+            $(item).find(".btn_add_file").on("click", function () {
+                if ($(item).find("input[type='file']").length < 10) {
+                    cnt++;
+                    var html = '<div><span class="file_src"></span><input type="file" class="input_file" id="file' + cnt + '" name="file" /><label for="file' + cnt + '" class="btn_file">파일찾기</label><button type="button" class="btnDelete">파일 삭제</button></div>';
+                    console.log("cnt", cnt);
+                    $(item).find(".file_area").append(html);
+                };
+            });
+            $fileArea.on("click", ".btnDelete", deleteFile);
+        });
+    })(jQuery);
+    function deleteFile(obj) {
+        //실제 파일 삭제
+        if (!confirm('파일을 삭제하시겠습니까?')) return;
+        $obj = $(obj);
+        $fileKey = $obj.attr('data-key');
+        if (!$fileKey == '') {
+            $.ajax({
+                url: '/Files/fileDelete',
+                data: { 'key': $fileKey },
+                dataType: 'json',
+                timeout: 10000,
+                cache: false,
+                type: 'POST',
+                beforeSend: function () {
+                    //$.blockUI(_BLOCKUI_OPTION);
+                },
+                complete: function () {
+                    //$.unblockUI();
+                },
+                error: function (x, e) {
+                    alert('요청하신 작업을 수행하던 중 예상치 않게 중지되었습니다.\n\n다시 시도해 주십시오.');
+                },
+                success: function (data) {
+                    if (!data) {
+                        alert('파일이 존재하지 않습니다.');
+                        return;
+                    }
+                    return;
+                }
+            });
+        }
+        $obj.parent("div").remove();
+
+    };
+    function modForm() {
+    if (!$('#title').required()) return;
+    editor_object.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
+    if (!$('#contents').required()) return;
+    if (!$('input[name=deployYn]').reqRadio()) return;
+
+    if (!confirm('수정하시겠습니까?')) return;
+    $('#content form').attr('action', 'modifyProc').submit();
+    }
+
+    function delForm() {
+    if (!confirm('삭제하시겠습니까?')) return;
+    $('#content form').attr('action', 'delete').submit();
+    }
+</script>

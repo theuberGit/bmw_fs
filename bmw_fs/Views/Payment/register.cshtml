@@ -14,7 +14,7 @@
                     <col width="870px">
                 </colgroup>
                 <tr>
-                    <th scope="row"><label for="regId">작성자</label></th>
+                    <th scope="row">작성자</th>
                     <td>@HttpContext.Current.User.Identity.Name</td>
                 </tr>
                 <tr>
@@ -93,6 +93,7 @@
     </div>
 </div>
 <script>
+    lnbSet(3, 0);
     //브랜드 셀렉트값 변경시
     $(document).on('change', '#brand', function () {
         console.log($(this));
@@ -222,7 +223,6 @@
         $('#result2').text("(" + addComma(parseInt(result2)) + "원)");
         $('#result3').text("(" + addComma(parseInt(result3)) + "원)");
     });
-    lnbSet(4, 1);
     function regForm() {
         if (!$('#brand').reqSelect()) return;
         if (!$('#series').reqSelect()) return;

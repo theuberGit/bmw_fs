@@ -60,8 +60,8 @@ namespace bmw_fs.Service.impl.CustomerService
         
         private void validation(Faq faq)
         {
-            if (String.IsNullOrWhiteSpace(faq.category)) throw new CustomException("필수 값이 없습니다.");
-            if (String.IsNullOrWhiteSpace(faq.ask)) throw new CustomException("필수 값이 없습니다.");
+            if (String.IsNullOrWhiteSpace(faq.question)) throw new CustomException("필수 값이 없습니다.(항목)");
+            if (String.IsNullOrWhiteSpace(faq.answer)) throw new CustomException("필수 값이 없습니다.(답변)");
             if (String.IsNullOrWhiteSpace(Regex.Replace(faq.question, "<.*?>", string.Empty))) throw new CustomException("필수 값이 없습니다.");
         }
     }

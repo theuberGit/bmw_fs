@@ -1,4 +1,5 @@
-﻿using bmw_fs.Dao.face.recruit;
+﻿using bmw_fs.Common;
+using bmw_fs.Dao.face.recruit;
 using bmw_fs.Models.recruit;
 using bmw_fs.Service.face.common;
 using bmw_fs.Service.face.recruit;
@@ -23,6 +24,7 @@ namespace bmw_fs.Service.impl.recruit
 
         public void insertRecruitFaq(RecruitFaq recruitFaq)
         {
+            validation(recruitFaq);
             int masterIdx = sequenceService.getSequenceMasterIdx();
             recruitFaq.idx = masterIdx;
             Mapper.Instance().BeginTransaction();
@@ -42,6 +44,7 @@ namespace bmw_fs.Service.impl.recruit
 
         public void updateRecruitFaq(RecruitFaq recruitFaq)
         {
+            validation(recruitFaq);
             Mapper.Instance().BeginTransaction();
             recruitFaqDao.updateRecruitFaq(recruitFaq);
             Mapper.Instance().CommitTransaction();
@@ -52,6 +55,19 @@ namespace bmw_fs.Service.impl.recruit
             Mapper.Instance().BeginTransaction();
             recruitFaqDao.deleteRecruitFaq(recruitFaq);
             Mapper.Instance().CommitTransaction();
+        }
+
+
+        private void validation(RecruitFaq recruitFaq)
+        {
+            if (String.IsNullOrWhiteSpace(recruitFaq.title)) throw new CustomException("필수 값이 없습니다.");
+            if (String.IsNullOrWhiteSpace(recruitFaq.contents)) throw new CustomException("필수 값이 없습니다.");
+            if ("Y".Equals(recruitFaq.engYn))
+            {
+                if (String.IsNullOrWhiteSpace(recruitFaq.titleEng)) throw new CustomException("필수 값이 없습니다.");
+                if (String.IsNullOrWhiteSpace(recruitFaq.contentsEng)) throw new CustomException("필수 값이 없습니다.");
+            }
+
         }
 
     }

@@ -1,7 +1,9 @@
 ﻿@{
     ViewBag.Title = "월 납입금 리스트";
 }
-
+<style>
+    .list .search_box select { width: 120px; }
+</style>
 <div id="content" class="list">
     <form method="get">
         <div class="cont_top">
@@ -24,7 +26,7 @@
                     <option value="잔가보장형 할부">잔가보자형 할부</option>
                     <option value="일반 할부">일반 할부</option>
                 </select>
-                <button type="button" class="submit_btn" onclick="searchList();"></button>
+                <button type="button" onclick="searchList();"></button>
             </div>
         </div>
         <div class="cont_bottom">
@@ -89,12 +91,14 @@
                 </tbody>
             </table>
             <!-- pagination -->
-            @RenderPage("~/Views/Common/Pagination.cshtml")
+            @*@RenderPage("~/Views/Common/Pagination.cshtml")*@
             <a href="register" class="btn_defualt btn_reg">등록</a>
         </div>
     </form>
 </div>
 <script>
+    lnbSet(3, 0);
+    $('#searchOption').val('@ViewBag.pagination.searchOption');
     (function () {
         //검색 브랜드 셀렉트값 변경시
         $(".search_box").on("change", "#brand", function (e) {
@@ -111,8 +115,8 @@
             console.log($seriesSelect);
             if (val == "BMW") {
 
-                series += '<option value="">구분</option>'; 
-                series += '<option value="1 Series">1 Series</option>'; 
+                series += '<option value="">구분</option>';
+                series += '<option value="1 Series">1 Series</option>';
                 series += '<option value="Active Tourer">Active Tourer</option>';
                 series += '<option value="3 Series">3 Series</option>';
                 series += '<option value="4 Series">4 Series</option>';
@@ -128,7 +132,7 @@
                 model += '<option value="">구분</option>';
             } else if (val == "MINI") {
                 series += '<option value="">구분</option>';
-                series += '<option value="MINI">MINI</option>'; 
+                series += '<option value="MINI">MINI</option>';
 
                 model += '<option value="">구분</option>';
             } else {
@@ -140,7 +144,7 @@
         });
         //검색 시리즈 셀렉트값 변경시
         $(".search_box").on("change", "#series", function (e) {
-            
+
             $modelSelect = $(this).siblings('.search_select').eq(1);
             var model = "";
             //모델 초기화
@@ -196,9 +200,11 @@
             $('#model').append(model);
         });
     })();
-
-    lnbSet(4, 1);
-    if ('@ViewBag.pagination.brand' !== '') {
-        $('#brand').val('@ViewBag.pagination.brand');
-    }
+    //브랜드,모델,시리즈 값
+    $('select[name="brand"]').val('@ViewBag.pagination.brand');
+    $('#brand').trigger('change');
+    $('select[name="series"]').val('@ViewBag.pagination.series');
+    $('#series').trigger('change');
+    $('select[name="model"]').val('@ViewBag.pagination.model');
+    $('select[name="item"]').val('@ViewBag.pagination.item');
 </script>

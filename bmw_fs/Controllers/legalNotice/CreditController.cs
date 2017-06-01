@@ -13,7 +13,7 @@ using System.Web.Mvc;
 
 namespace bmw_fs.Controllers.legalNotice
 {
-    [Authorize]
+    [Authorize(Roles = "MASTER, COMPLIANCE")]
     public class CreditController : Controller
     {
         CreditService creditService = new CreditServiceImpl();
@@ -26,12 +26,12 @@ namespace bmw_fs.Controllers.legalNotice
             ViewBag.list = creditService.findAll(credit);
             ViewBag.pagination = credit;
 
-            return View();
+            return View("~/Views/LegalNotice/Credit/list.cshtml");
         }
 
         public ActionResult register()
         {
-            return View();
+            return View("~/Views/LegalNotice/Credit/register.cshtml");
         }
 
         [HttpPost]
@@ -49,7 +49,7 @@ namespace bmw_fs.Controllers.legalNotice
             Credit item = creditService.findCredit(credit);
             ViewBag.item = item;
 
-            return View();
+            return View("~/Views/LegalNotice/Credit/view.cshtml");
         }
 
         public ActionResult modify(Credit credit)
@@ -57,7 +57,7 @@ namespace bmw_fs.Controllers.legalNotice
             Credit item = creditService.findCredit(credit);
             ViewBag.item = item;
 
-            return View();
+            return View("~/Views/LegalNotice/Credit/modify.cshtml");
         }
 
         [HttpPost]

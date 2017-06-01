@@ -24,8 +24,24 @@
       <result property="author" column="AUTHOR"/>
       <result property="status" column="STATUS"/>
       <result property="regDate" column="REG_DATE"/>
+      <result property="contents" column="CONTENTS"/>
+      <result property="replyContents" column="REPLY_CONTENTS"/>
+      <result property="email" column="EMAIL"/>
+      <result property="mailSendDate" column="MAIL_SEND_DATE"/>
     </resultMap>
-    
+
+    <resultMap id="InquiryListExcel" class="InquiryClass">
+      <result property="idx" column="IDX"/>
+      <result property="category" column="CATEGORY"/>
+      <result property="title" column="TITLE"/>
+      <result property="author" column="AUTHOR"/>
+      <result property="status" column="STATUS"/>
+      <result property="contents" column="CONTENTS"/>
+      <result property="regDate" column="REG_DATE"/>
+      <result property="replyContents" column="REPLY_CONTENTS"/>
+      <result property="mailSendDate" column="MAIL_SEND_DATE"/>
+    </resultMap>
+
   </resultMaps>
 
   <statements>
@@ -53,9 +69,18 @@
                   </isEqual>
                 </isNotEmpty>
               </isNotEmpty>
-            )t
+              <isNotEmpty property="category">
+                  AND category = #category#
+              </isNotEmpty>
+              <isNotEmpty property="startDate">
+                AND CONVERT(char(10), REG_DATE,23) &gt;= #startDate#
+              </isNotEmpty>
+              <isNotEmpty property="endDate">
+                AND CONVERT(char(10), REG_DATE,23) &lt;= #endDate#
+              </isNotEmpty>
+      )t
       WHERE 1=1
-        AND (RNUM BETWEEN #currentItem# AND #currentItemEnd# )
+      AND (RNUM BETWEEN #currentItem# AND #currentItemEnd# )
     </select>
 
     <select id="findAllCount" resultClass="int">
@@ -72,7 +97,17 @@
               AND AUTHOR LIKE '%'+#searchInput#+'%'
             </isEqual>
           </isNotEmpty>
+      </isNotEmpty>      
+      <isNotEmpty property="category">
+        AND category = #category#
       </isNotEmpty>
+      <isNotEmpty property="startDate" >
+        AND CONVERT(char(10), REG_DATE,23) &gt;= #startDate#
+      </isNotEmpty>
+      <isNotEmpty property="endDate" >
+        AND CONVERT(char(10), REG_DATE,23) &lt;= #endDate#
+      </isNotEmpty>
+
     </select>
 
     <select id="findInquiry" resultMap="InquiryMap">
@@ -84,8 +119,8 @@
                 ,REPLY_CONTENTS
                 ,STATUS
                 ,EMAIL
-                ,REPLY
                 ,REG_DATE
+                ,MAIL_SEND_DATE
       FROM BMW_FS_INQUIRY
       WHERE IDX = #idx#
           AND DEL_YN = 'N'
@@ -101,8 +136,8 @@
     
     <update id="updateInquirySendMail">
       UPDATE BMW_FS_INQUIRY
-            SET SEND_MAIL_DATE = GETDATE()
-                 ,SEND_MAIL_ID = #sendMailId#
+            SET MAIL_SEND_DATE = GETDATE()
+                 ,MAIL_SEND_ID = #mailSendId#
                  ,STATUS = #status#
       WHERE IDX = #idx#
     </update>
@@ -113,6 +148,40 @@
         WHERE IDX = #idx#
     </update>
 
+    <select id="findAllExcel" resultMap="InquiryListExcel">      
+      SELECT IDX
+                ,CATEGORY
+                ,TITLE
+                ,AUTHOR
+                ,STATUS
+                ,CONTENTS
+                ,REPLY_CONTENTS
+                ,REG_DATE
+                ,MAIL_SEND_DATE
+      FROM BMW_FS_INQUIRY
+      WHERE 1=1
+      AND DEL_YN = 'N'
+      <isNotEmpty property="searchInput">
+        <isNotEmpty property="searchOption">
+          <isEqual property="searchOption" compareValue="title">
+            AND TITLE LIKE '%'+#searchInput#+'%'
+          </isEqual>
+          <isEqual property="searchOption" compareValue="author">
+            AND AUTHOR LIKE '%'+#searchInput#+'%'
+          </isEqual>
+        </isNotEmpty>
+      </isNotEmpty>
+      <isNotEmpty property="category">
+        AND category = #category#
+      </isNotEmpty>
+      <isNotEmpty property="startDate">
+        AND CONVERT(char(10), REG_DATE,23) &gt;= #startDate#
+      </isNotEmpty>
+      <isNotEmpty property="endDate">
+        AND CONVERT(char(10), REG_DATE,23) &lt;= #endDate#
+      </isNotEmpty>
+            
+    </select>
     
   </statements>
 </sqlMap>

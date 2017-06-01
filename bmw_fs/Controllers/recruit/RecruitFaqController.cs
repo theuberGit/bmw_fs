@@ -12,7 +12,7 @@ using System.Web.Routing;
 
 namespace bmw_fs.Controllers.recruit
 {
-    [Authorize]
+    [Authorize(Roles = "MASTER, HR")]
     public class RecruitFaqController : Controller
     {
         SearchService searchService = new SearchServiceImpl();
@@ -23,15 +23,14 @@ namespace bmw_fs.Controllers.recruit
             searchService.setSearchSession(Request, Session);
             searchService.setPagination(recruitFaq, 20, recruitFaqService.findAllCount(recruitFaq));
             ViewBag.list = recruitFaqService.findAll(recruitFaq);
-            ViewBag.pagination = recruitFaq;
-            ViewBag.today = DateTime.Now;
+            ViewBag.pagination = recruitFaq;            
 
-            return View();
+            return View("~/Views/Recruit/RecruitFaq/list.cshtml");
         }
 
         public ActionResult register()
         {
-            return View();
+            return View("~/Views/Recruit/RecruitFaq/register.cshtml");
         }
 
         [HttpPost]
@@ -50,7 +49,7 @@ namespace bmw_fs.Controllers.recruit
         {
             RecruitFaq item = recruitFaqService.findRecruitFaq(recruitFaq);
             ViewBag.item = item;
-            return View();
+            return View("~/Views/Recruit/RecruitFaq/view.cshtml");
         }
 
         public ActionResult modify(RecruitFaq recruitFaq)
@@ -58,7 +57,7 @@ namespace bmw_fs.Controllers.recruit
             RecruitFaq item = recruitFaqService.findRecruitFaq(recruitFaq);
             ViewBag.item = item;            
 
-            return View();
+            return View("~/Views/Recruit/RecruitFaq/modify.cshtml");
         }
         [HttpPost]
         [ValidateInput(false)]

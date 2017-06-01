@@ -13,12 +13,12 @@ using System.Web.Routing;
 
 namespace bmw_fs.Controllers.recruit
 {
-    [Authorize]
+    [Authorize(Roles = "MASTER, HR")]
     public class RecruitNoticeController : Controller
     {
         RecruitNoticeService recruitNoticeService = new RecruitNoticeServiceImpl();
         SearchService searchService = new SearchServiceImpl();
-        FilesService filesServce = new FilesServiceImpl();
+        FilesService filesService = new FilesServiceImpl();
 
         public ActionResult list(RecruitNotice recruitNotice)
         {
@@ -28,12 +28,12 @@ namespace bmw_fs.Controllers.recruit
             ViewBag.pagination = recruitNotice;
             ViewBag.today = DateTime.Now;
 
-            return View();
+            return View("~/Views/Recruit/RecruitNotice/list.cshtml");
         }
 
         public ActionResult register()
         {
-            return View();
+            return View("~/Views/Recruit/RecruitNotice/register.cshtml");
         }
 
         [HttpPost]
@@ -53,18 +53,18 @@ namespace bmw_fs.Controllers.recruit
         {
             RecruitNotice item = recruitNoticeService.findRecruitNotice(recruitNotice);
             ViewBag.item = item;
-            ViewBag.filesList1 = filesServce.findAllByMasterIdxAndType(item.idx, "files");
+            ViewBag.filesList1 = filesService.findAllByMasterIdxAndType(item.idx, "files");
 
-            return View();
+            return View("~/Views/Recruit/RecruitNotice/view.cshtml");
         }
 
         public ActionResult modify(RecruitNotice recruitNotice)
         {
             RecruitNotice item = recruitNoticeService.findRecruitNotice(recruitNotice);
             ViewBag.item = item;
-            ViewBag.filesList1 = filesServce.findAllByMasterIdxAndTypeForUpload(item.idx, "files");
+            ViewBag.filesList1 = filesService.findAllByMasterIdxAndTypeForUpload(item.idx, "files");
 
-            return View();
+            return View("~/Views/Recruit/RecruitNotice/modify.cshtml");
         }
         [HttpPost]
         [ValidateInput(false)]
