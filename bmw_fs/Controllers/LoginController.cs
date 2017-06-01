@@ -16,7 +16,7 @@ namespace bmw_fs.Controllers.login
     {
 
         MemberService memberService = new MemberServiceImpl();
-        private String _domain = "HAP1KRS00";
+        private String _domain = "172.30.81.67";
         // GET: Login
         [AllowAnonymous]
         public ActionResult Login(String returnUrl)
