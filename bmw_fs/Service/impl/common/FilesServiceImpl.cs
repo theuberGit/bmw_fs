@@ -138,7 +138,7 @@ namespace bmw_fs.Service.impl.common
             IList<int> fileTmpIdxs = new List<int>();
             for (int i = 0, size = files.Count; i <size; i++)
             {
-                if(fileIdxs.Count > i) { //새로 추가된 파일의 경우 fileIdx.ElementAt으로 접근할 수 X
+                if(fileIdxs != null && fileIdxs.Count > i) { //새로 추가된 파일의 경우 fileIdx.ElementAt으로 접근할 수 X
                     if (files[i].ContentLength > 0 && fileIdxs.Count != 0 && fileIdxs.ElementAt(i) != 0) //파일이 교체됬을경우 : 파일있고 fileIdxs도 있는경우
                     {
                         deleteRealFilesByFileIdx(fileIdxs.ElementAt(i));
