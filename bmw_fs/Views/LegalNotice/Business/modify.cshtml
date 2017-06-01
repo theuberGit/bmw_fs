@@ -89,15 +89,13 @@
 <script type="text/javascript" src="/resources/se/js/HuskyEZCreator.js"></script>
 <script type="text/javascript" src="/resources/js/smarteditor.js"></script>
 <script>
-    if ('@ViewBag.item.deployYn' === 'Y')
-    {
-      $('#active').prop('checked', true);
+    lnbSet(".business_mgmt");
+    if ('@ViewBag.item.deployYn' === 'Y') {
+        $('#active').prop('checked', true);
     }
-    else
-    {
-      $('#inactivity').prop('checked', true);
+    else {
+        $('#inactivity').prop('checked', true);
     }
-    lnbSet(6, 4);
     (function ($) {
         var $fileArea = $(".add_file_area").find('.file_area');
 
@@ -163,17 +161,17 @@
 
     };
     function modForm() {
-    if (!$('#title').required()) return;
-    editor_object.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
-    if (!$('#contents').required()) return;
-    if (!$('input[name=deployYn]').reqRadio()) return;
+        if (!$('#title').required()) return;
+        editor_object.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
+        if (!$('#contents').required()) return;
+        if (!$('input[name=deployYn]').reqRadio()) return;
 
-    if (!confirm('수정하시겠습니까?')) return;
-    $('#content form').attr('action', 'modifyProc').submit();
+        if (!confirm('수정하시겠습니까?')) return;
+        $('#content form').attr('action', 'modifyProc').submit();
     }
 
     function delForm() {
-    if (!confirm('삭제하시겠습니까?')) return;
-    $('#content form').attr('action', 'delete').submit();
+        if (!confirm('삭제하시겠습니까?')) return;
+        $('#content form').attr('action', 'delete').submit();
     }
 </script>

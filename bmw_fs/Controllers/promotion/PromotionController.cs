@@ -25,6 +25,10 @@ namespace bmw_fs.Controllers.promotion
         public ActionResult list(Promotion webPromotion)
         {
             webPromotion.webYn = "Y";
+            if (webPromotion.searchOption == null)
+            {
+                webPromotion.searchOption = "now";
+            }
             searchService.setSearchSession(Request, Session);
             searchService.setPagination(webPromotion, 6, webPromotionService.findAllCount(webPromotion));
             ViewBag.list = webPromotionService.findAll(webPromotion);

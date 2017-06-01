@@ -73,8 +73,10 @@ namespace bmw_fs.Service.impl.common
             Files fileItem = new Files();
             IList<int> fileTmpIdxs = new List<int>();
             int idx = 0;
+
             foreach (var file in files)
             {
+                int fileIdx = -1;
                 if (file.ContentLength != 0)
                 {
                     String fileName = file.FileName;
@@ -96,7 +98,7 @@ namespace bmw_fs.Service.impl.common
                     fileItem.type = inputFileName;
                     if (fileIdxs == null || fileIdxs.Count == 0 || fileIdxs.Count <= idx || fileIdxs[idx] <= 0)
                     {//새로 올리는 file인 경우, db에 file 정보 insert
-                       int fileIdx =  filesDao.insertFile(fileItem);
+                        fileIdx =  filesDao.insertFile(fileItem);
                         fileTmpIdxs.Add(fileIdx);//리턴해줄 fileIdxs
                     }
                     else
@@ -108,14 +110,20 @@ namespace bmw_fs.Service.impl.common
                 }
                 else//기존 file은 있지만, 업데이트 이루어지지 않은 경우.
                 {
-                    if(fileIdxs != null)
+                    if(fileIdxs != null && fileIdxs[idx] >= 0)
                     {
-                        fileTmpIdxs.Add(fileIdxs[idx]);//리턴해줄 fileIdxs
+                        fileTmpIdxs.Add(fileIdxs[idx]);//리턴해줄 fileIdxs// exception
                     }
                 }
-                if(fileIdxs != null && fileIdxs[idx] >= 0)
+                if(fileIdxs != null)
                 {
-                    idx++;
+                    if(fileIdx == -1)
+                    {
+                        if (fileIdxs[idx] >= 0)
+                        {
+                            idx++;
+                        }
+                    }
                 }
             }
 
@@ -130,7 +138,7 @@ namespace bmw_fs.Service.impl.common
             IList<int> fileTmpIdxs = new List<int>();
             for (int i = 0, size = files.Count; i <size; i++)
             {
-                if(fileIdxs.Count > i) { //새로 추가된 파일의 경우 fileIdx.ElementAt으로 접근할 수 X
+                if(fileIdxs != null && fileIdxs.Count > i) { //새로 추가된 파일의 경우 fileIdx.ElementAt으로 접근할 수 X
                     if (files[i].ContentLength > 0 && fileIdxs.Count != 0 && fileIdxs.ElementAt(i) != 0) //파일이 교체됬을경우 : 파일있고 fileIdxs도 있는경우
                     {
                         deleteRealFilesByFileIdx(fileIdxs.ElementAt(i));

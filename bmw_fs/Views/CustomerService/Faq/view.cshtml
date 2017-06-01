@@ -1,13 +1,6 @@
 ﻿@{
     ViewBag.Title = "FAQ 상세보기";
 }
-
-<head>
-    <script src="/resources/js/jquery-1.12.4.min.js"></script>
-    <script src="/resources/js/jquery-ui.min.js"></script>
-    <script src="/resources/js/jquery.cust.js"></script>
-    <script src="/resources/js/common.js"></script>
-</head>
 <div id="content" class="reg">
     <div class="cont_top">
         <h3>FAQ</h3>
@@ -25,19 +18,19 @@
                     <td>@ViewBag.item.regId</td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="category">구분</label></th>
+                    <th scope="row">구분</th>
                     <td>@ViewBag.item.categoryName</td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="title">* 항목</label></th>
-                    <td>@ViewBag.item.ask</td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="contents">* 답변</label></th>
+                    <th scope="row">* 항목</th>
                     <td>@ViewBag.item.question</td>
                 </tr>
                 <tr>
-                    <th><label for="">배포</label></th>
+                    <th scope="row">* 답변</th>
+                    <td>@ViewBag.item.answer</td>
+                </tr>
+                <tr>
+                    <th>배포</th>
                     <td class="radio_area">@ViewBag.item.deployYn</td>
                 </tr>
             </table>
@@ -54,7 +47,7 @@
     </div>
 </div>
 <script>
-    lnbSet(8, 1);
+    lnbSet(".faq_mgmt");
     function modForm() {
         $('form').attr('action', 'modify').submit();
     }
