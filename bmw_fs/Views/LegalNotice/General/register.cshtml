@@ -65,7 +65,7 @@
 <script type="text/javascript" src="/resources/se/js/HuskyEZCreator.js"></script>
 <script type="text/javascript" src="/resources/js/smarteditor.js"></script>
 <script>
-    lnbSet(6, 5);
+    lnbSet(".general_mgmt");
     (function ($) {
         var $fileArea = $(".add_file_area").find('.file_area');
 
@@ -103,7 +103,7 @@
         if (!$('input[name=deployYn]').reqRadio()) return;
 
         if (!confirm('등록하시겠습니까?')) return;
-        
+
         $('#content form').attr('action', 'registerProc').submit();
     };
 

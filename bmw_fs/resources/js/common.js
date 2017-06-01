@@ -42,13 +42,9 @@ function searchList() {
     $('#content form').submit();
 };
 
-function lnbSet(mainIdx, subIdx) {
+function lnbSet(className) {
     $('.menu_list li').removeClass('on');
-    if (subIdx !== 0) {
-        $('.menu_list>li:nth-child(' + mainIdx + ')').find('li:nth-child(' + subIdx + ')').addClass('on');
-    } else {
-        $('.menu_list>li:nth-child(' + mainIdx + ')').addClass('on');
-    }
+    $(className).addClass('on');
 };
 
 function addFileBtn(target) {
