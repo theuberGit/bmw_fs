@@ -24,6 +24,7 @@ namespace bmw_fs.Models.CustomerService
         public String mailSendId { get; set; }
         public String startDate { get; set; }
         public String endDate { get; set; }
+        public String phone { get; set; }
         
         public DateTime isNullDate { get; set; }
         public String categoryName {
