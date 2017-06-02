@@ -146,7 +146,7 @@
         if (!$('#lat').required()) return;
         if (!$('#lng').required()) return;
 
-        window.open('https://www.google.co.kr/maps/place/' + $('#lat').val() + '+' + $('#lng').val(),'_blank');
+        window.open('https://www.google.co.kr/maps/place/@@' + $('#lat').val() + ',' + $('#lng').val() + ',17z','_blank');
 
     }
 
