@@ -17,16 +17,20 @@
                     <td colspan="3">@ViewBag.item.title</td>
                 </tr>
                 <tr>
+                    <th>작성자</th>
+                    <td colspan="3">@ViewBag.item.author</td>
+                </tr>
+                <tr>
                     <th>카테고리</th>
                     <td>@ViewBag.item.categoryName</td>
                     <th>작성일</th>
                     <td>@ViewBag.item.regDate.ToString("yyyy-MM-dd hh:mm")</td>
                 </tr>
-                <tr>
-                    <th>작성자</th>
-                    <td>@ViewBag.item.author</td>
+                <tr>                    
                     <th>이메일</th>
                     <td>@ViewBag.item.email</td>
+                    <th>휴대전화</th>
+                    <td>@ViewBag.item.phone</td>
                 </tr>
                 <tr>
                     <th><label for="">내용</label></th>
