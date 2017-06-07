@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
@@ -22,6 +23,7 @@ namespace bmw_fs.Controllers.CustomerService
         SearchService searchService = new SearchServiceImpl();
         FilesService filesServce = new FilesServiceImpl();
         InquiryService inquiryService = new InquiryServiceImpl();
+        MailService mailService = new MailServiceImpl();
 
         public ActionResult list(Inquiry inquiry)
         {
@@ -54,11 +56,14 @@ namespace bmw_fs.Controllers.CustomerService
 
         [HttpPost]
         [ValidateInput(false)]
-        public RedirectToRouteResult sendMail(Inquiry inquiry)
+        public async Task<RedirectToRouteResult> sendMail(Inquiry inquiry)
         {
             inquiry.replyRegId = System.Web.HttpContext.Current.User.Identity.Name;
             inquiry.mailSendId = System.Web.HttpContext.Current.User.Identity.Name;
             inquiryService.updateInquirySendMail(inquiry);
+            Inquiry item = inquiryService.findInquiry(inquiry);
+
+            await mailService.sendMail(item.email, "test@test.co.kr", item.title, inquiry.replyContents);
             return RedirectToAction("view", new { idx = inquiry.idx });
         }
 

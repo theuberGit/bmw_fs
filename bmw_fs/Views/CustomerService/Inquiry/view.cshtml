@@ -41,7 +41,7 @@
                     @if ("W".Equals(ViewBag.item.status))
                     {
                     <td colspan="3">
-                        <textarea name="replyContents" id="replyContents">@ViewBag.item.replyContents</textarea>
+                        <textarea name="replyContents" id="replyContents" title="답변">@ViewBag.item.replyContents</textarea>
                     </td>
                     }
                     else if ("F".Equals(ViewBag.item.status))
@@ -80,10 +80,12 @@
         $('#content form').attr('action', 'delete').submit();
     };
     function saveReply() {
+        if (!$('#replyContents').required()) return;
         if (!confirm('저장하시겠습니까?')) return;
         $('#content form').attr('action', 'reply').submit();
     };
     function sendMail() {
+        if (!$('#replyContents').required()) return;
         if (!confirm('메일을 발송하시겠습니까?')) return;
         $('#content form').attr('action', 'sendMail').submit();
     };

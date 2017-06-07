@@ -232,6 +232,7 @@
     <Compile Include="Service\face\admin\MemberService.cs" />
     <Compile Include="Service\face\board\BoardService.cs" />
     <Compile Include="Service\face\common\FilesService.cs" />
+    <Compile Include="Service\face\common\MailService.cs" />
     <Compile Include="Service\face\common\SearchService.cs" />
     <Compile Include="Service\face\common\SequenceService.cs" />
     <Compile Include="Service\face\catalog\CatalogService.cs" />
@@ -254,6 +255,7 @@
     <Compile Include="Service\impl\board\BoardServiceImpl.cs" />
     <Compile Include="Service\impl\common\FilesServiceImpl.cs" />
     <Compile Include="Service\impl\common\LdapAuthenticationService.cs" />
+    <Compile Include="Service\impl\common\MailServiceImpl.cs" />
     <Compile Include="Service\impl\common\SearchServiceImpl.cs" />
     <Compile Include="Service\impl\common\SequenceServiceImpl.cs" />
     <Compile Include="Service\impl\catalog\CatalogServiceImpl.cs" />
