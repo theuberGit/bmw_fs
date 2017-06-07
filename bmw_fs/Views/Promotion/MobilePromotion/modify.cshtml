@@ -13,6 +13,7 @@
 .thum_nail:after{content:"사이즈 307 * 233"; display:inline-block; padding: 7px 0 0 5px}
 .reg .cont_bottom .reg_table .event_btn_area input[type="text"]{margin-bottom: 10px; width: 467px;}
 .evt_btn_button{display: inline-block; width: 35px; height: 36.5px; line-height: 35px; border: 1px solid #c8c8c8; text-align: center; cursor: pointer; margin-left: 7px;}
+#note, #noteEng{height: 100px;}
 </style>
 </head>
 		<div id="content" class="reg">
@@ -168,6 +169,10 @@
                             </tr>
                         }
                         <tr>
+                            <th><label for="note">의무표시사항<br />(유의사항) </label></th>
+                            <td><textarea name="note" id="note" title="의무표시사항">@ViewBag.item.note</textarea></td>
+                        </tr>
+                        <tr>
                             <th rowspan="2"><label for="">상품 페이지 배너</label></th>
                             <td class="radio_area">
                                 <label for="productBannerY"><input type="radio" name="productBannerYn" id="productBannerY" value="Y"> 배포</label>
@@ -287,6 +292,10 @@
                                 </td>
                             </tr>
                         }
+                        <tr>
+                            <th><label for="noteEng">의무표시사항<br />(유의사항) </label></th>
+                            <td><textarea name="noteEng" id="noteEng" title="의무표시사항">@ViewBag.item.noteEng</textarea></td>
+                        </tr>
                     </table>
                     <input type="hidden" name="idx" value="@ViewBag.item.idx"/>
                     </form>
@@ -301,10 +310,8 @@
     //value setting (kor)
     if ('@ViewBag.item.category' === 'P') {
         $('#categoryP').prop('checked', true);
-        $('#btnAddFile, #btnAddFileEng').show();//본문이미지 + 버튼 show
     } else if ('@ViewBag.item.category' === 'E') {
         $('#categoryE').prop('checked', true);
-        $('#btnAddFile, #btnAddFileEng').hide();//본문이미지 + 버튼 hide
     }
 
     if('@ViewBag.item.engYn' === 'Y'){
@@ -454,20 +461,7 @@
 
     $('input[name=category]').change(function () {//카테고리 변경시
         if ($('#categoryE').prop('checked')) {
-            $('input[name=mainImg]').each(function (idx) {//본문이미지 1개 남기고 모두 삭제 (국)
-                if (idx > 0) {
-                    $obj = $(this).parent().find('.btnDelete');
-                    deleteFile($obj, 'Y');
-                }
-            });
-            $('input[name=engMainImg]').each(function (idx) {//본문이미지 1개 남기고 모두 삭제 (영)
-                if (idx > 0) {
-                    $obj = $(this).parent().find('.btnDelete');
-                    deleteFile($obj, 'Y');
-                }
-            });
             $('.event_y').show();//버튼명 show
-            $('#btnAddFile, #btnAddFileEng').hide();//본문이미지 + 버튼 hide
         } else {
             $('.event_y').find('input').val('');
             $('.evt_btn2').attr('data-flag', 'false');
@@ -475,7 +469,6 @@
             $('.evt_btn2').hide();
             $('.evt_btn2_eng').hide();
             $('.event_y').hide();//버튼명 hide
-            $('#btnAddFile, #btnAddFileEng').show();//본문이미지 + 버튼 show
         }
     });
 

@@ -106,6 +106,10 @@
                         </td>
                     </tr>
                     }
+                    <tr>
+                        <th>의무표시사항<br />(유의사항)</th>
+                        <td>@Html.Raw(@ViewBag.item.note)</td>
+                    </tr>
                      <tr>
                         <th>상품 페이지 배너</th>
                         <td>
@@ -177,6 +181,10 @@
                                 </td>
                             </tr>
                         }
+                        <tr>
+                            <th>의무표시사항<br />(유의사항)</th>
+                            <td>@Html.Raw(@ViewBag.item.noteEng)</td>
+                        </tr>
                     </table>
                 }
                 <input type="hidden" name="idx" value="@ViewBag.item.idx" />
