@@ -278,9 +278,6 @@
     $('input[name=category]').change(function () {//카테고리 변경시
         if ($('#categoryE').prop('checked')) {
             $('.event_y').show();//버튼명 show
-
-            $('.add_file_element').remove();
-            $('#btnAddFile, #btnAddFileEng').hide();//본문이미지 + 버튼 hide
         } else {
             $('.event_y').find('input').val('');
             $('.evt_btn2').attr('data-flag', 'false');
@@ -288,8 +285,6 @@
             $('.evt_btn2').hide();
             $('.evt_btn2_eng').hide();
             $('.event_y').hide();//버튼명 hide
-
-            $('#btnAddFile, #btnAddFileEng').show();//본문이미지 + 버튼 show
         }
     });
 

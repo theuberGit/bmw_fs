@@ -35,6 +35,8 @@
       <result property="btn2NameEng" column="BTN2_NAME_ENG" />
       <result property="btn1LinkEng" column="BTN1_LINK_ENG" />
       <result property="btn2LinkEng" column="BTN2_LINK_ENG" />
+      <result property="note" column="NOTE" />
+      <result property="noteEng" column="NOTE_ENG" />
       <result property="regDate" column="REG_DATE" />
       <result property="regId" column="REG_ID" />
     </resultMap>
@@ -115,6 +117,8 @@
       ,BTN2_NAME_ENG
       ,BTN1_LINK_ENG
       ,BTN2_LINK_ENG
+      ,NOTE
+      ,NOTE_ENG
       ,REG_DATE
       ,REG_ID
       FROM BMW_FS_PROMOTION
@@ -142,6 +146,8 @@
       ,BTN2_NAME_ENG
       ,BTN1_LINK_ENG
       ,BTN2_LINK_ENG
+      ,NOTE
+      ,NOTE_ENG
       ,REG_ID
       )
       VALUES (
@@ -163,6 +169,8 @@
       ,#btn2NameEng#
       ,#btn1LinkEng#
       ,#btn2LinkEng#
+      ,#note#
+      ,#noteEng#
       ,#regId#
       )
     </insert>
@@ -186,6 +194,8 @@
       ,BTN2_NAME_ENG = #btn2NameEng#
       ,BTN1_LINK_ENG = #btn1LinkEng#
       ,BTN2_LINK_ENG = #btn2LinkEng#
+      ,NOTE = #note#
+      ,NOTE_ENG = #noteEng#
       ,UPT_DATE = getDate()
       ,UPT_ID = #uptId#
       WHERE IDX = #idx#

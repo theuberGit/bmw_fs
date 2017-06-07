@@ -26,6 +26,8 @@ namespace bmw_fs.Models.promotion
         public String btn2NameEng { get; set; }
         public String btn1LinkEng { get; set; }
         public String btn2LinkEng { get; set; }
+        public String note { get; set; }
+        public String noteEng { get; set; }
 
         public String regId { get; set; }
         public DateTime regDate { get; set; }
