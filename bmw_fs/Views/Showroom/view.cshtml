@@ -19,7 +19,14 @@
                 <tr>
                     <th scope="row"><label for="brand">브랜드 *</label></th>
                     <td>
-                        @ViewBag.item.brand
+                        @if ("MOTORRAD".Equals(ViewBag.item.brand))
+                        {
+                            @:Motorrad
+                        }
+                        else
+                        {
+                            @ViewBag.item.brand
+                        }
                     </td>
                 </tr>
                 <tr>
@@ -51,9 +58,14 @@
                 </tr>
                 <tr>
                     <th scope="row"><label for="tel1">전화번호 *</label></th>
-                    <td>
-                        @ViewBag.item.tel1-@ViewBag.item.tel2-@ViewBag.item.tel3
-                    </td>
+                    @if ("-".Equals(@ViewBag.item.tel1))
+                    {
+                        <td>-</td>
+                    }
+                    else
+                    {
+                        <td>@ViewBag.item.tel1-@ViewBag.item.tel2-@ViewBag.item.tel3</td>
+                    }
                 </tr>
                 <tr>
                     <th><label for="businessTime">영업시간 *</label></th>

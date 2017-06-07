@@ -78,9 +78,17 @@ namespace bmw_fs.Service.impl.Showroom
             if (String.IsNullOrWhiteSpace(showroom.address)) throw new CustomException("필수 값이 없습니다.(주소)");
             if (String.IsNullOrWhiteSpace(showroom.lat)) throw new CustomException("필수 값이 없습니다.(위치좌표1)");
             if (String.IsNullOrWhiteSpace(showroom.lng)) throw new CustomException("필수 값이 없습니다.(위치좌표2)");
-            if (String.IsNullOrWhiteSpace(showroom.tel1)) throw new CustomException("필수 값이 없습니다.(전화번호1)");
-            if (String.IsNullOrWhiteSpace(showroom.tel2)) throw new CustomException("필수 값이 없습니다.(전화번호2)");
-            if (String.IsNullOrWhiteSpace(showroom.tel3)) throw new CustomException("필수 값이 없습니다.(전화번호3)");
+            if ("-".Equals(showroom.tel1))
+            {
+                showroom.tel2 = "-";
+                showroom.tel3 = "-";
+            }
+            else
+            {
+                if (String.IsNullOrWhiteSpace(showroom.tel1)) throw new CustomException("필수 값이 없습니다.(전화번호1)");
+                if (String.IsNullOrWhiteSpace(showroom.tel2)) throw new CustomException("필수 값이 없습니다.(전화번호2)");
+                if (String.IsNullOrWhiteSpace(showroom.tel3)) throw new CustomException("필수 값이 없습니다.(전화번호3)");
+            }
             if (String.IsNullOrWhiteSpace(showroom.businessTime)) throw new CustomException("필수 값이 없습니다.(영업시간)");
         }
     }
