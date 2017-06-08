@@ -21,5 +21,7 @@ namespace bmw_fs.Service.face.catalog
         void updateCatalog(HttpFileCollectionBase multipartFiles, Catalog catalog);
 
         void deleteCatalog(Catalog catalog);
+
+        bool findCatalogDuplicated(Catalog catalog);
     }
 }

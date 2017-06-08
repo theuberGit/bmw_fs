@@ -1,5 +1,6 @@
 ﻿using bmw_fs.Models.catalog;
 using IBatisNet.DataMapper;
+using System;
 using System.Collections.Generic;
 
 namespace bmw_fs.Dao.face.catalog
@@ -36,6 +37,11 @@ namespace bmw_fs.Dao.face.catalog
         public void deleteCatalog(Catalog catalog)
         {
             Mapper.Instance().Delete("catalog.deleteCatalog", catalog);
+        }
+
+        public int findCatalogDuplicated(Catalog catalog)
+        {
+            return Mapper.Instance().QueryForObject<int>("catalog.findCatalogDuplicated", catalog);
         }
     }
 }

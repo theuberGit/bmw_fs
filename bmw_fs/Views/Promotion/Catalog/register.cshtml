@@ -75,11 +75,47 @@
     }
     $('#catYear').append(yearHtml);
     $('#catMonth').append(monthHtml);
-    function regForm() {    
+    function regForm() {  
+        var isDup = false;
         if (!$('#catYear').reqSelect()) return;
         if (!$('#catMonth').reqSelect()) return;
         var title = $('#catYear').val() + '년 ' + $('#catMonth').val() + '월 금융 카탈로그';
         $('#title').val(title);
+
+        //카탈로그 중복확인
+        $.ajax({
+            url: 'isDuplicated',
+            data: { 'title': $('#title').val() },
+            dataType: 'json',
+            timeout: 10000,
+            cache: false,
+            type: 'POST',
+            async: false,
+            beforeSend: function () {
+                //$.blockUI(_BLOCKUI_OPTION);
+            },
+            complete: function () {
+                //$.unblockUI();
+            },
+            error: function (x, e) {
+                alert('요청하신 작업을 수행하던 중 예상치 않게 중지되었습니다.\n\n다시 시도해 주십시오.');
+            },
+            success: function (data) {
+                if (data == -1) {
+                    alert('등록된 카탈로그가 존재합니다.');
+                    isDup = true;
+                } else if (data == 1) {
+                    alert('등록 가능합니다.');
+                    isDup = false;
+                }
+                return;
+            }
+        });
+
+        if (isDup) {
+            return;
+        }
+
         if ($('#file').val() === '') {
            alert('파일을 등록하세요.');
            return;

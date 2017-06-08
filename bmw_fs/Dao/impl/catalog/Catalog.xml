@@ -97,6 +97,12 @@
       DELETE FROM BMW_FS_CATALOG
       WHERE IDX = #idx#
     </delete>
+
+    <select id="findCatalogDuplicated" resultClass="int">
+      SELECT COUNT(*)
+      FROM BMW_FS_CATALOG
+      WHERE TITLE = #title#
+    </select>
     
   </statements>
 </sqlMap>

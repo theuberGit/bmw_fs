@@ -77,5 +77,21 @@ namespace bmw_fs.Controllers.catalog
             catalogService.deleteCatalog(catalog);
             return RedirectToAction("list");
         }
+
+        [HttpPost]
+        public ActionResult isDuplicated(Catalog catalog)
+        {
+            int caseCode = 0;
+            if (catalogService.findCatalogDuplicated(catalog))
+            {
+                caseCode = -1;  //중복
+            }
+            else
+            {
+                caseCode = 1;
+            }
+
+            return Json(caseCode, JsonRequestBehavior.DenyGet);
+        }
     }
 }

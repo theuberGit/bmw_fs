@@ -65,5 +65,10 @@ namespace bmw_fs.Service.impl.catalog
         {
             if (String.IsNullOrWhiteSpace(catalog.title)) throw new CustomException("필수 값이 없습니다.(카탈로그)");
         }
+
+        public bool findCatalogDuplicated(Catalog catalog)
+        {
+            return this.catalogDao.findCatalogDuplicated(catalog) > 0 ? true : false;
+        }
     }
 }
