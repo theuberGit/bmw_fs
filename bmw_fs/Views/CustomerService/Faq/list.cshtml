@@ -13,7 +13,7 @@
 </style>
 
 <div id="content" class="list">
-    <form method="get">
+    <z method="get">
         <div class="cont_top">
             <h3>FAQ 관리</h3>
             <div class="search_box">
@@ -33,7 +33,8 @@
                 <li class="faq_contract"><a href="list?category=contract">계약/등록</a></li>
                 <li class="faq_finance"><a href="list?category=finance">금융조건의 변경</a></li>
                 <li class="faq_cost"><a href="list?category=cost">비용/서류</a></li>
-                <li class="faq_process"><a href="list?category=process">리스 승계 만기 시 처리</a></li>
+                <li class="faq_lease"><a href="list?category=lease">리스 승계</a></li>
+                <li class="faq_process"><a href="list?category=process">만기 시 처리</a></li>
                 <li class="faq_insurance"><a href="list?category=insurance">보험</a></li>
                 <li class="faq_overdue"><a href="list?category=overdue">연체</a></li>
                 <li class="faq_accounting"><a href="list?category=accounting">회계처리</a></li>
@@ -81,7 +82,7 @@
             @RenderPage("~/Views/Common/Pagination.cshtml")
             <a href="register" class="btn_defualt btn_reg">등록</a>
         </div>
-    </form>
+    </z>
 </div>
 <script>
     lnbSet(8, 1);

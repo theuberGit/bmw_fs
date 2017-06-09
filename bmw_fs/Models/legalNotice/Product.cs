@@ -18,5 +18,35 @@ namespace bmw_fs.Models.legalNotice
         public DateTime regDate { get; set; }
         public String uptId { get; set; }
         public DateTime uptDate { get; set; }
+        public String categoryName
+        {
+            get
+            {
+                if (String.IsNullOrWhiteSpace(category))
+                {
+                    return null;
+                }
+                else if ("yeosin".Equals(category))
+                {
+                    return "여신거래";
+                }
+                else if ("halbu".Equals(category))
+                {
+                    return "할부거래";
+                }
+                else if ("lease".Equals(category))
+                {
+                    return "리스";
+                }
+                else if ("auto".Equals(category))
+                {
+                    return "오토론";
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
     }
 }

@@ -43,9 +43,13 @@ namespace bmw_fs.Models.CustomerService
                 {
                     return "비용/서류";
                 }
-                else if ("process".Equals(category))
+                else if ("lease".Equals(category))
                 {
                     return "리스 승계";
+                }
+                else if ("process".Equals(category))
+                {
+                    return "만기 시 처리";
                 }
                 else if ("insurance".Equals(category))
                 {
