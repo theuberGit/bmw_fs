@@ -1,7 +1,14 @@
 ﻿@{
     ViewBag.Title = "월 납입금 상세보기";
 }
-
+<style>
+table.reg_table tr td.td_tit {font-weight: bold;}
+table.reg_table tr td label {margin-right: 15px}
+table.reg_table tr.item_area {display: none;}
+table.reg_table tr td span.result1, table.reg_table tr td span.result2, table.reg_table tr td span.result3 {display: none;}
+table.reg_table tr td span.on, table.reg_table tr td span.on, table.reg_table tr td span.on {display: inline-block;}
+    table.reg_table tr.off {display: none;}
+</style>
 <div id="content" class="reg">
     <div class="cont_top">
         <h3>월 납입금 관리</h3>
@@ -40,32 +47,71 @@
                     <td>@ViewBag.item.price  원</td>
                 </tr>
                 <tr>
+                    <th><label for="">배포 *</label></th>
+                    <td class="radio_area">@ViewBag.item.deployYn</td>
+                </tr>
+            </table>
+            <table class="reg_table">
+                <colgroup>
+                    <col width="150px">
+                    <col width="870px">
+                </colgroup>
+                @*<tr>
                     <th scope="row"><label for="item">* 상품 선택</label></th>
-                    <td>@ViewBag.item.item </td>
+                    <td>@ViewBag.item.itemName </td>
+                </tr>*@
+                <tr>
+                    <td colspan="2" class="td_tit">잔가보장형 할부</td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="zanga">잔가</label></th>
-                    <td>
-                        @if (ViewBag.item.zanga != 0){
-                         @ViewBag.item.zanga <span>%</span>
-                        }
-                    </td>
+                    <td>@ViewBag.item.zhZanga <span>%</span></td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="payment1">월 납입금 (선납 10%)</label></th>
-                    <td>@ViewBag.item.payment1 원</td>
+                    <td>@ViewBag.item.zhPay1 원 <span class="zanga result1"></span></td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="payment2">월 납입금 (선납 20%)</label></th>
-                    <td>@ViewBag.item.payment2 원</td>
+                    <td>@ViewBag.item.zhPay2 원 <span class="zanga result2"></span></td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="payment3">월 납입금 (선납 30%)</label></th>
-                    <td>@ViewBag.item.payment3 원</td>
+                    <td>@ViewBag.item.zhPay3 원 <span class="zanga result3"></span></td>
                 </tr>
                 <tr>
-                    <th><label for="">배포 *</label></th>
-                    <td class="radio_area">@ViewBag.item.deployYn</td>
+                    <td colspan="2" class="td_tit">잔가보장형 리스</td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="zanga">잔가</label></th>
+                    <td>@ViewBag.item.zlZanga <span>%</span></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="payment1">월 납입금 (선납 10%)</label></th>
+                    <td>@ViewBag.item.zlPay1 원 <span class="zanga result1"></span></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="payment2">월 납입금 (선납 20%)</label></th>
+                    <td>@ViewBag.item.zlPay2 원 <span class="zanga result2"></span></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="payment3">월 납입금 (선납 30%)</label></th>
+                    <td>@ViewBag.item.zlPay3 원 <span class="zanga result3"></span></td>
+                </tr>
+                <tr class="tr_g">
+                    <td colspan="2" class="td_tit">일반 할부</td>
+                </tr>
+                <tr class="tr_g">
+                    <th scope="row"><label for="payment1">월 납입금 (선납 10%)</label></th>
+                    <td>@ViewBag.item.ghPay1 원 <span class="general result1"></span></td>
+                </tr>
+                <tr class="tr_g">
+                    <th scope="row"><label for="payment2">월 납입금 (선납 20%)</label></th>
+                    <td>@ViewBag.item.ghPay2 원 <span class="general result2"></span></td>
+                </tr>
+                <tr class="tr_g">
+                    <th scope="row"><label for="payment3">월 납입금 (선납 30%)</label></th>
+                    <td>@ViewBag.item.ghPay3 원 <span class="general result3"></span></td>
                 </tr>
             </table>
             <input type="hidden" name="idx" value="@ViewBag.item.idx" />
@@ -82,6 +128,29 @@
 </div>
 <script>
     lnbSet(".payment_mgmt");
+    /*조건추가하기
+        i시리즈가 아닐때 선납 모두표시
+        시리즈 일때 잔가보장형 할부-리스에만 선납금표시 하기*/
+    // 선납 표시
+    if ('@ViewBag.item.series' != 'i') { //i시리즈가 아닐때
+        console.log('i시리즈가 아닐때');
+        $('.tr_g').removeClass('off');
+        $('.zanga').addClass('on');
+        $('.general').addClass('on');
+    } else { //i시리즈 일때
+        console.log('i시리즈 일때');
+        $('.zanga').addClass('on');
+        $('.tr_g').addClass('off');
+    }
+    var num = unComma('@ViewBag.item.price');
+    //var num = unComma(price);
+    var result1 = num * 0.1;
+    var result2 = num * 0.2;
+    var result3 = num * 0.3;
+    //선납금 표시할때 콤마 추가
+    $('.result1').text("(" + addComma(parseInt(result1)) + "원)");
+    $('.result2').text("(" + addComma(parseInt(result2)) + "원)");
+    $('.result3').text("(" + addComma(parseInt(result3)) + "원)");
     function modForm() {
         $('form').attr('action', 'modify').submit();
     }

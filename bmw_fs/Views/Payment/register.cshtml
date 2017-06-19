@@ -1,6 +1,11 @@
 ﻿@{
     ViewBag.Title = "월 납입금 관리 등록";
 }
+<style>
+    table.reg_table tr td.td_tit {font-weight: bold;}
+    table.reg_table tr td label {margin-right: 15px }
+    table.reg_table tr.off {display: none;}
+</style>
 <div id="content" class="reg">
     <div class="cont_top">
         <h3>월 납입금 등록</h3>
@@ -52,36 +57,79 @@
                     <td><input type="text" name="price" id="price" class="price" maxlength="50" title="차량가격" onkeyup="inputNumberFormat(this)" /> 원</td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="item">* 상품 선택</label></th>
-                    <td>
-                        <select name="item" id="item" title="상품">
-                            <option value="잔가보장형 할부">잔가보장형 할부</option>
-                            <option value="일반 할부">일반 할부</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="zanga">잔가</label></th>
-                    <td><input type="text" name="zanga" id="zanga" class="zanga" maxlength="50" title="잔가" /> %</td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="payment1">월 납입금 (선납 10%)</label></th>
-                    <td><input type="text" name="payment1" id="payment1" class="payment1" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span id="result1"></span></td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="payment2">월 납입금 (선납 20%)</label></th>
-                    <td><input type="text" name="payment2" id="payment2" class="payment2" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span id="result2"></span></td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="payment3">월 납입금 (선납 30%)</label></th>
-                    <td><input type="text" name="payment3" id="payment3" class="payment3" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span id="result3"></span></td>
-                </tr>
-                <tr>
                     <th><label for="">배포 *</label></th>
                     <td class="radio_area">
                         <label for="active"><input type="radio" name="deployYn" id="active" value="Y" title="배포 여부"> 배포</label>
                         <label for="inactivity"><input type="radio" name="deployYn" id="inactivity" checked value="N" title="배포 여부"> 미배포</label>
                     </td>
+                </tr>
+            </table>
+            <table class="reg_table">
+                <caption>월 납입금 입력 테이블</caption>
+                <colgroup>
+                    <col width="150px">
+                    <col width="870px">
+                </colgroup>
+                @*<tr class="item_area">
+                    <th scope="row"><label for="item">* 상품 선택</label></th>
+                    <td>
+                        <label for="zangaHalbu"><input type="checkbox"  name="item"  id="zangaHalbu" value="zangaHalbu" />잔가보장형 할부</label>
+                        <label for="zangaLease"><input type="checkbox" name="item" id="zangaLease" value="zangaLease" />잔가보장형 리스</label>
+                        <label for="generalHalbu"><input type="checkbox" name="item" id="generalHalbu" value="generalHalbu" />일반 할부</label>
+                </td>
+                </tr>*@
+                <tr>
+                    <td colspan="2" class="td_tit">잔가보장형 할부</td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="zhZanga">잔가</label></th>
+                    <td><input type="text" name="zhZanga" id="zhZanga" class="zhZanga" maxlength="50" title="잔가" /> %</td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="zhPay1">월 납입금 (선납 10%)</label></th>
+                    <td><input type="text" name="zhPay1" id="zhPay1" class="zhPay1" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span class="result1"></span></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="zhPay2">월 납입금 (선납 20%)</label></th>
+                    <td><input type="text" name="zhPay2" id="zhPay2" class="zhPay2" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span class="result2"></span></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="zhPay3">월 납입금 (선납 30%)</label></th>
+                    <td><input type="text" name="zhPay3" id="zhPay3" class="zhPay3" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span class="result3"></span></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="td_tit">잔가보장형 리스</td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="zlZanga">잔가</label></th>
+                    <td><input type="text" name="zlZanga" id="zlZanga" class="zlZanga" maxlength="50" title="잔가" /> %</td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="zlPay1">월 납입금 (선납 10%)</label></th>
+                    <td><input type="text" name="zlPay1" id="zlPay1" class="zlPay1" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span class="result1"></span></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="zlPay2">월 납입금 (선납 20%)</label></th>
+                    <td><input type="text" name="zlPay2" id="zlPay2" class="zlPay2" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span class="result2"></span></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="zlPay3">월 납입금 (선납 30%)</label></th>
+                    <td><input type="text" name="zlPay3" id="zlPay3" class="zlPay3" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span class="result3"></span></td>
+                </tr>
+                <tr class="general">
+                    <td colspan="2" class="td_tit">일반 할부</td>
+                </tr>
+                <tr class="general">
+                    <th scope="row"><label for="ghPay1">월 납입금 (선납 10%)</label></th>
+                    <td><input type="text" name="ghPay1" id="ghPay1" class="ghPay1" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span class="result1"></span></td>
+                </tr>
+                <tr class="general">
+                    <th scope="row"><label for="ghPay2">월 납입금 (선납 20%)</label></th>
+                    <td><input type="text" name="ghPay2" id="ghPay2" class="ghPay2" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span class="result2"></span></td>
+                </tr>
+                <tr class="general">
+                    <th scope="row"><label for="ghPay3">월 납입금 (선납 30%)</label></th>
+                    <td><input type="text" name="ghPay3" id="ghPay3" class="ghPay3" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span class="result3"></span></td>
                 </tr>
             </table>
             <input type="hidden" name="regId" id="regId" value="@HttpContext.Current.User.Identity.Name" />
@@ -190,19 +238,29 @@
             model += '';
         }
         $('#model').append(model);
+
+        if (val != "i") {
+            $('.general').removeClass('off');
+        } else {
+            console.log('초기화');
+            $('#ghPay1').val('');
+            $('#ghPay2').val('');
+            $('#ghPay3').val('');
+            $('.general').addClass('off');
+        }
     });
-    //일반할부 선택시 잔가 필드 비활성화
+    /*//일반할부 선택시 잔가 필드 비활성화
     $(document).on('change', '#item', function () {
         //item 선택값
         var val = $(this).val();
         var zanga = document.getElementById('zanga');
-        if (val == "일반 할부") {
+        if (val == "generalHalbu") {
             $('#zanga').val("");
             zanga.disabled = true;
         } else {
             zanga.disabled = false;
         }
-    });
+    });*/
     //가격입력시 선납금 계산
     $(document).on('change', '#price', function () {
 
@@ -210,18 +268,14 @@
         //선납계산을 위해 콤마제거
         var num = unComma(val);
 
-        //if (!$('#price').isnum()) {
-        //    $('#price').val("");
-        //    return;
-        //}
         //선납 계산
         var result1 = num * 0.1;
         var result2 = num * 0.2;
         var result3 = num * 0.3;
         //선납금 표시할때 콤마 추가
-        $('#result1').text("(" + addComma(parseInt(result1)) + "원)");
-        $('#result2').text("(" + addComma(parseInt(result2)) + "원)");
-        $('#result3').text("(" + addComma(parseInt(result3)) + "원)");
+        $('.result1').text("(" + addComma(parseInt(result1)) + "원)");
+        $('.result2').text("(" + addComma(parseInt(result2)) + "원)");
+        $('.result3').text("(" + addComma(parseInt(result3)) + "원)");
     });
     function regForm() {
         if (!$('#brand').reqSelect()) return;
@@ -232,13 +286,10 @@
         if (!$('#modelName').required()) return;
         if ($('#carImg').val() == '') {
             alert('차량 이미지를 등록하세요.');
-            return;
+           return;
         }
         if (!$('#price').required()) return;
-        if (!$('#item').reqSelect()) return;
-        if ($('select[name="item"]').val() == "잔가보장형 할부") {
-            if (!$('#zanga').required()) return;
-        }
+        if (!$('input[name=deployYn]').reqRadio()) return;
 
         if (!confirm('등록하시겠습니까?')) return;
 
