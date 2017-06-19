@@ -3,6 +3,7 @@ using bmw_fs.Service.face.common;
 using bmw_fs.Service.face.payment;
 using bmw_fs.Service.impl.common;
 using bmw_fs.Service.impl.payment;
+using System;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -19,6 +20,10 @@ namespace bmw_fs.Controllers.payment
         // GET: Payment
         public ActionResult list(Payment payment)
         {
+            if (String.IsNullOrWhiteSpace(payment.searchOption))
+            {
+                payment.searchOption = "zangaHalbu";
+            }
             searchService.setSearchSession(Request, Session);
             searchService.setPagination(payment, paymentService.findAllCount(payment), paymentService.findAllCount(payment));
             ViewBag.list = paymentService.findAll(payment);

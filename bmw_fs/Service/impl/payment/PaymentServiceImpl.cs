@@ -67,7 +67,7 @@ namespace bmw_fs.Service.impl.payment
             if (String.IsNullOrWhiteSpace(payment.series)) throw new CustomException("필수 값이 없습니다.(시리즈)");
             if (String.IsNullOrWhiteSpace(payment.modelName)) throw new CustomException("필수 값이 없습니다.(모델명)");
             if (String.IsNullOrWhiteSpace(payment.price)) throw new CustomException("필수 값이 없습니다.(가격)");
-            if (String.IsNullOrWhiteSpace(payment.item)) throw new CustomException("필수 값이 없습니다.(상품)");
+            if (String.IsNullOrWhiteSpace(payment.deployYn)) throw new CustomException("필수 값이 없습니다.(가격)");
 
         }
     }
