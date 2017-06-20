@@ -5,6 +5,8 @@
     <style>
      .btn_file {display: inline-block; width: 120px; height: 35px; line-height: 35px; border: 1px solid #c8c8c8; text-align: center; cursor: pointer;}
      .file_area button {display: inline-block; width: 120px; height: 37px; border: 1px solid #c8c8c8}
+     .file_area:after{content:"* .jpg, .png 파일만 업로드 가능";}
+     .file_area > div{height: 38px;}
     </style>
 </head>
 <div id="content" class="reg">
@@ -157,6 +159,7 @@ function modifyProc() {
     if ($('.thumb_file_nm').text() === '' && $('input[name=thumbIdxs]').val() !== -1) {// -1 : 새로등록, 0 : 기존파일 삭제
         $('input[name=thumbIdxs]').val(0);
     }
+    if (!validationFileType('jpg, png')) return;
 
     if (!confirm('수정하시겠습니까?')) return;
     $('#content form').attr('action', 'modifyProc').submit();

@@ -14,7 +14,7 @@
       <result property="contents" column="CONTENTS" />
       <result property="regDate" column="REG_DATE" />
       <result property="regId" column="REG_ID" />
-      <result property="fileCount" column="FILE_COUNT" />
+      <result property="fileIdx" column="FILE_IDX" />
     </resultMap>
     
     
@@ -40,7 +40,7 @@
       ,G.CONTENTS
       ,G.REG_DATE
       ,G.REG_ID
-      ,COUNT(FD.ORIGINAL_FILENAME) AS FILE_COUNT
+      ,MAX(FD.IDX) AS FILE_IDX
       FROM BMW_FS_GENERAL G
       LEFT JOIN BMW_FS_FILES_DATA FD ON G.IDX = FD.MASTER_IDX
       WHERE 1=1

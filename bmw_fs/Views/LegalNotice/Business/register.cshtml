@@ -2,12 +2,14 @@
     ViewBag.Title = "경영공시 등록";
 }
 <style>
-.add_file_area .file_area div { padding-bottom: 20px; }
+.add_file_area .file_area div { padding-bottom: 4px; }
 .reg .cont_bottom .reg_table td.file_area p{float:none; clear:both; padding-top:10px}
 .reg .cont_bottom .reg_table td.file_area p input[type="text"]{width:467px}
 .reg h4{margin-bottom:10px}
 
 .file_area{counter-reset:cnt1; }
+.file_area:after{content:"* .pdf, .docx, .hwp 파일만 업로드 가능";}
+.file_area > div{height: 38px;}
 .file_src:after{counter-increment:cnt1; content:"파일"counter(cnt1); color:#ccc;}
 .file_src.on:after{content:""; color:#666;}
 .reg .cont_bottom .reg_table .event_btn_area input[type="text"]{margin-bottom: 10px; width: 467px;}
@@ -43,9 +45,8 @@
                             <span class="file_src"></span>
                             <input type="file" class="input_file" name="file" id="file0">
                             <label for="file0" class="btn_file">파일찾기</label>
-                            <button type="button" class="btn_add_file" id="btnAddFile">파일 추가</button>
+                            <button type="button" class="btn_add_file" id="btnAddFile">+</button>
                         </div>
-                        <span class="file_comment">* .pdf, .docx, .hwp 파일만 업로드 가능</span>
                     </td>
                 </tr>
                 <tr>
@@ -89,8 +90,7 @@
             $(item).find(".btn_add_file").on("click", function () {
                 if ($(item).find("input[type='file']").length < 10) {
                     cnt++;
-                    var html = '<div><span class="file_src"></span><input type="file" class="input_file" id="file' + cnt + '" name="file" /><label for="file' + cnt + '" class="btn_file">파일찾기</label><button type="button" class="btnDelete">파일 삭제</button></div>';
-                    console.log("cnt", cnt);
+                    var html = '<div><span class="file_src"></span><input type="file" class="input_file" id="file' + cnt + '" name="file" /><label for="file' + cnt + '" class="btn_file">파일찾기</label><button type="button" class="btnDelete">-</button></div>';
                     $(item).find(".file_area").append(html);
                 };
             });
@@ -102,6 +102,7 @@
         editor_object.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
         if (!$('#contents').required()) return;
         if (!$('input[name=deployYn]').reqRadio()) return;
+        if (!validationFileType('pdf, docx, hwp')) return;
 
         if (!confirm('등록하시겠습니까?')) return;
         $('#content form').attr('action', 'registerProc').submit();

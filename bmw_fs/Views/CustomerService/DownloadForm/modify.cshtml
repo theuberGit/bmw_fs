@@ -1,4 +1,10 @@
-﻿<div id="content" class="reg">
+﻿<head>
+<style>
+.file_area:after{content:"* .pdf 파일만 업로드 가능";}
+.file_area > div{height: 38px;}
+</style>
+</head>
+<div id="content" class="reg">
     <div class="cont_top">
         <h3>다운로드 자료/양식</h3>
     </div>
@@ -83,7 +89,7 @@
         if (Number('@ViewBag.files.Count') === 0) {
             if (!$('#formFile').required()) return;
         }
-
+        if (!validationFileType('pdf')) return;
         if (!confirm('수정하시겠습니까')) return;
 
         $('#content form').attr('action', 'modifyProc').submit();

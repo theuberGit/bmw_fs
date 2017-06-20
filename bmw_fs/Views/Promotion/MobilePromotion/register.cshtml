@@ -9,6 +9,7 @@
 .reg h4{margin-bottom:10px}
 
 .file_area{counter-reset:cnt1; }
+.file_area:after{content:"* .jpg, .png 파일만 업로드 가능";}
 .file_src:after{counter-increment:cnt1; content:"이미지"counter(cnt1); color:#ccc;}
 .file_src.on:after{content:""; color:#666;}
 .thum_nail:after{content:"사이즈 351 * 264"; display:inline-block; padding: 7px 0 0 5px}
@@ -86,7 +87,7 @@
                                     <span class="file_src"></span>
                                     <input type="file" class="input_file" name="mainImg" id="file0">
                                     <label for="file0" class="btn_file">파일찾기</label>
-                                    <button type="button" class="btn_add_file" id="btnAddFile">첨부파일 추가</button>
+                                    <button type="button" class="btn_add_file" id="btnAddFile">+</button>
                                     <p><label for="url0"><input type="text" name="mainImgLinks" id="url0" placeholder="이미지에 대한 링크 URL (선택사항)"></label></p>
                                 </div>
                             </td>
@@ -143,7 +144,7 @@
                                     <span class="file_src"></span>
                                     <input type="file" class="input_file" name="engMainImg" id="engfile0">
                                     <label for="engfile0" class="btn_file">파일찾기</label>
-                                    <button type="button" class="btn_add_file" id="btnAddFileEng">첨부파일 추가</button>
+                                    <button type="button" class="btn_add_file" id="btnAddFileEng">+</button>
                                     <p><label for="engurl0"><input type="text" name="mainImgEngLinks" id="engurl0" placeholder="이미지에 대한 링크 URL (선택사항)"></label></p>
                                 </div>
                             </td>
@@ -238,6 +239,8 @@
                 }
             }
         }
+        if (!validationFileType('jpg, png')) return;
+
         return true;
     };
 
@@ -264,11 +267,11 @@
 			if($(item).find( "input[type='file']" ).length < 10){
 				cnt++;
 				if($(item).is(".kor")){
-                    var html = '<div class="add_file_element"><span class="file_src"></span><input type="file" class="input_file" id="file' + cnt + '" name="mainImg" /><label for="file' + cnt + '" class="btn_file">파일찾기</label><button type="button" class="btnDelete">첨부파일 삭제</button><p><label for="url' + cnt + '"><input type="text" name="mainImgLinks" id="url' + cnt +'"placeholder="이미지에 대한 링크 URL (선택사항)"></label></p></div>';
+                    var html = '<div class="add_file_element"><span class="file_src"></span><input type="file" class="input_file" id="file' + cnt + '" name="mainImg" /><label for="file' + cnt + '" class="btn_file">파일찾기</label><button type="button" class="btnDelete">-</button><p><label for="url' + cnt + '"><input type="text" name="mainImgLinks" id="url' + cnt +'"placeholder="이미지에 대한 링크 URL (선택사항)"></label></p></div>';
 					console.log("kor", cnt);
 				}
 				if($(item).is(".eng")){
-                    var html = '<div class="add_file_element"><span class="file_src"></span><input type="file" class="input_file" id="engfile' + cnt + '" name="engMainImg" /><label for="engfile' + cnt + '" class="btn_file">파일찾기</label><button type="button" class="btnDelete">첨부파일 삭제</button><p><label for="engurl' + cnt + '"><input type="text" name="mainImgEngLinks" id="url' + cnt +'"placeholder="이미지에 대한 링크 URL (선택사항)"></label></p></div>';
+                    var html = '<div class="add_file_element"><span class="file_src"></span><input type="file" class="input_file" id="engfile' + cnt + '" name="engMainImg" /><label for="engfile' + cnt + '" class="btn_file">파일찾기</label><button type="button" class="btnDelete">-</button><p><label for="engurl' + cnt + '"><input type="text" name="mainImgEngLinks" id="url' + cnt +'"placeholder="이미지에 대한 링크 URL (선택사항)"></label></p></div>';
 					console.log("eng", cnt);
 				}
 				$(item).find(".file_area").append(html);

@@ -103,12 +103,14 @@ body, html {
 .file_area > div > .file_src, .file_area > div > .btn_file, .file_area > div > button {float: left; margin-left: 10px;}
 .file_area > div .file_src {overflow: hidden; display: block; width: 532px; height: 35px; margin-left: 0; padding: 0 6px; line-height: 39px; font-size: 13px; border: 1px solid #c7c7c7; text-overflow: ellipsis; white-space: nowrap; word-wrap: normal;}
 .file_area input[type="file"] {width: 0; height: 0; text-indent: -9999px;}
-.file_area .file_comment {display:inline-block;padding-top:5px;}
+.add_file_area .file_area div.file_comment {display:inline-block;padding-top:5px; margin-bottom: 0; padding-bottom:0;}
+.file_area div.file_comment {display:inline-block;padding-top:5px; margin-bottom: 0; padding-bottom:0;}
 .btn_file {display: block; width: 120px; height: 35px; line-height: 35px; border: 1px solid #c8c8c8; text-align: center; cursor: pointer;}
 .file_area button {display: block; width: 120px; height: 37px; border: 1px solid #c8c8c8}
+.file_area button.btnDelete,.file_area button.btn_add_file,.btn_file {background-color:#bbbbbb;color:#282828; }
+.file_area button.btnDelete,.file_area button.btn_add_file{width:50px;}
 .reg .cont_bottom .reg_table td input[type="text"].input_long_type {width: 670px;}
 .reg .cont_bottom .reg_table td textarea {width: 666px; height: 300px; padding: 5px; resize: none;}
-
 .tdTextArea{white-space:pre;}
 
 /*webPromotion*/
