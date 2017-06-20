@@ -12,7 +12,6 @@
       <result property="model" column="MODEL" />
       <result property="modelName" column="MODELNAME" />
       <result property="price" column="PRICE" />
-      <result property="item" column="ITEM" />
       <result property="zlZanga" column="ZL_ZANGA" />
       <result property="zlPay1" column="ZL_PAY1" />
       <result property="zlPay2" column="ZL_PAY2" />
@@ -43,7 +42,6 @@
         , MODEL
         , MODELNAME
         , PRICE
-        , ITEM
         , ZL_ZANGA
         , ZL_PAY1
         , ZL_PAY2
@@ -69,9 +67,6 @@
       <isNotEmpty property="model">
           AND MODEL LIKE '%'+#model#+'%'
       </isNotEmpty>
-      <isNotEmpty property="item">
-          AND ITEM LIKE '%'+#item#+'%'
-      </isNotEmpty>
       )t
       WHERE 1=1
       AND (RNUM BETWEEN #currentItem# AND #currentItemEnd# )
@@ -90,9 +85,6 @@
       <isNotEmpty property="model">
           AND MODEL LIKE '%'+#model#+'%'
       </isNotEmpty>
-      <isNotEmpty property="item">
-          AND ITEM LIKE '%'+#item#+'%'
-      </isNotEmpty>
     </select>
 
     <select id="findPayment" resultMap="paymentMap">
@@ -102,7 +94,6 @@
       , MODEL
       , MODELNAME
       , PRICE
-      , ITEM
       , ZL_ZANGA
       , ZL_PAY1
       , ZL_PAY2
@@ -130,7 +121,6 @@
       , MODEL
       , MODELNAME
       , PRICE
-      , ITEM
       , ZL_ZANGA
       , ZL_PAY1
       , ZL_PAY2
@@ -152,7 +142,6 @@
       ,#model#
       ,#modelName#
       ,#price#
-      ,#item#
       ,#zlZanga#
       ,#zlPay1#
       ,#zlPay2#
@@ -177,7 +166,6 @@
       ,MODEL = #model#
       ,MODELNAME = #modelName#
       ,PRICE = #price#
-      ,ITEM = #item#
       , ZL_ZANGA = #zlZanga#
       , ZL_PAY1 = #zlPay1#
       , ZL_PAY2 = #zlPay2#
