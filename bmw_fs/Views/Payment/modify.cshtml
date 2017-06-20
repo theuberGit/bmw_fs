@@ -94,22 +94,22 @@
                         <label for="generalHalbu"><input type="checkbox" name="item" id="generalHalbu" value="generalHalbu" />일반 할부</label>
                     </td>
                 </tr>*@
-                <tr>
+                <tr class="zh">
                     <td colspan="2" class="td_tit">잔가보장형 할부</td>
                 </tr>
-                <tr>
+                <tr class="zh">
                     <th scope="row"><label for="zhZanga">잔가</label></th>
                     <td><input type="text" name="zhZanga" id="zhZanga" class="zhZanga" maxlength="50" title="잔가" value="@ViewBag.item.zhZanga" /> %</td>
                 </tr>
-                <tr>
+                <tr class="zh">
                     <th scope="row"><label for="zhPay1">월 납입금 (선납 10%)</label></th>
                     <td><input type="text" name="zhPay1" id="zhPay1" class="zhPay1" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.zhPay1"/> 원 <span class="result1"></span></td>
                 </tr>
-                <tr>
+                <tr class="zh">
                     <th scope="row"><label for="zhPay2">월 납입금 (선납 20%)</label></th>
                     <td><input type="text" name="zhPay2" id="zhPay2" class="zhPay2" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.zhPay2"/> 원 <span class="result2"></span></td>
                 </tr>
-                <tr>
+                <tr class="zh">
                     <th scope="row"><label for="zhPay3">월 납입금 (선납 30%)</label></th>
                     <td><input type="text" name="zhPay3" id="zhPay3" class="zhPay3" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.zhPay3"/> 원 <span class="result3"></span></td>
                 </tr>
@@ -269,13 +269,13 @@
         }
         $('#model').append(model);
         if (val != "i") {
-            $('.general').removeClass('off');
+            $('.zh').removeClass('off');
         } else {
-            console.log('초기화');
-            $('#ghPay1').val('');
-            $('#ghPay2').val('');
-            $('#ghPay3').val('');
-            $('.general').addClass('off');
+            $('#zhZanga').val('');
+            $('#zhPay1').val('');
+            $('#zhPay2').val('');
+            $('#zhPay3').val('');
+            $('.zh').addClass('off');
         }
     });
     //브랜드,모델,시리즈 값
