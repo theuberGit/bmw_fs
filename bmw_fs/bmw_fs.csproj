@@ -159,34 +159,34 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\CustomException.cs" />
     <Compile Include="Config\StringProperties.cs" />
+    <Compile Include="Common\Filter\TestFilter.cs" />
     <Compile Include="Controllers\admin\AdminController.cs" />
+    <Compile Include="Controllers\common\ErrorController.cs" />
+    <Compile Include="Controllers\common\FilesController.cs" />
     <Compile Include="Controllers\CustomerService\DownLoadFormController.cs" />
     <Compile Include="Controllers\CustomerService\FaqController.cs" />
     <Compile Include="Controllers\CustomerService\InquiryController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\legalNotice\BusinessController.cs" />
     <Compile Include="Controllers\legalNotice\CreditController.cs" />
     <Compile Include="Controllers\legalNotice\GeneralController.cs" />
     <Compile Include="Controllers\legalNotice\PrivacyController.cs" />
-    <Compile Include="Controllers\promotion\CatalogController.cs" />
     <Compile Include="Controllers\legalNotice\ProductController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\news\NewsController.cs" />
     <Compile Include="Controllers\payment\PaymentController.cs" />
+    <Compile Include="Controllers\promotion\CatalogController.cs" />
     <Compile Include="Controllers\promotion\MobilePromotionController.cs" />
     <Compile Include="Controllers\promotion\PromotionController.cs" />
     <Compile Include="Controllers\recruit\RecruitFaqController.cs" />
     <Compile Include="Controllers\recruit\RecruitNoticeController.cs" />
     <Compile Include="Controllers\showroom\ShowroomController.cs" />
     <Compile Include="Controllers\test\BoardController.cs" />
-    <Compile Include="Controllers\common\ErrorController.cs" />
-    <Compile Include="Controllers\common\FilesController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Dao\face\admin\MemberDao.cs" />
     <Compile Include="Dao\face\board\BoardDao.cs" />
+    <Compile Include="Dao\face\catalog\CatalogDao.cs" />
     <Compile Include="Dao\face\common\FilesDao.cs" />
     <Compile Include="Dao\face\common\SequenceDao.cs" />
-    <Compile Include="Common\Filter\TestFilter.cs" />
-    <Compile Include="Dao\face\catalog\CatalogDao.cs" />
     <Compile Include="Dao\face\CustomerService\DownLoadFormDao.cs" />
     <Compile Include="Dao\face\CustomerService\FaqDao.cs" />
     <Compile Include="Dao\face\CustomerService\InquiryDao.cs" />
@@ -200,13 +200,14 @@
     <Compile Include="Dao\face\promotion\PromotionDao.cs" />
     <Compile Include="Dao\face\recruit\RecruitFaqDao.cs" />
     <Compile Include="Dao\face\recruit\RecruitNoticeDao.cs" />
-    <Compile Include="Dao\face\Showroom\ShowroomDao.cs" />
     <Compile Include="Dao\face\rolling\RollingDao.cs" />
+    <Compile Include="Dao\face\Showroom\ShowroomDao.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\admin\Member.cs" />
     <Compile Include="Models\board\Board.cs" />
+    <Compile Include="Models\catalog\Catalog.cs" />
     <Compile Include="Models\common\Files.cs" />
     <Compile Include="Models\common\Pagination.cs" />
     <Compile Include="Models\common\SearchInfo.cs" />
@@ -218,24 +219,23 @@
     <Compile Include="Models\legalNotice\Credit.cs" />
     <Compile Include="Models\legalNotice\General.cs" />
     <Compile Include="Models\legalNotice\Privacy.cs" />
-    <Compile Include="Models\catalog\Catalog.cs" />
     <Compile Include="Models\legalNotice\Product.cs" />
     <Compile Include="Models\news\News.cs" />
     <Compile Include="Models\payment\Payment.cs" />
-    <Compile Include="Models\promotion\PromotionUrl.cs" />
     <Compile Include="Models\promotion\Promotion.cs" />
+    <Compile Include="Models\promotion\PromotionUrl.cs" />
     <Compile Include="Models\recruit\RecruitFaq.cs" />
     <Compile Include="Models\recruit\RecruitNotice.cs" />
-    <Compile Include="Models\Showroom\ShowRoom.cs" />
     <Compile Include="Models\rolling\Rolling.cs" />
+    <Compile Include="Models\Showroom\ShowRoom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\face\admin\MemberService.cs" />
     <Compile Include="Service\face\board\BoardService.cs" />
+    <Compile Include="Service\face\catalog\CatalogService.cs" />
     <Compile Include="Service\face\common\FilesService.cs" />
     <Compile Include="Service\face\common\MailService.cs" />
     <Compile Include="Service\face\common\SearchService.cs" />
     <Compile Include="Service\face\common\SequenceService.cs" />
-    <Compile Include="Service\face\catalog\CatalogService.cs" />
     <Compile Include="Service\face\CustomerService\DownLoadFormService.cs" />
     <Compile Include="Service\face\CustomerService\FaqService.cs" />
     <Compile Include="Service\face\CustomerService\InquiryService.cs" />
@@ -253,12 +253,12 @@
     <Compile Include="Service\face\Showroom\ShowroomService.cs" />
     <Compile Include="Service\impl\admin\MemberServiceImpl.cs" />
     <Compile Include="Service\impl\board\BoardServiceImpl.cs" />
+    <Compile Include="Service\impl\catalog\CatalogServiceImpl.cs" />
     <Compile Include="Service\impl\common\FilesServiceImpl.cs" />
     <Compile Include="Service\impl\common\LdapAuthenticationService.cs" />
     <Compile Include="Service\impl\common\MailServiceImpl.cs" />
     <Compile Include="Service\impl\common\SearchServiceImpl.cs" />
     <Compile Include="Service\impl\common\SequenceServiceImpl.cs" />
-    <Compile Include="Service\impl\catalog\CatalogServiceImpl.cs" />
     <Compile Include="Service\impl\CustomerService\DownLoadFormServiceImpl.cs" />
     <Compile Include="Service\impl\CustomerService\FaqServiceImpl.cs" />
     <Compile Include="Service\impl\CustomerService\InquiryServiceImpl.cs" />
@@ -272,40 +272,41 @@
     <Compile Include="Service\impl\promotion\PromotionServiceImpl.cs" />
     <Compile Include="Service\impl\recruit\RecruitFaqServiceImpl.cs" />
     <Compile Include="Service\impl\recruit\RecruitNoticeServiceImpl.cs" />
-    <Compile Include="Service\impl\Showroom\ShowroomServiceImpl.cs" />
     <Compile Include="Service\impl\rolling\RollingServiceImpl.cs" />
+    <Compile Include="Service\impl\Showroom\ShowroomServiceImpl.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dao\impl\admin\Member.xml" />
     <Content Include="Dao\impl\board\Board.xml" />
+    <Content Include="Dao\impl\catalog\Catalog.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Dao\impl\common\Files.xml" />
     <Content Include="Dao\impl\common\Sequence.xml" />
-    <Content Include="Dao\impl\catalog\Catalog.xml">
+    <Content Include="Dao\impl\CustomerService\DownLoadForm.xml" />
+    <Content Include="Dao\impl\CustomerService\Faq.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Dao\impl\CustomerService\Inquiry.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Dao\impl\CustomerService\DownLoadForm.xml" />
-    <Content Include="Dao\impl\CustomerService\Faq.xml" />
     <Content Include="Dao\impl\legalNotice\Business.xml" />
-    <EmbeddedResource Include="Dao\impl\legalNotice\Privacy.xml" />
+    <Content Include="Dao\impl\legalNotice\Credit.xml" />
+    <Content Include="Dao\impl\legalNotice\General.xml" />
     <Content Include="Dao\impl\legalNotice\Product.xml" />
     <Content Include="Dao\impl\news\News.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Dao\impl\legalNotice\Credit.xml" />
-    <Content Include="Dao\impl\legalNotice\General.xml" />
     <Content Include="Dao\impl\payment\Payment.xml" />
     <Content Include="Dao\impl\promotion\Promotion.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Dao\impl\recruit\RecruitFaq.xml" />
     <Content Include="Dao\impl\recruit\RecruitNotice.xml" />
-    <Content Include="Dao\impl\Showroom\Showroom.xml" />
     <Content Include="Dao\impl\rolling\Rolling.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Dao\impl\Showroom\Showroom.xml" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
@@ -382,30 +383,83 @@
     <Content Include="resources\se\SmartEditor2_noframe.html" />
     <Content Include="resources\se\smart_editor2_inputarea.html" />
     <Content Include="resources\se\smart_editor2_inputarea_ie8.html" />
-    <Content Include="Views\Payment\list.cshtml" />
-    <Content Include="Views\Payment\register.cshtml" />
-    <Content Include="Views\Payment\modify.cshtml" />
-    <Content Include="Views\Payment\view.cshtml" />
-    <Content Include="Views\News\modify.cshtml" />
-    <Content Include="Views\News\view.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Views\Admin\list.cshtml" />
-    <Content Include="Views\Admin\register.cshtml" />
     <Content Include="Views\Admin\modify.cshtml" />
+    <Content Include="Views\Admin\register.cshtml" />
     <Content Include="Views\Admin\view.cshtml" />
+    <Content Include="Views\Board\list.cshtml" />
+    <Content Include="Views\Board\modify.cshtml" />
+    <Content Include="Views\Board\register.cshtml" />
+    <Content Include="Views\Board\view.cshtml" />
+    <Content Include="Views\Common\Pagination.cshtml" />
+    <Content Include="Views\CustomerService\DownloadForm\list.cshtml" />
+    <Content Include="Views\CustomerService\DownloadForm\modify.cshtml" />
+    <Content Include="Views\CustomerService\DownloadForm\register.cshtml" />
+    <Content Include="Views\CustomerService\DownloadForm\view.cshtml" />
     <Content Include="Views\CustomerService\Faq\list.cshtml" />
     <Content Include="Views\CustomerService\Faq\modify.cshtml" />
     <Content Include="Views\CustomerService\Faq\register.cshtml" />
     <Content Include="Views\CustomerService\Faq\view.cshtml" />
     <Content Include="Views\CustomerService\Inquiry\list.cshtml" />
+    <Content Include="Views\CustomerService\Inquiry\view.cshtml" />
+    <Content Include="Views\Error\CustomError.cshtml" />
+    <Content Include="Views\Error\Error404.cshtml" />
+    <Content Include="Views\Error\Error500.cshtml" />
+    <Content Include="Views\Index.cshtml" />
+    <Content Include="Views\LegalNotice\Business\list.cshtml" />
+    <Content Include="Views\LegalNotice\Business\modify.cshtml" />
+    <Content Include="Views\LegalNotice\Business\register.cshtml" />
+    <Content Include="Views\LegalNotice\Business\view.cshtml" />
+    <Content Include="Views\LegalNotice\Credit\list.cshtml" />
+    <Content Include="Views\LegalNotice\Credit\modify.cshtml" />
+    <Content Include="Views\LegalNotice\Credit\register.cshtml" />
+    <Content Include="Views\LegalNotice\Credit\view.cshtml" />
+    <Content Include="Views\LegalNotice\General\list.cshtml" />
+    <Content Include="Views\LegalNotice\General\modify.cshtml" />
+    <Content Include="Views\LegalNotice\General\register.cshtml" />
+    <Content Include="Views\LegalNotice\General\view.cshtml" />
+    <Content Include="Views\LegalNotice\Privacy\list.cshtml" />
+    <Content Include="Views\LegalNotice\Privacy\modify.cshtml" />
+    <Content Include="Views\LegalNotice\Privacy\register.cshtml" />
+    <Content Include="Views\LegalNotice\Privacy\view.cshtml" />
+    <Content Include="Views\LegalNotice\Product\list.cshtml" />
+    <Content Include="Views\LegalNotice\Product\modify.cshtml" />
+    <Content Include="Views\LegalNotice\Product\register.cshtml" />
+    <Content Include="Views\LegalNotice\Product\view.cshtml" />
+    <Content Include="Views\Login.cshtml" />
+    <Content Include="Views\News\list.cshtml" />
+    <Content Include="Views\News\modify.cshtml" />
+    <Content Include="Views\News\register.cshtml" />
+    <Content Include="Views\News\view.cshtml" />
+    <Content Include="Views\Payment\list.cshtml" />
+    <Content Include="Views\Payment\modify.cshtml" />
+    <Content Include="Views\Payment\register.cshtml" />
+    <Content Include="Views\Payment\view.cshtml" />
+    <Content Include="Views\Promotion\Catalog\list.cshtml" />
+    <Content Include="Views\Promotion\Catalog\modify.cshtml" />
+    <Content Include="Views\Promotion\Catalog\register.cshtml" />
+    <Content Include="Views\Promotion\Catalog\view.cshtml" />
     <Content Include="Views\Promotion\MobilePromotion\list.cshtml" />
     <Content Include="Views\Promotion\MobilePromotion\modify.cshtml" />
     <Content Include="Views\Promotion\MobilePromotion\register.cshtml" />
     <Content Include="Views\Promotion\MobilePromotion\view.cshtml" />
-    <Content Include="Views\CustomerService\Inquiry\view.cshtml" />
-    <None Include="Views\Promotion\Promotion\list.cshtml" />
-    <None Include="Views\Promotion\Promotion\modify.cshtml" />
-    <None Include="Views\Promotion\Promotion\view.cshtml" />
-    <None Include="Views\Promotion\Promotion\register.cshtml" />
+    <Content Include="Views\Recruit\RecruitFaq\list.cshtml" />
+    <Content Include="Views\Recruit\RecruitFaq\modify.cshtml" />
+    <Content Include="Views\Recruit\RecruitFaq\register.cshtml" />
+    <Content Include="Views\Recruit\RecruitFaq\view.cshtml" />
+    <Content Include="Views\Recruit\RecruitNotice\list.cshtml" />
+    <Content Include="Views\Recruit\RecruitNotice\modify.cshtml" />
+    <Content Include="Views\Recruit\RecruitNotice\register.cshtml" />
+    <Content Include="Views\Recruit\RecruitNotice\view.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Showroom\list.cshtml" />
+    <Content Include="Views\Showroom\modify.cshtml" />
+    <Content Include="Views\Showroom\register.cshtml" />
+    <Content Include="Views\Showroom\view.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -415,19 +469,10 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Index.cshtml" />
-    <Content Include="Views\CustomerService\DownloadForm\list.cshtml" />
-    <Content Include="Views\CustomerService\DownloadForm\modify.cshtml" />
-    <Content Include="Views\CustomerService\DownloadForm\register.cshtml" />
-    <Content Include="Views\CustomerService\DownloadForm\view.cshtml" />
-    <Content Include="Views\Showroom\list.cshtml" />
-    <Content Include="Views\Showroom\modify.cshtml" />
-    <Content Include="Views\Showroom\register.cshtml" />
-    <Content Include="Views\Showroom\view.cshtml" />
+    <Content Include="Views\Promotion\Promotion\list.cshtml" />
+    <Content Include="Views\Promotion\Promotion\modify.cshtml" />
+    <Content Include="Views\Promotion\Promotion\register.cshtml" />
+    <Content Include="Views\Promotion\Promotion\view.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -456,130 +501,10 @@
     <Content Include="resources\fonts\NanumBarunGothicLight.woff" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Board\list.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Common\Pagination.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Board\register.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Board\view.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Board\modify.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Login.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Error\Error500.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Error\Error404.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Error\CustomError.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\News\list.cshtml" />
-    <Content Include="Views\News\register.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\LegalNotice\Privacy\list.cshtml" />
-    <Content Include="Views\LegalNotice\Privacy\register.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Recruit\RecruitNotice\list.cshtml" />
-    <Content Include="Views\Recruit\RecruitNotice\register.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Recruit\RecruitNotice\modify.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\LegalNotice\Privacy\view.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\LegalNotice\Privacy\modify.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Recruit\RecruitNotice\view.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Recruit\RecruitFaq\list.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Recruit\RecruitFaq\register.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Recruit\RecruitFaq\view.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Recruit\RecruitFaq\modify.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Promotion\Catalog\list.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Promotion\Catalog\modify.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Promotion\Catalog\register.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Promotion\Catalog\view.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\LegalNotice\Credit\list.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\LegalNotice\Credit\register.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\LegalNotice\Credit\modify.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\LegalNotice\Credit\view.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\LegalNotice\General\list.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\LegalNotice\General\modify.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\LegalNotice\General\register.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\LegalNotice\General\view.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\LegalNotice\Product\list.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\LegalNotice\Product\modify.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\LegalNotice\Product\register.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\LegalNotice\Product\view.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\LegalNotice\Business\list.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\LegalNotice\Business\modify.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\LegalNotice\Business\register.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\LegalNotice\Business\view.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Dao\impl\legalNotice\Privacy.xml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

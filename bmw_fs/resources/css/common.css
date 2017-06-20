@@ -20,10 +20,15 @@ body{min-height:100%;}
 
 /* common */
 
-
+::-webkit-input-placeholder { color: #c3c3c3;} /* Chrome */
+:-ms-input-placeholder { color: #c3c3c3;} /* IE 10+ */
+::-moz-placeholder { color: #c3c3c3;opacity: 1;} /* Firefox 19+ */
+:-moz-placeholder { color: #c3c3c3;opacity: 1;} /* Firefox 4 - 18 */
+input[type="text"], input[type="password"],select{border:1px solid #ccc;}
 /* layout */
-
-body, html{height:100%;}
+body, html {
+    height: 100%;
+}
 #wrap{position:relative; height:100%; }
 #header{position:absolute; left:0; top:0; width:100%; min-width:1200px; height:67px; background-color:#8e8e8e; z-index:10}
 #header h1{position:absolute; left:27.5px; top:20px;}
@@ -79,8 +84,8 @@ body, html{height:100%;}
 .reg .cont_bottom .reg_table td.rolling_img:after{content:"사이즈 1400 * 600"; display:inline-block; padding:7px 0 0 5px; }
 .reg .cont_bottom .reg_table td.contents {white-space: pre-line}
 
-.btn_defualt{display:inline-block; width:130px; height:37px; line-height:37px; color:#fff; background-color:#666; text-align:center;}
-.btn_small{display:inline-block; width:70px; height:37px; line-height:37px; color:#fff; background-color:#666; text-align:center;}
+.btn_defualt{display:inline-block; width:130px; height:37px; line-height:37px; color:#fff; background-color:#1c69d4; text-align:center;}
+.btn_small{display:inline-block; width:70px; height:37px; line-height:37px; color:#282828; background-color:#bbbbbb; text-align:center;}
 .btn_area{overflow:hidden;}
 .btn_defualt.btn_list{float:left}
 .btn_defualt.btn_reg {float: right; margin-left:5px}
