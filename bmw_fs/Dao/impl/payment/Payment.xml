@@ -13,10 +13,17 @@
       <result property="modelName" column="MODELNAME" />
       <result property="price" column="PRICE" />
       <result property="item" column="ITEM" />
-      <result property="zanga" column="ZANGA" />
-      <result property="payment1" column="PAYMENT1" />
-      <result property="payment2" column="PAYMENT2" />
-      <result property="payment3" column="PAYMENT3" />
+      <result property="zlZanga" column="ZL_ZANGA" />
+      <result property="zlPay1" column="ZL_PAY1" />
+      <result property="zlPay2" column="ZL_PAY2" />
+      <result property="zlPay3" column="ZL_PAY3" />
+      <result property="zhZanga" column="ZH_ZANGA" />
+      <result property="zhPay1" column="ZH_PAY1" />
+      <result property="zhPay2" column="ZH_PAY2" />
+      <result property="zhPay3" column="ZH_PAY3" />
+      <result property="ghPay1" column="GH_PAY1" />
+      <result property="ghPay2" column="GH_PAY2" />
+      <result property="ghPay3" column="GH_PAY3" />
       <result property="deployYn" column="DEPLOY_YN" />
       <result property="regDate" column="REG_DATE" />
       <result property="regId" column="REG_ID" />
@@ -28,8 +35,8 @@
     <select id="findAll" resultMap="paymentMap">
       SELECT *
       FROM (
-        SELECT
-          ROW_NUMBER() OVER(ORDER BY IDX DESC) AS RNUM
+      SELECT
+      ROW_NUMBER() OVER(ORDER BY IDX DESC) AS RNUM
         , IDX
         , BRAND
         , SERIES
@@ -37,10 +44,17 @@
         , MODELNAME
         , PRICE
         , ITEM
-        , ZANGA
-        , PAYMENT1
-        , PAYMENT2
-        , PAYMENT3
+        , ZL_ZANGA
+        , ZL_PAY1
+        , ZL_PAY2
+        , ZL_PAY3
+        , ZH_ZANGA
+        , ZH_PAY1
+        , ZH_PAY2
+        , ZH_PAY3
+        , GH_PAY1
+        , GH_PAY2
+        , GH_PAY3
         , DEPLOY_YN
         , REG_DATE
         , REG_ID
@@ -89,10 +103,17 @@
       , MODELNAME
       , PRICE
       , ITEM
-      , ZANGA
-      , PAYMENT1
-      , PAYMENT2
-      , PAYMENT3
+      , ZL_ZANGA
+      , ZL_PAY1
+      , ZL_PAY2
+      , ZL_PAY3
+      , ZH_ZANGA
+      , ZH_PAY1
+      , ZH_PAY2
+      , ZH_PAY3
+      , GH_PAY1
+      , GH_PAY2
+      , GH_PAY3
       , DEPLOY_YN
       , REG_DATE
       , REG_ID
@@ -110,10 +131,17 @@
       , MODELNAME
       , PRICE
       , ITEM
-      , ZANGA
-      , PAYMENT1
-      , PAYMENT2
-      , PAYMENT3
+      , ZL_ZANGA
+      , ZL_PAY1
+      , ZL_PAY2
+      , ZL_PAY3
+      , ZH_ZANGA
+      , ZH_PAY1
+      , ZH_PAY2
+      , ZH_PAY3
+      , GH_PAY1
+      , GH_PAY2
+      , GH_PAY3
       , DEPLOY_YN
       , REG_ID
       )
@@ -125,10 +153,17 @@
       ,#modelName#
       ,#price#
       ,#item#
-      ,#zanga#
-      ,#payment1#
-      ,#payment2#
-      ,#payment3#
+      ,#zlZanga#
+      ,#zlPay1#
+      ,#zlPay2#
+      ,#zlPay3#
+      ,#zhZanga#
+      ,#zhPay1#
+      ,#zhPay2#
+      ,#zhPay3#
+      ,#ghPay1#
+      ,#ghPay2#
+      ,#ghPay3#
       ,#deployYn#
       ,#regId#
       )
@@ -143,10 +178,17 @@
       ,MODELNAME = #modelName#
       ,PRICE = #price#
       ,ITEM = #item#
-      ,ZANGA = #zanga#
-      ,PAYMENT1 = #payment1#
-      ,PAYMENT2 = #payment2#
-      ,PAYMENT3 = #payment3#
+      , ZL_ZANGA = #zlZanga#
+      , ZL_PAY1 = #zlPay1#
+      , ZL_PAY2 = #zlPay2#
+      , ZL_PAY3 = #zlPay3#
+      , ZH_ZANGA = #zhZanga#
+      , ZH_PAY1 = #zhPay1#
+      , ZH_PAY2 = #zhPay2#
+      , ZH_PAY3 = #zhPay3#
+      , GH_PAY1 = #ghPay1#
+      , GH_PAY2 = #ghPay2#
+      , GH_PAY3 = #ghPay3#
       ,DEPLOY_YN  = #deployYn#
       ,UPT_DATE = getDate()
       ,UPT_ID = #uptId#

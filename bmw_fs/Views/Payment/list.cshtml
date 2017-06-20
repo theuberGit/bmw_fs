@@ -21,10 +21,11 @@
                 <select name="model" id="model" class="search_select">
                     <option value="">구분</option>
                 </select>
-                <select name="item" id="item" class="search_select">
+                <select name="searchOption" id="searchOption" class="search_select">
                     <option value="">구분</option>
-                    <option value="잔가보장형 할부">잔가보자형 할부</option>
-                    <option value="일반 할부">일반 할부</option>
+                    <option value="zangaHalbu">잔가보장형 할부</option>
+                    <option value="zangaLease">잔가보장형 리스</option>
+                    <option value="generalHalbu">일반 할부</option>
                 </select>
                 <button type="button" onclick="searchList();"></button>
             </div>
@@ -67,18 +68,36 @@
                             <td class="co1">@(ViewBag.pagination.totalItemCount - (ViewBag.pagination.currentPage - 1) * ViewBag.pagination.itemPerPage - i)</td>
                             <td class="co2 tit_area"><a href="view?idx=@ViewBag.list[i].idx">@ViewBag.list[i].modelName</a></td>
                             <td class="co3">@ViewBag.list[i].price</td>
-                            <td class="co4">
-                                @if (ViewBag.list[i].zanga != 0)
-                                {
-                                    @ViewBag.list[i].zanga <span>%</span>
-                                }
-                            </td>
-                            <td class="co5">@ViewBag.list[i].payment1</td>
-                            <td class="co6">@ViewBag.list[i].payment1</td>
-                            <td class="co7">@ViewBag.list[i].payment2</td>
-                            <td class="co8">@ViewBag.list[i].payment2</td>
-                            <td class="co9">@ViewBag.list[i].payment3</td>
-                            <td class="co10">@ViewBag.list[i].payment3</td>
+                            @if("zangaHalbu".Equals(ViewBag.pagination.searchOption))
+                            {
+                                <td class="co4">@ViewBag.list[i].zhZanga <span>%</span></td>
+                                <td class="co5">@ViewBag.list[i].zhPay1</td>
+                                <td class="co6">@ViewBag.list[i].zhPay1</td>
+                                <td class="co7">@ViewBag.list[i].zhPay2</td>
+                                <td class="co8">@ViewBag.list[i].zhPay2</td>
+                                <td class="co9">@ViewBag.list[i].zhPay3</td>
+                                <td class="co10">@ViewBag.list[i].zhPay3</td>
+                            }
+                            else if ("zangaLease".Equals(ViewBag.pagination.searchOption))
+                            {
+                                <td class="co4">@ViewBag.list[i].zlZanga <span>%</span></td>
+                                <td class="co5">@ViewBag.list[i].zlPay1</td>
+                                <td class="co6">@ViewBag.list[i].zlPay1</td>
+                                <td class="co7">@ViewBag.list[i].zlPay2</td>
+                                <td class="co8">@ViewBag.list[i].zlPay2</td>
+                                <td class="co9">@ViewBag.list[i].zlPay3</td>
+                                <td class="co10">@ViewBag.list[i].zlPay3</td>
+                            }
+                            else if ("generalHalbu".Equals(ViewBag.pagination.searchOption))
+                            {
+                                <td class="co4"></td>
+                                <td class="co5">@ViewBag.list[i].ghPay1</td>
+                                <td class="co6">@ViewBag.list[i].ghPay1</td>
+                                <td class="co7">@ViewBag.list[i].ghPay2</td>
+                                <td class="co8">@ViewBag.list[i].ghPay2</td>
+                                <td class="co9">@ViewBag.list[i].ghPay3</td>
+                                <td class="co10">@ViewBag.list[i].ghPay3</td>
+                            }
                             <td class="co11">@ViewBag.list[i].deployYn</td>
                         </tr>
                     }
