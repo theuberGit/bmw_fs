@@ -69,11 +69,9 @@
       <isNotEmpty property="searchOption">
               <isEqual property="searchOption" compareValue="now">
                 AND P.END_DATE &gt;= CONVERT(CHAR(10), getdate(), 23)
-                AND P.DEPLOY_YN = 'Y'
               </isEqual>
               <isEqual property="searchOption" compareValue="end">
-                AND (P.END_DATE &lt; CONVERT(CHAR(10), getdate(), 23)
-                OR P.DEPLOY_YN = 'N')
+                AND P.END_DATE &lt; CONVERT(CHAR(10), getdate(), 23)
               </isEqual>
      </isNotEmpty>
           )t
@@ -89,11 +87,9 @@
       <isNotEmpty property="searchOption">
               <isEqual property="searchOption" compareValue="now">
                 AND END_DATE &gt;= CONVERT(CHAR(10), getdate(), 23)
-                AND DEPLOY_YN = 'Y'
               </isEqual>
               <isEqual property="searchOption" compareValue="end">
-                AND (END_DATE &lt; CONVERT(CHAR(10), getdate(), 23)
-                OR DEPLOY_YN = 'N')
+                AND END_DATE &lt; CONVERT(CHAR(10), getdate(), 23)
               </isEqual>
      </isNotEmpty>
     </select>

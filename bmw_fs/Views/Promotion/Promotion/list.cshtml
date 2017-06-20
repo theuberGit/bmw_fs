@@ -23,6 +23,14 @@
                                     <span class="img_area"><img src="/Files/imageView?fileIdx=@ViewBag.list[i].fileIdx" alt=""></span>
                                     <span class="tit_area">@ViewBag.list[i].title</span>
                                     <span class="date_area">@ViewBag.list[i].startDate ~ @ViewBag.list[i].endDate</span>
+                                    @if ("N".Equals(ViewBag.list[i].deployYn))
+                                    {
+                                        <span>미배포</span>
+                                    }
+                                    else
+                                    {
+                                        <span>배포</span>
+                                    }
                                     <div class="country_area">
                                         @if ("Y".Equals(ViewBag.list[i].engYn))
                                         {
@@ -39,6 +47,14 @@
                                     <span class="img_area"><img src="/Files/imageView?fileIdx=@ViewBag.list[i].fileIdx" alt=""></span>
                                     <span class="tit_area">@ViewBag.list[i].title</span>
                                     <span class="date_area">@ViewBag.list[i].startDate ~ @ViewBag.list[i].endDate</span>
+                                    @if ("N".Equals(ViewBag.list[i].deployYn))
+                                    {
+                                        <span>미배포</span>
+                                    }
+                                    else
+                                    {
+                                        <span>배포</span>
+                                    }
                                     <div class="country_area">
                                         @if ("Y".Equals(ViewBag.list[i].engYn))
                                         {
