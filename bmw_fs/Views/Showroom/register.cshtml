@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "전시장 관리";
 }
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5k8bV2daehbsFSA-GKsmbAEeluU15Q_I"></script>
 <div id="content" class="reg">
     <div class="cont_top">
         <h3>전시장 관리 등록</h3>
@@ -70,6 +71,9 @@
                     </td>
                 </tr>
                 <tr>
+                    <td id="map" colspan="2" style="height:300px;"></td>
+                </tr>
+                <tr>
                     <th scope="row"><label for="tel1">전화번호 *</label></th>
                     <td>
                         <select name="tel1" id="tel1" title="지역번호">
@@ -100,7 +104,7 @@
                 </tr>
                 <tr>
                     <th><label for="businessTime">영업시간 *</label></th>
-                    <td><textarea name="businessTime" id="businessTime" title="영업시간" placeholder="[평일] 9:00 ~ 18:00&#10;[토요일] 9:00 ~ 18:00&#10;[일요일] 9:00 ~ 18:00&#10;[공휴일] 9:00 ~ 18:00"></textarea></td>
+                    <td><textarea style="width:300px;height:150px;" name="businessTime" id="businessTime" title="영업시간" placeholder="[평일] 9:00 ~ 18:00&#10;[토요일] 9:00 ~ 18:00&#10;[일요일] 9:00 ~ 18:00&#10;[공휴일] 9:00 ~ 18:00"></textarea></td>
                 </tr>
                 <tr>
                     <th><label for="">배포 *</label></th>
@@ -121,6 +125,8 @@
     lnbSet(".showroom_mgmt");
 
     $(document).ready(function () {
+        $("#map").hide();
+
         $(".telNum").keyup(function () { $(this).val($(this).val().replace(/[^0-9]/g, "")); }); //숫자만 입력가능
 
         $('#tel1').change(function () {
@@ -170,7 +176,27 @@
         if (!$('#lat').required()) return;
         if (!$('#lng').required()) return;
 
-        window.open('https://www.google.co.kr/maps/place/@@' + $('#lat').val() + ',' + $('#lng').val() + ',17z','_blank');
+        $("#map").show();
+
+        var Y_point = $('#lat').val();
+        var X_point = $('#lng').val(); // X 좌표
+        var zoomLevel = 16; // 지도의 확대 레벨 : 숫자가 클수록 확대정도가 큼
+        var markerTitle = ""; // 현재 위치 마커에 마우스를 오버을때 나타나는 정보
+        var myLatlng = new google.maps.LatLng(Y_point, X_point);
+        var mapOptions = {
+            zoom: zoomLevel,
+            center: myLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            labelContent: "",
+            title: markerTitle
+        });
+
+        //window.open('https://www.google.co.kr/maps/place/@@' + $('#lat').val() + ',' + $('#lng').val() + ',17z','_blank');
 
     }
 

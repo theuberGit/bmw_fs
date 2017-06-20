@@ -15,17 +15,17 @@
         <div class="cont_bottom">
             <table class="list_table">
                 <colgroup>
-                    <col width="50px" />
-                    <col width="250px" />                    
+                    <col width="60px" />
+                    <col width="180px" />
                     <col width="*" />
-                    <col width="80px" />
-                    <col width="90px" />
+                    <col width="50px" />
+                    <col width="150px" />
                     <col width="50px" />
                 </colgroup>
                 <thead>
                     <tr>
                         <th>No.</th>
-                        <th>양식명</th>                        
+                        <th>양식명</th>
                         <th>이용용도</th>
                         <th>파일</th>
                         <th>등록일</th>
@@ -37,9 +37,9 @@
                     {
                         <tr>
                             <td>@(ViewBag.pagination.totalItemCount - (ViewBag.pagination.currentPage - 1) * ViewBag.pagination.itemPerPage - i)</td>
-                            <td class="tit_area"><a href="view?idx=@ViewBag.list[i].idx">@ViewBag.list[i].formName</a></td>                            
-                            <td>@ViewBag.list[i].usagePurpose</td>
-                            <td><a href="/Files/fileDownload?fileIdx=@ViewBag.list[i].fileIdx"><img src="~/resources/images/BMW-save_24.png" /></a></td>
+                            <td class="tit_area"><a href="view?idx=@ViewBag.list[i].idx">@ViewBag.list[i].formName</a></td>
+                            <td class="tit">@ViewBag.list[i].usagePurpose</td>
+                            <td><a href="/Files/fileDownload?fileIdx=@ViewBag.list[i].fileIdx"><img src="/resources/images/BMW-save_24.png" alt="" /></a></td>
                             <td>@ViewBag.list[i].regDate.ToString("yyyy-MM-dd")</td>
                             <td>@ViewBag.list[i].deployYn</td>
                         </tr>

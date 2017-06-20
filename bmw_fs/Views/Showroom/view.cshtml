@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "전시장 관리";
 }
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5k8bV2daehbsFSA-GKsmbAEeluU15Q_I"></script>
 <div id="content" class="reg">
     <div class="cont_top">
         <h3>전시장 관리</h3>
@@ -57,6 +58,9 @@
                     </td>
                 </tr>
                 <tr>
+                    <td id="map" colspan="2" style="height:300px;"></td>
+                </tr>
+                <tr>
                     <th scope="row"><label for="tel1">전화번호 *</label></th>
                     @if ("-".Equals(@ViewBag.item.tel1))
                     {
@@ -97,6 +101,9 @@
 </div>
 <script>
     lnbSet(".showroom_mgmt");
+
+    $("#map").hide();
+
     function delForm() {
         if (!confirm('삭제하시겠습니까?')) return;
         $('#content form').attr('action', 'delete').submit();
@@ -106,6 +113,26 @@
         if (!$('#lat').required()) return;
         if (!$('#lng').required()) return;
 
-        window.open('https://www.google.co.kr/maps/place/@@' + $('#lat').val() + ',' + $('#lng').val() + ',17z', '_blank');
+        $("#map").show();
+
+        var Y_point = $('#lat').val();
+        var X_point = $('#lng').val(); // X 좌표
+        var zoomLevel = 16; // 지도의 확대 레벨 : 숫자가 클수록 확대정도가 큼
+        var markerTitle = ""; // 현재 위치 마커에 마우스를 오버을때 나타나는 정보
+        var myLatlng = new google.maps.LatLng(Y_point, X_point);
+        var mapOptions = {
+            zoom: zoomLevel,
+            center: myLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            labelContent: "",
+            title: markerTitle
+        });
+
+        //window.open('https://www.google.co.kr/maps/place/@@' + $('#lat').val() + ',' + $('#lng').val() + ',17z', '_blank');
     };
 </script>
