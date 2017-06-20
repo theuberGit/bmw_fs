@@ -56,7 +56,7 @@
         if (!$('#formName').required()) return;
         if (!$('#usagePurpose').required()) return;
         if (!$('#formFile').required()) return;
-        if (!validationFileType($('input[name="formFile"]'), 'pdf')) return;
+        if (!validationFileType('pdf')) return;
     
         if (!confirm('등록하시겠습니까')) return;
         $('#content form').attr('action', 'registerProc').submit();

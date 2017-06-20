@@ -79,7 +79,7 @@
             alert('내용을 입력하세요.');
             return;
         }
-        if (!validationFileType($('input[name="files"]'), 'jpg, png, pdf, docx, hwp')) return;
+        if (!validationFileType('jpg, png, pdf, docx, hwp')) return;
         if (!confirm('수정하시겠습니까')) return;
         $('#content form').attr('action', 'modifyProc').submit();
     };

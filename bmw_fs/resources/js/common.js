@@ -64,7 +64,7 @@ function addFileBtn(target) {
     appendTarget.after(html);
 };
 
-function validationFileType(inputFileDoc, typeArray) {
+function validationFileTypeSingle(inputFileDoc, typeArray) {
     var $file = $(inputFileDoc);
     var $filePath = $file.val();
     var $fileType = $filePath.substring($filePath.lastIndexOf('.') + 1, $filePath.length);   
@@ -76,4 +76,15 @@ function validationFileType(inputFileDoc, typeArray) {
     } else {
         return true;
     }
+};
+
+function validationFileType(typeArray) {
+    var fileFlag = true;
+    $('input[type="file"]').each(function (idx, item) {
+        if ($(item).val() != '' && !validationFileTypeSingle($(item), typeArray)) {
+            fileFlag = false;
+            return false;
+        }
+    });
+    return fileFlag;
 };
