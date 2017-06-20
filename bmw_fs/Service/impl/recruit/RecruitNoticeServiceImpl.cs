@@ -31,7 +31,7 @@ namespace bmw_fs.Service.impl.recruit
             recruitNotice.idx = masterIdx;
             Mapper.Instance().BeginTransaction();
             recruitNoticeDao.insertRecruitNotice(recruitNotice);
-            filesService.fileUpload(multipartFiles, "files", "jpg|png", 5 * 1024 * 1024, masterIdx, null);
+            filesService.fileUpload(multipartFiles, "files", "jpg|png|pdf|docx|hwp", 5 * 1024 * 1024, masterIdx, null);
             Mapper.Instance().CommitTransaction();
         }
 
@@ -49,7 +49,7 @@ namespace bmw_fs.Service.impl.recruit
         {
             validation(recruitNotice);
             Mapper.Instance().BeginTransaction();
-            filesService.deleteFileAndFileUpload(multipartFiles, "files", "jpg|png", 5 * 1024 * 1024, recruitNotice.idx, recruitNotice.fileIdxs);
+            filesService.deleteFileAndFileUpload(multipartFiles, "files", "jpg|png|pdf|docx|hwp", 5 * 1024 * 1024, recruitNotice.idx, recruitNotice.fileIdxs);
             recruitNoticeDao.updateRecruitNotice(recruitNotice);
             Mapper.Instance().CommitTransaction();
         }
