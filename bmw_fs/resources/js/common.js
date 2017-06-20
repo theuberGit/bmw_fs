@@ -63,3 +63,28 @@ function addFileBtn(target) {
     var appendTarget = $(target).parents('td').find('.file-wrapper:last');
     appendTarget.after(html);
 };
+
+function validationFileTypeSingle(inputFileDoc, typeArray) {
+    var $file = $(inputFileDoc);
+    var $filePath = $file.val();
+    var $fileType = $filePath.substring($filePath.lastIndexOf('.') + 1, $filePath.length);   
+    if (typeArray.indexOf($fileType.toLowerCase()) == -1) {
+        $file.val('');
+        $file.siblings('.file_src').text('');
+        alert('첨부 가능한 파일 형식은 ' + typeArray+' 입니다.');
+        return false;
+    } else {
+        return true;
+    }
+};
+
+function validationFileType(typeArray) {
+    var fileFlag = true;
+    $('input[type="file"]').each(function (idx, item) {
+        if ($(item).val() != '' && !validationFileTypeSingle($(item), typeArray)) {
+            fileFlag = false;
+            return false;
+        }
+    });
+    return fileFlag;
+};
