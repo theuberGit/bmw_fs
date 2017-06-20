@@ -5,12 +5,12 @@
 <head>
 <style>
 .reg .cont_bottom .reg_table td.file_area p{float:none; clear:both; padding-top:10px}
-.reg .cont_bottom .reg_table td.file_area p input[type="text"]{width:467px}
+.reg .cont_bottom .reg_table td.file_area p input[type="text"]{width:539px;}
 .reg h4{margin-bottom:10px}
 
 .file_area{counter-reset:cnt1; }
 .file_src.on:after{content:""; color:#666;}
-.thum_nail:after{content:"사이즈 307 * 233"; display:inline-block; padding: 7px 0 0 5px}
+.thum_nail:after{content:"사이즈 351 * 264"; display:inline-block; padding: 7px 0 0 5px}
 .reg .cont_bottom .reg_table .event_btn_area input[type="text"]{margin-bottom: 10px; width: 467px;}
 .evt_btn_button{display: inline-block; width: 35px; height: 36.5px; line-height: 35px; border: 1px solid #c8c8c8; text-align: center; cursor: pointer; margin-left: 7px;}
 </style>
@@ -109,7 +109,7 @@
                                             {
                                                 <button type="button" class="btnDelete" data-name="mainIdxs" data-key="@ViewBag.mainImgList[i].fileIdx" onclick="deleteFile(this, 'N');">첨부파일 삭제</button>
                                             }
-                                            <p><label for="url@(i)"><input type="text" name="mainImgLinks" id="url@(i)" placeholder="이미지에 대한 링크 URL" value="@ViewBag.imgUrlList[i]"></label></p>
+                                            <p><label for="url@(i)"><input type="text" name="mainImgLinks" id="url@(i)" placeholder="이미지에 대한 링크 URL (선택사항)" value="@ViewBag.imgUrlList[i]"></label></p>
                                             <input type="hidden" name="mainIdxs" value="@ViewBag.mainImgList[i].fileIdx" />
                                         </div>
                                      }
@@ -121,7 +121,7 @@
                                         <input type="file" class="input_file" name="mainImg" id="file0">
                                         <label for="file0" class="btn_file">파일찾기</label>
                                         <button type="button" class="btn_add_file" id="btnAddFile">첨부파일 추가</button>
-                                        <p><label for="url0"><input type="text" name="mainImgLinks" id="url0" placeholder="이미지에 대한 링크 URL"></label></p>
+                                        <p><label for="url0"><input type="text" name="mainImgLinks" id="url0" placeholder="이미지에 대한 링크 URL (선택사항)"></label></p>
                                     </div>
                                  }
                             </td>
@@ -228,7 +228,7 @@
                                             {
                                                 <button type="button" class="btnDelete" data-name="engMainIdxs" data-key="@ViewBag.mainImgEngList[i].fileIdx" onclick="deleteFile(this, 'N');">첨부파일 삭제</button>
                                             }
-                                            <p><label for="engurl@(i)"><input type="text" name="mainImgEngLinks" id="engurl@(i)" placeholder="이미지에 대한 링크 URL" value="@ViewBag.imgUrlEngList[i]"></label></p>
+                                            <p><label for="engurl@(i)"><input type="text" name="mainImgEngLinks" id="engurl@(i)" placeholder="이미지에 대한 링크 URL (선택사항)" value="@ViewBag.imgUrlEngList[i]"></label></p>
                                             <input type="hidden" name="engMainIdxs" value="@ViewBag.mainImgEngList[i].fileIdx" />
                                         </div>
                                      }
@@ -240,7 +240,7 @@
                                         <input type="file" class="input_file" name="engMainImg" id="engfile0">
                                         <label for="engfile0" class="btn_file">파일찾기</label>
                                         <button type="button" class="btn_add_file" id="btnAddFile">첨부파일 추가</button>
-                                        <p><label for="engurl0"><input type="text" name="mainImgEngLinks" id="engurl0" placeholder="이미지에 대한 링크 URL"/></label></p>
+                                        <p><label for="engurl0"><input type="text" name="mainImgEngLinks" id="engurl0" placeholder="이미지에 대한 링크 URL (선택사항)"/></label></p>
                                     </div>
                                  }
                             </td>
@@ -429,11 +429,11 @@
 			if($(item).find( "input[type='file']" ).length < 10){
 				cnt++;
 				if($(item).is(".kor")){
-                    var html = '<div><span class="file_src"></span><input type="file" class="input_file" id="file' + cnt + '" name="mainImg" /><label for="file' + cnt + '" class="btn_file">파일찾기</label><button type="button" class="btnDelete" data-key="" onclick="deleteFile(this, \'N\');">첨부파일 삭제</button><p><label for="url' + cnt +'"><input type="text" name="mainImgLinks" id="url'+ cnt +'"placeholder="이미지에 대한 링크 URL"></label></p></div>';
+                    var html = '<div><span class="file_src"></span><input type="file" class="input_file" id="file' + cnt + '" name="mainImg" /><label for="file' + cnt + '" class="btn_file">파일찾기</label><button type="button" class="btnDelete" data-key="" onclick="deleteFile(this, \'N\');">첨부파일 삭제</button><p><label for="url' + cnt + '"><input type="text" name="mainImgLinks" id="url' + cnt +'"placeholder="이미지에 대한 링크 URL (선택사항)"></label></p></div>';
 					console.log("kor", cnt);
 				}
 				if($(item).is(".eng")){
-                    var html = '<div><span class="file_src"></span><input type="file" class="input_file" id="engfile' + cnt + '" name="engMainImg" /><label for="engfile' + cnt + '" class="btn_file">파일찾기</label><button type="button" class="btnDelete" data-key="" onclick="deleteFile(this, \'N\');">첨부파일 삭제</button><p><label for="engurl' + cnt +'"><input type="text" name="mainImgEngLinks" id="url'+ cnt +'"placeholder="이미지에 대한 링크 URL"></label></p></div>';
+                    var html = '<div><span class="file_src"></span><input type="file" class="input_file" id="engfile' + cnt + '" name="engMainImg" /><label for="engfile' + cnt + '" class="btn_file">파일찾기</label><button type="button" class="btnDelete" data-key="" onclick="deleteFile(this, \'N\');">첨부파일 삭제</button><p><label for="engurl' + cnt + '"><input type="text" name="mainImgEngLinks" id="url' + cnt +'"placeholder="이미지에 대한 링크 URL (선택사항)"></label></p></div>';
 					console.log("eng", cnt);
 				}
 				$(item).find(".file_area").append(html);
