@@ -28,11 +28,11 @@
                     <td>@ViewBag.item.regId</td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="title">* 제목</label></th>
+                    <th scope="row"><label for="title">제목 *</label></th>
                     <td><input type="text" name="title" id="title"  class="input_long_type" value="@ViewBag.item.title" /></td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="contents">* 내용</label></th>
+                    <th scope="row"><label for="contents">내용 *</label></th>
                     <td><textarea rows="20" cols="30" id="contents" name="contents">@Html.Raw(@ViewBag.item.contents)</textarea></td>
                 </tr>
                 <tr class="add_file_area">
@@ -66,7 +66,7 @@
                                 <label for="file" class="btn_file">파일찾기</label>
                             </div>
                         }
-
+                        <span class="file_comment">* .pdf, .docx, .hwp 파일만 업로드 가능</span>
                     </td>
                 </tr>
                 <tr>
