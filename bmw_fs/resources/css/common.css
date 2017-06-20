@@ -84,7 +84,8 @@ body, html {
 .reg .cont_bottom .reg_table td.rolling_img:after{content:"사이즈 1400 * 600"; display:inline-block; padding:7px 0 0 5px; }
 .reg .cont_bottom .reg_table td.contents {white-space: pre-line}
 
-.btn_defualt{display:inline-block; width:130px; height:37px; line-height:37px; color:#fff; background-color:#1c69d4; text-align:center;}
+.btn_defualt{display:inline-block; width:130px; height:37px; line-height:37px; color:#fff; background-color:#666; text-align:center;}
+.btn_defualt.btn_reg,.btn_defualt.btn_modify,.btn_defualt.btn_delete{background-color:#1c69d4;color:#fff;} 
 .btn_small{display:inline-block; width:70px; height:37px; line-height:37px; color:#282828; background-color:#bbbbbb; text-align:center;}
 .btn_area{overflow:hidden;}
 .btn_defualt.btn_list{float:left}

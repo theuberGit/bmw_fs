@@ -41,7 +41,7 @@ namespace bmw_fs.Service.impl.legalNotice
             general.idx = masterIdx;
             Mapper.Instance().BeginTransaction();
             generalDao.insertGeneral(general);
-            filesService.fileUpload(multipartFiles, "file", "pdf", 10 * 1024 * 1024, masterIdx, null);
+            filesService.fileUpload(multipartFiles, "file", "pdf|hwp|docx", 10 * 1024 * 1024, masterIdx, null);
             Mapper.Instance().CommitTransaction();
         }
 
@@ -49,10 +49,10 @@ namespace bmw_fs.Service.impl.legalNotice
         {
             Mapper.Instance().BeginTransaction();
             if (general.fileIdxs != null) { // 처음등록시 파일을 올렸던 경우 
-            filesService.deleteFileAndFileUpload(multipartFiles, "file", "pdf", 10 * 1024 * 1024, general.idx, general.fileIdxs);
+            filesService.deleteFileAndFileUpload(multipartFiles, "file", "pdf|hwp|docx", 10 * 1024 * 1024, general.idx, general.fileIdxs);
             }else if (general.fileIdxs == null) // 처음등록시 파일이 없었던 경우 새로 올림
             {
-                filesService.fileUpload(multipartFiles, "file", "pdf", 10 * 1024 * 1024, general.idx, null);
+                filesService.fileUpload(multipartFiles, "file", "pdf|hwp|docx", 10 * 1024 * 1024, general.idx, null);
             }
 
             generalDao.updateGeneral(general);

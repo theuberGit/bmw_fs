@@ -29,11 +29,11 @@
                     <td>@HttpContext.Current.User.Identity.Name</td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="title">* 제목</label></th>
+                    <th scope="row"><label for="title">제목 *</label></th>
                     <td><input type="text" name="title" id="title" class="input_long_type" maxlength="50" value="" /></td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="contents">* 내용</label></th>
+                    <th scope="row"><label for="contents">내용 *</label></th>
                     <td><textarea rows="20" cols="30" id="contents" name="contents"></textarea> </td>
                 </tr>
                 <tr class="add_file_area">
@@ -45,6 +45,7 @@
                             <label for="file0" class="btn_file">파일찾기</label>
                             <button type="button" class="btn_add_file" id="btnAddFile">파일 추가</button>
                         </div>
+                        <span class="file_comment">* .pdf, .docx, .hwp 파일만 업로드 가능</span>
                     </td>
                 </tr>
                 <tr>
