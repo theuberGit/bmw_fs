@@ -166,6 +166,7 @@
         editor_object.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
         if (!$('#contents').required()) return;
         if (!$('input[name=deployYn]').reqRadio()) return;
+        if (!validationFileType('pdf, docx, hwp')) return;
 
         if (!confirm('수정하시겠습니까?')) return;
 

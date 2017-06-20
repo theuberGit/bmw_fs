@@ -154,6 +154,7 @@
                 return;
             }
         }
+        if (!validationFileType('pdf')) return;
         
         if (!confirm('수정하시겠습니까?')) return;
         $('#content form').attr('action', 'modifyProc').submit();

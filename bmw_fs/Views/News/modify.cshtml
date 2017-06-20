@@ -159,6 +159,7 @@ function modifyProc() {
     if ($('.thumb_file_nm').text() === '' && $('input[name=thumbIdxs]').val() !== -1) {// -1 : 새로등록, 0 : 기존파일 삭제
         $('input[name=thumbIdxs]').val(0);
     }
+    if (!validationFileType('jpg, png')) return;
 
     if (!confirm('수정하시겠습니까?')) return;
     $('#content form').attr('action', 'modifyProc').submit();

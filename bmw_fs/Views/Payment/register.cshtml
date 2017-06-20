@@ -293,6 +293,8 @@
         if (!$('#price').required()) return;
         if (!$('input[name=deployYn]').reqRadio()) return;
 
+        if (!validationFileType('jpg, png')) return;
+
         if (!confirm('등록하시겠습니까?')) return;
 
         $('#content form').attr('action', 'registerProc').submit();
