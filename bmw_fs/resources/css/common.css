@@ -24,10 +24,11 @@ body{min-height:100%;}
 :-ms-input-placeholder { color: #c3c3c3;} /* IE 10+ */
 ::-moz-placeholder { color: #c3c3c3;opacity: 1;} /* Firefox 19+ */
 :-moz-placeholder { color: #c3c3c3;opacity: 1;} /* Firefox 4 - 18 */
-
+input[type="text"], input[type="password"],select{border:1px solid #ccc;}
 /* layout */
-
-body, html{height:100%;}
+body, html {
+    height: 100%;
+}
 #wrap{position:relative; height:100%; }
 #header{position:absolute; left:0; top:0; width:100%; min-width:1200px; height:67px; background-color:#8e8e8e; z-index:10}
 #header h1{position:absolute; left:27.5px; top:20px;}
