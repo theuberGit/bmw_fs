@@ -83,7 +83,7 @@
         if (Number('@ViewBag.files.Count') === 0) {
             if (!$('#formFile').required()) return;
         }
-
+        if (!validationFileType($('input[name="formFile"]'), 'pdf')) return;
         if (!confirm('수정하시겠습니까')) return;
 
         $('#content form').attr('action', 'modifyProc').submit();
