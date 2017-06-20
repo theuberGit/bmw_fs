@@ -2,12 +2,14 @@
     ViewBag.Title = "일반공시 수정";
 }
 <style>
-.add_file_area .file_area div { padding-bottom: 20px; }
+.add_file_area .file_area div { padding-bottom: 4px; }
 .reg .cont_bottom .reg_table td.file_area p{float:none; clear:both; padding-top:10px}
 .reg .cont_bottom .reg_table td.file_area p input[type="text"]{width:467px}
 .reg h4{margin-bottom:10px}
 
 .file_area{counter-reset:cnt1; }
+.file_area:after{content:"* .pdf, .docx, .hwp 파일만 업로드 가능";}
+.file_area > div{height: 38px;}
 .file_src.on:after{content:""; color:#666;}
 .reg .cont_bottom .reg_table .event_btn_area input[type="text"]{margin-bottom: 10px; width: 467px;}
 </style>
@@ -66,7 +68,6 @@
                                 <label for="file" class="btn_file">파일찾기</label>
                             </div>
                         }
-                        <div class="file_comment">* .pdf, .docx, .hwp 파일만 업로드 가능</div>
                     </td>
                 </tr>
                 <tr>
