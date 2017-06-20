@@ -102,6 +102,7 @@ body, html {
 .file_area > div > .file_src, .file_area > div > .btn_file, .file_area > div > button {float: left; margin-left: 10px;}
 .file_area > div .file_src {overflow: hidden; display: block; width: 532px; height: 35px; margin-left: 0; padding: 0 6px; line-height: 39px; font-size: 13px; border: 1px solid #c7c7c7; text-overflow: ellipsis; white-space: nowrap; word-wrap: normal;}
 .file_area input[type="file"] {width: 0; height: 0; text-indent: -9999px;}
+.file_area .file_comment {display:inline-block;padding-top:5px;}
 .btn_file {display: block; width: 120px; height: 35px; line-height: 35px; border: 1px solid #c8c8c8; text-align: center; cursor: pointer;}
 .file_area button {display: block; width: 120px; height: 37px; border: 1px solid #c8c8c8}
 .reg .cont_bottom .reg_table td input[type="text"].input_long_type {width: 670px;}
@@ -127,9 +128,9 @@ body, html {
 .country_area span{display:inline-block; width:40px; padding:2px 0; color:#fff; font-size:12px; background-color:#666; text-align:center}
 
 /* list_area */
-.list_area{width:998px; border:1px solid #ccc;margin-top:10px;display:inline-block;}
+.list_area{width:998px; border:1px solid #ccc;margin:10px 0;display:inline-block;padding:10px 0;}
 .list_area {overflow:hidden;}
 .list_area li{float:left; padding:5px 0;}
-.list_area li a{display:block; padding:0 14px; font-size:13px; border-left:1px solid #ccc;}
+.list_area li a{display:block; padding:0 16px; font-size:14px; border-left:1px solid #ccc;}
 .list_area ul li:nth-child(1) a{border-left:0px;}
-.list_area li.on a{font-weight:bold}
+.list_area li.on a{font-weight:bold;color:#1c69d4;}
