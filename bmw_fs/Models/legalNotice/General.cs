@@ -18,7 +18,7 @@ namespace bmw_fs.Models.legalNotice
         public DateTime regDate { get; set; }
         public String uptId { get; set; }
         public DateTime uptDate { get; set; }
-        public int fileCount { get; set; }
+        public int fileIdx { get; set; }
 
         public IList<int> fileIdxs { get; set; }
     }

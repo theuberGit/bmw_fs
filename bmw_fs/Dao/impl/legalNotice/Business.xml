@@ -15,7 +15,7 @@
       <result property="deployYn" column="DEPLOY_YN" />
       <result property="regDate" column="REG_DATE" />
       <result property="regId" column="REG_ID" />
-      <result property="fileCount" column="FILE_COUNT" />
+      <result property="fileIdx" column="FILE_IDX" />
     </resultMap>
 
     <resultMap id="businessMap" class="BusinessClass">
@@ -41,7 +41,7 @@
       ,B.DEPLOY_YN
       ,B.REG_DATE
       ,B.REG_ID
-      ,COUNT(FD.ORIGINAL_FILENAME) AS FILE_COUNT
+      ,MAX(FD.IDX) AS FILE_IDX
       FROM BMW_FS_BUSINESS B
       LEFT JOIN BMW_FS_FILES_DATA FD ON B.IDX = FD.MASTER_IDX
       WHERE 1=1
