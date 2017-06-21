@@ -4,6 +4,7 @@ using bmw_fs.Service.face.common;
 using bmw_fs.Service.face.legalNotice;
 using bmw_fs.Service.impl.common;
 using bmw_fs.Service.impl.legalNotice;
+using Ganss.XSS;
 using Microsoft.Security.Application;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,8 @@ namespace bmw_fs.Controllers.legalNotice
         [ValidateInput(false)]
         public RedirectToRouteResult registerProc(Credit credit)
         {
-            credit.contents = Sanitizer.GetSafeHtmlFragment(credit.contents);
+            var sanitizer = new HtmlSanitizer();
+            credit.contents = sanitizer.Sanitize(credit.contents);
             credit.regId = System.Web.HttpContext.Current.User.Identity.Name;
             creditService.insertCredit(credit);
             return RedirectToAction("list");
@@ -64,7 +66,8 @@ namespace bmw_fs.Controllers.legalNotice
         [ValidateInput(false)]
         public RedirectToRouteResult modifyProc(Credit credit)
         {
-            credit.contents = Sanitizer.GetSafeHtmlFragment(credit.contents);
+            var sanitizer = new HtmlSanitizer();
+            credit.contents = sanitizer.Sanitize(credit.contents);
             credit.uptId = System.Web.HttpContext.Current.User.Identity.Name;
             creditService.updateCredit(credit);
             return RedirectToAction("list");

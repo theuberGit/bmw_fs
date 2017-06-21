@@ -4,6 +4,7 @@ using bmw_fs.Service.face.common;
 using bmw_fs.Service.face.legalNotice;
 using bmw_fs.Service.impl.common;
 using bmw_fs.Service.impl.legalNotice;
+using Ganss.XSS;
 using Microsoft.Security.Application;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,8 @@ namespace bmw_fs.Controllers.legalNotice
         [ValidateInput(false)]
         public RedirectToRouteResult registerProc(Product product)
         {
-            product.contents = Sanitizer.GetSafeHtmlFragment(product.contents);
+            var sanitizer = new HtmlSanitizer();
+            product.contents = sanitizer.Sanitize(product.contents);
             product.regId = System.Web.HttpContext.Current.User.Identity.Name;
             productService.insertProduct(product);
 
@@ -60,7 +62,8 @@ namespace bmw_fs.Controllers.legalNotice
         [ValidateInput(false)]
         public RedirectToRouteResult modifyProc(Product product)
         {
-            product.contents = Sanitizer.GetSafeHtmlFragment(product.contents);
+            var sanitizer = new HtmlSanitizer();
+            product.contents = sanitizer.Sanitize(product.contents);
             product.uptId = System.Web.HttpContext.Current.User.Identity.Name;
             productService.updateProduct(product);
 
