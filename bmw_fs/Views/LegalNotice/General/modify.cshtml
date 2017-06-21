@@ -37,7 +37,7 @@
                     <th scope="row"><label for="contents">내용 *</label></th>
                     <td><textarea rows="20" cols="30" id="contents" name="contents">@Html.Raw(@ViewBag.item.contents)</textarea></td>
                 </tr>
-                <tr class="add_file_area">
+                <tr class="add_img_area">
                     <th>첨부파일</th>
                     <td class="file_area">
                         @if (ViewBag.files.Count != 0)
@@ -47,7 +47,16 @@
                                 <div>
                                     <span class="file_src">@ViewBag.files[i].originalFilename</span>
                                     <input type="file" class="input_file" name="file" id="file">
-                                    <label for="file" class="btn_file">파일찾기</label>
+                                    @if (@ViewBag.files[i].originalFilename != null)
+                                    {
+                                        <label for="file" style="display:none;" class="btn_file btn_file_txt">파일찾기</label>
+                                        <label for="" class="btn_file del_file_txt">삭제</label>
+                                    }
+                                    else
+                                    {
+                                        <label for="file" class="btn_file btn_file_txt">파일찾기</label>
+                                        <label for="" style="display:none;" class="btn_file del_file_txt">삭제</label>
+                                    }
                                     @if (i == 0)
                                     {
                                         <button type="button" class="btn_add_file" id="btnAddFile">+</button>
@@ -66,6 +75,7 @@
                                 <span class="file_src"></span>
                                 <input type="file" class="input_file" name="file" id="file">
                                 <label for="file" class="btn_file">파일찾기</label>
+                                <button type="button" class="btn_add_file" id="btnAddFile">+</button>
                             </div>
                         }
                     </td>
@@ -98,13 +108,13 @@
         $('#inactivity').prop('checked', true);
     }
     (function ($) {
-        var $fileArea = $(".add_file_area").find('.file_area');
+        var $fileArea = $(".add_img_area").find('.file_area');
 
         function deleteFile() {
             $(this).parent("div").remove();
         }
 
-        $(".add_file_area").find(".file_area").on("change", ".input_file", function (e) {
+        $(".add_img_area").find(".file_area").on("change", ".input_file", function (e) {
             var $parent = $(this).closest("div");
             var val = $(this).val();
             var valTit = val.split("\\");
@@ -114,7 +124,7 @@
             };
         });
 
-        $(".add_file_area").each(function (index, item) {
+        $(".add_img_area").each(function (index, item) {
             var cnt = 0;
             $(item).find(".btn_add_file").on("click", function () {
                 if ($(item).find("input[type='file']").length < 10) {
