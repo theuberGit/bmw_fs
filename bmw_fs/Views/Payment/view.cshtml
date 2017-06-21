@@ -60,24 +60,24 @@ table.reg_table tr td span.on, table.reg_table tr td span.on, table.reg_table tr
                     <th scope="row"><label for="item">* 상품 선택</label></th>
                     <td>@ViewBag.item.itemName </td>
                 </tr>*@
-                <tr>
+                <tr class="tr_zh">
                     <td colspan="2" class="td_tit">잔가보장형 할부</td>
                 </tr>
-                <tr>
+                <tr class="tr_zh">
                     <th scope="row"><label for="zanga">잔가</label></th>
                     <td>@ViewBag.item.zhZanga <span>%</span></td>
                 </tr>
-                <tr>
+                <tr class="tr_zh">
                     <th scope="row"><label for="payment1">월 납입금 (선납 10%)</label></th>
-                    <td>@ViewBag.item.zhPay1 원 <span class="zanga result1"></span></td>
+                    <td>@ViewBag.item.zhPay1 원 <span class="zh result1"></span></td>
                 </tr>
-                <tr>
+                <tr class="tr_zh">
                     <th scope="row"><label for="payment2">월 납입금 (선납 20%)</label></th>
-                    <td>@ViewBag.item.zhPay2 원 <span class="zanga result2"></span></td>
+                    <td>@ViewBag.item.zhPay2 원 <span class="zh result2"></span></td>
                 </tr>
-                <tr>
+                <tr class="tr_zh">
                     <th scope="row"><label for="payment3">월 납입금 (선납 30%)</label></th>
-                    <td>@ViewBag.item.zhPay3 원 <span class="zanga result3"></span></td>
+                    <td>@ViewBag.item.zhPay3 원 <span class="zh result3"></span></td>
                 </tr>
                 <tr>
                     <td colspan="2" class="td_tit">잔가보장형 리스</td>
@@ -88,15 +88,15 @@ table.reg_table tr td span.on, table.reg_table tr td span.on, table.reg_table tr
                 </tr>
                 <tr>
                     <th scope="row"><label for="payment1">월 납입금 (선납 10%)</label></th>
-                    <td>@ViewBag.item.zlPay1 원 <span class="zanga result1"></span></td>
+                    <td>@ViewBag.item.zlPay1 원 <span class="zl result1"></span></td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="payment2">월 납입금 (선납 20%)</label></th>
-                    <td>@ViewBag.item.zlPay2 원 <span class="zanga result2"></span></td>
+                    <td>@ViewBag.item.zlPay2 원 <span class="zl result2"></span></td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="payment3">월 납입금 (선납 30%)</label></th>
-                    <td>@ViewBag.item.zlPay3 원 <span class="zanga result3"></span></td>
+                    <td>@ViewBag.item.zlPay3 원 <span class="zl result3"></span></td>
                 </tr>
                 <tr class="tr_g">
                     <td colspan="2" class="td_tit">일반 할부</td>
@@ -134,13 +134,15 @@ table.reg_table tr td span.on, table.reg_table tr td span.on, table.reg_table tr
     // 선납 표시
     if ('@ViewBag.item.series' != 'i') { //i시리즈가 아닐때
         console.log('i시리즈가 아닐때');
-        $('.tr_g').removeClass('off');
-        $('.zanga').addClass('on');
+        $('.tr_zh').removeClass('off');
+        $('.zh').addClass('on');
+        $('.zl').addClass('on');
         $('.general').addClass('on');
     } else { //i시리즈 일때
         console.log('i시리즈 일때');
-        $('.zanga').addClass('on');
-        $('.tr_g').addClass('off');
+        $('.general').addClass('on');
+        $('.zl').addClass('on');
+        $('.tr_zh').addClass('off');
     }
     var num = unComma('@ViewBag.item.price');
     //var num = unComma(price);
