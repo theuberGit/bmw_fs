@@ -20,13 +20,13 @@
 
             <table class="list_table">
                 <colgroup>
-                    <col width="60px" />
-                    <col width="60px" />
-                    <col width="150px" />
-                    <col width="200px" />
-                    <col width="*" />
-                    <col width="100px" />
-                    <col width="30px" />
+                    <col style="width: 60px;" />
+                    <col style="width: 120px;" />
+                    <col style="width: 120px;" />
+                    <col style="width: 200px;" />
+                    <col />
+                    <col style="width: 120px;" />
+                    <col style="width: 60px;" />                    
                 </colgroup>
                 <thead>
                     <tr>
@@ -55,8 +55,8 @@
                                 }
                             </td>
                             <td>@ViewBag.list[i].location</td>
-                            <td class="tit_area"><a href="view?idx=@ViewBag.list[i].idx">@ViewBag.list[i].showroomName</a></td>
-                            <td>@ViewBag.list[i].address</td>
+                            <td ><a href="view?idx=@ViewBag.list[i].idx">@ViewBag.list[i].showroomName</a></td>
+                            <td class="tit_area">@ViewBag.list[i].address</td>
                             @if ("-".Equals(@ViewBag.list[i].tel1))
                             {
                                 <td>-</td>
