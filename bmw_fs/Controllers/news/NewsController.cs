@@ -3,6 +3,7 @@ using bmw_fs.Service.face.common;
 using bmw_fs.Service.face.news;
 using bmw_fs.Service.impl.common;
 using bmw_fs.Service.impl.news;
+using Ganss.XSS;
 using Microsoft.Security.Application;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,8 @@ namespace bmw_fs.Controllers.news
         {
             HttpFileCollectionBase multipartfiles = Request.Files;
             news.regId = System.Web.HttpContext.Current.User.Identity.Name;
+            var sanitizer = new HtmlSanitizer();
+            news.contents = sanitizer.Sanitize(news.contents);
             newsService.insertNews(multipartfiles, news);
             return RedirectToAction("list", (RouteValueDictionary)Session["searchMap"]);
         }
@@ -70,8 +73,9 @@ namespace bmw_fs.Controllers.news
         public RedirectToRouteResult modifyProc(News news)
         {
             HttpFileCollectionBase multipartRequest = Request.Files;
-            news.uptId = System.Web.HttpContext.Current.User.Identity.Name;
-            news.contents = Sanitizer.GetSafeHtmlFragment(news.contents);
+            news.uptId = System.Web.HttpContext.Current.User.Identity.Name;            
+            var sanitizer = new HtmlSanitizer();            
+            news.contents = sanitizer.Sanitize(news.contents);            
             newsService.updateNews(multipartRequest, news);
             return RedirectToAction("list", (RouteValueDictionary)Session["searchMap"]);
         }
