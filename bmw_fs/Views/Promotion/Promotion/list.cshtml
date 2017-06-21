@@ -23,7 +23,7 @@ span.banner_yn{float:right;}
                         if (i == 3)
                         {
                             <li class="rolling_list4">
-                                <a href="view?idx=@ViewBag.list[i].idx">
+                                <a href="view?idx=@ViewBag.list[i].idx&searchOption=@ViewBag.pagination.searchOption">
                                     <span class="img_area"><img src="/Files/imageView?fileIdx=@ViewBag.list[i].fileIdx" alt=""></span>
                                     <span class="tit_area">@Html.Raw(@ViewBag.list[i].title)</span>
                                     <span class="date_area">@ViewBag.list[i].startDate ~ @ViewBag.list[i].endDate
@@ -48,7 +48,7 @@ span.banner_yn{float:right;}
                         else
                         {
                             <li>
-                                <a href="view?idx=@ViewBag.list[i].idx">
+                                <a href="view?idx=@ViewBag.list[i].idx&searchOption=@ViewBag.pagination.searchOption">
                                     <span class="img_area"><img src="/Files/imageView?fileIdx=@ViewBag.list[i].fileIdx" alt=""></span>
                                     <span class="tit_area">@Html.Raw(@ViewBag.list[i].title)</span>
                                     <span class="date_area">@ViewBag.list[i].startDate ~ @ViewBag.list[i].endDate
@@ -73,7 +73,10 @@ span.banner_yn{float:right;}
                     }
                     </ul>
                    @RenderPage("~/Views/Common/Pagination.cshtml")
+                   @if ("now".Equals(ViewBag.pagination.searchOption))
+                   {
                     <a href="register" class="btn_defualt btn_reg">등록</a>
+                   }
                 </div>
                 <input type="hidden" name="searchOption" id="searchOption" value="@ViewBag.pagination.searchOption"/>
             </form>
