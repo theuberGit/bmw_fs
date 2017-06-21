@@ -23,8 +23,8 @@
                     <col style="width: 60px;" />
                     <col  />
                     <col style="width: 80px;" />
-                    <col style="width: 100px;" />
-                    <col style="width: 200px;" />
+                    <col style="width: 120px;" />
+                    <col style="width: 120px;" />
                 </colgroup>
                 <thead>
                     <tr>
@@ -50,7 +50,7 @@
                             <td class="co3"><p>-</p></td>
                         }
                             <td class="co4">@ViewBag.list[i].regId</td>
-                            <td class="co5">@ViewBag.list[i].regDate</td>
+                            <td class="co5">@ViewBag.list[i].regDate.ToString("yyyy-MM-dd")</td>
                         </tr>
                     }
                     @if (ViewBag.list.Count == 0)
