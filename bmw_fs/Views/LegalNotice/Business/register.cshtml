@@ -38,7 +38,7 @@
                     <th scope="row"><label for="contents">내용 *</label></th>
                     <td><textarea rows="20" cols="30" id="contents" name="contents"></textarea> </td>
                 </tr>
-                <tr class="add_file_area">
+                <tr class="add_img_area">
                     <th>첨부파일 </th>
                     <td class="file_area">
                         <div>
@@ -69,13 +69,13 @@
 <script>
     lnbSet(".business_mgmt");
     (function ($) {
-        var $fileArea = $(".add_file_area").find('.file_area');
+        var $fileArea = $(".add_img_area").find('.file_area');
 
         function deleteFile() {
             $(this).parent("div").remove();
         }
 
-        $(".add_file_area").find(".file_area").on("change", ".input_file", function (e) {
+        $(".add_img_area").find(".file_area").on("change", ".input_file", function (e) {
             var $parent = $(this).closest("div");
             var val = $(this).val();
             var valTit = val.split("\\");
@@ -85,7 +85,7 @@
             };
         });
 
-        $(".add_file_area").each(function (index, item) {
+        $(".add_img_area").each(function (index, item) {
             var cnt = 0;
             $(item).find(".btn_add_file").on("click", function () {
                 if ($(item).find("input[type='file']").length < 10) {
