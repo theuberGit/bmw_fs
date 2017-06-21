@@ -3,6 +3,11 @@
 }
 <style>
     .list .search_box select { width: 120px; }
+    .list .cont_bottom .list_table tbody tr td.price { padding-right:10px; text-align: right; }
+    .list .cont_bottom .list_table thead tr th.yellow { background-color: #ffe08c;}
+    .list .cont_bottom .list_table thead tr th.blue {background-color: #b2ccff;}
+    .list .cont_bottom .list_table thead tr th.green {background-color: #5ec75e;}
+
 </style>
 <div id="content" class="list">
     <form method="get">
@@ -36,14 +41,14 @@
                 <colgroup>
                     <col width="50px" />
                     <col width="*" />
-                    <col width="100px" />
+                    <col width="90px" />
                     <col width="50px" />
-                    <col width="100px" />
-                    <col width="50px" />
-                    <col width="100px" />
-                    <col width="50px" />
-                    <col width="100px" />
-                    <col width="50px" />
+                    <col width="80px" />
+                    <col width="80px" />
+                    <col width="80px" />
+                    <col width="80px" />
+                    <col width="80px" />
+                    <col width="80px" />
                     <col width="30px" />
                 </colgroup>
                 <thead>
@@ -52,12 +57,12 @@
                         <th scope="col">상세모델</th>
                         <th scope="col">차량가격</th>
                         <th scope="col">잔가</th>
-                        <th scope="col">선납 10%</th>
-                        <th scope="col">월 납입금</th>
-                        <th scope="col">선납 20%</th>
-                        <th scope="col">월 납입금</th>
-                        <th scope="col">선납 30%</th>
-                        <th scope="col">월 납입금</th>
+                        <th scope="col" class="yellow">선납 10%</th>
+                        <th scope="col" class="yellow">월 납입금</th>
+                        <th scope="col" class="blue">선납 20%</th>
+                        <th scope="col" class="blue">월 납입금</th>
+                        <th scope="col" class="green">선납 30%</th>
+                        <th scope="col" class="green">월 납입금</th>
                         <th scope="col">배포</th>
                     </tr>
                 </thead>
@@ -67,36 +72,36 @@
                         <tr>
                             <td class="co1">@(ViewBag.pagination.totalItemCount - (ViewBag.pagination.currentPage - 1) * ViewBag.pagination.itemPerPage - i)</td>
                             <td class="co2 tit_area"><a href="view?idx=@ViewBag.list[i].idx">@ViewBag.list[i].modelName</a></td>
-                            <td class="co3">@ViewBag.list[i].price</td>
+                            <td class="co3 price">@ViewBag.list[i].price</td>
                             @if("zangaHalbu".Equals(ViewBag.pagination.searchOption))
                             {
                                 <td class="co4">@ViewBag.list[i].zhZanga <span>%</span></td>
-                                <td class="co5">@ViewBag.list[i].zhPay1</td>
-                                <td class="co6">@ViewBag.list[i].zhPay1</td>
-                                <td class="co7">@ViewBag.list[i].zhPay2</td>
-                                <td class="co8">@ViewBag.list[i].zhPay2</td>
-                                <td class="co9">@ViewBag.list[i].zhPay3</td>
-                                <td class="co10">@ViewBag.list[i].zhPay3</td>
+                                <td class="co5 price pay1">@ViewBag.list[i].zhPay1</td>
+                                <td class="co6 price">@ViewBag.list[i].zhPay1</td>
+                                <td class="co7 price pay2">@ViewBag.list[i].zhPay2</td>
+                                <td class="co8 price">@ViewBag.list[i].zhPay2</td>
+                                <td class="co9 price pay3">@ViewBag.list[i].zhPay3</td>
+                                <td class="co10 price">@ViewBag.list[i].zhPay3</td>
                             }
                             else if ("zangaLease".Equals(ViewBag.pagination.searchOption))
                             {
                                 <td class="co4">@ViewBag.list[i].zlZanga <span>%</span></td>
-                                <td class="co5">@ViewBag.list[i].zlPay1</td>
-                                <td class="co6">@ViewBag.list[i].zlPay1</td>
-                                <td class="co7">@ViewBag.list[i].zlPay2</td>
-                                <td class="co8">@ViewBag.list[i].zlPay2</td>
-                                <td class="co9">@ViewBag.list[i].zlPay3</td>
-                                <td class="co10">@ViewBag.list[i].zlPay3</td>
+                                <td class="co5 price pay1">@ViewBag.list[i].zlPay1</td>
+                                <td class="co6 price">@ViewBag.list[i].zlPay1</td>
+                                <td class="co7 price pay2">@ViewBag.list[i].zlPay2</td>
+                                <td class="co8 price">@ViewBag.list[i].zlPay2</td>
+                                <td class="co9 price pay3">@ViewBag.list[i].zlPay3</td>
+                                <td class="co10 price">@ViewBag.list[i].zlPay3</td>
                             }
                             else if ("generalHalbu".Equals(ViewBag.pagination.searchOption))
                             {
                                 <td class="co4"></td>
-                                <td class="co5">@ViewBag.list[i].ghPay1</td>
-                                <td class="co6">@ViewBag.list[i].ghPay1</td>
-                                <td class="co7">@ViewBag.list[i].ghPay2</td>
-                                <td class="co8">@ViewBag.list[i].ghPay2</td>
-                                <td class="co9">@ViewBag.list[i].ghPay3</td>
-                                <td class="co10">@ViewBag.list[i].ghPay3</td>
+                                <td class="co5 price pay1">@ViewBag.list[i].ghPay1</td>
+                                <td class="co6 price">@ViewBag.list[i].ghPay1</td>
+                                <td class="co7 price pay2">@ViewBag.list[i].ghPay2</td>
+                                <td class="co8 price">@ViewBag.list[i].ghPay2</td>
+                                <td class="co9 price pay3">@ViewBag.list[i].ghPay3</td>
+                                <td class="co10 price">@ViewBag.list[i].ghPay3</td>
                             }
                             <td class="co11">@ViewBag.list[i].deployYn</td>
                         </tr>
