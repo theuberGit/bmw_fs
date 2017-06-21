@@ -66,7 +66,7 @@
 						<th>썸네일 이미지</th>
                         @foreach (var file1 in ViewBag.thumbList)
                         {
-                            <td>@file1.originalFilename</td>
+                            <td><a href="/Files/fileDownload?fileIdx=@file1.fileIdx">@file1.originalFilename</a></td>
                         }
 					</tr>
 					<tr>
@@ -76,7 +76,7 @@
                             {
                                 <dl>
                                     <dt>[이미지 <span>@(i+1)</span>]</dt>
-                                    <dd> -  이미지 : <span>@ViewBag.mainImgList[i].originalFilename</span></dd>
+                                    <dd> -  이미지 : <a href="/Files/fileDownload?fileIdx=@ViewBag.mainImgList[i].fileIdx"><span>@ViewBag.mainImgList[i].originalFilename</span></a></dd>
                                     <dd> -  URL : <a href="@ViewBag.imgUrlList[i]">@ViewBag.imgUrlList[i]</a></dd>
                                 </dl>
                             }
@@ -137,7 +137,7 @@
                             <th>썸네일 이미지</th>
                             @foreach (var file1 in ViewBag.thumbEngList)
                             {
-                                <td>@file1.originalFilename</td>
+                                <td><a href="/Files/fileDownload?fileIdx=@file1.fileIdx">@file1.originalFilename</a></td>
                             }
                         </tr>
                         <tr>
@@ -147,7 +147,7 @@
                                 {
                                     <dl>
                                         <dt>[이미지 <span>@(i + 1)</span>]</dt>
-                                        <dd> -  이미지 : <span>@ViewBag.mainImgEngList[i].originalFilename</span></dd>
+                                        <dd> -  이미지 : <a href="/Files/fileDownload?fileIdx=@ViewBag.mainImgEngList[i].fileIdx"><span>@ViewBag.mainImgEngList[i].originalFilename</span></a></dd>
                                         <dd> -  URL : <a href="@ViewBag.imgUrlEngList[i]">@ViewBag.imgUrlEngList[i]</a></dd>
                                     </dl>
                                 }

@@ -41,7 +41,7 @@
                         <tr>
                             <td>@(ViewBag.pagination.totalItemCount - (ViewBag.pagination.currentPage - 1) * ViewBag.pagination.itemPerPage - i)</td>
                             <td class="tit_area"><a href="view?idx=@ViewBag.list[i].idx"> @ViewBag.list[i].title </a></td>
-                            <td><a href="/Files/fileDownloadByMIdx?masterIdx=@ViewBag.list[i].idx">@ViewBag.list[i].fileName</a></td>
+                            <td><a href="/Files/fileDownloadByMIdx?masterIdx=@ViewBag.list[i].idx"><img src="~/resources/images/BMW-save_24.png"></a></td>
                             <td>@ViewBag.list[i].regDate.ToString("yyyy-MM-dd")</td>
                             <td>@ViewBag.list[i].deployYn</td>
                         </tr>

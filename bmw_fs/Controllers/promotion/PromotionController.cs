@@ -66,7 +66,7 @@ namespace bmw_fs.Controllers.promotion
             IList<Files> mainImgEngList = filesService.findAllByMasterIdxAndType(item.idx, "engMainImg");
             ViewBag.mainImgEngList = mainImgEngList;
             ViewBag.imgUrlEngList = webPromotionService.findPromotionImgUrlEng(webPromotion, mainImgEngList);
-
+            ViewBag.state = webPromotion.searchOption;
             return View("~/Views/Promotion/Promotion/view.cshtml");
         }
 
