@@ -43,7 +43,7 @@
                             <td class="co3">@ViewBag.list[i].categoryName</td>
                             <td class="co2 tit_area"><a href="view?idx=@ViewBag.list[i].idx">@ViewBag.list[i].title</a></td>
                             <td class="co3">@ViewBag.list[i].regId</td>
-                            <td class="co4">@ViewBag.list[i].regDate</td>
+                            <td class="co4">@ViewBag.list[i].regDate.ToString("yyyy-MM-dd")</td>
                         </tr>
                     }
                     @if (ViewBag.list.Count == 0)
