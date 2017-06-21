@@ -3,6 +3,7 @@ using bmw_fs.Service.face.common;
 using bmw_fs.Service.face.recruit;
 using bmw_fs.Service.impl.common;
 using bmw_fs.Service.impl.recruit;
+using Ganss.XSS;
 using Microsoft.Security.Application;
 using System;
 using System.Collections.Generic;
@@ -41,8 +42,9 @@ namespace bmw_fs.Controllers.recruit
         public RedirectToRouteResult registerProc(RecruitNotice recruitNotice)
         {
             HttpFileCollectionBase multipartRequest = Request.Files;
-            recruitNotice.regId = System.Web.HttpContext.Current.User.Identity.Name;
-            recruitNotice.contents = Sanitizer.GetSafeHtmlFragment(recruitNotice.contents);
+            recruitNotice.regId = System.Web.HttpContext.Current.User.Identity.Name;            
+            var sanitizer = new HtmlSanitizer();
+            recruitNotice.contents = sanitizer.Sanitize(recruitNotice.contents);
             recruitNoticeService.insertRecruitNotice(multipartRequest, recruitNotice);
 
          
@@ -72,7 +74,8 @@ namespace bmw_fs.Controllers.recruit
         {
             HttpFileCollectionBase multipartRequest = Request.Files;
             recruitNotice.updateId = System.Web.HttpContext.Current.User.Identity.Name;
-            recruitNotice.contents = Sanitizer.GetSafeHtmlFragment(recruitNotice.contents);
+            var sanitizer = new HtmlSanitizer();
+            recruitNotice.contents = sanitizer.Sanitize(recruitNotice.contents);
             recruitNoticeService.updateRecruitNotice(multipartRequest, recruitNotice);
             return RedirectToAction("list");
         }
