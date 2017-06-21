@@ -16,6 +16,7 @@ caption{overflow:hidden; width:0; height:0; font-size:0; line-height:0;}
 button{background:none; cursor:pointer;}
 button::-moz-focus-inner{padding:0; border:0;}
 body{min-height:100%;}
+textarea{font-family:'NotoSans', sans-serif, Helvetica;}
 .screen_out{display: block; overflow: hidden; position:absolute; left:-9999px; width:1px; height:1px; font-size:0; line-height:0; text-indent:-9999px;}
 
 /* common */
@@ -131,9 +132,9 @@ body, html {
 .country_area span{display:inline-block; width:40px; padding:2px 0; color:#fff; font-size:12px; background-color:#666; text-align:center}
 
 /* list_area */
-.list_area{width:998px; border:1px solid #ccc;margin:10px 0;display:inline-block;padding:10px 0;}
+.list_area{width:1048px; border:1px solid #ccc;margin:10px 0;display:inline-block;padding:10px 0;}
 .list_area {overflow:hidden;}
 .list_area li{float:left; padding:5px 0;}
-.list_area li a{display:block; padding:0 16px; font-size:14px; border-left:1px solid #ccc;}
+.list_area li a{display:block; padding:0 18px; font-size:14px; border-left:1px solid #ccc;}
 .list_area ul li:nth-child(1) a{border-left:0px;}
 .list_area li.on a{font-weight:bold;color:#1c69d4;}
