@@ -29,10 +29,17 @@ namespace bmw_fs.Service.impl.recruit
             validation(recruitNotice);
             int masterIdx = sequenceService.getSequenceMasterIdx();
             recruitNotice.idx = masterIdx;
-            Mapper.Instance().BeginTransaction();
-            recruitNoticeDao.insertRecruitNotice(recruitNotice);
-            filesService.fileUpload(multipartFiles, "files", "jpg|png|pdf|docx|hwp", 5 * 1024 * 1024, masterIdx, null);
-            Mapper.Instance().CommitTransaction();
+            try
+            {
+                Mapper.Instance().BeginTransaction();
+                recruitNoticeDao.insertRecruitNotice(recruitNotice);
+                filesService.fileUpload(multipartFiles, "files", "jpg|png|pdf|docx|hwp", 5 * 1024 * 1024, masterIdx, null);
+                Mapper.Instance().CommitTransaction();
+            }catch(Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
+            
         }
 
         public RecruitNotice findRecruitNotice(RecruitNotice recruitNotice)
@@ -48,18 +55,31 @@ namespace bmw_fs.Service.impl.recruit
         public void updateRecruitNotice(HttpFileCollectionBase multipartFiles, RecruitNotice recruitNotice)
         {
             validation(recruitNotice);
-            Mapper.Instance().BeginTransaction();
-            filesService.deleteFileAndFileUpload(multipartFiles, "files", "jpg|png|pdf|docx|hwp", 5 * 1024 * 1024, recruitNotice.idx, recruitNotice.fileIdxs);
-            recruitNoticeDao.updateRecruitNotice(recruitNotice);
-            Mapper.Instance().CommitTransaction();
+            try
+            {
+                Mapper.Instance().BeginTransaction();
+                filesService.deleteFileAndFileUpload(multipartFiles, "files", "jpg|png|pdf|docx|hwp", 5 * 1024 * 1024, recruitNotice.idx, recruitNotice.fileIdxs);
+                recruitNoticeDao.updateRecruitNotice(recruitNotice);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         public void deleteRecruitNotice(RecruitNotice recruitNotice)
         {
-            Mapper.Instance().BeginTransaction();
-            recruitNoticeDao.deleteRecruitNotice(recruitNotice);
-            filesService.deleteRealFilesAndDataByFileMasterIdx(recruitNotice.idx);
-            Mapper.Instance().CommitTransaction();
+            try { 
+                Mapper.Instance().BeginTransaction();
+                recruitNoticeDao.deleteRecruitNotice(recruitNotice);
+                filesService.deleteRealFilesAndDataByFileMasterIdx(recruitNotice.idx);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         private void validation(RecruitNotice recruitNotice)

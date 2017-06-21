@@ -38,34 +38,52 @@ namespace bmw_fs.Service.impl.legalNotice
         {
             int masterIdx = sequenceService.getSequenceMasterIdx();
             business.idx = masterIdx;
-            Mapper.Instance().BeginTransaction();
             validation(business);
-            businessDao.insertBusiness(business);
-            filesService.fileUpload(multipartFiles, "file", "pdf|hwp|docx", 10 * 1024 * 1024, masterIdx, null);
-            Mapper.Instance().CommitTransaction();
+            try {
+                Mapper.Instance().BeginTransaction();
+                businessDao.insertBusiness(business);
+                filesService.fileUpload(multipartFiles, "file", "pdf|hwp|docx", 10 * 1024 * 1024, masterIdx, null);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         public void updateBusiness(HttpFileCollectionBase multipartFiles, Business business)
         {
-            Mapper.Instance().BeginTransaction();
-            if (business.fileIdxs != null)
-            { // 처음등록시 파일을 올렸던 경우 
-                filesService.deleteFileAndFileUpload(multipartFiles, "file", "pdf|hwp|docx", 10 * 1024 * 1024, business.idx, business.fileIdxs);
-            }
-            else if (business.fileIdxs == null) // 처음등록시 파일이 없었던 경우 새로 올림
-            {
-                filesService.fileUpload(multipartFiles, "file", "pdf|hwp|docx", 10 * 1024 * 1024, business.idx, null);
-            }
             validation(business);
-            businessDao.updateBusiness(business);
-            Mapper.Instance().CommitTransaction();
+            try { 
+                Mapper.Instance().BeginTransaction();
+                if (business.fileIdxs != null)
+                { // 처음등록시 파일을 올렸던 경우 
+                    filesService.deleteFileAndFileUpload(multipartFiles, "file", "pdf|hwp|docx", 10 * 1024 * 1024, business.idx, business.fileIdxs);
+                }
+                else if (business.fileIdxs == null) // 처음등록시 파일이 없었던 경우 새로 올림
+                {
+                    filesService.fileUpload(multipartFiles, "file", "pdf|hwp|docx", 10 * 1024 * 1024, business.idx, null);
+                }                
+                businessDao.updateBusiness(business);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         public void deleteBusiness(Business business)
         {
-            Mapper.Instance().BeginTransaction();
-            businessDao.deleteBusiness(business);
-            Mapper.Instance().CommitTransaction();
+            try { 
+                Mapper.Instance().BeginTransaction();
+                businessDao.deleteBusiness(business);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         private void validation(Business business)

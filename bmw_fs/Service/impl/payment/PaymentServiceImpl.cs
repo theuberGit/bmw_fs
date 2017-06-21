@@ -21,10 +21,16 @@ namespace bmw_fs.Service.impl.payment
 
         public void deletePayment(Payment payment)
         {
-            Mapper.Instance().BeginTransaction();
-            this.paymentDao.deletePayment(payment);
-            filesService.deleteRealFilesAndDataByFileMasterIdx(payment.idx);
-            Mapper.Instance().CommitTransaction();
+            try {
+                Mapper.Instance().BeginTransaction();
+                this.paymentDao.deletePayment(payment);
+                filesService.deleteRealFilesAndDataByFileMasterIdx(payment.idx);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         public IList<Payment> findAll(Payment payment)
@@ -46,20 +52,32 @@ namespace bmw_fs.Service.impl.payment
         {
             int masterIdx = sequenceService.getSequenceMasterIdx();
             payment.idx = masterIdx;
-            Mapper.Instance().BeginTransaction();
             validation(payment);
-            paymentDao.insertPayment(payment);
-            filesService.fileUpload(multipartFiles, "carImg", "jpg|png|gif", 10 * 1024 * 1024, masterIdx, null);
-            Mapper.Instance().CommitTransaction();
+            try {                 
+                Mapper.Instance().BeginTransaction();                
+                paymentDao.insertPayment(payment);
+                filesService.fileUpload(multipartFiles, "carImg", "jpg|png|gif", 10 * 1024 * 1024, masterIdx, null);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         public void updatePayment(HttpFileCollectionBase multipartFiles, Payment payment)
         {
-            Mapper.Instance().BeginTransaction();
-            filesService.deleteFileAndFileUpload(multipartFiles, "carImg", "jpg|png|gif", 10 * 1024 * 1024, payment.idx, payment.carIdxs);
             validation(payment);
-            this.paymentDao.updatePayment(payment);
-            Mapper.Instance().CommitTransaction();
+            try {
+                Mapper.Instance().BeginTransaction();
+                filesService.deleteFileAndFileUpload(multipartFiles, "carImg", "jpg|png|gif", 10 * 1024 * 1024, payment.idx, payment.carIdxs);                
+                this.paymentDao.updatePayment(payment);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
             private void validation(Payment payment)
         {

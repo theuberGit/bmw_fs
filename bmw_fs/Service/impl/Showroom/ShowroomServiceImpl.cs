@@ -32,10 +32,16 @@ namespace bmw_fs.Service.impl.Showroom
         {
             int masterIdx = this.sequenceService.getSequenceMasterIdx();
             showroom.idx = masterIdx;
-            Mapper.Instance().BeginTransaction();
             validation(showroom);
-            this.showroomDao.insertShowroom(showroom);
-            Mapper.Instance().CommitTransaction();
+            try { 
+                Mapper.Instance().BeginTransaction();                
+                this.showroomDao.insertShowroom(showroom);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         public ShowRoom findShowRoom(ShowRoom showroom)
@@ -50,20 +56,30 @@ namespace bmw_fs.Service.impl.Showroom
         public void updateShowRoom(ShowRoom showroom)
         {
             findShowRoom(showroom);
-
-            Mapper.Instance().BeginTransaction();
             validation(showroom);
-            this.showroomDao.updateShowroom(showroom);
-            Mapper.Instance().CommitTransaction();
+            try { 
+                Mapper.Instance().BeginTransaction();                
+                this.showroomDao.updateShowroom(showroom);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         public void deleteShowRoom(ShowRoom showroom)
         {
             findShowRoom(showroom);
-
-            Mapper.Instance().BeginTransaction();
-            this.showroomDao.deleteShowroom(showroom);
-            Mapper.Instance().CommitTransaction();
+            try {
+                Mapper.Instance().BeginTransaction();
+                this.showroomDao.deleteShowroom(showroom);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
 

@@ -39,11 +39,17 @@ namespace bmw_fs.Service.impl.CustomerService
         public void updateInquirySendMail(Inquiry inquiry)
         {
             validation(inquiry);
-            Mapper.Instance().BeginTransaction();
-            inquiry.status = "F";
-            inquiryDao.updateInquiry(inquiry);
-            inquiryDao.updateInquirySendMail(inquiry);
-            Mapper.Instance().CommitTransaction();
+            try { 
+                Mapper.Instance().BeginTransaction();
+                inquiry.status = "F";
+                inquiryDao.updateInquiry(inquiry);
+                inquiryDao.updateInquirySendMail(inquiry);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         public void deleteInquiry(Inquiry inquiry)

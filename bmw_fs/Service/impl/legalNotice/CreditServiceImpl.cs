@@ -37,24 +37,43 @@ namespace bmw_fs.Service.impl.legalNotice
         {
             int masterIdx = sequenceService.getSequenceMasterIdx();
             credit.idx = masterIdx;
-            Mapper.Instance().BeginTransaction();
             validation(credit);
-            creditDao.insertCredit(credit);
-            Mapper.Instance().CommitTransaction();
+            try { 
+                Mapper.Instance().BeginTransaction();                
+                creditDao.insertCredit(credit);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         public void updateCredit(Credit credit)
         {
-            Mapper.Instance().BeginTransaction();
-            creditDao.updateCredit(credit);
-            Mapper.Instance().CommitTransaction();
+            try { 
+                Mapper.Instance().BeginTransaction();
+                creditDao.updateCredit(credit);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
+
         }
         
         public void deleteCredit(Credit credit)
         {
-            Mapper.Instance().BeginTransaction();
-            creditDao.deleteCredit(credit);
-            Mapper.Instance().CommitTransaction();
+            try {
+                Mapper.Instance().BeginTransaction();
+                creditDao.deleteCredit(credit);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         private void validation(Credit credit)

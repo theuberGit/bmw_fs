@@ -27,9 +27,15 @@ namespace bmw_fs.Service.impl.recruit
             validation(recruitFaq);
             int masterIdx = sequenceService.getSequenceMasterIdx();
             recruitFaq.idx = masterIdx;
-            Mapper.Instance().BeginTransaction();
-            recruitFaqDao.insertRecruitFaq(recruitFaq);
-            Mapper.Instance().CommitTransaction();
+            try { 
+                Mapper.Instance().BeginTransaction();
+                recruitFaqDao.insertRecruitFaq(recruitFaq);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         public RecruitFaq findRecruitFaq(RecruitFaq recruitFaq)
@@ -45,16 +51,28 @@ namespace bmw_fs.Service.impl.recruit
         public void updateRecruitFaq(RecruitFaq recruitFaq)
         {
             validation(recruitFaq);
-            Mapper.Instance().BeginTransaction();
-            recruitFaqDao.updateRecruitFaq(recruitFaq);
-            Mapper.Instance().CommitTransaction();
+            try { 
+                Mapper.Instance().BeginTransaction();
+                recruitFaqDao.updateRecruitFaq(recruitFaq);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         public void deleteRecruitFaq(RecruitFaq recruitFaq)
         {
-            Mapper.Instance().BeginTransaction();
-            recruitFaqDao.deleteRecruitFaq(recruitFaq);
-            Mapper.Instance().CommitTransaction();
+            try { 
+                Mapper.Instance().BeginTransaction();
+                recruitFaqDao.deleteRecruitFaq(recruitFaq);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
 

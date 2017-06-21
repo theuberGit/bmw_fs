@@ -30,12 +30,18 @@ namespace bmw_fs.Service.impl.privacy
 
         public void insertPrivacy(Privacy privacy)
         {
-            int masterIdx = sequenceService.getSequenceMasterIdx();
-            privacy.idx = masterIdx;
-            Mapper.Instance().BeginTransaction();
             validation(privacy);
-            privacyDao.insertPrivacy(privacy);
-            Mapper.Instance().CommitTransaction();
+            try { 
+                int masterIdx = sequenceService.getSequenceMasterIdx();
+                privacy.idx = masterIdx;
+                Mapper.Instance().BeginTransaction();                
+                privacyDao.insertPrivacy(privacy);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         public Privacy findPrivacy(Privacy privacy)
@@ -45,17 +51,29 @@ namespace bmw_fs.Service.impl.privacy
 
         public void updatePrivacy(Privacy privacy)
         {
-            Mapper.Instance().BeginTransaction();
             validation(privacy);
-            privacyDao.updatePrivacy(privacy);
-            Mapper.Instance().CommitTransaction();
+            try { 
+                Mapper.Instance().BeginTransaction();                
+                privacyDao.updatePrivacy(privacy);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         public void deletePrivacy(Privacy privacy)
         {
-            Mapper.Instance().BeginTransaction();
-            privacyDao.deletePrivacy(privacy);
-            Mapper.Instance().CommitTransaction();
+            try { 
+                Mapper.Instance().BeginTransaction();
+                privacyDao.deletePrivacy(privacy);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         private void validation(Privacy privacy)

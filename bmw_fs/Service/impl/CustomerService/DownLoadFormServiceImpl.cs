@@ -42,32 +42,48 @@ namespace bmw_fs.Service.impl.CustomerService
         {
             int masterIdx = this.sequenceService.getSequenceMasterIdx();
             downloadForm.idx = masterIdx;
-            Mapper.Instance().BeginTransaction();
             validation(multipartFiles, downloadForm);
-            this.downloadFormDao.insertDownloadForm(downloadForm);
-            this.filesService.fileUpload(multipartFiles, "formFile", "pdf", 10 * 1024 * 1024, masterIdx, null);
-            Mapper.Instance().CommitTransaction();
+            try { 
+                Mapper.Instance().BeginTransaction();                
+                this.downloadFormDao.insertDownloadForm(downloadForm);
+                this.filesService.fileUpload(multipartFiles, "formFile", "pdf", 10 * 1024 * 1024, masterIdx, null);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         public void updateDownLoadForm(HttpFileCollectionBase multipartFiles, DownLoadForm downloadForm)
         {
             findDownLoadForm(downloadForm);
-
-            Mapper.Instance().BeginTransaction();
-            this.filesService.deleteFileAndFileUpload(multipartFiles, "formFile", "pdf", 10 * 1024 * 1024, downloadForm.idx, downloadForm.fileIdxs);
-            validation(multipartFiles,downloadForm);
-            this.downloadFormDao.updateDownloadForm(downloadForm);
-            Mapper.Instance().CommitTransaction();
+            validation(multipartFiles, downloadForm);
+            try { 
+                Mapper.Instance().BeginTransaction();
+                this.filesService.deleteFileAndFileUpload(multipartFiles, "formFile", "pdf", 10 * 1024 * 1024, downloadForm.idx, downloadForm.fileIdxs);                
+                this.downloadFormDao.updateDownloadForm(downloadForm);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         public void deleteDownLoadForm(DownLoadForm downloadForm)
         {
             findDownLoadForm(downloadForm);
-
-            Mapper.Instance().BeginTransaction();
-            this.downloadFormDao.deleteDownloadForm(downloadForm);
-            this.filesService.deleteRealFilesAndDataByFileMasterIdx(downloadForm.idx);
-            Mapper.Instance().CommitTransaction();
+            try { 
+                Mapper.Instance().BeginTransaction();
+                this.downloadFormDao.deleteDownloadForm(downloadForm);
+                this.filesService.deleteRealFilesAndDataByFileMasterIdx(downloadForm.idx);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         private void validation(HttpFileCollectionBase multipartFiles, DownLoadForm downloadForm)

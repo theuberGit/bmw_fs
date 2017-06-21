@@ -22,14 +22,21 @@ namespace bmw_fs.Service.impl.news
 
         public void insertNews(HttpFileCollectionBase multipartFiles, News news)
         {
+            validation(news);
             int masterIdx = sequenceService.getSequenceMasterIdx();
             news.idx = masterIdx;
-            Mapper.Instance().BeginTransaction();
-            validation(news);
-            newsDao.insertNews(news);
-            filesService.fileUpload(multipartFiles, "thumbImg", "jpg|png", 5 * 1024 * 1024, masterIdx, null);
-            filesService.fileUpload(multipartFiles, "mainImg", "jpg|png", 5 * 1024 * 1024, masterIdx, null);
-            Mapper.Instance().CommitTransaction();
+            try {                 
+                Mapper.Instance().BeginTransaction();                
+                newsDao.insertNews(news);
+                filesService.fileUpload(multipartFiles, "thumbImg", "jpg|png", 5 * 1024 * 1024, masterIdx, null);
+                filesService.fileUpload(multipartFiles, "mainImg", "jpg|png", 5 * 1024 * 1024, masterIdx, null);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
+
         }
 
         public IList<News> findAll(News news)
@@ -54,30 +61,42 @@ namespace bmw_fs.Service.impl.news
 
         public void updateNews(HttpFileCollectionBase multipartFiles, News news)
         {
-            Mapper.Instance().BeginTransaction();
-            if(("G".Equals(news.type) && news.thumbIdxs[0] != -1) || ("N".Equals(news.type) && news.thumbIdxs[0] != 0 && news.thumbIdxs[0] != -1))
-            {
-                filesService.deleteFileAndFileUpload(multipartFiles, "thumbImg", "jpg|png", 5 * 1024 * 1024, news.idx, news.thumbIdxs);  
-            }else if("N".Equals(news.type) && news.thumbIdxs[0] == 0)//기존에 등록되어있던 경우
-            {
-                filesService.deleteRealFilesAndDataByFileMasterIdxAndTp(news.idx, "thumbImg");
-            }else if(("N".Equals(news.type) && news.thumbIdxs[0] == -1) || ("G".Equals(news.type) && news.thumbIdxs[0] == -1))//새로 등록하는 경우
-            {
-                filesService.fileUpload(multipartFiles, "thumbImg", "jpg|png", 5 * 1024 * 1024, news.idx, null);
-            }
-
-            filesService.deleteFileAndFileUpload(multipartFiles, "mainImg", "jpg|png", 5 * 1024 * 1024, news.idx, news.fileIdxs);
             validation(news);
-            this.newsDao.updateNews(news);
-            Mapper.Instance().CommitTransaction();
+            try { 
+                Mapper.Instance().BeginTransaction();
+                if(("G".Equals(news.type) && news.thumbIdxs[0] != -1) || ("N".Equals(news.type) && news.thumbIdxs[0] != 0 && news.thumbIdxs[0] != -1))
+                {
+                    filesService.deleteFileAndFileUpload(multipartFiles, "thumbImg", "jpg|png", 5 * 1024 * 1024, news.idx, news.thumbIdxs);  
+                }else if("N".Equals(news.type) && news.thumbIdxs[0] == 0)//기존에 등록되어있던 경우
+                {
+                    filesService.deleteRealFilesAndDataByFileMasterIdxAndTp(news.idx, "thumbImg");
+                }else if(("N".Equals(news.type) && news.thumbIdxs[0] == -1) || ("G".Equals(news.type) && news.thumbIdxs[0] == -1))//새로 등록하는 경우
+                {
+                    filesService.fileUpload(multipartFiles, "thumbImg", "jpg|png", 5 * 1024 * 1024, news.idx, null);
+                }
+
+                filesService.deleteFileAndFileUpload(multipartFiles, "mainImg", "jpg|png", 5 * 1024 * 1024, news.idx, news.fileIdxs);                
+                this.newsDao.updateNews(news);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         public void deleteNews(News news)
         {
-            Mapper.Instance().BeginTransaction();
-            this.newsDao.deleteNews(news);
-            filesService.deleteRealFilesAndDataByFileMasterIdx(news.idx);
-            Mapper.Instance().CommitTransaction();
+            try { 
+                Mapper.Instance().BeginTransaction();
+                this.newsDao.deleteNews(news);
+                filesService.deleteRealFilesAndDataByFileMasterIdx(news.idx);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         private void validation(News news)

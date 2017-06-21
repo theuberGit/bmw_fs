@@ -25,37 +25,43 @@ namespace bmw_fs.Service.impl.promotion
         {
             int masterIdx = sequenceService.getSequenceMasterIdx();
             promotion.idx = masterIdx;
-            Mapper.Instance().BeginTransaction();
             validation(promotion);
-            promotionDao.insertPromotion(promotion);
+            try { 
+                Mapper.Instance().BeginTransaction();                
+                promotionDao.insertPromotion(promotion);
 
-            filesService.fileUpload(multipartFiles, "thumbNail", "jpg|png", 5 * 1024 * 1024, masterIdx, null);//섬네일 (국문)
-            Files files =  filesService.fileUpload(multipartFiles, "mainImg", "jpg|png", 5 * 1024 * 1024, masterIdx, null);//본문 (국문)
+                filesService.fileUpload(multipartFiles, "thumbNail", "jpg|png", 5 * 1024 * 1024, masterIdx, null);//섬네일 (국문)
+                Files files =  filesService.fileUpload(multipartFiles, "mainImg", "jpg|png", 5 * 1024 * 1024, masterIdx, null);//본문 (국문)
 
-            PromotionUrl promotionUrl = new PromotionUrl();
-            for (int i = 0; i < files.fileIdxs.Count; i++)
-            {
-                promotionUrl.pIdx = masterIdx;
-                promotionUrl.fileIdx = files.fileIdxs[i];
-                promotionUrl.url = promotion.mainImgLinks[i];
-                promotionDao.insertPromotionUrl(promotionUrl);//국문 본문 이미지 링크 INSERT
-            }
-
-            if ("Y".Equals(promotion.engYn))
-            {
-                PromotionUrl promotionUrlEng = new PromotionUrl();
-                filesService.fileUpload(multipartFiles, "engThumbNail", "jpg|png", 5 * 1024 * 1024, masterIdx, null);//섬네일 (영문)
-                Files filesEng = filesService.fileUpload(multipartFiles, "engMainImg", "jpg|png", 5 * 1024 * 1024, masterIdx, null);//본문 (영문)
-                for (int j = 0; j < filesEng.fileIdxs.Count; j++)
+                PromotionUrl promotionUrl = new PromotionUrl();
+                for (int i = 0; i < files.fileIdxs.Count; i++)
                 {
-                    promotionUrlEng.pIdx = masterIdx;
-                    promotionUrlEng.fileIdx = filesEng.fileIdxs[j];
-                    promotionUrlEng.url = promotion.mainImgEngLinks[j];
-                    promotionDao.insertPromotionUrl(promotionUrlEng);//영문 본문 이미지 링크 INSERT
+                    promotionUrl.pIdx = masterIdx;
+                    promotionUrl.fileIdx = files.fileIdxs[i];
+                    promotionUrl.url = promotion.mainImgLinks[i];
+                    promotionDao.insertPromotionUrl(promotionUrl);//국문 본문 이미지 링크 INSERT
                 }
-            }
+
+                if ("Y".Equals(promotion.engYn))
+                {
+                    PromotionUrl promotionUrlEng = new PromotionUrl();
+                    filesService.fileUpload(multipartFiles, "engThumbNail", "jpg|png", 5 * 1024 * 1024, masterIdx, null);//섬네일 (영문)
+                    Files filesEng = filesService.fileUpload(multipartFiles, "engMainImg", "jpg|png", 5 * 1024 * 1024, masterIdx, null);//본문 (영문)
+                    for (int j = 0; j < filesEng.fileIdxs.Count; j++)
+                    {
+                        promotionUrlEng.pIdx = masterIdx;
+                        promotionUrlEng.fileIdx = filesEng.fileIdxs[j];
+                        promotionUrlEng.url = promotion.mainImgEngLinks[j];
+                        promotionDao.insertPromotionUrl(promotionUrlEng);//영문 본문 이미지 링크 INSERT
+                    }
+                }
             
-            Mapper.Instance().CommitTransaction();
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
 
         }
 
@@ -76,59 +82,71 @@ namespace bmw_fs.Service.impl.promotion
 
         public void updatePromotion(HttpFileCollectionBase multipartFiles, Promotion promotion)
         {
-            Mapper.Instance().BeginTransaction();
-            filesService.deleteFileAndFileUpload(multipartFiles, "thumbNail", "jpg|png", 5 * 1024 * 1024, promotion.idx, promotion.thumbIdxs);//섬네일 (국문)
-            Files files = filesService.deleteFileAndFileUpload(multipartFiles, "mainImg", "jpg|png", 5 * 1024 * 1024, promotion.idx, promotion.mainIdxs);//본문 (국문)
+            validation(promotion);
+            try { 
+                Mapper.Instance().BeginTransaction();            
+                filesService.deleteFileAndFileUpload(multipartFiles, "thumbNail", "jpg|png", 5 * 1024 * 1024, promotion.idx, promotion.thumbIdxs);//섬네일 (국문)
+                Files files = filesService.deleteFileAndFileUpload(multipartFiles, "mainImg", "jpg|png", 5 * 1024 * 1024, promotion.idx, promotion.mainIdxs);//본문 (국문)
 
-            PromotionUrl promotionUrl = new PromotionUrl();
-            promotionUrl.pIdx = promotion.idx;
-            promotionDao.deletePromotionUrl(promotionUrl);//기존 이미지url 삭제(국/영문)
-            for (int i = 0; i < files.fileIdxs.Count; i++)
-            {
-                if(files.fileIdxs[i] > -1)
+                PromotionUrl promotionUrl = new PromotionUrl();
+                promotionUrl.pIdx = promotion.idx;
+                promotionDao.deletePromotionUrl(promotionUrl);//기존 이미지url 삭제(국/영문)
+                for (int i = 0; i < files.fileIdxs.Count; i++)
                 {
-                    promotionUrl.fileIdx = files.fileIdxs[i];
-                    promotionUrl.url = promotion.mainImgLinks[i];
-                    promotionDao.insertPromotionUrl(promotionUrl);//국문 본문 이미지 링크 INSERT
-                }
-            }
-            if ("Y".Equals(promotion.engYn))
-            {
-                filesService.deleteFileAndFileUpload(multipartFiles, "engThumbNail", "jpg|png", 5 * 1024 * 1024, promotion.idx, promotion.engThumbIdxs);//섬네일 (영문)
-                Files filesEng = filesService.deleteFileAndFileUpload(multipartFiles, "engMainImg", "jpg|png", 5 * 1024 * 1024, promotion.idx, promotion.engMainIdxs);//본문 (영문)
-
-                PromotionUrl promotionUrlEng = new PromotionUrl();
-                promotionUrlEng.pIdx = promotion.idx;
-                for (int i = 0; i < filesEng.fileIdxs.Count; i++)
-                {
-                    if (filesEng.fileIdxs[i] > -1)
+                    if(files.fileIdxs[i] > -1)
                     {
-                        promotionUrlEng.fileIdx = filesEng.fileIdxs[i];
-                        promotionUrlEng.url = promotion.mainImgEngLinks[i];
-                        promotionDao.insertPromotionUrl(promotionUrlEng);//영문 본문 이미지 링크 INSERT
+                        promotionUrl.fileIdx = files.fileIdxs[i];
+                        promotionUrl.url = promotion.mainImgLinks[i];
+                        promotionDao.insertPromotionUrl(promotionUrl);//국문 본문 이미지 링크 INSERT
                     }
                 }
+                if ("Y".Equals(promotion.engYn))
+                {
+                    filesService.deleteFileAndFileUpload(multipartFiles, "engThumbNail", "jpg|png", 5 * 1024 * 1024, promotion.idx, promotion.engThumbIdxs);//섬네일 (영문)
+                    Files filesEng = filesService.deleteFileAndFileUpload(multipartFiles, "engMainImg", "jpg|png", 5 * 1024 * 1024, promotion.idx, promotion.engMainIdxs);//본문 (영문)
+
+                    PromotionUrl promotionUrlEng = new PromotionUrl();
+                    promotionUrlEng.pIdx = promotion.idx;
+                    for (int i = 0; i < filesEng.fileIdxs.Count; i++)
+                    {
+                        if (filesEng.fileIdxs[i] > -1)
+                        {
+                            promotionUrlEng.fileIdx = filesEng.fileIdxs[i];
+                            promotionUrlEng.url = promotion.mainImgEngLinks[i];
+                            promotionDao.insertPromotionUrl(promotionUrlEng);//영문 본문 이미지 링크 INSERT
+                        }
+                    }
+                }
+                else
+                {
+                    //영문사이트 파일 삭제
+                    filesService.deleteRealFilesAndDataByFileMasterIdxAndTp(promotion.idx, "engThumbNail");
+                    filesService.deleteRealFilesAndDataByFileMasterIdxAndTp(promotion.idx, "engMainImg");
+                }                
+                this.promotionDao.updatePromotion(promotion);
+                Mapper.Instance().CommitTransaction();
             }
-            else
+            catch (Exception e)
             {
-                //영문사이트 파일 삭제
-                filesService.deleteRealFilesAndDataByFileMasterIdxAndTp(promotion.idx, "engThumbNail");
-                filesService.deleteRealFilesAndDataByFileMasterIdxAndTp(promotion.idx, "engMainImg");
+                Mapper.Instance().RollBackTransaction();
             }
-            validation(promotion);
-            this.promotionDao.updatePromotion(promotion);
-            Mapper.Instance().CommitTransaction();
         }
 
         public void deletePromotion(Promotion promotion)
         {
-            Mapper.Instance().BeginTransaction();
-            PromotionUrl promotionUrl = new PromotionUrl();
-            promotionUrl.pIdx = promotion.idx;
-            this.promotionDao.deletePromotion(promotion);
-            filesService.deleteRealFilesAndDataByFileMasterIdx(promotion.idx);//파일 삭제
-            promotionDao.deletePromotionUrl(promotionUrl);//관련 url 삭제
-            Mapper.Instance().CommitTransaction();
+            try { 
+                Mapper.Instance().BeginTransaction();
+                PromotionUrl promotionUrl = new PromotionUrl();
+                promotionUrl.pIdx = promotion.idx;
+                this.promotionDao.deletePromotion(promotion);
+                filesService.deleteRealFilesAndDataByFileMasterIdx(promotion.idx);//파일 삭제
+                promotionDao.deletePromotionUrl(promotionUrl);//관련 url 삭제
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         private void validation(Promotion promotion)

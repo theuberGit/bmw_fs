@@ -39,31 +39,51 @@ namespace bmw_fs.Service.impl.legalNotice
         {
             int masterIdx = sequenceService.getSequenceMasterIdx();
             general.idx = masterIdx;
-            Mapper.Instance().BeginTransaction();
-            generalDao.insertGeneral(general);
-            filesService.fileUpload(multipartFiles, "file", "pdf|hwp|docx", 10 * 1024 * 1024, masterIdx, null);
-            Mapper.Instance().CommitTransaction();
+            validation(general);
+            try { 
+                Mapper.Instance().BeginTransaction();
+                generalDao.insertGeneral(general);
+                filesService.fileUpload(multipartFiles, "file", "pdf|hwp|docx", 10 * 1024 * 1024, masterIdx, null);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         public void updateGeneral(HttpFileCollectionBase multipartFiles, General general)
         {
-            Mapper.Instance().BeginTransaction();
-            if (general.fileIdxs != null) { // 처음등록시 파일을 올렸던 경우 
-            filesService.deleteFileAndFileUpload(multipartFiles, "file", "pdf|hwp|docx", 10 * 1024 * 1024, general.idx, general.fileIdxs);
-            }else if (general.fileIdxs == null) // 처음등록시 파일이 없었던 경우 새로 올림
-            {
-                filesService.fileUpload(multipartFiles, "file", "pdf|hwp|docx", 10 * 1024 * 1024, general.idx, null);
-            }
+            validation(general);
+            try {
+                Mapper.Instance().BeginTransaction();
+                if (general.fileIdxs != null) { // 처음등록시 파일을 올렸던 경우 
+                filesService.deleteFileAndFileUpload(multipartFiles, "file", "pdf|hwp|docx", 10 * 1024 * 1024, general.idx, general.fileIdxs);
+                }else if (general.fileIdxs == null) // 처음등록시 파일이 없었던 경우 새로 올림
+                {
+                    filesService.fileUpload(multipartFiles, "file", "pdf|hwp|docx", 10 * 1024 * 1024, general.idx, null);
+                }
 
-            generalDao.updateGeneral(general);
-            Mapper.Instance().CommitTransaction();
+                generalDao.updateGeneral(general);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         public void deleteGeneral(General general)
         {
-            Mapper.Instance().BeginTransaction();
-            generalDao.deleteGeneral(general);
-            Mapper.Instance().CommitTransaction();
+            try { 
+                Mapper.Instance().BeginTransaction();
+                generalDao.deleteGeneral(general);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         private void validation(General general)
