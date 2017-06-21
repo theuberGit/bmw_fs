@@ -20,9 +20,16 @@ namespace bmw_fs.Service.impl.legalNotice
 
         public void deleteProduct(Product product)
         {
-            Mapper.Instance().BeginTransaction();
-            productDao.deleteProduct(product);
-            Mapper.Instance().CommitTransaction();
+            try {
+                Mapper.Instance().BeginTransaction();
+                productDao.deleteProduct(product);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
+
         }
 
         public IList<Product> findAll(Product product)
@@ -42,21 +49,33 @@ namespace bmw_fs.Service.impl.legalNotice
 
         public void insertProduct(Product product)
         {
-            int masterIdx = sequenceService.getSequenceMasterIdx();
-            product.idx = masterIdx;
-            Mapper.Instance().BeginTransaction();
             validation(product);
-            productDao.insertProduct(product);
-            Mapper.Instance().CommitTransaction();
+            try {
+                int masterIdx = sequenceService.getSequenceMasterIdx();
+                product.idx = masterIdx;
+                Mapper.Instance().BeginTransaction();                
+                productDao.insertProduct(product);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
 
         }
 
         public void updateProduct(Product product)
         {
-            Mapper.Instance().BeginTransaction();
             validation(product);
-            productDao.updateProduct(product);
-            Mapper.Instance().CommitTransaction();
+            try {
+                Mapper.Instance().BeginTransaction();                
+                productDao.updateProduct(product);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         private void validation(Product product)

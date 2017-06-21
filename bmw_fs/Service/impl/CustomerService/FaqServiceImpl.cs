@@ -20,9 +20,15 @@ namespace bmw_fs.Service.impl.CustomerService
 
         public void deleteFaq(Faq faq)
         {
-            Mapper.Instance().BeginTransaction();
-            faqDao.deleteFaq(faq);
-            Mapper.Instance().CommitTransaction();
+            try { 
+                Mapper.Instance().BeginTransaction();
+                faqDao.deleteFaq(faq);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         public IList<Faq> findAll(Faq faq)
@@ -44,18 +50,31 @@ namespace bmw_fs.Service.impl.CustomerService
         {
             int masterIdx = sequenceService.getSequenceMasterIdx();
             faq.idx = masterIdx;
-            Mapper.Instance().BeginTransaction();
             validation(faq);
-            faqDao.insertFaq(faq);
-            Mapper.Instance().CommitTransaction();
+            try { 
+                Mapper.Instance().BeginTransaction();            
+                faqDao.insertFaq(faq);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         public void updateFaq(Faq faq)
         {
-            Mapper.Instance().BeginTransaction();
             validation(faq);
-            faqDao.updateFaq(faq);
-            Mapper.Instance().CommitTransaction();
+            try { 
+                Mapper.Instance().BeginTransaction();
+                faqDao.updateFaq(faq);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
+
         }
         
         private void validation(Faq faq)

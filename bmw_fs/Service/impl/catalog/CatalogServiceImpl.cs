@@ -22,11 +22,17 @@ namespace bmw_fs.Service.impl.catalog
         {
             int masterIdx = sequenceService.getSequenceMasterIdx();
             catalog.idx = masterIdx;
-            Mapper.Instance().BeginTransaction();
             validation(catalog);
-            catalogDao.insertCatalog(catalog);
-            filesService.fileUpload(multipartFiles, "file", "pdf", 10 * 1024 * 1024, masterIdx, null);
-            Mapper.Instance().CommitTransaction();
+            try {                
+                Mapper.Instance().BeginTransaction();                
+                catalogDao.insertCatalog(catalog);
+                filesService.fileUpload(multipartFiles, "file", "pdf", 10 * 1024 * 1024, masterIdx, null);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         public IList<Catalog> findAll(Catalog catalog)
@@ -46,19 +52,32 @@ namespace bmw_fs.Service.impl.catalog
 
         public void updateCatalog(HttpFileCollectionBase multipartFiles, Catalog catalog)
         {
-            Mapper.Instance().BeginTransaction();
-            filesService.deleteFileAndFileUpload(multipartFiles, "file", "pdf", 10 * 1024 * 1024, catalog.idx, catalog.fileIdxs);
             validation(catalog);
-            this.catalogDao.updateCatalog(catalog);
-            Mapper.Instance().CommitTransaction();
+            try { 
+                Mapper.Instance().BeginTransaction();
+                filesService.deleteFileAndFileUpload(multipartFiles, "file", "pdf", 10 * 1024 * 1024, catalog.idx, catalog.fileIdxs);            
+                this.catalogDao.updateCatalog(catalog);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
+
         }
 
         public void deleteCatalog(Catalog catalog)
         {
-            Mapper.Instance().BeginTransaction();
-            this.catalogDao.deleteCatalog(catalog);
-            filesService.deleteRealFilesAndDataByFileMasterIdx(catalog.idx);
-            Mapper.Instance().CommitTransaction();
+            try { 
+                Mapper.Instance().BeginTransaction();
+                this.catalogDao.deleteCatalog(catalog);
+                filesService.deleteRealFilesAndDataByFileMasterIdx(catalog.idx);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         private void validation(Catalog catalog)
