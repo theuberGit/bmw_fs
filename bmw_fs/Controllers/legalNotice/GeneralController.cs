@@ -3,6 +3,7 @@ using bmw_fs.Service.face.common;
 using bmw_fs.Service.face.legalNotice;
 using bmw_fs.Service.impl.common;
 using bmw_fs.Service.impl.legalNotice;
+using Ganss.XSS;
 using Microsoft.Security.Application;
 using System;
 using System.Collections.Generic;
@@ -39,7 +40,8 @@ namespace bmw_fs.Controllers.legalNotice
         public RedirectToRouteResult registerProc(General general)
         {
             HttpFileCollectionBase multipartfiles = Request.Files;
-            general.contents = Sanitizer.GetSafeHtmlFragment(general.contents);
+            var sanitizer = new HtmlSanitizer();
+            general.contents = sanitizer.Sanitize(general.contents);
             general.regId = System.Web.HttpContext.Current.User.Identity.Name;
             generalService.insertGeneral(multipartfiles, general);
             return RedirectToAction("list");
@@ -66,7 +68,8 @@ namespace bmw_fs.Controllers.legalNotice
         public RedirectToRouteResult modifyProc(General general)
         {
             HttpFileCollectionBase multipartRequest = Request.Files;
-            general.contents = Sanitizer.GetSafeHtmlFragment(general.contents);
+            var sanitizer = new HtmlSanitizer();
+            general.contents = sanitizer.Sanitize(general.contents);
             general.uptId = System.Web.HttpContext.Current.User.Identity.Name;
             generalService.updateGeneral(multipartRequest, general);
             return RedirectToAction("list");

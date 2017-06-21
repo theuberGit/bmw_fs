@@ -3,6 +3,7 @@ using bmw_fs.Service.face.common;
 using bmw_fs.Service.face.privacy;
 using bmw_fs.Service.impl.common;
 using bmw_fs.Service.impl.privacy;
+using Ganss.XSS;
 using Microsoft.Security.Application;
 using System.Web.Mvc;
 
@@ -32,7 +33,8 @@ namespace bmw_fs.Controllers.legalNotice
         [ValidateInput(false)]
         public RedirectToRouteResult registerProc(Privacy privacy)
         {
-            privacy.contents = Sanitizer.GetSafeHtmlFragment(privacy.contents);
+            var sanitizer = new HtmlSanitizer();
+            privacy.contents = sanitizer.Sanitize(privacy.contents);
             privacy.regId = System.Web.HttpContext.Current.User.Identity.Name;
             privacyService.insertPrivacy(privacy);
             return RedirectToAction("list");
@@ -58,7 +60,8 @@ namespace bmw_fs.Controllers.legalNotice
         [ValidateInput(false)]
         public RedirectToRouteResult modifyProc(Privacy privacy)
         {
-            privacy.contents = Sanitizer.GetSafeHtmlFragment(privacy.contents);
+            var sanitizer = new HtmlSanitizer();
+            privacy.contents = sanitizer.Sanitize(privacy.contents);
             privacy.uptId = System.Web.HttpContext.Current.User.Identity.Name;
             privacyService.updatePrivacy(privacy);
             return RedirectToAction("list");
