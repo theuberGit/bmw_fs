@@ -109,7 +109,7 @@ body, html {
 .btn_file {display: block; width: 120px; height: 35px; line-height: 35px; border: 1px solid #c8c8c8; text-align: center; cursor: pointer;}
 .file_area button {display: block; width: 120px; height: 37px; border: 1px solid #c8c8c8}
 .file_area button.btnDelete,.file_area button.btn_add_file,.btn_file {background-color:#bbbbbb;color:#282828; }
-.file_area button.btnDelete,.file_area button.btn_add_file{width:50px;}
+.file_area button.btnDelete,.file_area button.btn_add_file{width:37px;font-size:25px;}
 .reg .cont_bottom .reg_table td input[type="text"].input_long_type {width: 900px;}
 .reg .cont_bottom .reg_table td textarea {width: 666px; height: 300px; padding: 5px; resize: none;}
 .tdTextArea{white-space:pre;}
