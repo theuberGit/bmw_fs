@@ -122,6 +122,8 @@ body, html {
 .rolling .rolling_list li:first-child{margin-left:0;}
 .rolling .rolling_list li.rolling_list4{margin-left:0;}
 .rolling .rolling_list li a > span{display:block; margin-bottom:5px;}
+.rolling .rolling_list li a span.tit_area { height: 40px;}
+.rolling .rolling_list li a span.date_area {font-size: 13px; color: gray;}
 .tab{overflow:hidden; width:400px; margin-bottom:15px; border:1px solid #ccc}
 .tab li{float:left; }
 .tab li a{display:block; width:200px; height:37px; line-height:37px; text-align:center;}
