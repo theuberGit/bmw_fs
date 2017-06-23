@@ -31,7 +31,7 @@
                     <td><input type="text" name="showroomName" id="showroomName" maxlength="30" value="@ViewBag.item.showroomName" title="전시장명" /></td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="dealerName">딜러명 *</label></th>
+                    <th scope="row"><label for="dealerName">딜러명 </label></th>
                     <td><input type="text" name="dealerName" id="dealerName" maxlength="10" value="@ViewBag.item.dealerName" title="딜러명" /></td>
                 </tr>
                 <tr>
@@ -75,7 +75,7 @@
                     <td id="map" colspan="2" style="height:300px;"></td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="tel1">전화번호 *</label></th>
+                    <th scope="row"><label for="tel1">전화번호 </label></th>
                     <td>
                         <select name="tel1" id="tel1" title="지역번호">
                             <option value="02">02</option>
@@ -95,7 +95,7 @@
                             <option value="062">062</option>
                             <option value="063">063</option>
                             <option value="064">064</option>
-                            <option value="-">없음</option>
+                            <option value="">없음</option>
                         </select>
                         -
                         <input type="text" name="tel2" id="tel2" class="telNum" maxlength="4" value="@ViewBag.item.tel2" title="전화번호 중간" />
@@ -136,44 +136,15 @@
         $('#location').val('@ViewBag.item.location');
         $('#tel1').val('@ViewBag.item.tel1');
 
-        if ($('#tel1').val() == '-') {
-            $('#tel2').attr('disabled', true);
-            $('#tel2').val('');
-            $('#tel3').attr('disabled', true);
-            $('#tel3').val('');
-        }
-
-
-        $('#tel1').change(function () {
-            if ($(this).val() == '-') {
-                $('#tel2').attr('disabled', true);
-                $('#tel2').val('');
-                $('#tel3').attr('disabled', true);
-                $('#tel3').val('');
-            }
-            else {
-                $('#tel2').attr('disabled', false);
-                $('#tel2').val('');
-                $('#tel3').attr('disabled', false);
-                $('#tel3').val('');
-            }
-        });
-
     });
 
     function modForm() {
         if (!$('#brand').required()) return;
         if (!$('#showroomName').required()) return;
-        if (!$('#dealerName').required()) return;
         if (!$('#location').required()) return;
         if (!$('#address').required()) return;
         if (!$('#lat').required()) return;
         if (!$('#lng').required()) return;
-        if ($('#tel1').val() != '-') {
-            if (!$('#tel1').required()) return;
-            if (!$('#tel2').required()) return;
-            if (!$('#tel3').required()) return;
-        }
         if (!$('#businessTime').required()) return;
 
         if (!confirm('수정하시겠습니까')) return;

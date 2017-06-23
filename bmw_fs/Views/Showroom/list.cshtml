@@ -57,9 +57,13 @@
                             <td>@ViewBag.list[i].location</td>
                             <td ><a href="view?idx=@ViewBag.list[i].idx">@ViewBag.list[i].showroomName</a></td>
                             <td class="tit_area">@ViewBag.list[i].address</td>
-                            @if ("-".Equals(@ViewBag.list[i].tel1))
+                            @if (string.IsNullOrWhiteSpace(@ViewBag.list[i].tel1) && string.IsNullOrWhiteSpace(@ViewBag.list[i].tel2) && string.IsNullOrWhiteSpace(@ViewBag.list[i].tel3))
                             {
                                 <td>-</td>
+                            }
+                            else if (string.IsNullOrWhiteSpace(@ViewBag.list[i].tel1))
+                            {
+                                <td>@ViewBag.list[i].tel2-@ViewBag.list[i].tel3</td>
                             }
                             else
                             {
