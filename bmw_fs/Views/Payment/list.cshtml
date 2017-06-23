@@ -72,35 +72,50 @@
                         <tr>
                             <td class="co1">@(ViewBag.pagination.totalItemCount - (ViewBag.pagination.currentPage - 1) * ViewBag.pagination.itemPerPage - i)</td>
                             <td class="co2 tit_area"><a href="view?idx=@ViewBag.list[i].idx">@ViewBag.list[i].modelName</a></td>
-                            <td class="co3 price">@ViewBag.list[i].price</td>
-                            @if("zangaHalbu".Equals(ViewBag.pagination.searchOption))
+                            <td class="co3 price">@ViewBag.list[i].price
+                                <input type="hidden" id="payNum_@i" value="@ViewBag.list[i].price" />
+                            </td>
+                            @if ("zangaHalbu".Equals(ViewBag.pagination.searchOption))
                             {
+                                if (ViewBag.list[i].series != "i") //i시리즈 아닐때
+                                {
                                 <td class="co4">@ViewBag.list[i].zhZanga <span>%</span></td>
-                                <td class="co5 price pay1">@ViewBag.list[i].zhPay1</td>
+                                <td class="co5 price pay1_@i"></td>
                                 <td class="co6 price">@ViewBag.list[i].zhPay1</td>
-                                <td class="co7 price pay2">@ViewBag.list[i].zhPay2</td>
+                                <td class="co7 price pay2_@i"></td>
                                 <td class="co8 price">@ViewBag.list[i].zhPay2</td>
-                                <td class="co9 price pay3">@ViewBag.list[i].zhPay3</td>
+                                <td class="co9 price pay3_@i"></td>
                                 <td class="co10 price">@ViewBag.list[i].zhPay3</td>
+                                }
+                                else //i시리즈 일때
+                                {
+                                    <td class="co4"></td>
+                                    <td class="co5"></td>
+                                    <td class="co6"></td>
+                                    <td class="co7"></td>
+                                    <td class="co8"></td>
+                                    <td class="co9"></td>
+                                    <td class="co10"></td>
+                                }
                             }
                             else if ("zangaLease".Equals(ViewBag.pagination.searchOption))
                             {
-                                <td class="co4">@ViewBag.list[i].zlZanga <span>%</span></td>
-                                <td class="co5 price pay1">@ViewBag.list[i].zlPay1</td>
-                                <td class="co6 price">@ViewBag.list[i].zlPay1</td>
-                                <td class="co7 price pay2">@ViewBag.list[i].zlPay2</td>
-                                <td class="co8 price">@ViewBag.list[i].zlPay2</td>
-                                <td class="co9 price pay3">@ViewBag.list[i].zlPay3</td>
-                                <td class="co10 price">@ViewBag.list[i].zlPay3</td>
+                            <td class="co4">@ViewBag.list[i].zlZanga <span>%</span></td>
+                            <td class="co5 price pay1_@i"></td>
+                            <td class="co6 price">@ViewBag.list[i].zlPay1</td>
+                            <td class="co7 price pay2_@i"></td>
+                            <td class="co8 price">@ViewBag.list[i].zlPay2</td>
+                            <td class="co9 price pay3_@i"></td>
+                            <td class="co10 price">@ViewBag.list[i].zlPay3</td>
                             }
                             else if ("generalHalbu".Equals(ViewBag.pagination.searchOption))
                             {
                                 <td class="co4"></td>
-                                <td class="co5 price pay1">@ViewBag.list[i].ghPay1</td>
+                                <td class="co5 price pay1_@i"></td>
                                 <td class="co6 price">@ViewBag.list[i].ghPay1</td>
-                                <td class="co7 price pay2">@ViewBag.list[i].ghPay2</td>
+                                <td class="co7 price pay2_@i"></td>
                                 <td class="co8 price">@ViewBag.list[i].ghPay2</td>
-                                <td class="co9 price pay3">@ViewBag.list[i].ghPay3</td>
+                                <td class="co9 price pay3_@i"></td>
                                 <td class="co10 price">@ViewBag.list[i].ghPay3</td>
                             }
                             <td class="co11">@ViewBag.list[i].deployYn</td>
@@ -122,8 +137,23 @@
 </div>
 <script>
     lnbSet(".payment_mgmt");
+    //검색값 유지
     $('#searchOption').val('@ViewBag.pagination.searchOption');
-    (function () {
+    //선납금 계산
+    for (var i = 0; i < @ViewBag.list.Count; i++)
+    {
+        var pay = $('#payNum_' + i).val();
+        console.log('payNum_'+i+' = '+pay);
+        var num = unComma(pay);
+        var result1 = num * 0.1;
+        var result2 = num * 0.2;
+        var result3 = num * 0.3;
+        //선납금 표시할때 콤마 추가
+        $('.pay1_'+i).text(addComma(parseInt(result1)));
+        $('.pay2_'+i).text(addComma(parseInt(result2)));
+        $('.pay3_'+i).text(addComma(parseInt(result3)));
+    };
+        (function () {
         //검색 브랜드 셀렉트값 변경시
         $(".search_box").on("change", "#brand", function (e) {
 
@@ -164,7 +194,7 @@
                 model += '<option value="">구분</option>';
             }
             $('#series').append(series);
-            $('#model').append(model);
+            $('#model').append(model);                      
         });
         //검색 시리즈 셀렉트값 변경시
         $(".search_box").on("change", "#series", function (e) {

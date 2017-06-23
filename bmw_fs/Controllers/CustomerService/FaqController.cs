@@ -37,7 +37,6 @@ namespace bmw_fs.Controllers.CustomerService
         [ValidateInput(false)]
         public RedirectToRouteResult registerProc(Faq faq)
         {
-            faq.answer = Sanitizer.GetSafeHtmlFragment(faq.answer);
             faq.regId = System.Web.HttpContext.Current.User.Identity.Name;
             faqService.insertFaq(faq);
 
@@ -60,7 +59,6 @@ namespace bmw_fs.Controllers.CustomerService
         [ValidateInput(false)]
         public RedirectToRouteResult modifyProc(Faq faq)
         {
-            faq.answer = Sanitizer.GetSafeHtmlFragment(faq.answer);
             faqService.updateFaq(faq);
 
             return RedirectToAction("list");
