@@ -107,8 +107,7 @@
 <body>
     <div id="wrap">
         <form method="post">
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.AntiForgeryToken()            
             <div class="login_box">
                 <div class="top">
                     <h1><img src="../resources/images/logo.png" alt=""></h1>
@@ -153,13 +152,13 @@
             });
         };
         placeholder();
-        
+
         function login() {
             if ($('#idSave').prop('checked')) {
                 setCookie('userId', $('#id').val(), 30);
             } else {
                 setCookie('userId', $('#id').val(), -1);
-            }            
+            }
             $('form').submit();
         }
         $('#password').keyup(function (e) {
@@ -171,7 +170,7 @@
         if (getCookie('userId') != '') {
             $('#id').val(getCookie('userId'));
             $('#idSave').prop('checked', true);
-        } 
+        }
 
         // 쿠키 생성
         function setCookie(cName, cValue, cDay) {
@@ -195,6 +194,10 @@
                 cValue = cookieData.substring(start, end);
             }
             return unescape(cValue);
+        }
+        //Login 실패시
+        @if (ViewBag.errorMsg != null) {
+            @:alert('@ViewBag.errorMsg');
         }
     </script>
 </body>

@@ -215,6 +215,7 @@
     <Compile Include="Models\board\Board.cs" />
     <Compile Include="Models\catalog\Catalog.cs" />
     <Compile Include="Models\common\Files.cs" />
+    <Compile Include="Models\common\LoginSession.cs" />
     <Compile Include="Models\common\Pagination.cs" />
     <Compile Include="Models\common\SearchInfo.cs" />
     <Compile Include="Models\common\Sequence.cs" />

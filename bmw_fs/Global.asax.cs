@@ -1,4 +1,5 @@
-﻿using System;
+﻿using bmw_fs.Models.common;
+using System;
 using System.Diagnostics;
 using System.Web;
 using System.Web.Mvc;
@@ -23,16 +24,25 @@ namespace bmw_fs
         {
             var authCookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
             if (authCookie != null)
-            {
+            {                
                 FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
                 if (authTicket != null && !authTicket.Expired)
                 {
                     var roles = authTicket.UserData.Split(',');
                     HttpContext.Current.User = new System.Security.Principal.GenericPrincipal(new FormsIdentity(authTicket), roles);
                 }
+                //중복 로그인 방지
+                if (LoginSession.cookieValue.ContainsKey(authTicket.Name))
+                {
+                    if (!LoginSession.cookieValue[authTicket.Name].ToString().Equals(authCookie.Value))
+                    {
+                        FormsAuthentication.SignOut();
+                    }
+                }
             }
         }
-
+        
+        
         protected void Application_Error(object sender, EventArgs e)
         {
             log4net.ILog logger = log4net.LogManager.GetLogger(typeof(MvcApplication));
@@ -67,7 +77,7 @@ namespace bmw_fs
             }
             
         }
-        
+
     }
 
 }
