@@ -8,7 +8,8 @@
         <div class="cont_top">
             <h3>1:1 문의</h3>
             <div class="search_box">
-                <span class="date"><input type="date" name="startDate" value="@ViewBag.pagination.startDate" /> ~ <input type="date" name="endDate" value="@ViewBag.pagination.endDate" /></span>
+                <span class="date"><input type="text" name="startDate" id="startDate" readonly="readonly" value="@ViewBag.pagination.startDate" /> ~ <input type="text" name="endDate" id="endDate" readonly="readonly" value="@ViewBag.pagination.endDate"/></span>
+                @*<input type="date" name="startDate" value="@ViewBag.pagination.startDate" /> ~ <input type="date" name="endDate" value="@ViewBag.pagination.endDate" />*@
                 <select name="searchOption" id="searchOption">
                     <option value="">선택</option>
                     <option value="title">항목</option>                    
@@ -83,6 +84,36 @@
 </div>
 <script>
     lnbSet(".inquiry_mgmt");
+
+    $("#startDate").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeMonth: true,
+        changeYear: true,
+        yearRange: 'c-14:c+10',
+        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+        onClose: function (selectedDate) {
+            $("#endDate").datepicker("option", "minDate", selectedDate);
+        }
+    });
+    $("#endDate").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeMonth: true,
+        changeYear: true,
+        yearRange: 'c-14:c+10',
+        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+        onClose: function (selectedDate) {
+            $("#startDate").datepicker("option", "maxDate", selectedDate);
+        }
+    });
+
     $('#searchOption').val('@ViewBag.pagination.searchOption');
     if ('@ViewBag.pagination.category' != '') {
         $('.list_area ul li').removeClass('on');
