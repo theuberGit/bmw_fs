@@ -145,3 +145,10 @@ body, html {
 .list_area li a{display:block; padding:0 18px; font-size:14px; border-left:1px solid #ccc;}
 .list_area ul li:nth-child(1) a{border-left:0px;}
 .list_area li.on a{font-weight:bold;color:#1c69d4;}
+
+/* Error */
+.error {min-height:555px;}
+.error h2 {padding-top:15px; font-size:35px; font-weight:bold; line-height:1;}
+.error .text {margin:20px 0; line-height:22px;}
+.error .btn {display:inline-block; width:265px; text-align:center; color:#fff; line-height:40px; background:#1c69d4; font-weight:700;}
+.error .btn:hover {background:#0653b6;}
