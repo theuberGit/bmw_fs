@@ -40,7 +40,7 @@
                         </tr>
                         <tr>
                             <th><label for="startDate">게시 기간</label></th>
-                            <td><input type="date" id="startDate" name="startDate" value="@ViewBag.item.startDate" title="게시 시작일"> ~ <input type="date" id="endDate" name="endDate" value="@ViewBag.item.endDate" title="게시 종료일"></td>
+                            <td><input type="text" name="startDate" id="startDate" readonly="readonly" value="@ViewBag.item.startDate" title="게시 시작일" /> ~ <input type="text" name="endDate" id="endDate" readonly="readonly" value="@ViewBag.item.endDate" title="게시 종료일" /></td>
                         </tr>
                         <tr>
                             <th>영문 사이트</th>
@@ -299,6 +299,35 @@
 		</div>
 <script>
     lnbSet(".web_promotion_mgmt");
+
+    $("#startDate").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeMonth: true,
+        changeYear: true,
+        yearRange: 'c-14:c+10',
+        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+        onClose: function (selectedDate) {
+            $("#endDate").datepicker("option", "minDate", selectedDate);
+        }
+    });
+    $("#endDate").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeMonth: true,
+        changeYear: true,
+        yearRange: 'c-14:c+10',
+        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+        onClose: function (selectedDate) {
+            $("#startDate").datepicker("option", "maxDate", selectedDate);
+        }
+    });
     //value setting (kor)
     if ('@ViewBag.item.category' === 'P') {
         $('#categoryP').prop('checked', true);

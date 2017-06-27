@@ -61,6 +61,12 @@
                             <td>@ViewBag.list[i].deployYn</td>
                         </tr>
                     }
+                    @if (ViewBag.noticeList.Count == 0 && ViewBag.list.Count == 0)
+                    {
+                        <tr>
+                            <td colspan="6">게시글이 없습니다.</td>
+                        </tr>
+                    }
                 </tbody>
             </table>
             @RenderPage("~/Views/Common/Pagination.cshtml")
