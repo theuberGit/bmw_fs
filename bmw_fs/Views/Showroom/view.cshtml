@@ -62,9 +62,13 @@
                 </tr>
                 <tr>
                     <th scope="row"><label for="tel1">전화번호 *</label></th>
-                    @if ("-".Equals(@ViewBag.item.tel1))
+                    @if (string.IsNullOrWhiteSpace(@ViewBag.item.tel1) && string.IsNullOrWhiteSpace(@ViewBag.item.tel2) && string.IsNullOrWhiteSpace(@ViewBag.item.tel3))
                     {
                         <td>-</td>
+                    }
+                    else if (string.IsNullOrWhiteSpace(@ViewBag.item.tel1))
+                    {
+                        <td>@ViewBag.item.tel2-@ViewBag.item.tel3</td>
                     }
                     else
                     {

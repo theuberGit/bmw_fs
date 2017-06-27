@@ -66,6 +66,11 @@ body, html {
 .list .cont_bottom .list_table tbody tr td{padding:13px 0; border-bottom:1px solid #ccc; border-right:1px solid #ccc; text-align:center; box-sizing:border-box;}
 .list .cont_bottom .list_table tbody tr td.tit{padding-left:13px; text-align:left;}
 .list .cont_bottom .list_table tbody tr td.tit_area {padding-left: 10px; text-align: left;}
+.list .cont_bottom .list_table tbody tr td.tit_area_center {
+    font-weight: bold;
+    padding-left: 10px;
+    text-align: center;
+}
 
 .reg .cont_top{margin-bottom:20px;}
 .reg .cont_bottom .reg_table{width:100%; margin-bottom:10px; border-top:2px solid #828282}

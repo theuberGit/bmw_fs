@@ -1,4 +1,5 @@
 ﻿using bmw_fs.Models.admin;
+using bmw_fs.Models.common;
 using bmw_fs.Service.face.admin;
 using bmw_fs.Service.impl.admin;
 using bmw_fs.Service.impl.common;
@@ -38,32 +39,49 @@ namespace bmw_fs.Controllers.login
             Member member = new Member();
             member = memberService.findMemberForLogin(model);
 
-            //LdapAuthenticationService ldapService = new LdapAuthenticationService("LDAP://" + _domain);
-            //Boolean isLogin = ldapService.IsAuthenticated(_domain, model.userId, model.password);
-
-            if (member != null)
+            if(member != null)
             {
-                FormsAuthentication.SetAuthCookie(model.userId, false);
+                LdapAuthenticationService ldapService = new LdapAuthenticationService("LDAP://" + _domain);
+                //Boolean isLogin = ldapService.IsAuthenticated(_domain, model.userId, model.password);
+                Boolean isLogin = true;
 
-                var authTicket = new FormsAuthenticationTicket(1, member.userId, DateTime.Now, DateTime.Now.AddMinutes(20), false, member.role);
-                string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
-                var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
-                HttpContext.Response.Cookies.Add(authCookie);                                                                                                          
-                memberService.updateLoginDate(member);
-                if (String.IsNullOrWhiteSpace(returnUrl))
+                if (isLogin)
                 {
-                    return RedirectToAction("Index", "Home");
+                    FormsAuthentication.SetAuthCookie(model.userId, false);
+
+                    var authTicket = new FormsAuthenticationTicket(1, member.userId, DateTime.Now, DateTime.Now.AddMinutes(20), false, member.role);
+                    string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
+                    var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                    HttpContext.Response.Cookies.Add(authCookie);
+                    memberService.updateLoginDate(member);
+
+                    if (LoginSession.cookieValue.ContainsKey(model.userId))
+                    {
+                        LoginSession.cookieValue.Remove(model.userId);
+                    }
+                    LoginSession.cookieValue.Add(model.userId, authCookie.Value);
+
+                    if (String.IsNullOrWhiteSpace(returnUrl))
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        return Redirect(returnUrl);
+                    }
                 }
                 else
                 {
-                    return Redirect(returnUrl);
+                    //ModelState.AddModelError("", "Invalid login attempt.");
+                    ViewBag.errorMsg = "Invalid login attempt.";
+                    return View("~/Views/Login.cshtml", model);
                 }
 
-                
             }
             else
             {
-                ModelState.AddModelError("", "Invalid login attempt.");
+                //ModelState.AddModelError("", "Invalid login attempt.");
+                ViewBag.errorMsg = "Invalid login attempt.";
                 return View("~/Views/Login.cshtml", model);
             }
         }

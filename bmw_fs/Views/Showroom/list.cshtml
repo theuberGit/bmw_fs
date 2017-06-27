@@ -55,16 +55,24 @@
                                 }
                             </td>
                             <td>@ViewBag.list[i].location</td>
-                            <td ><a href="view?idx=@ViewBag.list[i].idx">@ViewBag.list[i].showroomName</a></td>
-                            <td class="tit_area">@ViewBag.list[i].address</td>
-                            @if ("-".Equals(@ViewBag.list[i].tel1))
-                            {
-                                <td>-</td>
-                            }
-                            else
-                            {
-                                <td>@ViewBag.list[i].tel1-@ViewBag.list[i].tel2-@ViewBag.list[i].tel3</td>
-                            }
+                            <td class="tit_area_center"><a href="view?idx=@ViewBag.list[i].idx">@ViewBag.list[i].showroomName</a></td>
+                            <td class="tit"><a href="view?idx=@ViewBag.list[i].idx">@ViewBag.list[i].address</a></td>
+                            <td>
+                                <a href="view?idx=@ViewBag.list[i].idx">
+                                @if (string.IsNullOrWhiteSpace(@ViewBag.list[i].tel1) && string.IsNullOrWhiteSpace(@ViewBag.list[i].tel2) && string.IsNullOrWhiteSpace(@ViewBag.list[i].tel3))
+                                {
+                                    @:-
+                                }
+                                else if (string.IsNullOrWhiteSpace(@ViewBag.list[i].tel1))
+                                {
+                                    @ViewBag.list[i].tel2@:-@ViewBag.list[i].tel3
+                                }
+                                else
+                                {
+                                    @ViewBag.list[i].tel1@:-@ViewBag.list[i].tel2-@ViewBag.list[i].tel3
+                                }
+                                </a>
+                            </td>
                             <td>@ViewBag.list[i].deployYn</td>
                         </tr>
                     }
