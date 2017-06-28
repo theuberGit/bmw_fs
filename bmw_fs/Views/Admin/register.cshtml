@@ -24,21 +24,19 @@
                 <tr>
                     <th><label for="role">관리자 권한 *</label></th>
                     <td>
-                        <select name="role" id="role">
-                            <option value="MASTER">MASTER</option>
-                            <option value="IT">IT</option>
-                            <option value="MSS">MSS</option>
-                            <option value="COMPLIANCE">COMPLIANCE</option>
-                            <option value="HR">HR</option>
-                            <option value="CIC">CIC</option>
-                        </select>
+                        <input type="checkbox" name="roles" id="role1" class="role_master" value="MASTER" /><label for="role1"> MASTER</label>&nbsp;&nbsp;
+                        <input type="checkbox" name="roles" id="role2" class="role_others" value="IT" /><label for="role2"> IT</label>&nbsp;&nbsp;
+                        <input type="checkbox" name="roles" id="role3" class="role_others" value="MSS" /><label for="role3"> MSS</label>&nbsp;&nbsp;
+                        <input type="checkbox" name="roles" id="role4" class="role_others" value="COMPLIANCE" /><label for="role4"> COMPLIANCE</label>&nbsp;&nbsp;
+                        <input type="checkbox" name="roles" id="role5" class="role_others" value="HR" /><label for="role5"> HR</label>&nbsp;&nbsp;
+                        <input type="checkbox" name="roles" id="role6" class="role_others" value="CIC" /><label for="role6"> CIC</label>&nbsp;&nbsp;
                     </td>
                 </tr>
                 <tr>
                     <th><label for="active">상태</label></th>
                     <td class="radio_area">
                         <label for="active"><input type="radio" name="activeYn" id="active" value="Y" checked title="상태"> 활성</label>
-                        <label for="inactivity"><input type="radio" name="activeYn" id="inactivity"  value="N" title="상태"> 비활성</label>
+                        <label for="inactivity"><input type="radio" name="activeYn" id="inactivity" value="N" title="상태"> 비활성</label>
                     </td>
                 </tr>
             </table>
@@ -56,7 +54,7 @@
         if (!$('#id').required()) return;
         $.ajax({
             url: 'isDuplicated',
-            data: { 'userId' : $('#id').val() },
+            data: { 'userId': $('#id').val() },
             dataType: 'json',
             timeout: 10000,
             cache: false,
@@ -71,11 +69,11 @@
                 alert('요청하신 작업을 수행하던 중 예상치 않게 중지되었습니다.\n\n다시 시도해 주십시오.');
             },
             success: function (data) {
-                if (data == -1){
+                if (data == -1) {
                     alert('동일한 관리자 ID가 존재합니다.');
                     isDuplicated = true;
                     return;
-                } else if (data == 1){
+                } else if (data == 1) {
                     alert('등록 가능합니다.');
                     isDuplicated = false;
                     return;
@@ -90,18 +88,28 @@
     };
 
     function regForm() {
+        var roleCnt = 0;
         if (!$('#id').required()) return;
         if (isDuplicated) {
             alert('아이디를 검증하세요.');
             return;
         }
         if (!$('#pass').required()) return;
-        if (!$('#pass').isvalidpwd()) return; 
+        if (!$('#pass').isvalidpwd()) return;
         if (!$('#passOk').required()) return;
         if ($('#pass').val() != $('#passOk').val()) {
             alert('비밀번호가 일치하지 않습니다.');
             return;
         }
+        $('input[name="roles"]').each(function () {
+            if ($(this).prop('checked')) {
+                roleCnt++;
+            }
+        });
+        if (roleCnt == 0) {
+            alert('권한을 선택해주세요.');
+            return;
+        } 
 
         if (!confirm('등록하시겠습니까')) return;
         $('#content form').attr('action', 'registerProc').submit();
@@ -109,5 +117,13 @@
 
     $('#id').change(function () {
         isDuplicated = true;
+    });
+
+    $('#role1').change(function () {
+        if ($(this).prop('checked')) {
+            $('.role_others').prop('checked', true).prop('disabled', true);
+        } else {
+            $('.role_others').prop('disabled', false).prop('checked', false);
+        }
     });
 </script>

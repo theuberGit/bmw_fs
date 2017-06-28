@@ -40,12 +40,45 @@ namespace bmw_fs.Service.impl.admin
 
         public void insertMember(Member member)
         {
+            String roles = "";
+            if(member.roles.Count != 0)
+            {
+                for (int i = 0; i < member.roles.Count; i++)
+                {
+                    if (i == 0)
+                    {
+                        roles = member.roles[i];
+                    }
+                    else
+                    {
+                        roles = roles + "," + member.roles[i];
+                    }
+                }
+                member.role = roles;
+            }
+           
             regValidation(member);
             memberDao.insertMember(member);
         }
 
         public void updateMember(Member member)
         {
+            String roles = "";
+            if (member.roles.Count != 0)
+            {
+                for (int i = 0; i < member.roles.Count; i++)
+                {
+                    if (i == 0)
+                    {
+                        roles = member.roles[i];
+                    }
+                    else
+                    {
+                        roles = roles + "," + member.roles[i];
+                    }
+                }
+                member.role = roles;
+            }
             modValidation(member);
             memberDao.updateMember(member);
         }

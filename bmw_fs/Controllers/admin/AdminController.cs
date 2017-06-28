@@ -5,6 +5,7 @@ using bmw_fs.Service.impl.admin;
 using bmw_fs.Service.impl.common;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -42,7 +43,6 @@ namespace bmw_fs.Controllers.admin
             member.regId = System.Web.HttpContext.Current.User.Identity.Name;
             memberService.insertMember(member);
 
-
             return RedirectToAction("list", (RouteValueDictionary)Session["searchMap"]);
         }
 
@@ -56,6 +56,7 @@ namespace bmw_fs.Controllers.admin
         public ActionResult modify(Member member)
         {
             Member item = memberService.findMemberByIdx(member);
+            item.roles = item.role.Split(',');
             ViewBag.item = item;
 
             return View();
