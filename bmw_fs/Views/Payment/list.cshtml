@@ -142,8 +142,7 @@
     //선납금 계산
     for (var i = 0; i < @ViewBag.list.Count; i++)
     {
-        var pay = $('#payNum_' + i).val();
-        console.log('payNum_'+i+' = '+pay);
+        var pay = $('#payNum_' + i).val();        
         var num = unComma(pay);
         var result1 = num * 0.1;
         var result2 = num * 0.2;
@@ -165,8 +164,7 @@
             $seriesSelect.html(series);
             //모델 초기화
             $modelSelect.html(model);
-            var val = $(this).val();
-            console.log($seriesSelect);
+            var val = $(this).val();            
             if (val == "BMW") {
 
                 series += '<option value="">구분</option>';
@@ -207,9 +205,7 @@
             var model = "";
             //모델 초기화
             $modelSelect.html(model);
-            var val = $(this).val();
-            console.log(val);
-            console.log($modelSelect);
+            var val = $(this).val();                        
             model = '<option value="">구분</option>';
             if (val == "1 Series") {
                 model += '<option value="118">118</option>';

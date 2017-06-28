@@ -80,8 +80,7 @@
 <script>
     lnbSet(".faq_mgmt");
     $('#searchOption').val('@ViewBag.pagination.searchOption');
-    if ('@ViewBag.pagination.category' != '') {
-        console.log('@ViewBag.pagination.category');
+    if ('@ViewBag.pagination.category' != '') {        
         $('.list_area ul li').removeClass('on');
         $('.faq_' + '@ViewBag.pagination.category').addClass('on');
     } else {

@@ -129,8 +129,7 @@
             $(item).find(".btn_add_file").on("click", function () {
                 if ($(item).find("input[type='file']").length < 10) {
                     cnt++;
-                    var html = '<div><span class="file_src"></span><input type="file" class="input_file" id="file' + cnt + '" name="file" /><label for="file' + cnt + '" class="btn_file">파일찾기</label><button type="button" class="btnDelete">-</button></div>';
-                    console.log("cnt", cnt);
+                    var html = '<div><span class="file_src"></span><input type="file" class="input_file" id="file' + cnt + '" name="file" /><label for="file' + cnt + '" class="btn_file">파일찾기</label><button type="button" class="btnDelete">-</button></div>';                    
                     $(item).find(".file_area").append(html);
                 };
             });

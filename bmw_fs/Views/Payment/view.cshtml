@@ -132,14 +132,12 @@ table.reg_table tr td span.on, table.reg_table tr td span.on, table.reg_table tr
         i시리즈가 아닐때 선납 모두표시
         시리즈 일때 잔가보장형 할부-리스에만 선납금표시 하기*/
     // 선납 표시
-    if ('@ViewBag.item.series' != 'i') { //i시리즈가 아닐때
-        console.log('i시리즈가 아닐때');
+    if ('@ViewBag.item.series' != 'i') { //i시리즈가 아닐때        
         $('.tr_zh').removeClass('off');
         $('.zh').addClass('on');
         $('.zl').addClass('on');
         $('.general').addClass('on');
-    } else { //i시리즈 일때
-        console.log('i시리즈 일때');
+    } else { //i시리즈 일때        
         $('.general').addClass('on');
         $('.zl').addClass('on');
         $('.tr_zh').addClass('off');
