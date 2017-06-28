@@ -90,10 +90,7 @@
                 ,REG_ID
         FROM BMW_FS_ADMIN_MEMBER
       WHERE 1=1
-        AND USER_ID = #userId#
-        <!--
-        AND PASSWORD = #password#
-        -->
+        AND USER_ID = #userId#        
     </select>
 
     <select id="findMemberDuplicated" resultClass="int">
@@ -104,15 +101,13 @@
 
     <insert id="insertMember">
       INSERT INTO BMW_FS_ADMIN_MEMBER (
-                   USER_ID
-                  ,PASSWORD
+                   USER_ID                  
                   ,ROLE
                   ,REG_ID
                   ,ACTIVE_YN
                   )
       VALUES (
-                  #userId#
-                 ,#password#
+                  #userId#                 
                  ,#role#
                  ,#regId#
                  ,#activeYn#
@@ -123,10 +118,7 @@
         UPDATE BMW_FS_ADMIN_MEMBER
             SET ROLE = #role#
                  ,UPT_ID = #uptId#
-                 ,UPT_DATE = GETDATE()
-              <isNotEmpty property="password">
-                ,PASSWORD = #password#
-              </isNotEmpty>
+                 ,UPT_DATE = GETDATE()              
                 ,ACTIVE_YN = #activeYn#
       WHERE IDX = #idx#
     </update>

@@ -16,7 +16,9 @@ namespace bmw_fs.Controllers.login
     public class LoginController : Controller
     {
 
-        MemberService memberService = new MemberServiceImpl();
+        private MemberService memberService = new MemberServiceImpl();
+        private SmsService smsService = new SmsServiceImpl();
+
         private String _domain = "172.30.81.67";
         // GET: Login
         [AllowAnonymous]
@@ -63,6 +65,7 @@ namespace bmw_fs.Controllers.login
                     var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                     HttpContext.Response.Cookies.Add(authCookie);
                     memberService.updateLoginDate(member);
+                    smsService.insertSms("test", "010-1234-5678", "010-1234-5678", "contents");
 
                     if (LoginSession.cookieValue.ContainsKey(model.userId))
                     {
