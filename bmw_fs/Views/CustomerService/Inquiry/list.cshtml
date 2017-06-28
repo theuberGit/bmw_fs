@@ -9,9 +9,8 @@
             <h3>1:1 문의</h3>
             <div class="search_box">
                 <span class="date"><input type="text" name="startDate" id="startDate" readonly="readonly" value="@ViewBag.pagination.startDate" /> ~ <input type="text" name="endDate" id="endDate" readonly="readonly" value="@ViewBag.pagination.endDate"/></span>
-                @*<input type="date" name="startDate" value="@ViewBag.pagination.startDate" /> ~ <input type="date" name="endDate" value="@ViewBag.pagination.endDate" />*@
                 <select name="searchOption" id="searchOption">
-                    <option value="">선택</option>
+                    <option value="">구분</option>
                     <option value="title">항목</option>                    
                 </select>
                 <input type="text" class="search_text" name="searchInput" value="@ViewBag.pagination.searchInput"><input type="text" style="display:none;" />

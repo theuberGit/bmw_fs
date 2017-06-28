@@ -56,12 +56,7 @@
             FROM BMW_FS_SHOWROOM S
               WHERE 1=1
           <isNotEmpty property="searchInput">
-            <isEmpty property="searchOption">
-              AND (S.BRAND LIKE '%'+#searchInput#+'%' OR S.SHOWROOM_NAME LIKE '%'+#searchInput#+'%')
-            </isEmpty>
             <isNotEmpty property="searchOption">
-              <isEqual property="searchOption" compareValue="all">
-              </isEqual>
               <isEqual property="searchOption" compareValue="brand">
                 AND S.BRAND LIKE '%'+#searchInput#+'%'
               </isEqual>
@@ -81,9 +76,6 @@
       WHERE 1=1
       <isNotEmpty property="searchInput">
         <isNotEmpty property="searchOption">
-          <isEqual property="searchOption" compareValue="all">
-            AND (S.BRAND LIKE '%'+#searchInput#+'%' OR S.SHOWROOM_NAME LIKE '%'+#searchInput#+'%')
-          </isEqual>
           <isEqual property="searchOption" compareValue="brand">
             AND S.BRAND LIKE '%'+#searchInput#+'%'
           </isEqual>
