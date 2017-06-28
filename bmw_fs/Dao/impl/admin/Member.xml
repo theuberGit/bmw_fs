@@ -35,15 +35,17 @@
         FROM BMW_FS_ADMIN_MEMBER
         WHERE 1=1
       <isNotEmpty property="searchInput">
-        <isEqual property="searchOption" compareValue="id">
-          AND USER_ID LIKE '%'+#searchInput#+'%'
-        </isEqual>
-        <isEqual property="searchOption" compareValue="status">
-          AND ACTIVE_YN LIKE '%'+#searchInput#+'%'
-        </isEqual>
-        <isEqual property="searchOption" compareValue="role">
-          AND ROLE LIKE '%'+#searchInput#+'%'
-        </isEqual>
+        <isNotEmpty property="searchOption">
+          <isEqual property="searchOption" compareValue="id">
+            AND USER_ID LIKE '%'+#searchInput#+'%'
+          </isEqual>
+          <isEqual property="searchOption" compareValue="status">
+            AND ACTIVE_YN LIKE '%'+#searchInput#+'%'
+          </isEqual>
+          <isEqual property="searchOption" compareValue="role">
+            AND ROLE LIKE '%'+#searchInput#+'%'
+          </isEqual>
+        </isNotEmpty>
       </isNotEmpty>
       )t
       WHERE 1=1
@@ -55,15 +57,17 @@
       FROM BMW_FS_ADMIN_MEMBER
       WHERE 1=1
       <isNotEmpty property="searchInput">
-        <isEqual property="searchOption" compareValue="id">
-          AND USER_ID LIKE '%'+#searchInput#+'%'
-        </isEqual>
-        <isEqual property="searchOption" compareValue="status">
-          AND ACTIVE_YN LIKE '%'+#searchInput#+'%'
-        </isEqual>
-        <isEqual property="searchOption" compareValue="role">
-          AND ROLE LIKE '%'+#searchInput#+'%'
-        </isEqual>
+        <isNotEmpty property="searchOption">
+          <isEqual property="searchOption" compareValue="id">
+            AND USER_ID LIKE '%'+#searchInput#+'%'
+          </isEqual>
+          <isEqual property="searchOption" compareValue="status">
+            AND ACTIVE_YN LIKE '%'+#searchInput#+'%'
+          </isEqual>
+          <isEqual property="searchOption" compareValue="role">
+            AND ROLE LIKE '%'+#searchInput#+'%'
+          </isEqual>
+        </isNotEmpty>
       </isNotEmpty>
     </select>
 
