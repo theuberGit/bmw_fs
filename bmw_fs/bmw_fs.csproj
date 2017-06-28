@@ -189,6 +189,7 @@
     <Compile Include="Controllers\showroom\ShowroomController.cs" />
     <Compile Include="Controllers\test\BoardController.cs" />
     <Compile Include="Dao\face\admin\MemberDao.cs" />
+    <Compile Include="Dao\face\admin\SmsDao.cs" />
     <Compile Include="Dao\face\board\BoardDao.cs" />
     <Compile Include="Dao\face\catalog\CatalogDao.cs" />
     <Compile Include="Dao\face\common\FilesDao.cs" />
@@ -212,6 +213,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\admin\Member.cs" />
+    <Compile Include="Models\admin\Sms.cs" />
     <Compile Include="Models\board\Board.cs" />
     <Compile Include="Models\catalog\Catalog.cs" />
     <Compile Include="Models\common\Files.cs" />
@@ -237,6 +239,7 @@
     <Compile Include="Models\Showroom\ShowRoom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\face\admin\MemberService.cs" />
+    <Compile Include="Service\face\admin\SmsService.cs" />
     <Compile Include="Service\face\board\BoardService.cs" />
     <Compile Include="Service\face\catalog\CatalogService.cs" />
     <Compile Include="Service\face\common\FilesService.cs" />
@@ -259,6 +262,7 @@
     <Compile Include="Service\face\rolling\RollingService.cs" />
     <Compile Include="Service\face\Showroom\ShowroomService.cs" />
     <Compile Include="Service\impl\admin\MemberServiceImpl.cs" />
+    <Compile Include="Service\impl\admin\SmsServiceImpl.cs" />
     <Compile Include="Service\impl\board\BoardServiceImpl.cs" />
     <Compile Include="Service\impl\catalog\CatalogServiceImpl.cs" />
     <Compile Include="Service\impl\common\FilesServiceImpl.cs" />
@@ -284,6 +288,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dao\impl\admin\Member.xml" />
+    <Content Include="Dao\impl\admin\Sms.xml" />
     <Content Include="Dao\impl\board\Board.xml" />
     <Content Include="Dao\impl\catalog\Catalog.xml">
       <SubType>Designer</SubType>
@@ -481,6 +486,7 @@
     <Content Include="Views\Promotion\Promotion\modify.cshtml" />
     <Content Include="Views\Promotion\Promotion\register.cshtml" />
     <Content Include="Views\Promotion\Promotion\view.cshtml" />
+    <Content Include="SqlMapSms.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
