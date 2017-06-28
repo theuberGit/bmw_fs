@@ -13,6 +13,7 @@
                     <th><label for="id">ID *</label></th>
                     <td><input type="text" name="userId" id="id" class="" title="ID" maxlength="25"> <a href="javascript:void(0);" class="btn_defualt" id="btn_overlap" onclick="duplicationCheck();">check</a></td>
                 </tr>
+                <!--
                 <tr>
                     <th><label for="pass">비밀번호 *</label></th>
                     <td><input type="password" name="password" id="pass" class="" title="비밀번호" maxlength="25"></td>
@@ -21,6 +22,7 @@
                     <th><label for="passOk">비밀번호 확인 *</label></th>
                     <td><input type="password" name="" id="passOk" class="" title="비밀번호 확인" maxlength="25"></td>
                 </tr>
+                    -->
                 <tr>
                     <th><label for="role">관리자 권한 *</label></th>
                     <td>
@@ -94,6 +96,7 @@
             alert('아이디를 검증하세요.');
             return;
         }
+        /*
         if (!$('#pass').required()) return;
         if (!$('#pass').isvalidpwd()) return;
         if (!$('#passOk').required()) return;
@@ -101,6 +104,7 @@
             alert('비밀번호가 일치하지 않습니다.');
             return;
         }
+        */
         $('input[name="roles"]').each(function () {
             if ($(this).prop('checked')) {
                 roleCnt++;

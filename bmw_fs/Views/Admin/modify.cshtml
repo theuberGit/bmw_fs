@@ -14,6 +14,7 @@
                     <th><label for="id">ID *</label></th>
                     <td>@ViewBag.item.userId</td>
                 </tr>
+                <!--
                 <tr>
                     <th><label for="pass">비밀번호 *</label></th>
                     <td><input type="password" name="password" id="pass" class="" title="비밀번호" maxlength="25"></td>
@@ -22,6 +23,7 @@
                     <th><label for="passOk">비밀번호 확인 *</label></th>
                     <td><input type="password" name="" id="passOk" class="" title="비밀번호 확인" maxlength="25"></td>
                 </tr>
+                    -->
                 <tr>
                     <th><label for="role">관리자 권한 *</label></th>
                     <td>
@@ -52,6 +54,7 @@
     lnbSet(".admin_mgmt");
     function modForm() {
         var roleCnt = 0;
+        /*
         if ($('#pass').val().trim() != '') {
             if (!$('#pass').isvalidpwd()) return;
             if (!$('#passOk').required()) return;
@@ -60,6 +63,7 @@
                 return;
             }
         }
+        */
         $('input[name="roles"]').each(function () {
             if ($(this).prop('checked')) {
                 roleCnt++;
