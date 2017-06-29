@@ -34,21 +34,41 @@
                 </tr>
                 <tr>
                     <th><label for="">내용</label></th>
-                    <td colspan="3">@Html.Raw(@ViewBag.item.contents)</td>
+                    <td colspan="3" class="contents">@Html.Raw(@ViewBag.item.contents)</td>
                 </tr>
                 <tr>
                     <th><label for="replyContents">답변</label></th>                    
                     @if ("W".Equals(ViewBag.item.status))
                     {
                     <td colspan="3">
-                        <textarea name="replyContents" id="replyContents" title="답변">@ViewBag.item.replyContents</textarea>
+                        <textarea name="replyContents" id="replyContents" title="답변">
+                            @if (ViewBag.item.replyContents == null)
+                            {
+@:안녕하세요 고객님,
+@:문의 주셔서 감사합니다.
+@:
+@:
+@:
+@:
+@:
+@:
+@:                            
+@:추가적인 문의사항이 있으신 경우 고객센터(1577 - 5822) 또는 당사 홈페이지(https://www.bmwfs.co.kr) ‘1:1문의’를 이용하여 주시기 바랍니다.
+@:
+@:항상 많은 관심 주셔서 감사합니다.
+@:행복한 하루 되시길 바랍니다.
+@:
+@:BMW Financial service Korea 드림.
+                            }
+                            else
+                            {
+                                @ViewBag.item.replyContents
+                            }</textarea>
                     </td>
                     }
                     else if ("F".Equals(ViewBag.item.status))
                     {
-                        <td colspan="3" class="contents">
-                            @ViewBag.item.replyContents      
-                        </td>
+                        <td colspan="3" class="contents">@ViewBag.item.replyContents</td>
                     }
                 </tr>
                 @if ("F".Equals(ViewBag.item.status))

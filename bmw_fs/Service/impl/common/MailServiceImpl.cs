@@ -19,23 +19,29 @@ namespace bmw_fs.Service.impl.common
             message.Subject = subject;
             message.Body = body;
             //message.IsBodyHtml = true;
-
-            using (var smtp = new SmtpClient())
+            try
             {
-                var credential = new NetworkCredential
+                using (var smtp = new SmtpClient())
                 {
-                    UserName = "theuber.upm@gmail.com",
-                    Password = "Uber51##"
-                };
-                smtp.Credentials = credential;
-                smtp.Host = "smtp.gmail.com";
-                smtp.Port = 587;
-                smtp.EnableSsl = true;
-                await smtp.SendMailAsync(message);
-                return true;
+                    /*
+                    var credential = new NetworkCredential
+                    {
+                        UserName = "theuber.upm@gmail.com",
+                        Password = "Uber51##"
+                    };
+                    smtp.Credentials = credential;
+                    */
+                    smtp.Host = "SMTP.MUC";
+                    //smtp.Port = 25;
+                    smtp.EnableSsl = true;
+                    await smtp.SendMailAsync(message);
+                    return true;
+                }
+            }catch(Exception e)
+            {
+                return false;
             }
-
-            return false;
+            
         }
     }
 }

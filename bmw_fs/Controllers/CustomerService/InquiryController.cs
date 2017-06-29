@@ -63,7 +63,7 @@ namespace bmw_fs.Controllers.CustomerService
             inquiryService.updateInquirySendMail(inquiry);
             Inquiry item = inquiryService.findInquiry(inquiry);
 
-            await mailService.sendMail(item.email, "test@test.co.kr", item.title, inquiry.replyContents);
+            await mailService.sendMail(item.email, "bmwfs-helpdesk@bmw.co.kr", "[BMW파이낸셜]1:1문의 답변입니다.", inquiry.replyContents);
             return RedirectToAction("view", new { idx = inquiry.idx });
         }
 

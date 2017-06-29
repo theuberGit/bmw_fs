@@ -65,7 +65,7 @@ namespace bmw_fs.Controllers.login
                     var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                     HttpContext.Response.Cookies.Add(authCookie);
                     memberService.updateLoginDate(member);
-                    smsService.insertSms("test", "010-1234-5678", "010-1234-5678", "contents");
+                    //smsService.insertSms("test", "010-5112-6486", "010-5112-6486", "contents");
 
                     if (LoginSession.cookieValue.ContainsKey(model.userId))
                     {
