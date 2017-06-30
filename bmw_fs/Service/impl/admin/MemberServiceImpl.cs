@@ -99,12 +99,18 @@ namespace bmw_fs.Service.impl.admin
             //if (String.IsNullOrWhiteSpace(member.password)) throw new CustomException("필수 값이 없습니다.");
             if (String.IsNullOrWhiteSpace(member.role)) throw new CustomException("필수 값이 없습니다.");
             if (String.IsNullOrWhiteSpace(member.activeYn)) throw new CustomException("필수 값이 없습니다.");
+            if (String.IsNullOrWhiteSpace(member.tel1)) throw new CustomException("필수 값이 없습니다.");
+            if (String.IsNullOrWhiteSpace(member.tel2)) throw new CustomException("필수 값이 없습니다.");
+            if (String.IsNullOrWhiteSpace(member.tel3)) throw new CustomException("필수 값이 없습니다.");
         }
 
         private void modValidation(Member member)
         {
             if (String.IsNullOrWhiteSpace(member.role)) throw new CustomException("필수 값이 없습니다.");
             if (String.IsNullOrWhiteSpace(member.activeYn)) throw new CustomException("필수 값이 없습니다.");
+            if (String.IsNullOrWhiteSpace(member.tel1)) throw new CustomException("필수 값이 없습니다.");
+            if (String.IsNullOrWhiteSpace(member.tel2)) throw new CustomException("필수 값이 없습니다.");
+            if (String.IsNullOrWhiteSpace(member.tel3)) throw new CustomException("필수 값이 없습니다.");
         }
     }
 }
