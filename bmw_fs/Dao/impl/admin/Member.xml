@@ -15,6 +15,9 @@
       <result property="activeYn" column="ACTIVE_YN" />
       <result property="regDate" column="REG_DATE" />
       <result property="regId" column="REG_ID" />
+      <result property="tel1" column="tel1" />
+      <result property="tel2" column="tel2" />
+      <result property="tel3" column="tel3" />
     </resultMap>
   </resultMaps>
 
@@ -22,18 +25,21 @@
 
     <select id="findAll" resultMap="memberMap">
       SELECT *
-        FROM (
-          SELECT
+      FROM (
+        SELECT
           ROW_NUMBER() OVER(ORDER BY idx DESC) AS RNUM
-            ,IDX
-            ,USER_ID
-            ,ROLE
-            ,LOGIN_DATE
-            ,ACTIVE_YN
-            ,REG_DATE
-            ,REG_ID
-        FROM BMW_FS_ADMIN_MEMBER
-        WHERE 1=1
+          ,IDX
+          ,USER_ID
+          ,ROLE
+          ,LOGIN_DATE
+          ,ACTIVE_YN
+          ,REG_DATE
+          ,REG_ID
+          ,tel1
+          ,tel2
+          ,tel3
+      FROM BMW_FS_ADMIN_MEMBER
+      WHERE 1=1
       <isNotEmpty property="searchInput">
         <isNotEmpty property="searchOption">
           <isEqual property="searchOption" compareValue="id">
@@ -79,9 +85,12 @@
                 ,ACTIVE_YN
                 ,REG_DATE
                 ,REG_ID
-        FROM BMW_FS_ADMIN_MEMBER
+                ,tel1
+                ,tel2
+                ,tel3
+      FROM BMW_FS_ADMIN_MEMBER
       WHERE 1=1
-          AND IDX = #idx#
+      AND IDX = #idx#
     </select>
 
     <select id="findMemberForLogin" resultMap="memberMap">
@@ -92,9 +101,12 @@
                 ,ACTIVE_YN
                 ,REG_DATE
                 ,REG_ID
-        FROM BMW_FS_ADMIN_MEMBER
+                ,tel1
+                ,tel2
+                ,tel3
+      FROM BMW_FS_ADMIN_MEMBER
       WHERE 1=1
-        AND USER_ID = #userId#        
+      AND USER_ID = #userId#
     </select>
 
     <select id="findMemberDuplicated" resultClass="int">
@@ -105,26 +117,35 @@
 
     <insert id="insertMember">
       INSERT INTO BMW_FS_ADMIN_MEMBER (
-                   USER_ID                  
+                  USER_ID
                   ,ROLE
                   ,REG_ID
                   ,ACTIVE_YN
-                  )
+                  ,tel1
+                  ,tel2
+                  ,tel3
+      )
       VALUES (
-                  #userId#                 
-                 ,#role#
-                 ,#regId#
-                 ,#activeYn#
-                  )
+                  #userId#
+                  ,#role#
+                  ,#regId#
+                  ,#activeYn#
+                  ,#tel1#
+                  ,#tel2#
+                  ,#tel3#
+      )
     </insert>
 
-    <update id="updateMember">      
-        UPDATE BMW_FS_ADMIN_MEMBER
-            SET ROLE = #role#
-                 ,UPT_ID = #uptId#
-                 ,UPT_DATE = GETDATE()              
-                ,ACTIVE_YN = #activeYn#
-      WHERE IDX = #idx#
+    <update id="updateMember">
+      UPDATE BMW_FS_ADMIN_MEMBER
+        SET ROLE = #role#
+              ,UPT_ID = #uptId#
+              ,UPT_DATE = GETDATE()
+              ,ACTIVE_YN = #activeYn#
+              ,tel1 = #tel1#
+              ,tel2 = #tel2#
+              ,tel3 = #tel3#
+    WHERE IDX = #idx#
     </update>
 
     <delete id="deleteMember">

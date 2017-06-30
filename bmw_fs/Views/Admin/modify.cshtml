@@ -14,6 +14,10 @@
                     <th><label for="id">ID *</label></th>
                     <td>@ViewBag.item.userId</td>
                 </tr>
+                <tr>
+                    <th><label for="tel1">핸드폰번호</label></th>
+                    <td><input type="text" name="tel1" id="tel1" class="tel_num_input"  title="핸드폰번호" maxlength="3" value="@ViewBag.item.tel1"/> - <input type="text" name="tel2" id="tel2" class="tel_num_input"  title="핸드폰번호" maxlength="4" value="@ViewBag.item.tel2"/> - <input type="text" name="tel3" id="tel3" class="tel_num_input"  title="핸드폰번호" maxlength="4" value="@ViewBag.item.tel3"/></td>
+                </tr>
                 <!--
                 <tr>
                     <th><label for="pass">비밀번호 *</label></th>
@@ -54,6 +58,13 @@
     lnbSet(".admin_mgmt");
     function modForm() {
         var roleCnt = 0;
+
+        if (!$('#tel1').required()) return;
+        if (!$('#tel2').required()) return;
+        if (!$('#tel3').required()) return;
+        if (!$('#tel1').isnum()) return;
+        if (!$('#tel2').isnum()) return;
+        if (!$('#tel3').isnum()) return;
         /*
         if ($('#pass').val().trim() != '') {
             if (!$('#pass').isvalidpwd()) return;

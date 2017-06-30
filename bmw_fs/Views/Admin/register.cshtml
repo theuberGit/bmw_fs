@@ -13,6 +13,10 @@
                     <th><label for="id">ID *</label></th>
                     <td><input type="text" name="userId" id="id" class="" title="ID" maxlength="25"> <a href="javascript:void(0);" class="btn_defualt" id="btn_overlap" onclick="duplicationCheck();">check</a></td>
                 </tr>
+                <tr>
+                    <th>핸드폰번호</th>
+                    <td><input type="text" name="tel1" id="tel1" class="tel_num_input" title="핸드폰번호" maxlength="3"/> - <input type="text" name="tel2" id="tel2" class="tel_num_input" title="핸드폰번호" maxlength="4" /> - <input type="text" name="tel3" id="tel3" class="tel_num_input" title="핸드폰번호" maxlength="4" /></td>
+                </tr>
                 <!--
                 <tr>
                     <th><label for="pass">비밀번호 *</label></th>
@@ -96,6 +100,12 @@
             alert('아이디를 검증하세요.');
             return;
         }
+        if (!$('#tel1').required()) return;
+        if (!$('#tel2').required()) return;
+        if (!$('#tel3').required()) return;
+        if (!$('#tel1').isnum()) return;
+        if (!$('#tel2').isnum()) return;
+        if (!$('#tel3').isnum()) return;
         /*
         if (!$('#pass').required()) return;
         if (!$('#pass').isvalidpwd()) return;

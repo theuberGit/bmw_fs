@@ -18,6 +18,9 @@ namespace bmw_fs.Models.admin
         public DateTime regDate { get; set; }
         public String uptId { get; set; }
         public DateTime uptDate { get; set; }
+        public String tel1 { get; set; }
+        public String tel2 { get; set; }
+        public String tel3 { get; set; }
 
         public IList<String> roles { get; set; }
     }
