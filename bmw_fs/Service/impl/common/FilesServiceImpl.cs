@@ -80,6 +80,10 @@ namespace bmw_fs.Service.impl.common
                 if (file.ContentLength != 0)
                 {
                     String fileName = file.FileName;
+                    if(fileName.IndexOf("\\") != -1)
+                    {
+                        fileName = fileName.Substring(fileName.LastIndexOf("\\")+1);
+                    }
                     int typeIndex = fileName.LastIndexOf(".")+1;
                     String fileType = fileName.Substring(typeIndex, fileName.Length - typeIndex);
                     validationFileUpload(file, allowType, fileSize, fileType); //file type 및 size 체크
