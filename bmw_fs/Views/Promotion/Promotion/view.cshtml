@@ -48,7 +48,10 @@
 						@if ("Y".Equals(ViewBag.item.engYn)) {<td>있음</td>}
                         else {<td>없음</td>}
 						<th>배포</th>
-						<td>배포</td>
+						
+                        @if("Y".Equals(ViewBag.item.deployYn)){<td>배포</td>}
+                        else{<td>미배포</td>}
+                        
 					</tr>
 				</table>
 
