@@ -73,22 +73,24 @@ namespace bmw_fs.Service.impl.common
             Files fileItem = new Files();
             IList<int> fileTmpIdxs = new List<int>();
             int idx = 0;
-
+            int randIdx = 1;
             foreach (var file in files)
             {
+                randIdx++;
                 int fileIdx = -1;
                 if (file.ContentLength != 0)
                 {
                     String fileName = file.FileName;
-                    if(fileName.IndexOf("\\") != -1)
+                    if (fileName.IndexOf("\\") != -1)
                     {
-                        fileName = fileName.Substring(fileName.LastIndexOf("\\")+1);
+                        fileName = fileName.Substring(fileName.LastIndexOf("\\") + 1);
                     }
                     int typeIndex = fileName.LastIndexOf(".")+1;
                     String fileType = fileName.Substring(typeIndex, fileName.Length - typeIndex);
                     validationFileUpload(file, allowType, fileSize, fileType); //file type 및 size 체크
-                    String replaceName = replaceFileName();//파일 이름 변환
+                    String replaceName = ""+ randIdx + replaceFileName();//파일 이름 변환
                    
+
                     String path = Path.Combine(StringProperties.FILE_PATH, replaceName);
                     //폴더가 없으면 생성
                     if (!Directory.Exists(StringProperties.FILE_PATH))

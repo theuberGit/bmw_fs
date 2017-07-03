@@ -65,7 +65,12 @@ namespace bmw_fs.Controllers.login
                     var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                     HttpContext.Response.Cookies.Add(authCookie);
                     memberService.updateLoginDate(member);
-                    //smsService.insertSms("test", "010-5112-6486", "010-5112-6486", "contents");
+
+
+                    if (!String.IsNullOrWhiteSpace(member.tel1))
+                    {
+                        //smsService.insertSms("[BMW FS 관리자]", member.tel1+"-"+member.tel2+"-"+member.tel3, "02-3441-5439", "[BMW FS 관리자] " + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "에 로그인 되었습니다.");
+                    }
 
                     if (LoginSession.cookieValue.ContainsKey(model.userId))
                     {
