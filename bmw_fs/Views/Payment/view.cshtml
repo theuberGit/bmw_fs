@@ -3,11 +3,13 @@
 }
 <style>
 table.reg_table tr td.td_tit {font-weight: bold;}
+.reg .cont_bottom .reg_table td.smart{padding-left:0px;}
+table.reg_table tr td span.square{font-size:16px;}
 table.reg_table tr td label {margin-right: 15px}
 table.reg_table tr.item_area {display: none;}
 table.reg_table tr td span.result1, table.reg_table tr td span.result2, table.reg_table tr td span.result3 {display: none;}
 table.reg_table tr td span.on, table.reg_table tr td span.on, table.reg_table tr td span.on {display: inline-block;}
-    table.reg_table tr.off {display: none;}
+table.reg_table tr.off {display: none;}
 </style>
 <div id="content" class="reg">
     <div class="cont_top">
@@ -61,7 +63,7 @@ table.reg_table tr td span.on, table.reg_table tr td span.on, table.reg_table tr
                     <td>@ViewBag.item.itemName </td>
                 </tr>*@
                 <tr class="tr_zh">
-                    <td colspan="2" class="td_tit">SMART 할부</td>
+                    <td colspan="2" class="td_tit smart"><span class="square">■</span> &nbsp;SMART 할부</td>
                 </tr>
                 <tr class="tr_zh">
                     <th scope="row"><label for="zanga">잔가</label></th>
@@ -80,7 +82,7 @@ table.reg_table tr td span.on, table.reg_table tr td span.on, table.reg_table tr
                     <td>@ViewBag.item.zhPay3 원 <span class="zh result3"></span></td>
                 </tr>
                 <tr>
-                    <td colspan="2" class="td_tit">SMART 운용리스</td>
+                    <td colspan="2" class="td_tit smart"><span class="square">■</span> &nbsp;SMART 운용리스</td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="zanga">잔가</label></th>
@@ -99,7 +101,7 @@ table.reg_table tr td span.on, table.reg_table tr td span.on, table.reg_table tr
                     <td>@ViewBag.item.zlPay3 원 <span class="zl result3"></span></td>
                 </tr>
                 <tr class="tr_g">
-                    <td colspan="2" class="td_tit">일반 할부</td>
+                    <td colspan="2" class="td_tit smart"><span class="square">■</span> &nbsp;일반 할부</td>
                 </tr>
                 <tr class="tr_g">
                     <th scope="row"><label for="payment1">월 납입금 (선납 10%)</label></th>

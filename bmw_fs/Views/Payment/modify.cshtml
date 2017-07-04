@@ -4,6 +4,8 @@
 <style>
     .file_area:after{content:"* .jpg, .png 파일만 업로드 가능";}
     .file_area > div{height: 38px;}
+    .reg .cont_bottom .reg_table td.smart{padding-left:0px;}
+    table.reg_table tr td span.square{font-size:16px;}
     table.reg_table tr td.td_tit {font-weight: bold;}
     table.reg_table tr td label {margin-right: 15px}
     table.reg_table tr.item_area { display: none;}
@@ -97,7 +99,7 @@
                     </td>
                 </tr>*@
                 <tr class="zh">
-                    <td colspan="2" class="td_tit">SMART 할부</td>
+                    <td colspan="2" class="td_tit smart"><span class="square">■</span> SMART 할부</td>
                 </tr>
                 <tr class="zh">
                     <th scope="row"><label for="zhZanga">잔가</label></th>
@@ -116,7 +118,7 @@
                     <td><input type="text" name="zhPay3" id="zhPay3" class="zhPay3" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.zhPay3"/> 원 <span class="result3"></span></td>
                 </tr>
                 <tr>
-                    <td colspan="2" class="td_tit">SMART 운용리스</td>
+                    <td colspan="2" class="td_tit smart"><span class="square">■</span> SMART 운용리스</td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="zlZanga">잔가</label></th>
@@ -135,7 +137,7 @@
                     <td><input type="text" name="zlPay3" id="zlPay3" class="zlPay3" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.zlPay3"/> 원 <span class="result3"></span></td>
                 </tr>
                 <tr class="general">
-                    <td colspan="2" class="td_tit">일반 할부</td>
+                    <td colspan="2" class="td_tit smart"><span class="square">■</span> 일반 할부</td>
                 </tr>
                 <tr class="general">
                     <th scope="row"><label for="ghPay1">월 납입금 (선납 10%)</label></th>
