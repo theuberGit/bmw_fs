@@ -67,7 +67,7 @@ namespace bmw_fs.Controllers.login
                     memberService.updateLoginDate(member);
 
 
-                    if (!String.IsNullOrWhiteSpace(member.tel1))
+                    if (!String.IsNullOrWhiteSpace(member.tel1) && !String.IsNullOrWhiteSpace(member.tel2) && !String.IsNullOrWhiteSpace(member.tel3))
                     {
                         //smsService.insertSms("[BMW FS 관리자]", member.tel1+"-"+member.tel2+"-"+member.tel3, "02-3441-5439", "[BMW FS 관리자] " + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "에 로그인 되었습니다.");
                     }
@@ -88,16 +88,14 @@ namespace bmw_fs.Controllers.login
                     }
                 }
                 else
-                {
-                    //ModelState.AddModelError("", "Invalid login attempt.");
+                {                    
                     ViewBag.errorMsg = "Invalid login attempt.";
                     return View("~/Views/Login.cshtml", model);
                 }
 
             }
             else
-            {
-                //ModelState.AddModelError("", "Invalid login attempt.");
+            {                
                 ViewBag.errorMsg = "Invalid login attempt.";
                 return View("~/Views/Login.cshtml", model);
             }

@@ -42,7 +42,7 @@ body, html {
 #header .link_list{}
 
 #container{position:absolute; left:0; top:0; width:100%; min-height:100%;}
-#lnb{position:absolute; left:0; top:0; width:156px; height:100%; background-color:#f4f4f4;}
+#lnb{position:absolute; left:0; top:0; width:156px; background-color:#f4f4f4;}
 #lnb .menu_list{padding:157px 0 0 30px;}
 #lnb .menu_list > li{margin-bottom:18px}
 #lnb .menu_list > li > a{font-weight:bold; color:#3d3d3d;}
