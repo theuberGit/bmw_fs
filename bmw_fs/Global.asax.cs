@@ -20,17 +20,45 @@ namespace bmw_fs
             log4net.Config.XmlConfigurator.Configure();
         }
 
+        void Application_PreRequestHandlerExecute(object sender, EventArgs e)
+        {            
+            var authCookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
+            if (authCookie != null)
+            {
+                FormsAuthenticationTicket objOrigTicket = FormsAuthentication.Decrypt(authCookie.Value);                
+                FormsAuthenticationTicket objNewTicket = FormsAuthentication.RenewTicketIfOld(objOrigTicket);
+
+                if (objNewTicket.Expiration > objOrigTicket.Expiration)
+                {                        
+                    HttpCookie objCookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(objNewTicket));                      
+                    Response.Cookies.Add(objCookie);                        
+                    objOrigTicket = objNewTicket;
+
+                    if (LoginSession.cookieValue.ContainsKey(objOrigTicket.Name))
+                    {
+                        LoginSession.cookieValue.Remove(objOrigTicket.Name);
+                    }
+                    LoginSession.cookieValue.Add(objOrigTicket.Name, objCookie.Value);
+                }
+                
+            }
+        }
+
+        
         protected void Application_PostAuthenticateRequest(Object sender, EventArgs e)
         {
             var authCookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
             if (authCookie != null)
             {                
                 FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+                
                 if (authTicket != null && !authTicket.Expired)
-                {
+                {                    
                     var roles = authTicket.UserData.Split(',');
                     HttpContext.Current.User = new System.Security.Principal.GenericPrincipal(new FormsIdentity(authTicket), roles);
+                    
                 }
+                
                 //중복 로그인 방지
                 if (LoginSession.cookieValue.ContainsKey(authTicket.Name))
                 {
@@ -39,8 +67,10 @@ namespace bmw_fs
                         FormsAuthentication.SignOut();
                     }
                 }
+                
             }
         }
+        
         
         
         protected void Application_Error(object sender, EventArgs e)

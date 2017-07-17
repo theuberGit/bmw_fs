@@ -60,7 +60,7 @@ namespace bmw_fs.Controllers.login
                 {
                     FormsAuthentication.SetAuthCookie(model.userId, false);
 
-                    var authTicket = new FormsAuthenticationTicket(1, member.userId, DateTime.Now, DateTime.Now.AddMinutes(20), false, member.role);
+                    var authTicket = new FormsAuthenticationTicket(1, member.userId, DateTime.Now, DateTime.Now.AddMinutes(30), false, member.role);
                     string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                     var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                     HttpContext.Response.Cookies.Add(authCookie);
