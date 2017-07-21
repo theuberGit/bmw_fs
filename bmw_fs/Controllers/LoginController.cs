@@ -56,11 +56,12 @@ namespace bmw_fs.Controllers.login
                     return View("~/Views/Login.cshtml", model);
                 }
                 */
+                
                 if (isLogin)
                 {
                     FormsAuthentication.SetAuthCookie(model.userId, false);
 
-                    var authTicket = new FormsAuthenticationTicket(1, member.userId, DateTime.Now, DateTime.Now.AddMinutes(30), false, member.role);
+                    var authTicket = new FormsAuthenticationTicket(1, member.userId, DateTime.Now, DateTime.Now.AddMinutes(15), false, member.role);
                     string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                     var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                     HttpContext.Response.Cookies.Add(authCookie);
@@ -69,7 +70,7 @@ namespace bmw_fs.Controllers.login
 
                     if (!String.IsNullOrWhiteSpace(member.tel1) && !String.IsNullOrWhiteSpace(member.tel2) && !String.IsNullOrWhiteSpace(member.tel3))
                     {
-                        //smsService.insertSms("[BMW FS 관리자]", member.tel1+"-"+member.tel2+"-"+member.tel3, "02-3441-5439", "[BMW FS 관리자] " + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "에 로그인 되었습니다.");
+                        smsService.insertSms("[BMW FS 관리자]", member.tel1+"-"+member.tel2+"-"+member.tel3, "02-3441-5439", "[BMW FS 관리자] " + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "에 로그인 되었습니다.");
                     }
 
                     if (LoginSession.cookieValue.ContainsKey(model.userId))

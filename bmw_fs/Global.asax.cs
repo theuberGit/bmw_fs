@@ -19,7 +19,7 @@ namespace bmw_fs
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             log4net.Config.XmlConfigurator.Configure();
         }
-
+        
         void Application_PreRequestHandlerExecute(object sender, EventArgs e)
         {            
             var authCookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
