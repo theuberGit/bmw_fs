@@ -73,10 +73,8 @@ namespace bmw_fs.Service.impl.common
             Files fileItem = new Files();
             IList<int> fileTmpIdxs = new List<int>();
             int idx = 0;
-            int randIdx = 1;
             foreach (var file in files)
             {
-                randIdx++;
                 int fileIdx = -1;
                 if (file.ContentLength != 0)
                 {
@@ -88,7 +86,7 @@ namespace bmw_fs.Service.impl.common
                     int typeIndex = fileName.LastIndexOf(".")+1;
                     String fileType = fileName.Substring(typeIndex, fileName.Length - typeIndex);
                     validationFileUpload(file, allowType, fileSize, fileType); //file type 및 size 체크
-                    String replaceName = ""+ randIdx + replaceFileName();//파일 이름 변환
+                    String replaceName = replaceFileName();//파일 이름 변환
                    
 
                     String path = Path.Combine(StringProperties.FILE_PATH, replaceName);
@@ -238,7 +236,7 @@ namespace bmw_fs.Service.impl.common
         }
 
         private String replaceFileName()
-        {
+        {           
             Guid guid = Guid.NewGuid();
             return guid.ToString();
         }
