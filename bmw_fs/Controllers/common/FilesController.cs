@@ -5,6 +5,7 @@ using bmw_fs.Service.impl.common;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Web;
 using System.Web.Mvc;
 
@@ -46,18 +47,20 @@ namespace bmw_fs.Controllers.common
 
         }
 
+        [AcceptVerbs(HttpVerbs.Get)]
         public FileResult imageView(Files files)
         {
             Files item = filesService.findAllByIdx(files);
             if (item != null)
             {
-                return File(StringProperties.FILE_PATH + "/" + item.savedFilename, "image/jpg");
+                var path = StringProperties.FILE_PATH + "/" + item.savedFilename;
+                return new FileStreamResult(new FileStream(path, FileMode.Open), "image/jpeg");
             }
             else
             {
                 return null;
             }
-        }
+        }        
 
         public ActionResult photoUpload(String callback_func)
         {

@@ -457,6 +457,10 @@
     <Content Include="Views\Promotion\MobilePromotion\modify.cshtml" />
     <Content Include="Views\Promotion\MobilePromotion\register.cshtml" />
     <Content Include="Views\Promotion\MobilePromotion\view.cshtml" />
+    <Content Include="Views\Promotion\Promotion\list.cshtml" />
+    <Content Include="Views\Promotion\Promotion\modify.cshtml" />
+    <Content Include="Views\Promotion\Promotion\register.cshtml" />
+    <Content Include="Views\Promotion\Promotion\view.cshtml" />
     <Content Include="Views\Recruit\RecruitFaq\list.cshtml" />
     <Content Include="Views\Recruit\RecruitFaq\modify.cshtml" />
     <Content Include="Views\Recruit\RecruitFaq\register.cshtml" />
@@ -482,10 +486,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Promotion\Promotion\list.cshtml" />
-    <Content Include="Views\Promotion\Promotion\modify.cshtml" />
-    <Content Include="Views\Promotion\Promotion\register.cshtml" />
-    <Content Include="Views\Promotion\Promotion\view.cshtml" />
     <Content Include="SqlMapSms.config" />
   </ItemGroup>
   <ItemGroup>
