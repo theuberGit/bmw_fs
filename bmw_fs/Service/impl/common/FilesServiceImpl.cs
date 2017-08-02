@@ -239,10 +239,8 @@ namespace bmw_fs.Service.impl.common
 
         private String replaceFileName()
         {
-            Random random = new Random();
-            String copyFileName = ""+ random.Next(Int32.MaxValue) + random.Next(Int32.MaxValue) + random.Next(Int32.MaxValue);
-            String replaceName = copyFileName + ".tmp";
-            return replaceName;
+            Guid guid = new Guid();
+            return guid.ToString();
         }
 
         private Boolean deleteRealFile(Files files)
