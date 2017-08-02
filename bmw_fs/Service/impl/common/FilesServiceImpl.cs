@@ -239,7 +239,7 @@ namespace bmw_fs.Service.impl.common
 
         private String replaceFileName()
         {
-            Guid guid = new Guid();
+            Guid guid = Guid.NewGuid();
             return guid.ToString();
         }
 
