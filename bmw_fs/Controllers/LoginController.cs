@@ -44,8 +44,8 @@ namespace bmw_fs.Controllers.login
             if(member != null)
             {
                 LdapAuthenticationService ldapService = new LdapAuthenticationService("LDAP://" + _domain);
-                Boolean isLogin = true;
-                /*
+                //Boolean isLogin = true;
+                
                 Boolean isLogin = false;
                 try { 
                     isLogin = ldapService.IsAuthenticated(_domain, model.userId, model.password);
@@ -55,13 +55,13 @@ namespace bmw_fs.Controllers.login
                     ViewBag.errorMsg = "Invalid login attempt.";
                     return View("~/Views/Login.cshtml", model);
                 }
-                */
+                
                 
                 if (isLogin)
                 {
                     FormsAuthentication.SetAuthCookie(model.userId, false);
 
-                    var authTicket = new FormsAuthenticationTicket(1, member.userId, DateTime.Now, DateTime.Now.AddMinutes(15), false, member.role);
+                    var authTicket = new FormsAuthenticationTicket(1, member.userId, DateTime.Now, DateTime.Now.AddMinutes(30), false, member.role);
                     string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                     var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                     HttpContext.Response.Cookies.Add(authCookie);
