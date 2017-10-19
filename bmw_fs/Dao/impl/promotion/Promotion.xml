@@ -39,6 +39,7 @@
       <result property="noteEng" column="NOTE_ENG" />
       <result property="regDate" column="REG_DATE" />
       <result property="regId" column="REG_ID" />
+      <result property="brand" column="BRAND" />
     </resultMap>
     
     <resultMap id="promotionUrlMap" class="PromotionUrlClass">
@@ -117,6 +118,7 @@
       ,NOTE_ENG
       ,REG_DATE
       ,REG_ID
+      ,BRAND
       FROM BMW_FS_PROMOTION
       WHERE IDX = #idx#
     </select>
@@ -145,6 +147,7 @@
       ,NOTE
       ,NOTE_ENG
       ,REG_ID
+      ,BRAND
       )
       VALUES (
       #idx#
@@ -168,6 +171,7 @@
       ,#note#
       ,#noteEng#
       ,#regId#
+      ,#brand#
       )
     </insert>
 
@@ -194,6 +198,7 @@
       ,NOTE_ENG = #noteEng#
       ,UPT_DATE = getDate()
       ,UPT_ID = #uptId#
+      ,BRAND = #brand#
       WHERE IDX = #idx#
     </update>
 

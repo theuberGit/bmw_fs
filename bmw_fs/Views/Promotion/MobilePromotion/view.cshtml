@@ -34,6 +34,11 @@
 						@if ("P".Equals(ViewBag.item.category)) {<td colspan="3">프로모션</td>}
                         else if("E".Equals(ViewBag.item.category)){<td colspan="3">이벤트</td>}
 					</tr>
+                    <tr>
+						<th>브랜드</th>
+						@if ("B".Equals(ViewBag.item.brand)) {<td colspan="3">BMW</td>}
+                        else if("M".Equals(ViewBag.item.brand)){<td colspan="3">MINI</td>}
+					</tr>
 					<tr>
 						<th>작성일</th>
 						<td>@ViewBag.item.regDate</td>

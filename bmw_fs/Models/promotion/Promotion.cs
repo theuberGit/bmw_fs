@@ -43,5 +43,7 @@ namespace bmw_fs.Models.promotion
 
         public IList<String> mainImgLinks { get; set; } //국문 본문이미지 url
         public IList<String> mainImgEngLinks { get; set; } //영문 본문이미지 url
+
+        public String brand { get; set; }
     }
 }
