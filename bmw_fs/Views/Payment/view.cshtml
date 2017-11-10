@@ -14,7 +14,8 @@ table.reg_table tr.off {display: none;}
         <h3>월 납입금 관리</h3>
     </div>
     <div class="cont_bottom">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data" id="payForm">
+            <input type="hidden" name="idx" value="@ViewBag.item.idx" />
             <table class="reg_table">
                 <caption>월 납입금 뷰 테이블</caption>
                 <colgroup>
@@ -26,15 +27,15 @@ table.reg_table tr.off {display: none;}
                     <td>@ViewBag.item.regId</td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="category">분류</label></th>
+                    <th scope="row"><label for="category">분류 </label></th>
                     <td>@ViewBag.item.brand @ViewBag.item.series @ViewBag.item.model</td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="modelName">* 상세 모델</label></th>
+                    <th scope="row"><label for="modelName">상세 모델 </label></th>
                     <td>@ViewBag.item.modelName </td>
                 </tr>
                 <tr class="add_img_area">
-                    <th>* 차량 이미지</th>
+                    <th>차량 이미지 </th>
                     <td class="file_area">
                         @foreach (var file in ViewBag.carList)
                         {
@@ -43,12 +44,16 @@ table.reg_table tr.off {display: none;}
                     </td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="price">* 차량가격</label></th>
+                    <th scope="row"><label for="price">차량가격 </label></th>
                     <td>@ViewBag.item.price  원</td>
                 </tr>
                 <tr>
-                    <th><label for="">배포 *</label></th>
+                    <th><label for="">배포 </label></th>
                     <td class="radio_area">@ViewBag.item.deployYn</td>
+                </tr>
+                <tr>
+                    <th><label for="">프로그램 선택 </label></th>
+                    <td class="">@ViewBag.item.programsKo</td>
                 </tr>
             </table>
             <table class="reg_table">
@@ -113,8 +118,22 @@ table.reg_table tr.off {display: none;}
                     <th scope="row"><label for="payment3">월 납입금 (선납 30%)</label></th>
                     <td>@ViewBag.item.ghPay3 원 <span class="general result3"></span></td>
                 </tr>
+                <tr class="tr_g">
+                    <td colspan="2" class="td_tit smart"><span class="square">■</span> &nbsp;SMART 렌트</td>
+                </tr>
+                <tr class="tr_g">
+                    <th scope="row"><label for="payment1">월 납입금 (선납 10%)</label></th>
+                    <td>@ViewBag.item.rtPay1 원 <span class="general result1"></span></td>
+                </tr>
+                <tr class="tr_g">
+                    <th scope="row"><label for="payment2">월 납입금 (선납 20%)</label></th>
+                    <td>@ViewBag.item.rtPay2 원 <span class="general result2"></span></td>
+                </tr>
+                <tr class="tr_g">
+                    <th scope="row"><label for="payment3">월 납입금 (선납 30%)</label></th>
+                    <td>@ViewBag.item.rtPay3 원 <span class="general result3"></span></td>
+                </tr>
             </table>
-            <input type="hidden" name="idx" value="@ViewBag.item.idx" />
         </form>
         <div class="btn_area">
             <a href="list?@Session["searchString"]" class="btn_defualt btn_list">목록</a>
@@ -152,11 +171,11 @@ table.reg_table tr.off {display: none;}
     $('.result2').text("(" + addComma(parseInt(result2)) + "원)");
     $('.result3').text("(" + addComma(parseInt(result3)) + "원)");
     function modForm() {
-        $('form').attr('action', 'modify').submit();
+        $('#payForm').attr('action', 'modify').submit();
     }
 
     function delForm() {
         if (!confirm('삭제하시겠습니까?')) return;
-        $('form').attr('action', 'delete').submit();
+        $('#payForm').attr('action', 'delete').submit();
     }
 </script>

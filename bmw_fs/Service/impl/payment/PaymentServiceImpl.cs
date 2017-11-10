@@ -10,6 +10,7 @@ using bmw_fs.Service.impl.common;
 using IBatisNet.DataMapper;
 using bmw_fs.Common;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace bmw_fs.Service.impl.payment
 {
@@ -52,6 +53,22 @@ namespace bmw_fs.Service.impl.payment
         {
             int masterIdx = sequenceService.getSequenceMasterIdx();
             payment.idx = masterIdx;
+            String programs = "";
+            if(payment.programs.Count!= 0)
+            {
+                for (int i= 0; i < payment.programs.Count; i++)
+                {
+                    if (i == 0)
+                    {
+                        programs = payment.programs[i];
+                    }
+                    else
+                    {
+                        programs = programs + "," + payment.programs[i];
+                    }
+                }
+                payment.program = programs;
+            }
             validation(payment);
             try {                 
                 Mapper.Instance().BeginTransaction();                
@@ -67,6 +84,22 @@ namespace bmw_fs.Service.impl.payment
 
         public void updatePayment(HttpFileCollectionBase multipartFiles, Payment payment)
         {
+            String programs = "";
+            if (payment.programs.Count != 0)
+            {
+                for (int i = 0; i < payment.programs.Count; i++)
+                {
+                    if (i == 0)
+                    {
+                        programs = payment.programs[i];
+                    }
+                    else
+                    {
+                        programs = programs + "," + payment.programs[i];
+                    }
+                }
+                payment.program = programs;
+            }
             validation(payment);
             try {
                 Mapper.Instance().BeginTransaction();
@@ -85,7 +118,8 @@ namespace bmw_fs.Service.impl.payment
             if (String.IsNullOrWhiteSpace(payment.series)) throw new CustomException("필수 값이 없습니다.(시리즈)");
             if (String.IsNullOrWhiteSpace(payment.modelName)) throw new CustomException("필수 값이 없습니다.(모델명)");
             if (String.IsNullOrWhiteSpace(payment.price)) throw new CustomException("필수 값이 없습니다.(가격)");
-            if (String.IsNullOrWhiteSpace(payment.deployYn)) throw new CustomException("필수 값이 없습니다.(가격)");
+            if (String.IsNullOrWhiteSpace(payment.deployYn)) throw new CustomException("필수 값이 없습니다.(배포)");
+            if (String.IsNullOrWhiteSpace(payment.program)) throw new CustomException("필수 값이 없습니다.(프로그램)");
 
         }
     }

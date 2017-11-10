@@ -29,6 +29,7 @@
                     <option value="zangaHalbu">SMART 할부</option>
                     <option value="zangaLease">SAMRT 운용리스</option>
                     <option value="generalHalbu">일반 할부</option>
+                    <option value="smartRent">SMART 렌트</option>
                 </select>
                 <button type="button" onclick="searchList();"></button>
             </div>
@@ -115,6 +116,16 @@
                                 <td class="co8 price">@ViewBag.list[i].ghPay2</td>
                                 <td class="co9 price pay3_@i"></td>
                                 <td class="co10 price">@ViewBag.list[i].ghPay3</td>
+                            }
+                            else if ("smartRent".Equals(ViewBag.pagination.searchOption))
+                            {
+                                <td class="co4"></td>
+                                <td class="co5 price pay1_@i"></td>
+                                <td class="co6 price">@ViewBag.list[i].rtPay1</td>
+                                <td class="co7 price pay2_@i"></td>
+                                <td class="co8 price">@ViewBag.list[i].rtPay2</td>
+                                <td class="co9 price pay3_@i"></td>
+                                <td class="co10 price">@ViewBag.list[i].rtPay3</td>
                             }
                             <td class="co11">@ViewBag.list[i].deployYn</td>
                         </tr>
@@ -270,5 +281,4 @@
     $('select[name="series"]').val('@ViewBag.pagination.series');
     $('#series').trigger('change');
     $('select[name="model"]').val('@ViewBag.pagination.model');
-    $('select[name="item"]').val('@ViewBag.pagination.item');
 </script>

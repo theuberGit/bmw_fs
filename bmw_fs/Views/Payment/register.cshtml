@@ -59,10 +59,19 @@
                     <td><input type="text" name="price" id="price" class="price" maxlength="50" title="차량가격" onkeyup="inputNumberFormat(this)" /> 원</td>
                 </tr>
                 <tr>
-                    <th><label for="">배포 *</label></th>
+                    <th><label for="">* 배포</label></th>
                     <td class="radio_area">
                         <label for="active"><input type="radio" name="deployYn" id="active" value="Y" title="배포 여부"> 배포</label>
                         <label for="inactivity"><input type="radio" name="deployYn" id="inactivity" checked value="N" title="배포 여부"> 미배포</label>
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="program">* 프로그램 선택</label></th>
+                    <td>
+                        <input type="checkbox" name="programs" id="ZH" class="pr_zh" value="ZH" /><label for="ZH"> SMART 할부</label>&nbsp;&nbsp;
+                        <input type="checkbox" name="programs" id="ZL" class="pr_zl" value="ZL" /><label for="ZL"> SMART 운용리스</label>&nbsp;&nbsp;
+                        <input type="checkbox" name="programs" id="GH" class="pr_gh" value="GH" /><label for="GH"> 일반 할부</label>&nbsp;&nbsp;
+                        <input type="checkbox" name="programs" id="RT" class="pr_rt" value="RT" /><label for="RT"> SMART 렌트</label>&nbsp;&nbsp;
                     </td>
                 </tr>
             </table>
@@ -132,6 +141,21 @@
                 <tr class="general">
                     <th scope="row"><label for="ghPay3">월 납입금 (선납 30%)</label></th>
                     <td><input type="text" name="ghPay3" id="ghPay3" class="ghPay3" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span class="result3"></span></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="td_tit smart"><span class="square">■</span> SMART 렌트</td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="rtPay1">월 납입금 (선납 10%)</label></th>
+                    <td><input type="text" name="rtPay1" id="rtPay1" class="rtPay1" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span class="result1"></span></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="rtPay2">월 납입금 (선납 20%)</label></th>
+                    <td><input type="text" name="rtPay2" id="rtPay2" class="rtPay2" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span class="result2"></span></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="rtPay3">월 납입금 (선납 30%)</label></th>
+                    <td><input type="text" name="rtPay3" id="rtPay3" class="rtPay3" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span class="result3"></span></td>
                 </tr>
             </table>
             <input type="hidden" name="regId" id="regId" value="@HttpContext.Current.User.Identity.Name" />
@@ -257,8 +281,12 @@
         $('#model').append(model);
 
         if (val != "i") {
+            $('#ZH').attr('disabled', false);
             $('.zh').removeClass('off');
         } else {
+            //i시리즈 선택시 
+            $('#ZH').prop("checked", false);
+            $('#ZH').attr('disabled', true); //프로그램 SMART할부 체크박스 비활성화
             $('#zhZanga').val('');
             $('#zhPay1').val('');
             $('#zhPay2').val('');
@@ -305,7 +333,22 @@
             alert('차량 이미지를 등록하세요.');
            return;
         }
+
+        var prCnt = 0;
         if (!$('#price').required()) return;
+        $('input[name="programs"]').each(function () {
+            if ($(this).prop('checked')) {
+                prCnt++;
+            }
+        });
+        if (prCnt == 0) {
+            alert('프로그램을 선택해주세요.');
+            return;
+        } else if (prCnt < 2 || prCnt > 3 ){
+            alert('프로그램은 최소2개, 최대3개까지 선택 가능합니다.');
+            return;
+        } 
+
         if (!$('input[name=deployYn]').reqRadio()) return;
 
         if (!validationFileType('jpg, png')) return;

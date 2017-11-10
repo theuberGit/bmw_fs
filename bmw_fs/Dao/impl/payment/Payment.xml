@@ -12,6 +12,7 @@
       <result property="model" column="MODEL" />
       <result property="modelName" column="MODELNAME" />
       <result property="price" column="PRICE" />
+      <result property="program" column="PROGRAM" />
       <result property="zlZanga" column="ZL_ZANGA" />
       <result property="zlPay1" column="ZL_PAY1" />
       <result property="zlPay2" column="ZL_PAY2" />
@@ -23,6 +24,9 @@
       <result property="ghPay1" column="GH_PAY1" />
       <result property="ghPay2" column="GH_PAY2" />
       <result property="ghPay3" column="GH_PAY3" />
+      <result property="rtPay1" column="RT_PAY1" />
+      <result property="rtPay2" column="RT_PAY2" />
+      <result property="rtPay3" column="RT_PAY3" />
       <result property="deployYn" column="DEPLOY_YN" />
       <result property="regDate" column="REG_DATE" />
       <result property="regId" column="REG_ID" />
@@ -36,26 +40,30 @@
       FROM (
       SELECT
       ROW_NUMBER() OVER(ORDER BY IDX DESC) AS RNUM
-        , IDX
-        , BRAND
-        , SERIES
-        , MODEL
-        , MODELNAME
-        , PRICE
-        , ZL_ZANGA
-        , ZL_PAY1
-        , ZL_PAY2
-        , ZL_PAY3
-        , ZH_ZANGA
-        , ZH_PAY1
-        , ZH_PAY2
-        , ZH_PAY3
-        , GH_PAY1
-        , GH_PAY2
-        , GH_PAY3
-        , DEPLOY_YN
-        , REG_DATE
-        , REG_ID
+      , IDX
+      , BRAND
+      , SERIES
+      , MODEL
+      , MODELNAME
+      , PRICE
+      , PROGRAM
+      , ZL_ZANGA
+      , ZL_PAY1
+      , ZL_PAY2
+      , ZL_PAY3
+      , ZH_ZANGA
+      , ZH_PAY1
+      , ZH_PAY2
+      , ZH_PAY3
+      , GH_PAY1
+      , GH_PAY2
+      , GH_PAY3
+      , RT_PAY1
+      , RT_PAY2
+      , RT_PAY3
+      , DEPLOY_YN
+      , REG_DATE
+      , REG_ID
       FROM BMW_FS_PAYMENT
       WHERE 1=1
       <isNotEmpty property="brand">
@@ -94,6 +102,7 @@
       , MODEL
       , MODELNAME
       , PRICE
+      , PROGRAM
       , ZL_ZANGA
       , ZL_PAY1
       , ZL_PAY2
@@ -105,6 +114,9 @@
       , GH_PAY1
       , GH_PAY2
       , GH_PAY3
+      , RT_PAY1
+      , RT_PAY2
+      , RT_PAY3
       , DEPLOY_YN
       , REG_DATE
       , REG_ID
@@ -121,6 +133,7 @@
       , MODEL
       , MODELNAME
       , PRICE
+      , PROGRAM
       , ZL_ZANGA
       , ZL_PAY1
       , ZL_PAY2
@@ -132,6 +145,9 @@
       , GH_PAY1
       , GH_PAY2
       , GH_PAY3
+      , RT_PAY1
+      , RT_PAY2
+      , RT_PAY3
       , DEPLOY_YN
       , REG_ID
       )
@@ -142,6 +158,7 @@
       ,#model#
       ,#modelName#
       ,#price#
+      ,#program#
       ,#zlZanga#
       ,#zlPay1#
       ,#zlPay2#
@@ -153,6 +170,9 @@
       ,#ghPay1#
       ,#ghPay2#
       ,#ghPay3#
+      ,#rtPay1#
+      ,#rtPay2#
+      ,#rtPay3#
       ,#deployYn#
       ,#regId#
       )
@@ -166,6 +186,7 @@
       ,MODEL = #model#
       ,MODELNAME = #modelName#
       ,PRICE = #price#
+      ,PROGRAM = #program#
       , ZL_ZANGA = #zlZanga#
       , ZL_PAY1 = #zlPay1#
       , ZL_PAY2 = #zlPay2#
@@ -177,6 +198,9 @@
       , GH_PAY1 = #ghPay1#
       , GH_PAY2 = #ghPay2#
       , GH_PAY3 = #ghPay3#
+      , RT_PAY1 = #rtPay1#
+      , RT_PAY2 = #rtPay2#
+      , RT_PAY3 = #rtPay3#
       ,DEPLOY_YN  = #deployYn#
       ,UPT_DATE = getDate()
       ,UPT_ID = #uptId#

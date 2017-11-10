@@ -58,6 +58,7 @@ namespace bmw_fs.Controllers.payment
         public ActionResult modify(Payment payment)
         {
             Payment item = paymentService.findPayment(payment);
+            item.programs = item.program.Split(',');
             ViewBag.item = item;
             ViewBag.carList = filesService.findAllByMasterIdxAndType(item.idx, "carImg");
             return View();
