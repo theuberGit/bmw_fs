@@ -65,74 +65,111 @@ table.reg_table tr.off {display: none;}
                     <th scope="row"><label for="item">* 상품 선택</label></th>
                     <td>@ViewBag.item.itemName </td>
                 </tr>*@
-                <tr class="tr_zh">
-                    <td colspan="2" class="td_tit smart"><span class="square">■</span> &nbsp;SMART 할부</td>
-                </tr>
-                <tr class="tr_zh">
-                    <th scope="row"><label for="zanga">잔가</label></th>
-                    <td>@ViewBag.item.zhZanga <span>%</span></td>
-                </tr>
-                <tr class="tr_zh">
-                    <th scope="row"><label for="payment1">월 납입금 (선납 10%)</label></th>
-                    <td>@ViewBag.item.zhPay1 원 <span class="zh result1"></span></td>
-                </tr>
-                <tr class="tr_zh">
-                    <th scope="row"><label for="payment2">월 납입금 (선납 20%)</label></th>
-                    <td>@ViewBag.item.zhPay2 원 <span class="zh result2"></span></td>
-                </tr>
-                <tr class="tr_zh">
-                    <th scope="row"><label for="payment3">월 납입금 (선납 30%)</label></th>
-                    <td>@ViewBag.item.zhPay3 원 <span class="zh result3"></span></td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="td_tit smart"><span class="square">■</span> &nbsp;SMART 운용리스</td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="zanga">잔가</label></th>
-                    <td>@ViewBag.item.zlZanga <span>%</span></td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="payment1">월 납입금 (선납 10%)</label></th>
-                    <td>@ViewBag.item.zlPay1 원 <span class="zl result1"></span></td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="payment2">월 납입금 (선납 20%)</label></th>
-                    <td>@ViewBag.item.zlPay2 원 <span class="zl result2"></span></td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="payment3">월 납입금 (선납 30%)</label></th>
-                    <td>@ViewBag.item.zlPay3 원 <span class="zl result3"></span></td>
-                </tr>
-                <tr class="tr_g">
-                    <td colspan="2" class="td_tit smart"><span class="square">■</span> &nbsp;일반 할부</td>
-                </tr>
-                <tr class="tr_g">
-                    <th scope="row"><label for="payment1">월 납입금 (선납 10%)</label></th>
-                    <td>@ViewBag.item.ghPay1 원 <span class="general result1"></span></td>
-                </tr>
-                <tr class="tr_g">
-                    <th scope="row"><label for="payment2">월 납입금 (선납 20%)</label></th>
-                    <td>@ViewBag.item.ghPay2 원 <span class="general result2"></span></td>
-                </tr>
-                <tr class="tr_g">
-                    <th scope="row"><label for="payment3">월 납입금 (선납 30%)</label></th>
-                    <td>@ViewBag.item.ghPay3 원 <span class="general result3"></span></td>
-                </tr>
-                <tr class="tr_g">
-                    <td colspan="2" class="td_tit smart"><span class="square">■</span> &nbsp;SMART 렌트</td>
-                </tr>
-                <tr class="tr_g">
-                    <th scope="row"><label for="payment1">월 납입금 (선납 10%)</label></th>
-                    <td>@ViewBag.item.rtPay1 원 <span class="general result1"></span></td>
-                </tr>
-                <tr class="tr_g">
-                    <th scope="row"><label for="payment2">월 납입금 (선납 20%)</label></th>
-                    <td>@ViewBag.item.rtPay2 원 <span class="general result2"></span></td>
-                </tr>
-                <tr class="tr_g">
-                    <th scope="row"><label for="payment3">월 납입금 (선납 30%)</label></th>
-                    <td>@ViewBag.item.rtPay3 원 <span class="general result3"></span></td>
-                </tr>
+
+                @if (String.Join(",", ViewBag.item.programs).Contains("ZH"))
+                {
+                    <tr class="tr_zh">
+                        <td colspan="2" class="td_tit smart"><span class="square">■</span> &nbsp;SMART/SMILE 할부</td>
+                    </tr>
+                    <tr class="tr_zh">
+                        <th scope="row"><label for="zanga">잔가</label></th>
+                        <td>@ViewBag.item.zhZanga <span>%</span></td>
+                    </tr>
+                    <tr class="tr_zh">
+                        <th scope="row"><label for="payment1">월 납입금 (선납 10%)</label></th>
+                        <td>@ViewBag.item.zhPay1 원 <span class="zh result1"></span></td>
+                    </tr>
+                    <tr class="tr_zh">
+                        <th scope="row"><label for="payment2">월 납입금 (선납 20%)</label></th>
+                        <td>@ViewBag.item.zhPay2 원 <span class="zh result2"></span></td>
+                    </tr>
+                    <tr class="tr_zh">
+                        <th scope="row"><label for="payment3">월 납입금 (선납 30%)</label></th>
+                        <td>@ViewBag.item.zhPay3 원 <span class="zh result3"></span></td>
+                    </tr>
+                }
+                @if (String.Join(",", ViewBag.item.programs).Contains("ZL"))
+                {
+                    <tr>
+                        <td colspan="2" class="td_tit smart"><span class="square">■</span> &nbsp;SMART/SMILE 운용리스</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="zanga">잔가</label></th>
+                        <td>@ViewBag.item.zlZanga <span>%</span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="payment1">월 납입금 (선납 10%)</label></th>
+                        <td>@ViewBag.item.zlPay1 원 <span class="zl result1"></span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="payment2">월 납입금 (선납 20%)</label></th>
+                        <td>@ViewBag.item.zlPay2 원 <span class="zl result2"></span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="payment3">월 납입금 (선납 30%)</label></th>
+                        <td>@ViewBag.item.zlPay3 원 <span class="zl result3"></span></td>
+                    </tr>
+                }
+                @if (String.Join(",", ViewBag.item.programs).Contains("GH"))
+                {
+                    <tr class="tr_g">
+                        <td colspan="2" class="td_tit smart"><span class="square">■</span> &nbsp;일반 할부</td>
+                    </tr>
+                    <tr class="tr_g">
+                        <th scope="row"><label for="payment1">월 납입금 (선납 10%)</label></th>
+                        <td>@ViewBag.item.ghPay1 원 <span class="general result1"></span></td>
+                    </tr>
+                    <tr class="tr_g">
+                        <th scope="row"><label for="payment2">월 납입금 (선납 20%)</label></th>
+                        <td>@ViewBag.item.ghPay2 원 <span class="general result2"></span></td>
+                    </tr>
+                    <tr class="tr_g">
+                        <th scope="row"><label for="payment3">월 납입금 (선납 30%)</label></th>
+                        <td>@ViewBag.item.ghPay3 원 <span class="general result3"></span></td>
+                    </tr>
+                }
+                @if (String.Join(",", ViewBag.item.programs).Contains("RT"))
+                {
+                    <tr class="tr_g">
+                        <td colspan="2" class="td_tit smart"><span class="square">■</span> &nbsp;SMART 렌트</td>
+                    </tr>
+                    <tr class="tr_g">
+                        <th scope="row"><label for="payment1">월 납입금 (선납 10%)</label></th>
+                        <td>@ViewBag.item.rtPay1 원 <span class="general result1"></span></td>
+                    </tr>
+                    <tr class="tr_g">
+                        <th scope="row"><label for="payment2">월 납입금 (선납 20%)</label></th>
+                        <td>@ViewBag.item.rtPay2 원 <span class="general result2"></span></td>
+                    </tr>
+                    <tr class="tr_g">
+                        <th scope="row"><label for="payment3">월 납입금 (선납 30%)</label></th>
+                        <td>@ViewBag.item.rtPay3 원 <span class="general result3"></span></td>
+                    </tr>
+                }
+                @if (String.Join(",", ViewBag.item.programs).Contains("PP"))
+                {
+                    <tr class="tr_pp">
+                        <td colspan="2" class="td_tit smart"><span class="square">■</span> &nbsp;유예 할부</td>
+                    </tr>
+                    <tr class="tr_pp">
+                        <th scope="row"><label for="">유예율</label></th>
+                        <td>@ViewBag.item.ppRate <span>%</span></td>
+                    </tr>
+                    <tr class="tr_pp">
+                        <th scope="row"><label for="payment1">월 납입금 (선납 10%)</label></th>
+                        <td>@ViewBag.item.ppPay1 원 <span class="pp result1"></span></td>
+                    </tr>
+                    <tr class="tr_pp">
+                        <th scope="row"><label for="payment2">월 납입금 (선납 20%)</label></th>
+                        <td>@ViewBag.item.ppPay2 원 <span class="pp result2"></span></td>
+                    </tr>
+                    <tr class="tr_pp">
+                        <th scope="row"><label for="payment3">월 납입금 (선납 30%)</label></th>
+                        <td>@ViewBag.item.ppPay3 원 <span class="pp result3"></span></td>
+                    </tr>
+                }
+
+
             </table>
         </form>
         <div class="btn_area">
@@ -156,6 +193,7 @@ table.reg_table tr.off {display: none;}
         $('.zh').addClass('on');
         $('.zl').addClass('on');
         $('.general').addClass('on');
+        $('.pp').addClass('on');
     } else { //i시리즈 일때        
         $('.general').addClass('on');
         $('.zl').addClass('on');

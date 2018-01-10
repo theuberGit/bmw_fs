@@ -23,10 +23,14 @@
       <result property="zhPay3" column="ZH_PAY3" />
       <result property="ghPay1" column="GH_PAY1" />
       <result property="ghPay2" column="GH_PAY2" />
-      <result property="ghPay3" column="GH_PAY3" />
+      <result property="ghPay3" column="GH_PAY3" />      
       <result property="rtPay1" column="RT_PAY1" />
       <result property="rtPay2" column="RT_PAY2" />
       <result property="rtPay3" column="RT_PAY3" />
+      <result property="ppRate" column="PP_RATE" />
+      <result property="ppPay1" column="PP_PAY1" />
+      <result property="ppPay2" column="PP_PAY2" />
+      <result property="ppPay3" column="PP_PAY3" />
       <result property="deployYn" column="DEPLOY_YN" />
       <result property="regDate" column="REG_DATE" />
       <result property="regId" column="REG_ID" />
@@ -61,6 +65,10 @@
       , RT_PAY1
       , RT_PAY2
       , RT_PAY3
+      , PP_RATE
+      , PP_PAY1
+      , PP_PAY2
+      , PP_PAY3
       , DEPLOY_YN
       , REG_DATE
       , REG_ID
@@ -117,6 +125,10 @@
       , RT_PAY1
       , RT_PAY2
       , RT_PAY3
+      , PP_RATE
+      , PP_PAY1
+      , PP_PAY2
+      , PP_PAY3
       , DEPLOY_YN
       , REG_DATE
       , REG_ID
@@ -148,6 +160,10 @@
       , RT_PAY1
       , RT_PAY2
       , RT_PAY3
+      , PP_RATE
+      , PP_PAY1
+      , PP_PAY2
+      , PP_PAY3
       , DEPLOY_YN
       , REG_ID
       )
@@ -173,6 +189,10 @@
       ,#rtPay1#
       ,#rtPay2#
       ,#rtPay3#
+      ,#ppRate#
+      ,#ppPay1#
+      ,#ppPay2#
+      ,#ppPay3#
       ,#deployYn#
       ,#regId#
       )
@@ -201,6 +221,10 @@
       , RT_PAY1 = #rtPay1#
       , RT_PAY2 = #rtPay2#
       , RT_PAY3 = #rtPay3#
+      , PP_RATE = #ppRate#
+      , PP_PAY1 = #ppPay1#
+      , PP_PAY2 = #ppPay2#
+      , PP_PAY3 = #ppPay3#
       ,DEPLOY_YN  = #deployYn#
       ,UPT_DATE = getDate()
       ,UPT_ID = #uptId#

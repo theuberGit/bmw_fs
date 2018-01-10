@@ -8,6 +8,7 @@
     table.reg_table tr td label {margin-right: 15px}
     table.reg_table tr.item_area { display: none;}
     table.reg_table tr.off {display: none;}
+    .input_table tbody{display:none;}
 </style>
 <div id="content" class="reg">
     <div class="cont_top">
@@ -32,6 +33,7 @@
                             <option value="">구분</option>
                             <option value="BMW">BMW</option>
                             <option value="MINI">MINI</option>
+                            <option value="Motorrad">Motorrad</option>
                         </select>
                         <select name="series" id="series" class="category_select" title="BMW시리즈">
                             <option value="">구분</option>
@@ -84,96 +86,118 @@
                 <tr>
                     <th><label for="program">* 프로그램 선택</label></th>
                     <td>
-                        <input type="checkbox" name="programs" id="ZH" class="pr_zh" value="ZH" /><label for="ZH"> SMART 할부</label>&nbsp;&nbsp;
-                        <input type="checkbox" name="programs" id="ZL" class="pr_zl" value="ZL" /><label for="ZL"> SMART 운용리스</label>&nbsp;&nbsp;
+                        <input type="checkbox" name="programs" id="ZH" class="pr_zh" value="ZH" /><label for="ZH"> SMART/SMILE 할부</label>&nbsp;&nbsp;
+                        <input type="checkbox" name="programs" id="ZL" class="pr_zl" value="ZL" /><label for="ZL"> SMART/SMILE 운용리스</label>&nbsp;&nbsp;
                         <input type="checkbox" name="programs" id="GH" class="pr_gh" value="GH" /><label for="GH"> 일반 할부</label>&nbsp;&nbsp;
                         <input type="checkbox" name="programs" id="RT" class="pr_rt" value="RT" /><label for="RT"> SMART 렌트</label>&nbsp;&nbsp;
+                        <input type="checkbox" name="programs" id="PP" class="pr_pp" value="PP" /><label for="PP">유예 할부</label>
                     </td>
                 </tr>
             </table>
-            <table class="reg_table">
+            <table class="reg_table input_table">
                 <caption>월 납입금 입력 테이블</caption>
                 <colgroup>
                     <col width="150px">
                     <col width="870px">
-                </colgroup>
-                @*<tr class="item_area">
-                    <th scope="row"><label for="item">* 상품 선택</label></th>
-                    <td>
-                        <label for="zangaHalbu"><input type="checkbox" name="item" id="zangaHalbu" value="zangaHalbu" />잔가보장형 할부</label>
-                        <label for="zangaLease"><input type="checkbox" name="item" id="zangaLease" value="zangaLease" />잔가보장형 리스</label>
-                        <label for="generalHalbu"><input type="checkbox" name="item" id="generalHalbu" value="generalHalbu" />일반 할부</label>
-                    </td>
-                </tr>*@
-                <tr class="zh">
-                    <td colspan="2" class="td_tit smart"><span class="square">■</span> SMART 할부</td>
-                </tr>
-                <tr class="zh">
-                    <th scope="row"><label for="zhZanga">잔가</label></th>
-                    <td><input type="text" name="zhZanga" id="zhZanga" class="zhZanga" maxlength="50" title="잔가" value="@ViewBag.item.zhZanga" /> %</td>
-                </tr>
-                <tr class="zh">
-                    <th scope="row"><label for="zhPay1">월 납입금 (선납 10%)</label></th>
-                    <td><input type="text" name="zhPay1" id="zhPay1" class="zhPay1" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.zhPay1"/> 원 <span class="result1"></span></td>
-                </tr>
-                <tr class="zh">
-                    <th scope="row"><label for="zhPay2">월 납입금 (선납 20%)</label></th>
-                    <td><input type="text" name="zhPay2" id="zhPay2" class="zhPay2" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.zhPay2"/> 원 <span class="result2"></span></td>
-                </tr>
-                <tr class="zh">
-                    <th scope="row"><label for="zhPay3">월 납입금 (선납 30%)</label></th>
-                    <td><input type="text" name="zhPay3" id="zhPay3" class="zhPay3" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.zhPay3"/> 원 <span class="result3"></span></td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="td_tit smart"><span class="square">■</span> SMART 운용리스</td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="zlZanga">잔가</label></th>
-                    <td><input type="text" name="zlZanga" id="zlZanga" class="zlZanga" maxlength="50" title="잔가" value="@ViewBag.item.zlZanga" /> %</td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="zlPay1">월 납입금 (선납 10%)</label></th>
-                    <td><input type="text" name="zlPay1" id="zlPay1" class="zlPay1" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.zlPay1"/> 원 <span class="result1"></span></td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="zlPay2">월 납입금 (선납 20%)</label></th>
-                    <td><input type="text" name="zlPay2" id="zlPay2" class="zlPay2" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.zlPay2"/> 원 <span class="result2"></span></td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="zlPay3">월 납입금 (선납 30%)</label></th>
-                    <td><input type="text" name="zlPay3" id="zlPay3" class="zlPay3" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.zlPay3"/> 원 <span class="result3"></span></td>
-                </tr>
-                <tr class="general">
-                    <td colspan="2" class="td_tit smart"><span class="square">■</span> 일반 할부</td>
-                </tr>
-                <tr class="general">
-                    <th scope="row"><label for="ghPay1">월 납입금 (선납 10%)</label></th>
-                    <td><input type="text" name="ghPay1" id="ghPay1" class="ghPay1" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.ghPay1"/> 원 <span class="result1"></span></td>
-                </tr>
-                <tr class="general">
-                    <th scope="row"><label for="ghPay2">월 납입금 (선납 20%)</label></th>
-                    <td><input type="text" name="ghPay2" id="ghPay2" class="ghPay2" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.ghPay2"/> 원 <span class="result2"></span></td>
-                </tr>
-                <tr class="general">
-                    <th scope="row"><label for="ghPay3">월 납입금 (선납 30%)</label></th>
-                    <td><input type="text" name="ghPay3" id="ghPay3" class="ghPay3" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.ghPay3"/> 원 <span class="result3"></span></td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="td_tit smart"><span class="square">■</span> SMART 렌트</td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="rtPay1">월 납입금 (선납 10%)</label></th>
-                    <td><input type="text" name="rtPay1" id="rtPay1" class="rtPay1" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.rtPay1"/> 원 <span class="result1"></span></td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="rtPay2">월 납입금 (선납 20%)</label></th>
-                    <td><input type="text" name="rtPay2" id="rtPay2" class="rtPay2" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.rtPay2" /> 원 <span class="result2"></span></td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="rtPay3">월 납입금 (선납 30%)</label></th>
-                    <td><input type="text" name="rtPay3" id="rtPay3" class="rtPay3" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.rtPay3" /> 원 <span class="result3"></span></td>
-                </tr>
-            </table>
+                </colgroup>               
+                <tbody class="zh_tbody">
+                    <tr class="zh">
+                        <td colspan="2" class="td_tit smart"><span class="square">■</span> SMART/SMILE 할부</td>
+                    </tr>
+                    <tr class="zh">
+                        <th scope="row"><label for="zhZanga">잔가</label></th>
+                        <td><input type="text" name="zhZanga" id="zhZanga" class="zhZanga" maxlength="50" title="잔가" value="@ViewBag.item.zhZanga" /> %</td>
+                    </tr>
+                    <tr class="zh">
+                        <th scope="row"><label for="zhPay1">월 납입금 (선납 10%)</label></th>
+                        <td><input type="text" name="zhPay1" id="zhPay1" class="zhPay1" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.zhPay1" /> 원 <span class="result1"></span></td>
+                    </tr>
+                    <tr class="zh">
+                        <th scope="row"><label for="zhPay2">월 납입금 (선납 20%)</label></th>
+                        <td><input type="text" name="zhPay2" id="zhPay2" class="zhPay2" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.zhPay2" /> 원 <span class="result2"></span></td>
+                    </tr>
+                    <tr class="zh">
+                        <th scope="row"><label for="zhPay3">월 납입금 (선납 30%)</label></th>
+                        <td><input type="text" name="zhPay3" id="zhPay3" class="zhPay3" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.zhPay3" /> 원 <span class="result3"></span></td>
+                    </tr>
+                </tbody>
+                <tbody class="zl_tbody">
+                    <tr>
+                        <td colspan="2" class="td_tit smart"><span class="square">■</span> SMART/SMILE 운용리스</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="zlZanga">잔가</label></th>
+                        <td><input type="text" name="zlZanga" id="zlZanga" class="zlZanga" maxlength="50" title="잔가" value="@ViewBag.item.zlZanga" /> %</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="zlPay1">월 납입금 (선납 10%)</label></th>
+                        <td><input type="text" name="zlPay1" id="zlPay1" class="zlPay1" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.zlPay1" /> 원 <span class="result1"></span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="zlPay2">월 납입금 (선납 20%)</label></th>
+                        <td><input type="text" name="zlPay2" id="zlPay2" class="zlPay2" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.zlPay2" /> 원 <span class="result2"></span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="zlPay3">월 납입금 (선납 30%)</label></th>
+                        <td><input type="text" name="zlPay3" id="zlPay3" class="zlPay3" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.zlPay3" /> 원 <span class="result3"></span></td>
+                    </tr>
+                </tbody>
+                <tbody class="gh_tbody">
+                    <tr class="general">
+                        <td colspan="2" class="td_tit smart"><span class="square">■</span> 일반 할부</td>
+                    </tr>
+                    <tr class="general">
+                        <th scope="row"><label for="ghPay1">월 납입금 (선납 10%)</label></th>
+                        <td><input type="text" name="ghPay1" id="ghPay1" class="ghPay1" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.ghPay1" /> 원 <span class="result1"></span></td>
+                    </tr>
+                    <tr class="general">
+                        <th scope="row"><label for="ghPay2">월 납입금 (선납 20%)</label></th>
+                        <td><input type="text" name="ghPay2" id="ghPay2" class="ghPay2" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.ghPay2" /> 원 <span class="result2"></span></td>
+                    </tr>
+                    <tr class="general">
+                        <th scope="row"><label for="ghPay3">월 납입금 (선납 30%)</label></th>
+                        <td><input type="text" name="ghPay3" id="ghPay3" class="ghPay3" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.ghPay3" /> 원 <span class="result3"></span></td>
+                    </tr>
+                </tbody>
+                <tbody class="rt_tbody">
+                    <tr>
+                        <td colspan="2" class="td_tit smart"><span class="square">■</span> SMART 렌트</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="rtPay1">월 납입금 (선납 10%)</label></th>
+                        <td><input type="text" name="rtPay1" id="rtPay1" class="rtPay1" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.rtPay1" /> 원 <span class="result1"></span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="rtPay2">월 납입금 (선납 20%)</label></th>
+                        <td><input type="text" name="rtPay2" id="rtPay2" class="rtPay2" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.rtPay2" /> 원 <span class="result2"></span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="rtPay3">월 납입금 (선납 30%)</label></th>
+                        <td><input type="text" name="rtPay3" id="rtPay3" class="rtPay3" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.rtPay3" /> 원 <span class="result3"></span></td>
+                    </tr>
+               </tbody>
+                <tbody class="pp_tbody">
+                    <tr>
+                        <td colspan="2" class="td_tit "><span class="square">■</span>유예 할부</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="postponeRate">유예율</label></th>
+                        <td><input type="text" name="ppRate" id="postponeRate" class="postponeRate" maxlength="50" title="유예율" value="@ViewBag.item.ppRate" /> %</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="ppPay1">월 납입금 (선납 10%)</label></th>
+                        <td><input type="text" name="ppPay1" id="ppPay1" class="ppPay1" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.ppPay1" /> 원 <span class="result1"></span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="ppPay2">월 납입금 (선납 20%)</label></th>
+                        <td><input type="text" name="ppPay2" id="ppPay2" class="ppPay2" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.ppPay2" /> 원 <span class="result2"></span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="ppPay3">월 납입금 (선납 30%)</label></th>
+                        <td><input type="text" name="ppPay3" id="ppPay3" class="ppPay3" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" value="@ViewBag.item.ppPay3" /> 원 <span class="result3"></span></td>
+                    </tr>
+                </tbody>        
+</table>
             <input type="hidden" name="uptId" id="uptId" value="@HttpContext.Current.User.Identity.Name" />
             <input type="hidden" name="idx" value="@ViewBag.item.idx" />
         </form>
@@ -241,6 +265,16 @@
         series += '<option value="CONVERTIBLE">CONVERTIBLE</option>';
         series += '<option value="THE NEW MINI COUNTRYMAN">THE NEW MINI COUNTRYMAN</option>';
 
+
+        model += '<option value="">구분</option>';
+    } else if (val == "Motorrad") {
+        series += '<option value="">구분</option>';
+        series += '<option value="R">R</option>';
+        series += '<option value="S">S</option>';
+        series += '<option value="C">C</option>';
+        series += '<option value="F">F</option>';
+        series += '<option value="G">G</option>';
+        series += '<option value="K">K</option>';
 
         model += '<option value="">구분</option>';
     } else {
@@ -317,7 +351,21 @@
             model += '<option value="CONVERTIBLE">CONVERTIBLE</option>';
         } else if (val == "THE NEW MINI COUNTRYMAN") {
             model += '<option value="THE NEW MINI COUNTRYMAN">THE NEW MINI COUNTRYMAN</option>';
-        }else {
+        } else if (val == "R") {
+            model += '<option value="nine T">nine T</option>';
+            model += '<option value="1200">1200</option>';
+        } else if (val == "S") {
+            model += '<option value="1000">1000</option>';
+        } else if (val == "C") {
+            model += '<option value="650">650</option>';
+        } else if (val == "F") {
+            model += '<option value="700">700</option>';
+            model += '<option value="800">800</option>';
+        } else if (val == "G") {
+            model += '<option value="310">310</option>';
+        } else if (val == "K") {
+            model += '<option value="1600">1600</option>';
+        } else {
             model += '';
         }
         $('#model').append(model);
@@ -406,5 +454,17 @@
         function delForm() {
         if (!confirm('삭제하시겠습니까?')) return;
         $('#content form').attr('action', 'delete').submit();
-        }
+    }
+
+        $('input[name="programs"]').click(function () {
+            $id = $(this).attr('id').toLowerCase();
+            if ($(this).prop('checked')) {
+                $('.' + $id + '_tbody').show();
+                $('.' + $id + '_tbody input').prop('disabled', false);
+            } else {
+                $('.' + $id + '_tbody').hide();
+                $('.' + $id + '_tbody input').prop('disabled', true);
+            }
+
+        });
 </script>

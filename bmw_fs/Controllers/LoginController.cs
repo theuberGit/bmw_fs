@@ -46,18 +46,18 @@ namespace bmw_fs.Controllers.login
                 LdapAuthenticationService ldapService = new LdapAuthenticationService("LDAP://" + _domain);
 
                 //로컬작업시 활성
-                Boolean isLogin = true;
+                //Boolean isLogin = true;
                 
                 //실섭에서 활성
-                //Boolean isLogin = false;
-                //try { 
-                //    isLogin = ldapService.IsAuthenticated(_domain, model.userId, model.password);
-                //}
-                //catch (Exception e)
-                //{
-                //    ViewBag.errorMsg = "Invalid login attempt.";
-                //    return View("~/Views/Login.cshtml", model);
-                //}
+                Boolean isLogin = false;
+                try { 
+                    isLogin = ldapService.IsAuthenticated(_domain, model.userId, model.password);
+                }
+                catch (Exception e)
+                {
+                    ViewBag.errorMsg = "Invalid login attempt.";
+                    return View("~/Views/Login.cshtml", model);
+                }
                 
                 
                 if (isLogin)

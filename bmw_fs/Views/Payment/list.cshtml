@@ -16,7 +16,7 @@
                     <option value="">구분</option>
                     <option value="BMW">BMW</option>
                     <option value="MINI">MINI</option>
-                    <!--<option value="Motorrad">Motorrad</option> 적용 보류-->
+                    <option value="Motorrad">Motorrad</option> 
                 </select>
                 <select name="series" id="series" class="search_select">
                     <option value="">구분</option>
@@ -30,6 +30,7 @@
                     <option value="zangaLease">SAMRT 운용리스</option>
                     <option value="generalHalbu">일반 할부</option>
                     <option value="smartRent">SMART 렌트</option>
+                    <option value="postponeHalbu">유예 할부</option>
                 </select>
                 <button type="button" onclick="searchList();"></button>
             </div>
@@ -55,7 +56,15 @@
                         <th scope="col">No.</th>
                         <th scope="col">상세모델</th>
                         <th scope="col">차량가격</th>
-                        <th scope="col">잔가</th>
+                        <th scope="col">
+                            @if ("postponeHalbu".Equals(ViewBag.pagination.searchOption))
+                            {
+                                @:유예율
+                            }
+                            else{ 
+                                @:잔가
+                            }                            
+                        </th>
                         <th scope="col" class="yellow">선납 10%</th>
                         <th scope="col" class="yellow">월 납입금</th>
                         <th scope="col" class="blue">선납 20%</th>
@@ -126,6 +135,16 @@
                                 <td class="co8 price">@ViewBag.list[i].rtPay2</td>
                                 <td class="co9 price pay3_@i"></td>
                                 <td class="co10 price">@ViewBag.list[i].rtPay3</td>
+                            }
+                            else if ("postponeHalbu".Equals(ViewBag.pagination.searchOption))
+                            {
+                                <td class="co4">@ViewBag.list[i].ppRate <span>%</span></td>
+                                <td class="co5 price pay1_@i"></td>
+                                <td class="co6 price">@ViewBag.list[i].ppPay1</td>
+                                <td class="co7 price pay2_@i"></td>
+                                <td class="co8 price">@ViewBag.list[i].ppPay2</td>
+                                <td class="co9 price pay3_@i"></td>
+                                <td class="co10 price">@ViewBag.list[i].ppPay3</td>
                             }
                             <td class="co11">@ViewBag.list[i].deployYn</td>
                         </tr>
@@ -200,6 +219,16 @@
                 series += '<option value="THE NEW MINI COUNTRYMAN">THE NEW MINI COUNTRYMAN</option>';
 
                 model += '<option value="">구분</option>';
+            } else if (val == "Motorrad") {
+                series += '<option value="">구분</option>';
+                series += '<option value="R">R</option>';
+                series += '<option value="S">S</option>';
+                series += '<option value="C">C</option>';
+                series += '<option value="F">F</option>';
+                series += '<option value="G">G</option>';
+                series += '<option value="K">K</option>';
+
+                model += '<option value="">구분</option>';
             } else {
                 series += '<option value="">구분</option>';
                 model += '<option value="">구분</option>';
@@ -272,6 +301,20 @@
                 model += '<option value="CONVERTIBLE">CONVERTIBLE</option>';
             } else if (val == "THE NEW MINI COUNTRYMAN") {
                 model += '<option value="THE NEW MINI COUNTRYMAN">THE NEW MINI COUNTRYMAN</option>';
+            } else if (val == "R") {
+                model += '<option value="nine T">nine T</option>';
+                model += '<option value="1200">1200</option>';
+            } else if (val == "S") {
+                model += '<option value="1000">1000</option>';
+            } else if (val == "C") {
+                model += '<option value="650">650</option>';
+            } else if (val == "F") {
+                model += '<option value="700">700</option>';
+                model += '<option value="800">800</option>';
+            } else if (val == "G") {
+                model += '<option value="310">310</option>';
+            } else if (val == "K") {
+                model += '<option value="1600">1600</option>';
             } else {
                 model += '';
             }

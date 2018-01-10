@@ -14,7 +14,7 @@ namespace bmw_fs.Models.payment
         public String model { get; set; }
         public String modelName { get; set; }
         public String price { get; set; }
-        public String program { get; set; } //프로그램 선택 ( ZH-SMART 할부 ,ZL-SMART 운용리스 ,GH-일반할부 ,RT-SMART 렌트)
+        public String program { get; set; } //프로그램 선택 ( ZH-SMART 할부 ,ZL-SMART 운용리스 ,GH-일반할부 ,RT-SMART 렌트, PP-유예할부)
         public int zlZanga { get; set; }
         public String zlPay1 { get; set; }
         public String zlPay2 { get; set; }
@@ -29,6 +29,10 @@ namespace bmw_fs.Models.payment
         public String rtPay1 { get; set; }
         public String rtPay2 { get; set; }
         public String rtPay3 { get; set; }
+        public int ppRate { get; set; }
+        public String ppPay1 { get; set; }
+        public String ppPay2 { get; set; }
+        public String ppPay3 { get; set; }
         public String deployYn { get; set; }
         public String regId { get; set; }
         public DateTime regDate { get; set; }
@@ -52,11 +56,11 @@ namespace bmw_fs.Models.payment
                     count += 1;
                     if ("ZH".Equals(str))
                     {
-                        programKo += "SMART할부";
+                        programKo += "SMART/SMILE 할부";
                     }
                     else if ("ZL".Equals(str))
                     {
-                        programKo += "SMART운용리스";
+                        programKo += "SMART/SMILE 운용리스";
                     }
                     else if ("GH".Equals(str))
                     {
@@ -65,6 +69,10 @@ namespace bmw_fs.Models.payment
                     else if ("RT".Equals(str))
                     {
                         programKo += "SMART렌트";
+                    }
+                    else if ("PP".Equals(str))
+                    {
+                        programKo += "유예할부";
                     }
                     else
                     {
