@@ -63,6 +63,7 @@ namespace bmw_fs.Service.impl.payment
                         programs = payment.programs[i];
                     }
                     else
+
                     {
                         programs = programs + "," + payment.programs[i];
                     }
