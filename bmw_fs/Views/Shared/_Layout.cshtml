@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>BMW 파이낸셜 관리자</title>
+    <title>BMW 파이낸셜 서비스</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
     <meta http-equiv="X-UA-Compatible" content="IE=edge">       
     <meta charset="utf-8" />
@@ -19,7 +19,7 @@
         <div id="header">
             <h1><a href="#"><img src="/resources/images/logo.png" alt=""></a></h1>
             <div class="header_inner">
-                <h2>BMW FS 관리자</h2>
+                <h2>BMW 파이낸셜 서비스</h2>
                 <form method="post" action="/login/LogOff" id="logoutForm">
                     <div class="link_list">
                         <!--
@@ -44,10 +44,10 @@
                     @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("MASTER") || HttpContext.Current.User.IsInRole("IT")))
                     {
                     <li class="sub_list">
-                        <a href="#">관리자 관리</a>
+                        <a href="#">담당자 관리</a>
                         <ul>
-                            <li class="admin_mgmt"><a href="/Admin/list">관리자 관리</a></li>
-                            <li class="admin_log_mgmt"><a href="javascript:void(0);" onclick="alert('준비중입니다.');">관리자 로그 관리</a></li>
+                            <li class="admin_mgmt"><a href="/Admin/list">담당자 관리</a></li>
+                            <li class="admin_log_mgmt"><a href="javascript:void(0);" onclick="alert('준비중입니다.');">담당자 로그 관리</a></li>
                         </ul>
                     </li>
                     }
