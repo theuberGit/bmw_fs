@@ -71,13 +71,14 @@
 })();
 
 function regForm() {
-    if (!$('#title').required()) return;    
-       
-    if ($('#mainImg').val() === '') {
-        alert('본문이미지를 등록하세요.');
+    if (!$('#brand').reqSelect()) return;
+    if (!$('#series').reqSelect()) return;
+    if (!$('#model').required()) return;
+    if ($('#carImg').val() == '') {
+        alert('차량 이미지를 등록하세요.');
         return;
     }
-    if (!validationFileType('jpg, png')) return;
+    if (!validationFileType('png')) return;
 
     if (!confirm('등록하시겠습니까?')) return;
     $('#content form').attr('action', 'registerProc').submit();
