@@ -1,0 +1,112 @@
+﻿<div id="content" class="reg">
+    <div class="cont_top">
+        <h3>1:1 문의</h3>
+    </div>
+    <div class="cont_bottom">
+        <form method="post" enctype="multipart/form-data">
+            <input type="hidden" name="idx" value="@ViewBag.item.idx" />
+            <table class="reg_table">
+                <colgroup>
+                    <col width="130px" />
+                    <col width="370px" />
+                    <col width="130px" />
+                    <col width="370px" />
+                </colgroup>
+                <tr>
+                    <th>제목</th>
+                    <td colspan="3">@ViewBag.item.title</td>
+                </tr>
+                <tr>
+                    <th>작성자</th>
+                    <td colspan="3">@ViewBag.item.author</td>
+                </tr>
+                <tr>
+                    <th>카테고리</th>
+                    <td>@ViewBag.item.categoryName</td>
+                    <th>작성일</th>
+                    <td>@ViewBag.item.regDate.ToString("yyyy-MM-dd HH:mm")</td>
+                </tr>
+                <tr>                    
+                    <th>이메일</th>
+                    <td>@ViewBag.item.email</td>
+                    <th>휴대전화</th>
+                    <td>@ViewBag.item.phone</td>
+                </tr>
+                <tr>
+                    <th><label for="">내용</label></th>
+                    <td colspan="3" class="contents">@Html.Raw(@ViewBag.item.contents)</td>
+                </tr>
+                <tr>
+                    <th><label for="replyContents">답변</label></th>                    
+                    @if ("W".Equals(ViewBag.item.status))
+                    {
+                    <td colspan="3">
+                        <textarea name="replyContents" id="replyContents" title="답변">
+                            @if (ViewBag.item.replyContents == null)
+                            {
+@:안녕하세요 고객님,
+@:문의 주셔서 감사합니다.
+@:
+@:
+@:
+@:
+@:
+@:
+@:                            
+@:추가적인 문의사항이 있으신 경우 고객센터(1577 - 5822) 또는 당사 홈페이지(https://www.bmwfs.co.kr) ‘1:1문의’를 이용하여 주시기 바랍니다.
+@:
+@:항상 많은 관심 주셔서 감사합니다.
+@:행복한 하루 되시길 바랍니다.
+@:
+@:BMW Financial service Korea 드림.
+                            }
+                            else
+                            {
+                                @ViewBag.item.replyContents
+                            }</textarea>
+                    </td>
+                    }
+                    else if ("F".Equals(ViewBag.item.status))
+                    {
+                        <td colspan="3" class="contents">@ViewBag.item.replyContents</td>
+                    }
+                </tr>
+                @if ("F".Equals(ViewBag.item.status))
+                {
+                    <tr>
+                        <th><label for="replyContents">답변 메일 발송</label></th>
+                        <td colspan="3">@ViewBag.item.mailSendDate.ToString("yyyy-MM-dd hh:mm")</td>
+                    </tr>
+                }
+            </table>
+        </form>
+        <div class="btn_area">
+            <a href="list?@Session["searchString"]" class="btn_defualt btn_list">목록</a>
+            <div class="view_btn_area">
+                <a href="javascript:void(0);" class="btn_defualt btn_delete" onclick="delForm();">문의글 삭제</a>
+                    @if ("W".Equals(ViewBag.item.status))
+                    {
+                        <a href="javascript:void(0);" class="btn_defualt btn_modify" onclick="saveReply();">답변 저장</a>
+                        <a href="javascript:void(0);" class="btn_defualt btn_modify" onclick="sendMail();">메일 발송</a>
+                    }                
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    lnbSet(".inquiry_mgmt");
+    function delForm() {
+        if (!confirm('삭제하시겠습니까?')) return;
+        $('#content form').attr('action', 'delete').submit();
+    };
+    function saveReply() {
+        if (!$('#replyContents').required()) return;
+        if (!confirm('저장하시겠습니까?')) return;
+        $('#content form').attr('action', 'reply').submit();
+    };
+    function sendMail() {
+        if (!$('#replyContents').required()) return;
+        if (!confirm('메일을 발송하시겠습니까?')) return;
+        $('#content form').attr('action', 'sendMail').submit();
+    };
+</script>

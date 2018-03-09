@@ -1,0 +1,104 @@
+﻿
+<head>
+<style>
+span.banner_yn{float:right;}
+</style>
+</head>
+<div id="content" class="rolling list">
+    <div class="cont_top">
+        <h3>모바일 프로모션</h3>
+    </div>
+    <form>
+        <div class="cont_bottom">
+            <ul class="tab">
+                <li id="promotion_now" class="on"><a href="javascript:void(0);" onclick="searchPromotion('now');">진행 중 프로모션</a></li>
+                <li id="promotion_end"><a href="javascript:void(0);" onclick="searchPromotion('end');">종료된 프로모션</a></li>
+            </ul>
+            <ul class="rolling_list on">
+                @for (var i = 0; i < ViewBag.list.Count; i++)
+                {
+                    if (i == 3)
+                    {
+                        <li class="rolling_list4">
+                            <a href="view?idx=@ViewBag.list[i].idx&searchOption=@ViewBag.pagination.searchOption">
+                                <span class="img_area"><img src="/Files/imageView?fileIdx=@ViewBag.list[i].fileIdx" alt=""></span>
+                                <span class="tit_area">@Html.Raw(@ViewBag.list[i].title)</span>
+                                <span class="date_area">@ViewBag.list[i].startDate ~ @ViewBag.list[i].endDate
+                                    @if ("N".Equals(ViewBag.list[i].deployYn))
+                                    {
+                                        <span class="banner_yn">미배포</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="banner_yn">배포</span>
+                                    }
+                                </span>
+                                <div class="country_area">
+                                    @if ("Y".Equals(ViewBag.list[i].engYn))
+                                    {
+                                        <span class="eng">영문</span>
+                                    }
+                                </div>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="view?idx=@ViewBag.list[i].idx&searchOption=@ViewBag.pagination.searchOption">
+                                <span class="img_area"><img src="/Files/imageView?fileIdx=@ViewBag.list[i].fileIdx" alt=""></span>
+                                <span class="tit_area">@Html.Raw(@ViewBag.list[i].title)</span>
+                                <span class="date_area">@ViewBag.list[i].startDate ~ @ViewBag.list[i].endDate
+                                    @if ("N".Equals(ViewBag.list[i].deployYn))
+                                    {
+                                        <span class="banner_yn">미배포</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="banner_yn">배포</span>
+                                    }
+                                </span>
+                                <div class="country_area">
+                                    @if ("Y".Equals(ViewBag.list[i].engYn))
+                                    {
+                                        <span class="eng">영문</span>
+                                    }
+                                </div>
+                            </a>
+                        </li>
+                    }
+                }
+            </ul>
+            @RenderPage("~/Views/Common/Pagination.cshtml")
+        @if ("now".Equals(ViewBag.pagination.searchOption))
+        {
+            <a href="register" class="btn_defualt btn_reg">등록</a>
+        }
+        </div>
+        <input type="hidden" name="searchOption" id="searchOption" value="@ViewBag.pagination.searchOption" />
+    </form>
+</div>
+<script>
+    lnbSet(".mobile_promotion_mgmt");
+
+    function searchPromotion(status) {
+        $('#searchOption').val(status);
+        searchList();
+    };
+
+    if ('@ViewBag.pagination.searchOption' == 'now') {
+        $('#promotion_now').addClass('on');
+        $('#promotion_end').removeClass('on');
+    } else if ('@ViewBag.pagination.searchOption' == 'end') {
+        $('#promotion_end').addClass('on');
+        $('#promotion_now').removeClass('on');
+    }
+
+$(".tab").find("li").each(function(index , item){
+	$(item).find("a").click(function(){
+		$(this).parent("li").addClass("on").siblings("li").removeClass("on");
+		$(".rolling_list").eq(index).addClass("on").siblings(".rolling_list").removeClass("on");
+		return false;
+	})
+})
+</script>

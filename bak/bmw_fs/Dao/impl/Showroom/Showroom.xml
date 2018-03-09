@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace ="showroom" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="showroomClass" type="bmw_fs.Models.Showroom.ShowRoom"/>
+  </alias>
+
+  <resultMaps>
+    <resultMap id="showroomMapByList" class="showroomClass">
+      <result property="idx" column="IDX"/>
+      <result property="brand" column="BRAND"/>
+      <result property="showroomName" column="SHOWROOM_NAME"/>
+      <result property="location" column="LOCATION"/>
+      <result property="address" column="ADDRESS"/>
+      <result property="tel1" column="TEL1"/>
+      <result property="tel2" column="TEL2"/>
+      <result property="tel3" column="TEL3"/>
+      <result property="deployYn" column="DEPLOY_YN"/>
+    </resultMap>
+    
+    <resultMap id="showroomMap" class="showroomClass">
+      <result property="idx" column="IDX"/>
+      <result property="brand" column="BRAND"/>
+      <result property="showroomName" column="SHOWROOM_NAME"/>
+      <result property="dealerName" column="DEALER_NAME"/>
+      <result property="location" column="LOCATION"/>
+      <result property="address" column="ADDRESS"/>
+      <result property="lat" column="LAT"/>
+      <result property="lng" column="LNG"/>
+      <result property="tel1" column="TEL1"/>
+      <result property="tel2" column="TEL2"/>
+      <result property="tel3" column="TEL3"/>
+      <result property="businessTime" column="BUSINESS_TIME"/>
+      <result property="deployYn" column="DEPLOY_YN"/>
+      <result property="regDate" column="REG_DATE"/>
+      <result property="regId" column="REG_ID"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="findAll" resultMap="showroomMapByList">
+      SELECT *
+      FROM (
+            SELECT
+                ROW_NUMBER() OVER(ORDER BY S.IDX DESC) AS RNUM
+                ,S.IDX
+                ,S.BRAND
+                ,S.LOCATION
+                ,S.SHOWROOM_NAME
+                ,S.ADDRESS
+                ,S.TEL1
+                ,S.TEL2
+                ,S.TEL3
+                ,S.DEPLOY_YN
+            FROM BMW_FS_SHOWROOM S
+              WHERE 1=1
+          <isNotEmpty property="searchInput">
+            <isNotEmpty property="searchOption">
+              <isEqual property="searchOption" compareValue="brand">
+                AND S.BRAND LIKE '%'+#searchInput#+'%'
+              </isEqual>
+              <isEqual property="searchOption" compareValue="showroomName">
+                AND S.SHOWROOM_NAME LIKE '%'+#searchInput#+'%'
+              </isEqual>
+            </isNotEmpty>
+          </isNotEmpty>
+            )t
+      WHERE 1=1
+        AND (RNUM BETWEEN #currentItem# AND #currentItemEnd# )
+    </select>
+
+    <select id="findAllCount" resultClass="int">
+      SELECT COUNT(1)
+      FROM BMW_FS_SHOWROOM S
+      WHERE 1=1
+      <isNotEmpty property="searchInput">
+        <isNotEmpty property="searchOption">
+          <isEqual property="searchOption" compareValue="brand">
+            AND S.BRAND LIKE '%'+#searchInput#+'%'
+          </isEqual>
+          <isEqual property="searchOption" compareValue="showroomName">
+            AND S.SHOWROOM_NAME LIKE '%'+#searchInput#+'%'
+          </isEqual>
+        </isNotEmpty>
+      </isNotEmpty>
+    </select>
+
+    <insert id="insertShowroom">
+      INSERT INTO BMW_FS_SHOWROOM(
+                   BRAND
+                  ,SHOWROOM_NAME
+                  ,DEALER_NAME
+                  ,LOCATION
+                  ,ADDRESS
+                  ,LAT
+                  ,LNG
+                  ,TEL1
+                  ,TEL2
+                  ,TEL3
+                  ,BUSINESS_TIME
+                  ,DEPLOY_YN
+                  ,REG_ID
+      )
+      VALUES (
+                   #brand#
+                  ,#showroomName#
+                  ,#dealerName#
+                  ,#location#
+                  ,#address#
+                  ,#lat#
+                  ,#lng#
+                  ,#tel1#
+                  ,#tel2#
+                  ,#tel3#
+                  ,#businessTime#
+                  ,#deployYn#
+                  ,#regId#
+      )
+    </insert>
+
+    <select id="findShowroom" resultMap="showroomMap">
+      SELECT
+             IDX
+            ,BRAND
+            ,SHOWROOM_NAME
+            ,DEALER_NAME
+            ,LOCATION
+            ,ADDRESS
+            ,LAT
+            ,LNG
+            ,TEL1
+            ,TEL2
+            ,TEL3
+            ,BUSINESS_TIME
+            ,DEPLOY_YN
+            ,REG_ID
+            ,REG_DATE
+      FROM BMW_FS_SHOWROOM
+      WHERE IDX = #idx#
+    </select>
+
+    <update id="updateShowroom">
+      UPDATE BMW_FS_SHOWROOM
+      SET
+          BRAND = #brand#
+          ,SHOWROOM_NAME = #showroomName#
+          ,DEALER_NAME = #dealerName#
+          ,LOCATION = #location#
+          ,ADDRESS = #address#
+          ,LAT = #lat#
+          ,LNG = #lng#
+          ,TEL1 = #tel1#
+          ,TEL2 = #tel2#
+          ,TEL3 = #tel3#
+          ,BUSINESS_TIME = #businessTime#
+          ,DEPLOY_YN = #deployYn#
+          ,UPT_ID = #uptId#
+          ,UPT_DATE = GETDATE()
+      WHERE IDX = #idx#;
+    </update>
+
+    <delete id="deleteShowroom">
+      DELETE BMW_FS_SHOWROOM
+      WHERE IDX = #idx#;
+    </delete>
+
+  </statements>
+</sqlMap>

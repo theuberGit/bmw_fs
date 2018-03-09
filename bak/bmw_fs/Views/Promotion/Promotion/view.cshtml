@@ -1,0 +1,211 @@
+﻿
+<head>
+<style>
+.img_view{overflow:hidden; margin-bottom:30px; }
+.img_view > div{float:left;width:499.5px; text-align:center}
+.img_view > div span{display:block; width:100%; padding:13px 0; font-weight:bold; background-color:#f4f4f4; border-top:1px solid #ccc; border-bottom:1px solid #ccc}
+.img_view > div div{padding:30px 0; border-bottom:1px solid #ccc}
+.img_view > div div img{width:300px;}
+.img_view > div:first-child{border-right:1px solid #ccc;}
+.main_img_area dl{margin-bottom:15px; }
+.main_img_area dl dt{margin-bottom:10px; font-weight:bold;}
+.main_img_area dl dd a{color:blue; text-decoration:underline;}
+</style>
+</head>
+		<div id="content" class="reg">
+			<div class="cont_top">
+				<h3>웹 프로모션</h3>
+			</div>
+			<div class="cont_bottom">
+                <form method="post" enctype="multipart/form-data">
+				<table class="reg_table">
+					<colgroup>
+						<col width="130px" />
+						<col width="370px" />
+						<col width="130px" />
+						<col width="370px" />
+					</colgroup>
+					<tr>
+						<th>작성자</th>
+						<td colspan="3">@ViewBag.item.regId</td>
+					</tr>
+                    <tr>
+						<th>카테고리</th>
+						@if ("P".Equals(ViewBag.item.category)) {<td colspan="3">프로모션</td>}
+                        else if("E".Equals(ViewBag.item.category)){<td colspan="3">이벤트</td>}
+					</tr>
+                    <tr>
+						<th>브랜드</th>
+						@if ("B".Equals(ViewBag.item.brand)) {<td colspan="3">BMW</td>}
+                        else if("M".Equals(ViewBag.item.brand)){<td colspan="3">MINI</td>}
+					</tr>
+					<tr>
+						<th>작성일</th>
+						<td>@ViewBag.item.regDate</td>
+						<th>게시 기간</th>
+						<td>@ViewBag.item.startDate  ~  @ViewBag.item.endDate</td>
+					</tr>
+					<tr>
+						<th>영문 사이트</th>
+						@if ("Y".Equals(ViewBag.item.engYn)) {<td>있음</td>}
+                        else {<td>없음</td>}
+						<th>배포</th>
+						
+                        @if("Y".Equals(ViewBag.item.deployYn)){<td>배포</td>}
+                        else{<td>미배포</td>}
+                        
+					</tr>
+				</table>
+
+                <h4>국문사이트</h4>
+				<table class="reg_table">
+					<colgroup>
+						<col width="130px" />
+						<col width="870px" />
+					</colgroup>
+					<tr>
+						<th>제목</th>
+						<td>@Html.Raw(@ViewBag.item.title)</td>
+					</tr>
+					<tr>
+						<th>썸네일 이미지</th>
+                        @foreach (var file1 in ViewBag.thumbList)
+                        {
+                            <td><a href="/Files/fileDownload?fileIdx=@file1.fileIdx">@file1.originalFilename</a></td>
+                        }
+					</tr>
+					<tr>
+						<th>본문 이미지</th>
+						<td class="main_img_area">
+                            @for (var i = 0; i < ViewBag.mainImgList.Count; i++)
+                            {
+                                <dl>
+                                    <dt>[이미지 <span>@(i+1)</span>]</dt>
+                                    <dd> -  이미지 : <a href="/Files/fileDownload?fileIdx=@ViewBag.mainImgList[i].fileIdx"><span>@ViewBag.mainImgList[i].originalFilename</span></a></dd>
+                                    <dd> -  URL : <a href="@ViewBag.imgUrlList[i]">@ViewBag.imgUrlList[i]</a></dd>
+                                </dl>
+                            }
+						</td>
+					</tr>
+                    @if ("E".Equals(ViewBag.item.category))
+                    {
+                    <tr>
+                        <th>버튼</th>
+                        <td class="main_img_area">
+                            @if (!"".Equals(ViewBag.item.btn1Name))
+                            {
+                                <dl>
+                                    <dt>[버튼 1]</dt>
+                                    <dd> -  버튼명 : <span>@ViewBag.item.btn1Name</span></dd>
+                                    <dd> -  URL : <a href="@ViewBag.item.btn1Link">@ViewBag.item.btn1Link</a></dd>
+                                </dl>
+                            }
+                            @if (!"".Equals(ViewBag.item.btn2Name))
+                            {
+                                <dl>
+                                    <dt>[버튼 2]</dt>
+                                    <dd> -  버튼명 : <span>@ViewBag.item.btn2Name</span></dd>
+                                    <dd> -  URL : <a href="@ViewBag.item.btn2Link">@ViewBag.item.btn2Link</a></dd>
+                                </dl>
+                            }
+                        </td>
+                    </tr>
+                    }
+                     <tr>
+                        <th>상품 페이지 배너</th>
+                        <td>
+                        @if ("N".Equals(ViewBag.item.productBannerYn))
+                        {
+                            <p>미배포</p>
+                        }
+                        else
+                        {
+                            <p>배포</p>
+                        }
+                         </td>
+                     </tr>
+				</table>
+
+                @if ("Y".Equals(ViewBag.item.engYn))
+                {
+                    <h4>영문사이트</h4>
+                    <table class="reg_table">
+                        <colgroup>
+                            <col width="130px" />
+                            <col width="870px" />
+                        </colgroup>
+                        <tr>
+                            <th>제목</th>
+                            <td>@Html.Raw(@ViewBag.item.titleEng)</td>
+                        </tr>
+                        <tr>
+                            <th>썸네일 이미지</th>
+                            @foreach (var file1 in ViewBag.thumbEngList)
+                            {
+                                <td><a href="/Files/fileDownload?fileIdx=@file1.fileIdx">@file1.originalFilename</a></td>
+                            }
+                        </tr>
+                        <tr>
+                            <th>본문 이미지</th>
+                            <td class="main_img_area">
+                                @for (var i = 0; i < ViewBag.mainImgEngList.Count; i++)
+                                {
+                                    <dl>
+                                        <dt>[이미지 <span>@(i + 1)</span>]</dt>
+                                        <dd> -  이미지 : <a href="/Files/fileDownload?fileIdx=@ViewBag.mainImgEngList[i].fileIdx"><span>@ViewBag.mainImgEngList[i].originalFilename</span></a></dd>
+                                        <dd> -  URL : <a href="@ViewBag.imgUrlEngList[i]">@ViewBag.imgUrlEngList[i]</a></dd>
+                                    </dl>
+                                }
+                            </td>
+                        </tr>
+                        @if ("E".Equals(ViewBag.item.category))
+                        {
+                            <tr>
+                                <th>버튼</th>
+                                <td class="main_img_area">
+                                    @if (!"".Equals(ViewBag.item.btn1NameEng))
+                                    {
+                                        <dl>
+                                            <dt>[버튼 1]</dt>
+                                            <dd> -  버튼명 : <span>@ViewBag.item.btn1NameEng</span></dd>
+                                            <dd> -  URL : <a href="@ViewBag.item.btn1LinkEng">@ViewBag.item.btn1LinkEng</a></dd>
+                                        </dl>
+                                    }
+                                    @if (!"".Equals(ViewBag.item.btn2NameEng))
+                                    {
+                                        <dl>
+                                            <dt>[버튼 2]</dt>
+                                            <dd> -  버튼명 : <span>@ViewBag.item.btn2NameEng</span></dd>
+                                            <dd> -  URL : <a href="@ViewBag.item.btn2LinkEng">@ViewBag.item.btn2LinkEng</a></dd>
+                                        </dl>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                }
+                <input type="hidden" name="idx" value="@ViewBag.item.idx" />
+				</form>
+                <div class="btn_area">
+			        <a href="list" class="btn_defualt btn_list">목록</a>
+					<div class="view_btn_area">
+                        <a href="#" class="btn_defualt btn_delete">삭제</a>
+						<a href="javascript:void(0);" onclick="modForm();" class="btn_defualt btn_modify">수정</a>
+					</div>
+				</div>
+			</div>
+		</div>
+<script>
+    lnbSet(".web_promotion_mgmt");
+    function modForm() {
+        $('form').attr('action', 'modify').submit();
+    }
+(function(){
+	$(".btn_delete").click(function(){
+        if (!confirm('삭제하시겠습니까?')) {
+            return;
+        }
+        $('form').attr('action', 'delete').submit();
+	});
+})();
+</script>
