@@ -8,7 +8,7 @@ namespace bmw_fs.Models.payment
 {
     public class Payment : SearchInfo
     {
-        public int idx { get; set; }
+        public int idx { get; set; }        
         public String brand { get; set; }
         public String series { get; set; }
         public String model { get; set; }
@@ -40,9 +40,12 @@ namespace bmw_fs.Models.payment
         public DateTime uptDate { get; set; }
         
        //public IList<int> thumbIdxs { get; set; }
-        public IList<int> carIdxs { get; set; }
+        public IList<int> carIdxs { get; set; }        
         public IList<String> programs { get; set; }
-        
+
+        public IList<int> fileIdxs { get; set; }
+        public string fileName { get; set; }
+
         public String programsKo
         {
             get
