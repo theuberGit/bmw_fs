@@ -1,0 +1,82 @@
+﻿
+<div id="content" class="reg">
+    <div class="cont_top">
+        <h3>뉴스 관리</h3>
+    </div>
+    <div class="cont_bottom">
+        <form method="post" enctype="multipart/form-data">
+            <table class="reg_table">
+                <colgroup>
+                    <col width="130px" />
+                    <col width="870px" />
+                </colgroup>
+                <tr>
+                    <th>작성자 </th>
+                    <td>@ViewBag.item.regId</td>
+                </tr>
+                <tr>
+                    <th><label for="">구분</label></th>
+                    
+                    @if ("N".Equals(ViewBag.item.type))
+                    {
+                        <td class="radio_area">공지</td>
+                    }
+                    else
+                    {
+                        <td class="radio_area">일반</td>
+                    }
+                </tr>
+                <tr>
+                    <th><label for="">제목</label></th>
+                    <td>@Html.Raw(@ViewBag.item.title)</td>
+                </tr>
+                <tr>
+                    <th><label for="">내용</label></th>                    
+                    <td>@Html.Raw(ViewBag.item.contents)</td>
+                </tr>
+                <tr class="add_img_area">
+                    <th>썸네일 이미지</th>
+                    <td class="file_area">
+                        @foreach (var file in ViewBag.thumbList)
+                        {
+                            <div><a href="/Files/fileDownload?fileIdx=@file.fileIdx">@file.originalFilename</a></div>
+                        }
+                    </td>
+                </tr>
+                <tr class="add_img_area">
+                    <th>본문 이미지</th>
+                    <td class="file_area">
+                        @foreach (var file in ViewBag.mainList)
+                        {
+                            <div><a href="/Files/fileDownload?fileIdx=@file.fileIdx">@file.originalFilename</a></div>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="">배포</label></th>
+                    <td class="radio_area">@ViewBag.item.deployYn</td>
+                </tr>
+            </table>
+            <input type="hidden" name="idx" value="@ViewBag.item.idx"/>
+        </form>
+        <div class="btn_area">
+            <a href="list?@Session["searchString"]" class="btn_defualt btn_list">목록</a>
+            <div class="view_btn_area">
+                <a href="javascript:void(0);" class="btn_defualt btn_delete" onclick="delForm();">삭제</a>
+                <a href="javascript:void(0);" onclick="modForm();" class="btn_defualt btn_modify">수정</a>
+            </div>
+    </div>
+    </div>
+</div>
+<script>
+    lnbSet(".news_mgmt");
+function modForm() {
+  $('form').attr('action', 'modify').submit();
+};
+function delForm() {
+   if (!confirm('삭제하시겠습니까?')) {
+       return;
+   }
+  $('form').attr('action', 'delete').submit();
+};
+</script>
