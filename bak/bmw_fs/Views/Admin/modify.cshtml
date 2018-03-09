@@ -1,0 +1,107 @@
+﻿<div id="content" class="reg">
+    <div class="cont_top">
+        <h3>담당자 관리</h3>
+    </div>
+    <div class="cont_bottom">
+        <form method="post" enctype="multipart/form-data">
+            <input type="hidden" name="idx" value="@ViewBag.item.idx" />
+            <table class="reg_table">
+                <colgroup>
+                    <col width="130px" />
+                    <col width="870px" />
+                </colgroup>
+                <tr>
+                    <th><label for="id">ID *</label></th>
+                    <td>@ViewBag.item.userId</td>
+                </tr>
+                <tr>
+                    <th><label for="tel1">핸드폰번호 *</label></th>
+                    <td><input type="text" name="tel1" id="tel1" class="tel_num_input"  title="핸드폰번호" maxlength="3" value="@ViewBag.item.tel1"/> - <input type="text" name="tel2" id="tel2" class="tel_num_input"  title="핸드폰번호" maxlength="4" value="@ViewBag.item.tel2"/> - <input type="text" name="tel3" id="tel3" class="tel_num_input"  title="핸드폰번호" maxlength="4" value="@ViewBag.item.tel3"/></td>
+                </tr>
+                <!--
+                <tr>
+                    <th><label for="pass">비밀번호 *</label></th>
+                    <td><input type="password" name="password" id="pass" class="" title="비밀번호" maxlength="25"></td>
+                </tr>
+                <tr>
+                    <th><label for="passOk">비밀번호 확인 *</label></th>
+                    <td><input type="password" name="" id="passOk" class="" title="비밀번호 확인" maxlength="25"></td>
+                </tr>
+                    -->
+                <tr>
+                    <th><label for="role">담당자 권한 *</label></th>
+                    <td>
+                        <input type="checkbox" name="roles" id="MASTER" class="role_master" value="MASTER" /><label for="MASTER"> MASTER</label>&nbsp;&nbsp;
+                        <input type="checkbox" name="roles" id="IT" class="role_others" value="IT" /><label for="IT"> IT</label>&nbsp;&nbsp;
+                        <input type="checkbox" name="roles" id="MSS" class="role_others" value="MSS" /><label for="MSS"> MSS</label>&nbsp;&nbsp;
+                        <input type="checkbox" name="roles" id="COMPLIANCE" class="role_others" value="COMPLIANCE" /><label for="COMPLIANCE"> COMPLIANCE</label>&nbsp;&nbsp;
+                        <input type="checkbox" name="roles" id="HR" class="role_others" value="HR" /><label for="HR"> HR</label>&nbsp;&nbsp;
+                        <input type="checkbox" name="roles" id="CIC" class="role_others" value="CIC" /><label for="CIC"> CIC</label>&nbsp;&nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="active">상태</label></th>
+                    <td class="radio_area">
+                        <label for="active"><input type="radio" name="activeYn" id="active" value="Y" checked title="상태"> 활성</label>
+                        <label for="inactivity"><input type="radio" name="activeYn" id="inactivity" value="N" title="상태"> 비활성</label>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <div class="btn_area">
+            <a href="list" class="btn_defualt btn_list">목록</a>
+            <a href="javascript:void(0);" class="btn_defualt btn_reg" onclick="modForm();">수정</a>
+        </div>
+    </div>
+</div>
+<script>
+    lnbSet(".admin_mgmt");
+    function modForm() {
+        var roleCnt = 0;
+
+        if (!$('#tel1').required()) return;
+        if (!$('#tel2').required()) return;
+        if (!$('#tel3').required()) return;
+        if (!$('#tel1').isnum()) return;
+        if (!$('#tel2').isnum()) return;
+        if (!$('#tel3').isnum()) return;
+        /*
+        if ($('#pass').val().trim() != '') {
+            if (!$('#pass').isvalidpwd()) return;
+            if (!$('#passOk').required()) return;
+            if ($('#pass').val() != $('#passOk').val()) {
+                alert('비밀번호가 일치하지 않습니다.');
+                return;
+            }
+        }
+        */
+        $('input[name="roles"]').each(function () {
+            if ($(this).prop('checked')) {
+                roleCnt++;
+            }
+        });
+        if (roleCnt == 0) {
+            alert('권한을 선택해주세요.');
+            return;
+        } 
+        if (!confirm('수정하시겠습니까')) return;
+        $('#content form').attr('action', 'modifyProc').submit();
+    };
+
+    $('#MASTER').change(function () {
+        if ($(this).prop('checked')) {
+            $('.role_others').prop('checked', true).prop('disabled', true);
+        } else {
+            $('.role_others').prop('disabled', false).prop('checked', false);
+        }
+    });
+
+    $(function () {
+
+        @for (int i = 0; i < ViewBag.item.roles.Length; i++) {
+            @:$("#@ViewBag.item.roles[i]").click();
+        }
+        $('input[name="activeYn"][value="@ViewBag.item.activeYn"]').prop('checked', true);
+
+    });
+</script>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sqlMap namespace="member" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="MemberClass" type="bmw_fs.Models.admin.Member"/>
+  </alias>
+
+  <resultMaps>
+    <resultMap id="memberMap" class="MemberClass">
+      <result property="idx" column="IDX" />
+      <result property="userId" column="USER_ID" />
+      <result property="loginDate" column="LOGIN_DATE" />
+      <result property="role" column="ROLE" />
+      <result property="activeYn" column="ACTIVE_YN" />
+      <result property="regDate" column="REG_DATE" />
+      <result property="regId" column="REG_ID" />
+      <result property="tel1" column="tel1" />
+      <result property="tel2" column="tel2" />
+      <result property="tel3" column="tel3" />
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+
+    <select id="findAll" resultMap="memberMap">
+      SELECT *
+      FROM (
+        SELECT
+          ROW_NUMBER() OVER(ORDER BY idx DESC) AS RNUM
+          ,IDX
+          ,USER_ID
+          ,ROLE
+          ,LOGIN_DATE
+          ,ACTIVE_YN
+          ,REG_DATE
+          ,REG_ID
+          ,tel1
+          ,tel2
+          ,tel3
+      FROM BMW_FS_ADMIN_MEMBER
+      WHERE 1=1
+      <isNotEmpty property="searchInput">
+        <isNotEmpty property="searchOption">
+          <isEqual property="searchOption" compareValue="id">
+            AND USER_ID LIKE '%'+#searchInput#+'%'
+          </isEqual>
+          <isEqual property="searchOption" compareValue="status">
+            AND ACTIVE_YN LIKE '%'+#searchInput#+'%'
+          </isEqual>
+          <isEqual property="searchOption" compareValue="role">
+            AND ROLE LIKE '%'+#searchInput#+'%'
+          </isEqual>
+        </isNotEmpty>
+      </isNotEmpty>
+      )t
+      WHERE 1=1
+          AND (RNUM BETWEEN #currentItem# AND #currentItemEnd# )
+    </select>
+
+    <select id="findAllCount" resultClass="int">
+      SELECT COUNT(*)
+      FROM BMW_FS_ADMIN_MEMBER
+      WHERE 1=1
+      <isNotEmpty property="searchInput">
+        <isNotEmpty property="searchOption">
+          <isEqual property="searchOption" compareValue="id">
+            AND USER_ID LIKE '%'+#searchInput#+'%'
+          </isEqual>
+          <isEqual property="searchOption" compareValue="status">
+            AND ACTIVE_YN LIKE '%'+#searchInput#+'%'
+          </isEqual>
+          <isEqual property="searchOption" compareValue="role">
+            AND ROLE LIKE '%'+#searchInput#+'%'
+          </isEqual>
+        </isNotEmpty>
+      </isNotEmpty>
+    </select>
+
+    <select id="findMemberByIdx" resultMap="memberMap">
+      SELECT IDX
+                ,USER_ID
+                ,ROLE
+                ,LOGIN_DATE
+                ,ACTIVE_YN
+                ,REG_DATE
+                ,REG_ID
+                ,tel1
+                ,tel2
+                ,tel3
+      FROM BMW_FS_ADMIN_MEMBER
+      WHERE 1=1
+      AND IDX = #idx#
+    </select>
+
+    <select id="findMemberForLogin" resultMap="memberMap">
+      SELECT IDX
+                ,USER_ID
+                ,ROLE
+                ,LOGIN_DATE
+                ,ACTIVE_YN
+                ,REG_DATE
+                ,REG_ID
+                ,tel1
+                ,tel2
+                ,tel3
+      FROM BMW_FS_ADMIN_MEMBER
+      WHERE 1=1
+      AND USER_ID = #userId#
+    </select>
+
+    <select id="findMemberDuplicated" resultClass="int">
+      SELECT COUNT(*)
+        FROM BMW_FS_ADMIN_MEMBER
+      WHERE USER_ID = #userId#
+    </select>
+
+    <insert id="insertMember">
+      INSERT INTO BMW_FS_ADMIN_MEMBER (
+                  USER_ID
+                  ,ROLE
+                  ,REG_ID
+                  ,ACTIVE_YN
+                  ,tel1
+                  ,tel2
+                  ,tel3
+      )
+      VALUES (
+                  #userId#
+                  ,#role#
+                  ,#regId#
+                  ,#activeYn#
+                  ,#tel1#
+                  ,#tel2#
+                  ,#tel3#
+      )
+    </insert>
+
+    <update id="updateMember">
+      UPDATE BMW_FS_ADMIN_MEMBER
+        SET ROLE = #role#
+              ,UPT_ID = #uptId#
+              ,UPT_DATE = GETDATE()
+              ,ACTIVE_YN = #activeYn#
+              ,tel1 = #tel1#
+              ,tel2 = #tel2#
+              ,tel3 = #tel3#
+    WHERE IDX = #idx#
+    </update>
+
+    <delete id="deleteMember">
+      DELETE FROM BMW_FS_ADMIN_MEMBER
+      WHERE 1=1
+          AND IDX = #idx#
+    </delete>
+
+    <update id="updateLoginDate">
+      UPDATE BMW_FS_ADMIN_MEMBER
+            SET LOGIN_DATE = GETDATE()
+      WHERE IDX = #idx#
+    </update>
+      
+    
+  </statements>
+
+</sqlMap>

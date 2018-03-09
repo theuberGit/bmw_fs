@@ -1,0 +1,25 @@
+﻿<script type="text/javascript">
+    function goPage(page) {
+        $("#page").val(page);
+        $("form").submit();
+    };
+</script>
+<input type="hidden" name="search" value="true" />
+<input type="hidden" id="page" name="page" value="@ViewBag.pagination.currentPage" />
+<div id="paging">
+    <a href="javascript:void(0);" class="" onclick="goPage('1')"><img src="/resources/images/btn_prev_prev.jpg" alt="맨처음으로 돌아가기"></a>
+    <a href="javascript:void(0);" class="" onclick="goPage('@ViewBag.pagination.jumpPrevPage')"><img src="/resources/images/btn_prev.jpg" alt="이전"></a>
+@for (var idx = ViewBag.pagination.pageBegin; idx <= ViewBag.pagination.pageEnd; idx++)
+{
+    if (ViewBag.pagination.currentPage == idx)
+    {
+        <span class="screen_out">현재페이지</span><em class="paging_box">@idx</em>
+    }
+    else
+    {
+        <a href="javascript:void(0);" class="paging_box" onclick="goPage('@idx')">@idx</a>
+    }
+}
+    <a href="javascript:void(0);" class="" onclick="goPage('@ViewBag.pagination.jumpNextPage')"><img src="/resources/images/btn_next.jpg" alt="다음"></a>
+    <a href="javascript:void(0);" class="" onclick="goPage('@ViewBag.pagination.lastPage')"><img src="/resources/images/btn_next_next.jpg" alt="끝으로"></a>
+</div>

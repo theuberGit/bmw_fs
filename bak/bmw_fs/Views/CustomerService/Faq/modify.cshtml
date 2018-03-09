@@ -1,0 +1,81 @@
+﻿
+<div id="content" class="reg">
+    <div class="cont_top">
+        <h3>FAQ 수정</h3>
+    </div>
+    <div class="cont_bottom">
+        <form method="post" enctype="multipart/form-data">
+            <table class="reg_table">
+                <caption>FAQ 수정 테이블</caption>
+                <colgroup>
+                    <col width="130px">
+                    <col width="870px">
+                </colgroup>
+                <tr>
+                    <th>작성자 </th>
+                    <td>@ViewBag.item.regId</td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="category">구분</label></th>
+                    <td>
+                        <select name="category" id="category">
+                            <option value="leaseIntro">리스 소개</option>
+                            <option value="contract">계약/등록</option>
+                            <option value="finance">금융조건의 변경</option>
+                            <option value="cost">비용/서류 </option>
+                            <option value="lease">리스 승계</option>
+                            <option value="process">만기 시 처리</option>
+                            <option value="insurance">보험</option>
+                            <option value="overdue">연체</option>
+                            <option value="accounting">회계처리</option>
+                            <option value="homepage">홈페이지 이용 관련</option> 
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="title">* 항목</label></th>
+                    <td><input type="text" class="input_long_type" name="question" id="question" value="@ViewBag.item.question" /></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="contents">* 답변</label></th>
+                    <td><textarea rows="20" cols="30" id="answer" name="answer">@ViewBag.item.answer</textarea></td>
+                </tr>
+                <tr>
+                    <th><label for="">배포 *</label></th>
+                    <td class="radio_area">
+                        <label for="active"><input type="radio" name="deployYn" id="active" value="Y" title="배포 여부"> 배포</label>
+                        <label for="inactivity"><input type="radio" name="deployYn" id="inactivity" value="N" title="배포 여부"> 미배포</label>
+                    </td>
+                </tr>
+            </table>
+            <input type="hidden" name="uptId" id="uptId" value="@HttpContext.Current.User.Identity.Name" />
+            <input type="hidden" name="idx" value="@ViewBag.item.idx" />
+        </form>
+        <div class="btn_area">
+            <a href="list?@Session["searchString"]" class="btn_defualt btn_list">취소</a>
+            <a href="javascript:void(0);" class="btn_defualt btn_reg" onclick="modForm();">수정</a>            
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/resources/se/js/HuskyEZCreator.js"></script>
+<script type="text/javascript" src="/resources/js/smarteditor.js"></script>
+<script>
+$('select[name="category"]').val('@ViewBag.item.category');
+if ('@ViewBag.item.deployYn' === 'Y') {//배포 여부 set
+$('#active').prop('checked', true);
+} else {
+$('#inactivity').prop('checked', true);
+}
+lnbSet(".faq_mgmt");
+function modForm() {
+if (!confirm('수정하시겠습니까?')) return;
+    if (!$('#question').required()) return;
+    if (!$('#answer').required()) return;
+$('#content form').attr('action', 'modifyProc').submit();
+}
+
+function delForm() {
+if (!confirm('삭제하시겠습니까?')) return;
+$('#content form').attr('action', 'delete').submit();
+}
+</script>

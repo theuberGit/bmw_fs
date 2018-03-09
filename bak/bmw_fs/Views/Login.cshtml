@@ -1,0 +1,209 @@
+﻿@{
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="../resources/css/common.css">
+    <title>BMW 파이낸셜 서비스</title>
+    <style>
+        .modi{
+
+        }
+        html, body {
+            height: 100%;
+        }
+
+        #wrap {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+        }
+
+        .login_box {
+            overflow: hidden;
+            position: absolute;
+            width: 600px;
+            height: 400px;
+            left: 50%;
+            top: 50%;
+            margin: -200px 0 0 -300px;
+            background: #f4f4f4;
+        }
+
+        .top {
+            position: relative;
+            height: 50px;
+            line-height: 50px;
+            margin-bottom: 56px;
+            background-color: #8e8e8e;
+        }
+
+        h1 {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+
+        h2 {
+            color: #fff;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .login_area {
+            width: 310px;
+            margin: 0 auto;
+        }
+
+        .input_area {
+            margin-bottom: 10px;
+        }
+
+            .input_area label {
+                display: none
+            }
+
+            .input_area input {
+                display: block;
+                width: 300px;
+                height: 45px;
+                padding-left: 10px;
+                color: #9c9c9c;
+                border: 1px solid #d2d2d2;
+            }
+
+                .input_area input[name="id"] {
+                    margin-bottom: 4px;
+                }
+
+        .idsave_label {
+            display: inline-block;
+            margin-bottom: 34px;
+        }
+
+        .btn_login {
+            display: block;
+            width: 100%;
+            height: 45px;
+            line-height: 45px;
+            margin-bottom: 25px;
+            color: #fff;
+            background-color: #0752b7;
+            border: 1px solid #c7c7c7;
+            text-align: center
+        }
+
+        .id_save_checkbox {
+            margin: -2px 2px 0 0;
+            vertical-align: middle
+        }
+
+        .login_area p {
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <form method="post">
+            @Html.AntiForgeryToken()            
+            <div class="login_box">
+                <div class="top">
+                    <h1><img src="../resources/images/logo.png" alt=""></h1>
+                    <h2>BMW 파이낸셜 서비스</h2>
+                </div>
+                <div class="login_area">
+                    <div class="input_area">
+                        <label for="id">ID</label>
+                        <input type="text" class="placeholder_input" name="userId" id="id" placeholder="ID">
+                        <label for="password">Password</label>
+                        <input type="password" class="placeholder_input" name="password" id="password" placeholder="Password">
+                    </div>
+                    <label for="idSave" class="idsave_label"><input type="checkbox" class="id_save_checkbox" name="idSave" id="idSave"> ID 저장</label>
+                    <a href="#" class="btn_login" onclick="login()">로그인</a>
+                    <p>※ 계정 관련 문의는 IT팀(02-3015-5661)에 문의 바랍니다.</p>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="/resources/js/jquery-1.12.4.min.js"></script>
+    <script>
+        function placeholder() {
+            $(".placeholder_input").each(function () {
+                var $self = $(this);
+                var placeholder = $self.attr("placeholder");
+                $self.attr("placeholder", placeholder);
+                $self.css({ color: "#9c9c9c" });
+
+                $self.focusin(function () {
+                    if ($self.val() == placeholder) {
+                        $self.val("");
+                        $self.css({ color: "#9c9c9c" });
+                    };
+                });
+                $self.focusout(function () {
+                    if ($self.val() == "") {
+                        $self.val(placeholder);
+                        $self.css({ color: "#9c9c9c" });
+                    };
+                });
+            });
+        };
+        placeholder();
+
+        function login() {
+            if ($('#idSave').prop('checked')) {
+                setCookie('userId', $('#id').val(), 30);
+            } else {
+                setCookie('userId', $('#id').val(), -1);
+            }
+            $('form').submit();
+        }
+        $('#password').keyup(function (e) {
+            if (e.keyCode == 13) {
+                login();
+            }
+        });
+
+        if (getCookie('userId') != '') {
+            $('#id').val(getCookie('userId'));
+            $('#idSave').prop('checked', true);
+        }
+
+        // 쿠키 생성
+        function setCookie(cName, cValue, cDay) {
+            var expire = new Date();
+            expire.setDate(expire.getDate() + cDay);
+            cookies = cName + '=' + escape(cValue) + '; path=/ ';
+            if (typeof cDay != 'undefined') cookies += ';expires=' + expire.toGMTString() + ';';
+            document.cookie = cookies;
+        }
+
+        // 쿠키 가져오기
+        function getCookie(cName) {
+            cName = cName + '=';
+            var cookieData = document.cookie;
+            var start = cookieData.indexOf(cName);
+            var cValue = '';
+            if (start != -1) {
+                start += cName.length;
+                var end = cookieData.indexOf(';', start);
+                if (end == -1) end = cookieData.length;
+                cValue = cookieData.substring(start, end);
+            }
+            return unescape(cValue);
+        }
+        //Login 실패시
+        @if (ViewBag.errorMsg != null) {
+            @:alert('@ViewBag.errorMsg');
+        }
+    </script>
+</body>
+</html>
