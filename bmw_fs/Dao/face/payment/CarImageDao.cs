@@ -11,7 +11,7 @@ namespace bmw_fs.Dao.face.payment
     {
         public void insertCarImage(Payment payment)
         {
-            Mapper.Instance().Insert("carImage.insertPayment", payment);
+            Mapper.Instance().Insert("carImage.insertCarImage", payment);
         }
 
         public IList<Payment> findAll(Payment payment)
@@ -21,17 +21,17 @@ namespace bmw_fs.Dao.face.payment
 
         public Payment findCarImage(Payment payment)
         {
-            return Mapper.Instance().QueryForObject<Payment>("carImage.findPayment", payment);
+            return Mapper.Instance().QueryForObject<Payment>("carImage.findCarImage", payment);
         }
 
         public void updateCarImage(Payment payment)
         {
-            Mapper.Instance().Update("carImage.updatePayment", payment);
+            Mapper.Instance().Update("carImage.updateCarImage", payment);
         }
 
         public void deleteCarImage(Payment payment)
         {
-            Mapper.Instance().Delete("carImage.deletePayment", payment);
+            Mapper.Instance().Delete("carImage.deleteCarImage", payment);
         }
     }
 }
