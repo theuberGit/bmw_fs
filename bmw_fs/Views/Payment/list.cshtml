@@ -5,8 +5,7 @@
     .list .cont_bottom .list_table thead tr th.yellow { background-color: #ffe08c;}
     .list .cont_bottom .list_table thead tr th.blue {background-color: #b2ccff;}
     .list .cont_bottom .list_table thead tr th.green {background-color: #5ec75e;}
-    .list .cont_bottom .excel_area{padding: 15px 115px 20px;}
-    .list .cont_bottom .excel_text {display:inline-block;padding-top:5px 0;}
+
 </style>
 <div id="content" class="list">
     <form method="get">
@@ -17,7 +16,7 @@
                     <option value="">구분</option>
                     <option value="BMW">BMW</option>
                     <option value="MINI">MINI</option>
-                    <option value="Motorrad">Motorrad</option>
+                    <option value="Motorrad">Motorrad</option> 
                 </select>
                 <select name="series" id="series" class="search_select">
                     <option value="">구분</option>
@@ -35,26 +34,9 @@
                 </select>
                 <button type="button" onclick="searchList();"></button>
             </div>
-        </div>    
-        <div class="cont_bottom">        
-            <div class="file_area excel_area">
-                <div>                    
-                    <span class="file_src main_src"></span>
-                    <input type="file" class="input_file" name="fileExcel" id="fileExcel">
-                    <label for="fileExcel" class="btn_file">파일찾기</label>
-                    <a href="javascript:void(0);" class="btn_defualt btn_reg" onclick="excelUpate();">등록</a>
-                </div>
-                <div class="excel_text">
-                    @for (var i = 0; i < ViewBag.excelFile.Count; i++)
-                    {
-                        <span>* 최신파일명 :</span> @ViewBag.excelFile[0].originalFilename @:(
-                        <span>작성자 : </span>if (ViewBag.list.Count > 0) { @ViewBag.list[0].regId } @:/<span> 등록일 : </span> @ViewBag.excelFile[0].regDate 
-                            @:)
-                    }
+        </div>
+        <div class="cont_bottom">
 
-                </div>
-            </div>
-        
             <table class="list_table">
                 <colgroup>
                     <col width="50px" />
@@ -174,8 +156,10 @@
                         </tr>
                     }
                 </tbody>
-            </table>           
-            
+            </table>
+            <!-- pagination -->
+            @*@RenderPage("~/Views/Common/Pagination.cshtml")*@
+            <a href="register" class="btn_defualt btn_reg">등록</a>
         </div>
     </form>
 </div>
@@ -343,26 +327,4 @@
     $('select[name="series"]').val('@ViewBag.pagination.series');
     $('#series').trigger('change');
     $('select[name="model"]').val('@ViewBag.pagination.model');
-
-    $(".file_area").on("change", ".input_file", function (e) {
-        var $parent = $(this).closest("div");
-        var val = $(this).val();
-        var valTit = val.split("\\");
-        var valTittext = valTit[valTit.length - 1]
-        if (val != "") {
-            $parent.find(".file_src").text(valTittext).addClass("on");
-        };
-    });
-    function excelUpate() {
-        if ($('#fileExcel').val() == '') {
-            alert('파일을 등록해주세요.');
-            return;
-        }
-        if ($('#fileExcel').val().indexOf('.xlsx') < 0) {
-            alert('.xlsx 파일만 가능합니다.');
-            return;
-        }
-        if (!confirm('등록하시겠습니까?')) return; 
-        $('#content form').attr('method', 'post').attr('enctype', 'multipart/form-data').attr('action', 'loadExcel').submit();        
-    }
 </script>

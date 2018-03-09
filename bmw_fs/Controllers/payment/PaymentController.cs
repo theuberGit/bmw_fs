@@ -1,14 +1,9 @@
-﻿using bmw_fs.Common;
-using bmw_fs.Models.common;
-using bmw_fs.Models.payment;
+﻿using bmw_fs.Models.payment;
 using bmw_fs.Service.face.common;
 using bmw_fs.Service.face.payment;
 using bmw_fs.Service.impl.common;
 using bmw_fs.Service.impl.payment;
-using OfficeOpenXml;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -34,9 +29,6 @@ namespace bmw_fs.Controllers.payment
             ViewBag.list = paymentService.findAll(payment);
             ViewBag.pagination = payment;
             ViewBag.noticeList = paymentService.findAll(payment);
-            Files file = new Files();
-            file.masterIdx = 900000;
-            ViewBag.excelFile = filesService.findAllByMasterIdx(file);
             return View();
         }
 
@@ -86,15 +78,6 @@ namespace bmw_fs.Controllers.payment
         public RedirectToRouteResult delete(Payment payment)
         {
             paymentService.deletePayment(payment);
-            return RedirectToAction("list");
-        }
-
-        [HttpPost]
-        public ActionResult loadExcel()
-        {
-            HttpFileCollectionBase multipartfiles = Request.Files;
-            string regId = System.Web.HttpContext.Current.User.Identity.Name;
-            paymentService.loadExcelByFileAndUpdateToDB(multipartfiles, regId);            
             return RedirectToAction("list");
         }
     }

@@ -13,7 +13,6 @@ namespace bmw_fs.Models.common
         public String savedFilename { get; set; }
         public String type { get; set; }
         public IList<int> fileIdxs { get; set; }
-        public DateTime regDate { get; set; }
         
     }
 }

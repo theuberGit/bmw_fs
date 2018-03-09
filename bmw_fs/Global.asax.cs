@@ -65,7 +65,6 @@ namespace bmw_fs
                     if (!LoginSession.cookieValue[authTicket.Name].ToString().Equals(authCookie.Value))
                     {
                         FormsAuthentication.SignOut();
-                        HttpContext.Current.Response.Redirect("/");
                     }
                 }
                 

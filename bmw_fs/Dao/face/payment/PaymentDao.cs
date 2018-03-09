@@ -38,10 +38,5 @@ namespace bmw_fs.Dao.face.payment
         {
             Mapper.Instance().Delete("payment.deletePayment", payment);
         }
-
-        public void deletePaymentAll()
-        {
-            Mapper.Instance().Delete("payment.deletePaymentAll", null);
-        }
     }
 }

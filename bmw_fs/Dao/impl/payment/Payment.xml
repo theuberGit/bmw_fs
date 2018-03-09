@@ -237,9 +237,5 @@
       WHERE IDX = #idx#
     </delete>
 
-    <delete id="deletePaymentAll">
-      DELETE FROM BMW_FS_PAYMENT      
-    </delete>
-
   </statements>
 </sqlMap>

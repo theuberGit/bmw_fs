@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
-using System.Web.Configuration;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -16,7 +15,7 @@ namespace bmw_fs.Controllers.login
 {
     public class LoginController : Controller
     {
-        private static bool testFlag = Boolean.Parse(WebConfigurationManager.AppSettings["testFlag"]);
+
         private MemberService memberService = new MemberServiceImpl();
         private SmsService smsService = new SmsServiceImpl();
 
@@ -45,24 +44,21 @@ namespace bmw_fs.Controllers.login
             if(member != null)
             {
                 LdapAuthenticationService ldapService = new LdapAuthenticationService("LDAP://" + _domain);
+
+                //로컬작업시 활성
+                //Boolean isLogin = true;
+                
+                //실섭에서 활성
                 Boolean isLogin = false;
-                if (testFlag)
+                try { 
+                    isLogin = ldapService.IsAuthenticated(_domain, model.userId, model.password);
+                }
+                catch (Exception e)
                 {
-                    isLogin = true;
+                    ViewBag.errorMsg = "Invalid login attempt.";
+                    return View("~/Views/Login.cshtml", model);
                 }
-                else
-                {                    
-                    isLogin = false;
-                    try
-                    {
-                        isLogin = ldapService.IsAuthenticated(_domain, model.userId, model.password);
-                    }
-                    catch (Exception e)
-                    {
-                        ViewBag.errorMsg = "Invalid login attempt.";
-                        return View("~/Views/Login.cshtml", model);
-                    }
-                }
+                
                 
                 if (isLogin)
                 {
@@ -75,9 +71,9 @@ namespace bmw_fs.Controllers.login
                     memberService.updateLoginDate(member);
 
 
-                    if (!testFlag && !String.IsNullOrWhiteSpace(member.tel1) && !String.IsNullOrWhiteSpace(member.tel2) && !String.IsNullOrWhiteSpace(member.tel3))
+                    if (!String.IsNullOrWhiteSpace(member.tel1) && !String.IsNullOrWhiteSpace(member.tel2) && !String.IsNullOrWhiteSpace(member.tel3))
                     {
-                        smsService.insertSms("[BMW FS 담당자]", member.tel1+"-"+member.tel2+"-"+member.tel3, "02-3441-5439", "[BMW FS 담당자] " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "에 로그인 되었습니다.");
+                        smsService.insertSms("[BMW FS 관리자]", member.tel1+"-"+member.tel2+"-"+member.tel3, "02-3441-5439", "[BMW FS 관리자] " + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "에 로그인 되었습니다.");
                     }
 
                     if (LoginSession.cookieValue.ContainsKey(model.userId))

@@ -21,8 +21,5 @@ namespace bmw_fs.Service.face.payment
         void updatePayment(HttpFileCollectionBase multipartFiles, Payment payment);
 
         void deletePayment(Payment payment);
-
-        void loadExcelByFileAndUpdateToDB(HttpFileCollectionBase multipartFiles, string regId);
-
     }
 }
