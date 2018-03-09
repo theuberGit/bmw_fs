@@ -52,6 +52,9 @@
     <Reference Include="AntiXssLibrary, Version=4.3.0.0, Culture=neutral, PublicKeyToken=d127efab8a9c114f, processorArchitecture=MSIL">
       <HintPath>..\packages\AntiXSS.4.3.0\lib\net40\AntiXssLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="EPPlus, Version=4.1.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.1.1\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="HtmlSanitizationLibrary, Version=4.3.0.0, Culture=neutral, PublicKeyToken=d127efab8a9c114f, processorArchitecture=MSIL">
       <HintPath>..\packages\AntiXSS.4.3.0\lib\net40\HtmlSanitizationLibrary.dll</HintPath>
     </Reference>
@@ -166,8 +169,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\CustomException.cs" />
     <Compile Include="Common\CustomFormatException.cs" />
-    <Compile Include="Common\Filter\TestFilter.cs" />
     <Compile Include="Config\StringProperties.cs" />
+    <Compile Include="Common\Filter\TestFilter.cs" />
     <Compile Include="Controllers\admin\AdminController.cs" />
     <Compile Include="Controllers\common\ErrorController.cs" />
     <Compile Include="Controllers\common\FilesController.cs" />
