@@ -12,7 +12,8 @@
       <result property="masterIdx" column="MASTER_IDX" />
       <result property="savedFilename" column="SAVED_FILENAME" />
       <result property="originalFilename" column="ORIGINAL_FILENAME" />
-      <result property="type" column="TYPE" />      
+      <result property="type" column="TYPE" />
+      <result property="regDate" column="REG_DATE" />
     </resultMap>
   </resultMaps>
 
@@ -24,6 +25,7 @@
                 ,ORIGINAL_FILENAME
                 ,SAVED_FILENAME
                 ,TYPE
+                ,REG_DATE
        FROM BMW_FS_FILES_DATA
       WHERE IDX = #fileIdx#
     </select>
@@ -66,6 +68,7 @@
                 ,ORIGINAL_FILENAME
                 ,SAVED_FILENAME
                 ,TYPE
+                ,REG_DATE
         FROM BMW_FS_FILES_DATA
       WHERE MASTER_IDX = #masterIdx#
     </select>
@@ -76,6 +79,7 @@
                 ,ORIGINAL_FILENAME
                 ,SAVED_FILENAME
                 ,TYPE
+                ,REG_DATE
         FROM BMW_FS_FILES_DATA
       WHERE MASTER_IDX = #masterIdx#
           AND TYPE = #type#

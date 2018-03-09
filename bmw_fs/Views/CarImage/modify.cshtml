@@ -1,0 +1,165 @@
+﻿
+<head>
+    <style>
+     .btn_file {display: inline-block; width: 120px; height: 35px; line-height: 35px; border: 1px solid #c8c8c8; text-align: center; cursor: pointer;}
+     .file_area button {display: inline-block; width: 120px; height: 37px; border: 1px solid #c8c8c8}
+     .file_area:after{content:"* .jpg, .png 파일만 업로드 가능";}
+     .file_area > div{height: 38px;}
+    </style>
+</head>
+<div id="content" class="reg">
+    <div class="cont_top">
+        <h3>뉴스 관리</h3>
+    </div>
+    <div class="cont_bottom">
+        <form method="post" enctype="multipart/form-data">
+            <table class="reg_table">
+                <colgroup>
+                    <col width="130px" />
+                    <col width="870px" />
+                </colgroup>
+                <tr>
+                    <th>작성자 </th>
+                    <td>@ViewBag.item.regId</td>
+                </tr>
+                <tr>
+                    <th><label for="">구분 *</label></th>
+                    <td class="radio_area">
+                        <label for="notice"><input type="radio" name="type" id="notice" value="N" title="구분"> 공지</label>
+                        <label for="normal"><input type="radio" name="type" id="normal" value="G" title="구분"> 일반</label>
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="">제목 *</label></th>
+                    <td><input type="text" name="title" id="title" class="input_long_type" title="제목" maxlength="100" value="@ViewBag.item.title"></td>
+                </tr>
+                <tr>
+                    <th><label for="">내용 *</label></th>
+                    <td><textarea name="contents" id="contents" title="내용">@ViewBag.item.contents</textarea></td>
+                </tr>
+                <tr class="add_img_area">
+                    <th>썸네일 이미지</th>
+                    <td class="file_area">
+                    @if (ViewBag.thumbList.Count != 0)
+                    {
+                        for (int i = 0, size = ViewBag.thumbList.Count; i < size; i++)
+                        {
+                            <div class="thum_nail thumbImg">
+                                <span class="file_src thumb_file_nm">@ViewBag.thumbList[i].originalFilename</span>
+                                <input type="file" class="input_file" name="thumbImg" id="thumNail">
+                                <label for="thumNail" style="display:none;" class="btn_file btn_file_txt">파일찾기</label>
+                                <label for="" class="btn_file del_file_txt">삭제</label>
+                                <input type="hidden" name="thumbIdxs" value="@ViewBag.thumbList[i].fileIdx" />
+                            </div>
+                        }
+                        
+                    }
+                    else
+                    {
+                        <div class="thum_nail thumbImg">
+                            <span class="file_src thumb_file_nm"></span>
+                            <input type="file" class="input_file" name="thumbImg" id="thumNail">
+                            <label for="thumNail" class="btn_file btn_file_txt">파일찾기</label>
+                            <label for="" style="display:none;" class="btn_file del_file_txt">삭제</label>
+                            <input type="hidden" name="thumbIdxs" value="-1" />
+                        </div>
+                    }
+                    </td>
+                </tr>
+                <tr class="add_img_area">
+                    <th>본문 이미지 *</th>
+                    <td class="file_area">
+                        @if (ViewBag.mainList.Count != 0)
+                        {
+                            for (int i = 0, size = ViewBag.mainList.Count; i < size; i++)
+                            {
+                                <div class="main_img">
+                                    <span class="file_src main_src">@ViewBag.mainList[i].originalFilename</span>
+                                    <input type="file" class="input_file" name="mainImg" id="mainImg">
+                                    <label for="mainImg" class="btn_file">파일찾기</label>
+                                    <input type="hidden" name="fileIdxs" value="@ViewBag.mainList[i].fileIdx" />
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="main_img">
+                                <span class="file_src main_src"></span>
+                                <input type="file" class="input_file" name="mainImg" id="mainImg">
+                                <label for="mainImg" class="btn_file">파일찾기</label>
+                            </div>
+                        }
+
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="">배포 *</label></th>
+                    <td class="radio_area">
+                        <label for="active"><input type="radio" name="deployYn" id="active" value="Y" title="배포 여부"> 배포</label>
+                        <label for="inactivity"><input type="radio" name="deployYn" id="inactivity" value="N" title="배포 여부"> 미배포</label>
+                    </td>
+                </tr>
+            </table>
+            <input type="hidden" name="idx" value="@ViewBag.item.idx"/>
+        </form>
+        <div class="btn_area">
+            <a href="list?@Session["searchString"]" class="btn_defualt btn_list">목록</a>
+            <a href="javascript:void(0);" class="btn_defualt btn_reg" onclick="modifyProc();">수정</a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/resources/se/js/HuskyEZCreator.js"></script>
+<script type="text/javascript" src="/resources/js/smarteditor.js"></script>
+<script>
+    lnbSet(".news_mgmt");
+if ('@ViewBag.item.type' === 'N') {//일반 or 공지 set
+  $('#notice').prop('checked', true);
+} else {
+  $('#normal').prop('checked', true);
+}
+if ('@ViewBag.item.deployYn' === 'Y') {//배포 여부 set
+  $('#active').prop('checked', true);
+} else {
+  $('#inactivity').prop('checked', true);
+}
+$('.del_file_txt').click(function () {//썸네일 삭제 버튼 click
+    $(this).hide();
+    $('.thumb_file_nm').text('');
+    $('#thumNail').val('');
+    $('.btn_file_txt').show();
+});
+
+$('.btn_file_txt').click(function () {//썸네일 파일찾기 버튼 click
+    if ($('.thumb_file_nm').text() != '') {
+        $(this).hide();
+        $('.thumb_file_nm').text('');
+        $('.del_file_txt').show();
+     }
+});
+function modifyProc() {
+    if (!$('#title').required()) return;
+    editor_object.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
+    if ($('#contents').val().trim().replace(/<p>/gi, '').replace(/<\/p>/gi, '').replace(/<br>/gi, '').replace(/&nbsp;/gi, '').replace(/ /gi, '') == '') {
+        alert('내용을 입력하세요.');
+        return;
+    }
+    if ($('#normal').prop('checked')) {//일반 게시물일 경우
+        if ($('#thumNail').val() === '' && $('.thumb_file_nm').text() === '') {
+            alert('섬네일이미지를 등록하세요.');
+            return false;
+        }
+    }
+    if ($('.main_src').text() === '') {
+        alert('본문이미지를 등록하세요.');
+        return;
+    }
+        
+    if ($('.thumb_file_nm').text() === '' && $('input[name=thumbIdxs]').val() !== -1) {// -1 : 새로등록, 0 : 기존파일 삭제
+        $('input[name=thumbIdxs]').val(0);
+    }
+    if (!validationFileType('jpg, png')) return;
+
+    if (!confirm('수정하시겠습니까?')) return;
+    $('#content form').attr('action', 'modifyProc').submit();
+};
+</script>
