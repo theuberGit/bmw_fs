@@ -1,0 +1,425 @@
+﻿
+<style>
+    .file_area:after{content:"* .jpg, .png 파일만 업로드 가능";}
+    .file_area > div{height: 38px;}
+    .reg .cont_bottom .reg_table td.smart{padding-left:0px;}
+    table.reg_table tr td span.square{font-size:16px;}
+    table.reg_table tr td.td_tit {font-weight: bold;}
+    table.reg_table tr td label {margin-right: 15px }
+    table.reg_table tr.off {display: none;}
+    .input_table tbody{display:none;}
+        
+</style>
+<div id="content" class="reg">
+    <div class="cont_top">
+        <h3>월 납입금 등록</h3>
+    </div>
+    <div class="cont_bottom">
+        <form method="post" enctype="multipart/form-data">
+            <table class="reg_table">
+                <caption>월 납입금 입력 테이블</caption>
+                <colgroup>
+                    <col width="150px">
+                    <col width="870px">
+                </colgroup>
+                <tr>
+                    <th scope="row">작성자</th>
+                    <td>@HttpContext.Current.User.Identity.Name</td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="">* 분류</label></th>
+                    <td>
+                        <select name="brand" id="brand"class="category_select" title="브랜드">
+                            <option value="">구분</option>
+                            <option value="BMW">BMW</option>
+                            <option value="MINI">MINI</option>
+                            <option value="Motorrad">Motorrad</option>
+                        </select>
+                        <select name="series" id="series" class="category_select" title="시리즈">
+                            <option value="">구분</option>                    
+                        </select>
+                        <select name="model" id="model" class="category_select" title="모델">
+                            <option value="">구분</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="modelName">* 상세 모델</label></th>
+                    <td><input type="text" name="modelName" id="modelName" class="modelName input_long_type" maxlength="70" title="상세모델" /></td>
+                </tr>
+                <tr class="add_img_area">
+                    <th>* 차량 이미지</th>
+                    <td class="file_area">
+                        <div class="car_image">
+                            <span class="file_src"></span>
+                            <input type="file" class="input_file" name="carImg" id="carImg">
+                            <label for="carImg" class="btn_file">찾아보기</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="price">* 차량가격</label></th>
+                    <td><input type="text" name="price" id="price" class="price" maxlength="50" title="차량가격" onkeyup="inputNumberFormat(this)" /> 원</td>
+                </tr>
+                <tr>
+                    <th><label for="">* 배포</label></th>
+                    <td class="radio_area">
+                        <label for="active"><input type="radio" name="deployYn" id="active" value="Y" title="배포 여부"> 배포</label>
+                        <label for="inactivity"><input type="radio" name="deployYn" id="inactivity" checked value="N" title="배포 여부"> 미배포</label>
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="program">* 프로그램 선택</label></th>
+                    <td>
+                        <input type="checkbox" name="programs" id="ZH" class="pr_zh" value="ZH" /><label for="ZH"> SMART/SMILE 할부</label>&nbsp;&nbsp;
+                        <input type="checkbox" name="programs" id="ZL" class="pr_zl" value="ZL" /><label for="ZL"> SMART/SMILE 운용리스</label>&nbsp;&nbsp;
+                        <input type="checkbox" name="programs" id="GH" class="pr_gh" value="GH" /><label for="GH"> 일반 할부</label>&nbsp;&nbsp;
+                        <input type="checkbox" name="programs" id="RT" class="pr_rt" value="RT" /><label for="RT"> SMART 렌트</label>&nbsp;&nbsp;
+                        <input type="checkbox" name="programs" id="PP" class="pr_pp" value="PP" /><label for="PP">유예 할부</label>
+                    </td>
+                </tr>
+            </table>
+            <table class="reg_table input_table">
+                <caption>월 납입금 입력 테이블</caption>
+                <colgroup>
+                    <col width="150px">
+                    <col width="870px">
+                </colgroup>
+                <tbody class="zh_tbody">
+                    <tr class="zh">
+                        <td colspan="2" class="td_tit smart"><span class="square">■</span> SMART/SMILE 할부</td>
+                    </tr>
+                    <tr class="zh">
+                        <th scope="row"><label for="zhZanga">잔가</label></th>
+                        <td><input type="text" name="zhZanga" id="zhZanga" class="zhZanga" maxlength="50" title="잔가" /> %</td>
+                    </tr>
+                    <tr class="zh">
+                        <th scope="row"><label for="zhPay1">월 납입금 (선납 10%)</label></th>
+                        <td><input type="text" name="zhPay1" id="zhPay1" class="zhPay1" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span class="result1"></span></td>
+                    </tr>
+                    <tr class="zh">
+                        <th scope="row"><label for="zhPay2">월 납입금 (선납 20%)</label></th>
+                        <td><input type="text" name="zhPay2" id="zhPay2" class="zhPay2" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span class="result2"></span></td>
+                    </tr>
+                    <tr class="zh">
+                        <th scope="row"><label for="zhPay3">월 납입금 (선납 30%)</label></th>
+                        <td><input type="text" name="zhPay3" id="zhPay3" class="zhPay3" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span class="result3"></span></td>
+                    </tr>
+                </tbody>
+                <tbody class="zl_tbody">
+                    <tr>
+                        <td colspan="2" class="td_tit smart"><span class="square">■</span> SMART/SMILE 운용리스</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="zlZanga">잔가</label></th>
+                        <td><input type="text" name="zlZanga" id="zlZanga" class="zlZanga" maxlength="50" title="잔가" /> %</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="zlPay1">월 납입금 (선납 10%)</label></th>
+                        <td><input type="text" name="zlPay1" id="zlPay1" class="zlPay1" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span class="result1"></span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="zlPay2">월 납입금 (선납 20%)</label></th>
+                        <td><input type="text" name="zlPay2" id="zlPay2" class="zlPay2" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span class="result2"></span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="zlPay3">월 납입금 (선납 30%)</label></th>
+                        <td><input type="text" name="zlPay3" id="zlPay3" class="zlPay3" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span class="result3"></span></td>
+                    </tr>
+                </tbody>
+                <tbody class="gh_tbody">
+                    <tr class="general">
+                        <td colspan="2" class="td_tit smart"><span class="square">■</span> 일반 할부</td>
+                    </tr>
+                    <tr class="general">
+                        <th scope="row"><label for="ghPay1">월 납입금 (선납 10%)</label></th>
+                        <td><input type="text" name="ghPay1" id="ghPay1" class="ghPay1" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span class="result1"></span></td>
+                    </tr>
+                    <tr class="general">
+                        <th scope="row"><label for="ghPay2">월 납입금 (선납 20%)</label></th>
+                        <td><input type="text" name="ghPay2" id="ghPay2" class="ghPay2" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span class="result2"></span></td>
+                    </tr>
+                    <tr class="general">
+                        <th scope="row"><label for="ghPay3">월 납입금 (선납 30%)</label></th>
+                        <td><input type="text" name="ghPay3" id="ghPay3" class="ghPay3" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span class="result3"></span></td>
+                    </tr>
+                </tbody>
+                <tbody class="rt_tbody">
+                    <tr>
+                        <td colspan="2" class="td_tit smart"><span class="square">■</span> SMART 렌트</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="rtPay1">월 납입금 (선납 10%)</label></th>
+                        <td><input type="text" name="rtPay1" id="rtPay1" class="rtPay1" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span class="result1"></span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="rtPay2">월 납입금 (선납 20%)</label></th>
+                        <td><input type="text" name="rtPay2" id="rtPay2" class="rtPay2" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span class="result2"></span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="rtPay3">월 납입금 (선납 30%)</label></th>
+                        <td><input type="text" name="rtPay3" id="rtPay3" class="rtPay3" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span class="result3"></span></td>
+                    </tr>
+                </tbody>
+                <tbody class="pp_tbody">
+                    <tr>
+                        <td colspan="2" class="td_tit smart"><span class="square">■</span> 유예 할부</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="postponeRate">유예율</label></th>
+                        <td><input type="text" name="ppRate" id="postponeRate" class="postponeRate" maxlength="50" title="유예율" /> %</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="ppPay1">월 납입금 (선납 10%)</label></th>
+                        <td><input type="text" name="ppPay1" id="ppPay1" class="ppPay1" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span class="result1"></span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="ppPay2">월 납입금 (선납 20%)</label></th>
+                        <td><input type="text" name="ppPay2" id="ppPay2" class="ppPay2" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span class="result2"></span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="ppPay3">월 납입금 (선납 30%)</label></th>
+                        <td><input type="text" name="ppPay3" id="ppPay3" class="ppPay3" maxlength="50" title="월 납입금" onkeyup="inputNumberFormat(this)" /> 원 <span class="result3"></span></td>
+                    </tr>
+                </tbody>                    
+        </table>
+            <input type="hidden" name="regId" id="regId" value="@HttpContext.Current.User.Identity.Name" />
+        </form>
+        <div class="btn_area">
+            <a href="list?@Session["searchString"]" class="btn_defualt btn_list">목록</a>
+            <a href="javascript:void(0);" class="btn_defualt btn_reg" onclick="regForm();">등록</a>
+        </div>
+    </div>
+</div>
+<script>
+    lnbSet(".payment_mgmt");
+    //브랜드 셀렉트값 변경시
+    $(document).on('change', '#brand', function () {        
+        $seriesSelect = $(this).siblings('.category_select').eq(0);
+        $modelSelect = $(this).siblings('.category_select').eq(1);
+        var series = "";
+        var model = "";
+        //시리즈 초기화
+        $seriesSelect.html(series);
+        //모델 초기화
+        $modelSelect.html(model);
+        var val = $(this).val();
+
+        if (val == "BMW") {
+
+            series += '<option value="">구분</option>';
+            series += '<option value="1 Series">1 Series</option>';
+            series += '<option value="Active Tourer">Active Tourer</option>';
+            series += '<option value="3 Series">3 Series</option>';
+            series += '<option value="4 Series">4 Series</option>';
+            series += '<option value="5 Series">5 Series</option>';
+            series += '<option value="6 Series">6 Series</option>';
+            series += '<option value="7 Series">7 Series</option>';
+            series += '<option value="X">X</option>';
+            series += '<option value="GT">GT</option>';
+            series += '<option value="M">M</option>';
+            series += '<option value="Z">Z</option>';
+            series += '<option value="i">i</option>';
+
+            model += '<option value="">구분</option>';
+        } else if (val == "MINI") {
+            series += '<option value="">구분</option>';
+            series += '<option value="3 DOOR">3 DOOR</option>';
+            series += '<option value="5 DOOR">5 DOOR</option>';
+            series += '<option value="CLUBMAN">CLUBMAN</option>';
+            series += '<option value="CONVERTIBLE">CONVERTIBLE</option>';
+            series += '<option value="THE NEW MINI COUNTRYMAN">THE NEW MINI COUNTRYMAN</option>';
+
+            model += '<option value="">구분</option>';
+        } else if (val == "Motorrad") {
+            series += '<option value="">구분</option>';
+            series += '<option value="R">R</option>';
+            series += '<option value="S">S</option>';
+            series += '<option value="C">C</option>';
+            series += '<option value="F">F</option>';
+            series += '<option value="G">G</option>';
+            series += '<option value="K">K</option>';
+
+            model += '<option value="">구분</option>';
+        } else {
+            series += '<option value="">구분</option>';
+        }
+        $('#series').append(series);
+        $('#model').append(model);
+    });
+    //시리즈 셀렉트값 변경시
+    $(document).on("change", "#series", function (e) {
+
+        $modelSelect = $(this).siblings('.category_select').eq(1);
+        var model = "";
+        //모델 초기화
+        $modelSelect.html(model);
+        var val = $(this).val();
+
+        model = '<option value="">구분</option>';
+        if (val == "1 Series") {
+            model += '<option value="118">118</option>';
+        } else if (val == "Active Tourer") {
+            model += '<option value="Active Tourer">Active Tourer</option>';
+        } else if (val == "3 Series") {
+            model += '<option value="320">320</option>';
+            model += '<option value="328">328</option>';
+            model += '<option value="330">330</option>';
+        } else if (val == "4 Series") {
+            model += '<option value="420">420</option>';
+            model += '<option value="428">428</option>';
+            model += '<option value="430">430</option>';
+            model += '<option value="435">435</option>';
+        } else if (val == "5 Series") {
+            model += '<option value="520">520</option>';
+            model += '<option value="528">528</option>';
+            model += '<option value="530">530</option>';
+            model += '<option value="550">550</option>';
+        } else if (val == "6 Series") {
+            model += '<option value="630">630</option>';
+            model += '<option value="640">640</option>';
+        } else if (val == "7 Series") {
+            model += '<option value="730">730</option>';
+            model += '<option value="740">740</option>';
+            model += '<option value="750">750</option>';
+            model += '<option value="760">760</option>';
+        } else if (val == "X") {
+            model += '<option value="X1">X1</option>';
+            model += '<option value="X2">X2</option>';
+            model += '<option value="X3">X3</option>';
+            model += '<option value="X4">X4</option>';
+            model += '<option value="X5">X5</option>';
+            model += '<option value="X6">X6</option>';
+        } else if (val == "GT") {
+            model += '<option value="GT">GT</option>';
+        } else if (val == "M") {
+            model += '<option value="M2">M2</option>';
+            model += '<option value="M3">M3</option>';
+            model += '<option value="M4">M4</option>';
+            model += '<option value="M5">M5</option>';
+            model += '<option value="M6">M6</option>';
+        } else if (val == "Z") {
+            model += '<option value="Z4">Z4</option>';
+        } else if (val == "i") {
+            model += '<option value="i3">i3</option>';
+            model += '<option value="i8">i8</option>';
+        } else if (val == "3 DOOR") {
+            model += '<option value="3 DOOR">3 DOOR</option>';
+        } else if (val == "5 DOOR") {
+            model += '<option value="5 DOOR">5 DOOR</option>';
+        } else if (val == "CLUBMAN") {
+            model += '<option value="CLUBMAN">CLUBMAN</option>';
+        } else if (val == "CONVERTIBLE") {
+            model += '<option value="CONVERTIBLE">CONVERTIBLE</option>';
+        } else if (val == "THE NEW MINI COUNTRYMAN") {
+            model += '<option value="THE NEW MINI COUNTRYMAN">THE NEW MINI COUNTRYMAN</option>';
+        } else if (val == "R") {
+            model += '<option value="nine T">nine T</option>';
+            model += '<option value="1200">1200</option>';
+        } else if (val == "S") {
+            model += '<option value="1000">1000</option>';
+        } else if (val == "C") {
+            model += '<option value="650">650</option>';
+        } else if (val == "F") {
+            model += '<option value="700">700</option>';
+            model += '<option value="800">800</option>';
+        } else if (val == "G") {
+            model += '<option value="310">310</option>';
+        } else if (val == "K") {
+            model += '<option value="1600">1600</option>';
+        } else {
+            model += '';
+        }
+        $('#model').append(model);
+
+        if (val != "i") {
+            $('#ZH').attr('disabled', false);
+            $('.zh').removeClass('off');
+        } else {
+            //i시리즈 선택시 
+            $('#ZH').prop("checked", false);
+            $('#ZH').attr('disabled', true); //프로그램 SMART할부 체크박스 비활성화
+            $('#zhZanga').val('');
+            $('#zhPay1').val('');
+            $('#zhPay2').val('');
+            $('#zhPay3').val('');
+            $('.zh').addClass('off');
+        }
+    });
+    /*//일반할부 선택시 잔가 필드 비활성화
+    $(document).on('change', '#item', function () {
+        //item 선택값
+        var val = $(this).val();
+        var zanga = document.getElementById('zanga');
+        if (val == "generalHalbu") {
+            $('#zanga').val("");
+            zanga.disabled = true;
+        } else {
+            zanga.disabled = false;
+        }
+    });*/
+    //가격입력시 선납금 계산
+    $(document).on('change', '#price', function () {
+
+        var val = $(this).val();
+        //선납계산을 위해 콤마제거
+        var num = unComma(val);
+
+        //선납 계산
+        var result1 = num * 0.1;
+        var result2 = num * 0.2;
+        var result3 = num * 0.3;
+        //선납금 표시할때 콤마 추가
+        $('.result1').text("(" + addComma(parseInt(result1)) + "원)");
+        $('.result2').text("(" + addComma(parseInt(result2)) + "원)");
+        $('.result3').text("(" + addComma(parseInt(result3)) + "원)");
+    });
+    function regForm() {
+        if (!$('#brand').reqSelect()) return;
+        if (!$('#series').reqSelect()) return;
+        if ($('select[name="brand"]').val() == "BMW") {
+            if (!$('#model').reqSelect()) return;
+        }
+        if (!$('#modelName').required()) return;
+        if ($('#carImg').val() == '') {
+            alert('차량 이미지를 등록하세요.');
+           return;
+        }
+
+        var prCnt = 0;
+        if (!$('#price').required()) return;
+        $('input[name="programs"]').each(function () {
+            if ($(this).prop('checked')) {
+                prCnt++;
+            }
+        });
+        if (prCnt == 0) {
+            alert('프로그램을 선택해주세요.');
+            return;
+        } else if (prCnt < 2 || prCnt > 3 ){
+            alert('프로그램은 최소2개, 최대3개까지 선택 가능합니다.');
+            return;
+        } 
+
+        if (!$('input[name=deployYn]').reqRadio()) return;
+
+        if (!validationFileType('jpg, png')) return;
+
+        if (!confirm('등록하시겠습니까?')) return;
+
+        $('#content form').attr('action', 'registerProc').submit();
+    };
+
+    $('input[name="programs"]').click(function () {        
+        $id = $(this).attr('id').toLowerCase();        
+        if ($(this).prop('checked')) {        
+            $('.' + $id + '_tbody').show();
+            $('.' + $id + '_tbody input').prop('disabled', false);
+        } else {            
+            $('.' + $id + '_tbody').hide();
+            $('.' + $id + '_tbody input').prop('disabled', true);
+        }
+        
+    });
+
+</script>

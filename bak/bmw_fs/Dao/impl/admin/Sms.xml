@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<sqlMap namespace="sms" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <statements>
+
+    <insert id="insertSms">      
+        INSERT INTO MMS_MSG (
+                     SUBJECT
+                    ,PHONE
+                    ,CALLBACK
+                    ,STATUS
+                    ,REQDATE
+                    ,MSG
+                    ,TYPE
+                    ,ID
+                    ,FILE_CNT
+                    ,ETC3
+                    )
+        VALUES(
+                    #subject#
+                    ,#phone#
+                    ,#callback#
+                    ,'0'
+                    ,getdate()
+                    ,#msg#
+                    ,'0'
+                    ,'SYSTEM'
+                    ,'0'
+                    ,''
+                    )                    
+    </insert>
+
+  </statements>
+
+</sqlMap>

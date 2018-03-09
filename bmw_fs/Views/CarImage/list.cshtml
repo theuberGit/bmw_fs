@@ -1,0 +1,111 @@
+﻿<div id="content" class="list">
+    <form method="get">
+        <div class="cont_top">
+            <h3>차량 이미지 관리 목록</h3>
+            <div class="search_box">
+                <select name="brand" id="brand">
+                    <option value=""> 브랜드 </option>
+                    <option value="BMW">BMW</option>
+                    <option value="MINI">MINI</option>
+                    <option value="Motorrad">Motorrad</option>
+                </select>
+                <select name="series" id="series">
+                    <option value=""> 시리즈 </option>
+                </select>
+                <button type="button" onclick="searchList();"></button>
+            </div>
+        </div>
+        <div class="cont_bottom">
+
+            <table class="list_table">
+                <colgroup>
+                    <col width="60px" />
+                    <col width="120px" />
+                    <col width="150px" />
+                    <col width="*" />                                        
+                    <col width="250px" />
+                    <col width="100px" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>브랜드</th>
+                        <th>시리즈</th>
+                        <th>모델</th>
+                        <th>이미지 파일명</th>
+                        <th>이미지 idx</th>
+                    </tr>
+                </thead>
+                <tbody>                   
+                    @for (var i = 0; i < ViewBag.list.Count; i++)
+                    {
+                    <tr>
+                        <td>@(i + 1)</td>
+                        <td>@ViewBag.list[i].brand</td>
+                        <td>@ViewBag.list[i].series</td>
+                        <td class="tit_area"><a href="view?idx=@ViewBag.list[i].idx">@ViewBag.list[i].model </a></td>
+                        <td>@ViewBag.list[i].fileName</td>
+                        <td>@ViewBag.list[i].idx</td>
+                    </tr>
+                    }
+                    @if (ViewBag.list.Count == 0)
+                    {
+                        <tr>
+                            <td colspan="6">게시글이 없습니다.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>            
+            <a href="register" class="btn_defualt btn_reg">등록</a>
+        </div>
+        </form>
+</div>
+<script>
+    lnbSet(".carImg_mgmt");
+    if ('@ViewBag.pagination.brand' != '') {
+        $('#brand').val('@ViewBag.pagination.brand');
+    }
+    if ('@ViewBag.pagination.series' != '') {
+        $('#series').val('@ViewBag.pagination.series');
+    }
+
+    $("#brand").change(function (e) {                
+        var series = '';
+        $('#series').html(series);
+        //모델 초기화        
+        var val = $(this).val();
+        if (val == "BMW") {
+            series += '<option value="">시리즈</option>';
+            series += '<option value="1 Series">1 Series</option>';
+            series += '<option value="Active Tourer">Active Tourer</option>';
+            series += '<option value="3 Series">3 Series</option>';
+            series += '<option value="4 Series">4 Series</option>';
+            series += '<option value="5 Series">5 Series</option>';
+            series += '<option value="6 Series">6 Series</option>';
+            series += '<option value="7 Series">7 Series</option>';
+            series += '<option value="X">X</option>';
+            series += '<option value="GT">GT</option>';
+            series += '<option value="M">M</option>';
+            series += '<option value="Z">Z</option>';
+            series += '<option value="i">i</option>';            
+        } else if (val == "MINI") {
+            series += '<option value="">시리즈</option>';
+            series += '<option value="3 Door">3 Door</option>';
+            series += '<option value="5 Door">5 Door</option>';
+            series += '<option value="CLUBMAN">CLUBMAN</option>';
+            series += '<option value="CONVERTIBLE">CONVERTIBLE</option>';
+            series += '<option value="THE NEW MINI COUNTRYMAN">THE NEW MINI COUNTRYMAN</option>';            
+        } else if (val == "Motorrad") {
+            series += '<option value="">시리즈</option>';
+            series += '<option value="R">R</option>';
+            series += '<option value="S">S</option>';
+            series += '<option value="C">C</option>';
+            series += '<option value="F">F</option>';
+            series += '<option value="G">G</option>';
+            series += '<option value="K">K</option>';
+        } else {
+            series += '<option value="">시리즈</option>';            
+        }
+        $('#series').append(series);        
+    });
+</script>

@@ -1,0 +1,142 @@
+﻿@{
+    ViewBag.Title = "전시장 관리";
+}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5k8bV2daehbsFSA-GKsmbAEeluU15Q_I"></script>
+<div id="content" class="reg">
+    <div class="cont_top">
+        <h3>전시장 관리</h3>
+    </div>
+    <div class="cont_bottom">
+        <form method="post">
+            <input type="hidden" name="idx" value="@ViewBag.item.idx" />
+            <input type="hidden" name="lat" id="lat" value="@ViewBag.item.lat" title="위도" />
+            <input type="hidden" name="lng" id="lng" value="@ViewBag.item.lng" title="경도" />
+            <table class="reg_table">
+                <caption>전시장 관리 자세히보기</caption>
+                <colgroup>
+                    <col width="130px">
+                    <col width="870px">
+                </colgroup>
+                <tr>
+                    <th scope="row"><label for="brand">브랜드 *</label></th>
+                    <td>
+                        @if ("MOTORRAD".Equals(ViewBag.item.brand))
+                        {
+                            @:Motorrad
+                        }
+                        else
+                        {
+                            @ViewBag.item.brand
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="showroomName">전시장명 *</label></th>
+                    <td>@ViewBag.item.showroomName</td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="dealerName">딜러명 *</label></th>
+                    <td>@ViewBag.item.dealerName</td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="location">지역 *</label></th>
+                    <td>
+                        @ViewBag.item.location
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="address">주소 *</label></th>
+                    <td>@ViewBag.item.address</td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="">위치 좌표 *</label></th>
+                    <td>
+                        @ViewBag.item.lat
+                        /
+                        @ViewBag.item.lng
+                        <a href="javascript:void(0);" class="btn_small" onclick="javascript:showGoogleMap();">지도보기</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="map" colspan="2" style="height:300px;"></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="tel1">전화번호 *</label></th>
+                    @if (string.IsNullOrWhiteSpace(@ViewBag.item.tel1) && string.IsNullOrWhiteSpace(@ViewBag.item.tel2) && string.IsNullOrWhiteSpace(@ViewBag.item.tel3))
+                    {
+                        <td>-</td>
+                    }
+                    else if (string.IsNullOrWhiteSpace(@ViewBag.item.tel1))
+                    {
+                        <td>@ViewBag.item.tel2-@ViewBag.item.tel3</td>
+                    }
+                    else
+                    {
+                        <td>@ViewBag.item.tel1-@ViewBag.item.tel2-@ViewBag.item.tel3</td>
+                    }
+                </tr>
+                <tr>
+                    <th><label for="businessTime">영업시간 *</label></th>
+                    <td class="tdTextArea">@ViewBag.item.businessTime</td>
+                </tr>
+                <tr>
+                    <th><label for="">배포 *</label></th>
+                    <td class="radio_area">
+                        @if ("Y".Equals(@ViewBag.item.deployYn))
+                        {
+                            @:배포
+                        }
+                        else if ("N".Equals(@ViewBag.item.deployYn))
+                        {
+                            @:미배포
+                        }
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <div class="btn_area">
+            <a href="list?@Session["searchString"]" class="btn_defualt btn_list">목록</a>
+            <div class="view_btn_area">
+                <a href="javascript:void(0);" class="btn_defualt btn_delete" onclick="delForm();">삭제</a>
+                <a href="modify?idx=@ViewBag.item.idx" class="btn_defualt btn_modify">수정</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    lnbSet(".showroom_mgmt");
+
+    $("#map").hide();
+
+    function delForm() {
+        if (!confirm('삭제하시겠습니까?')) return;
+        $('#content form').attr('action', 'delete').submit();
+    };
+
+    function showGoogleMap() {
+        if (!$('#lat').required()) return;
+        if (!$('#lng').required()) return;
+
+        $("#map").show();
+
+        var Y_point = $('#lat').val();
+        var X_point = $('#lng').val(); // X 좌표
+        var zoomLevel = 16; // 지도의 확대 레벨 : 숫자가 클수록 확대정도가 큼
+        var markerTitle = ""; // 현재 위치 마커에 마우스를 오버을때 나타나는 정보
+        var myLatlng = new google.maps.LatLng(Y_point, X_point);
+        var mapOptions = {
+            zoom: zoomLevel,
+            center: myLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            labelContent: "",
+            title: markerTitle
+        });
+
+        //window.open('https://www.google.co.kr/maps/place/@@' + $('#lat').val() + ',' + $('#lng').val() + ',17z', '_blank');
+    };
+</script>

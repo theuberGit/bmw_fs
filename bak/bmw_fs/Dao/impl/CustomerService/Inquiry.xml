@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace ="inquiry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="InquiryClass" type="bmw_fs.Models.CustomerService.Inquiry"/>
+  </alias>
+
+  <resultMaps>
+
+    <resultMap id="InquiryMapByList" class="InquiryClass">
+      <result property="idx" column="IDX"/>
+      <result property="category" column="CATEGORY"/>
+      <result property="title" column="TITLE"/>
+      <result property="author" column="AUTHOR"/>
+      <result property="status" column="STATUS"/>
+      <result property="regDate" column="REG_DATE"/>
+    </resultMap>
+
+    <resultMap id="InquiryMap" class="InquiryClass">
+      <result property="idx" column="IDX"/>
+      <result property="category" column="CATEGORY"/>
+      <result property="title" column="TITLE"/>
+      <result property="author" column="AUTHOR"/>
+      <result property="status" column="STATUS"/>
+      <result property="phone" column="PHONE"/>
+      <result property="regDate" column="REG_DATE"/>
+      <result property="contents" column="CONTENTS"/>
+      <result property="replyContents" column="REPLY_CONTENTS"/>
+      <result property="email" column="EMAIL"/>
+      <result property="phone" column="PHONE"/>
+      <result property="mailSendDate" column="MAIL_SEND_DATE"/>
+    </resultMap>
+
+    <resultMap id="InquiryListExcel" class="InquiryClass">
+      <result property="idx" column="IDX"/>
+      <result property="category" column="CATEGORY"/>
+      <result property="title" column="TITLE"/>
+      <result property="author" column="AUTHOR"/>
+      <result property="status" column="STATUS"/>
+      <result property="contents" column="CONTENTS"/>
+      <result property="regDate" column="REG_DATE"/>
+      <result property="replyContents" column="REPLY_CONTENTS"/>
+      <result property="mailSendDate" column="MAIL_SEND_DATE"/>
+    </resultMap>
+
+  </resultMaps>
+
+  <statements>
+    <select id="findAll" resultMap="InquiryMapByList">
+      SELECT *
+      FROM (
+              SELECT
+                    ROW_NUMBER() OVER(ORDER BY IDX DESC) AS RNUM
+                   ,IDX
+                   ,CATEGORY
+                   ,TITLE
+                   ,AUTHOR
+                   ,STATUS
+                   ,REG_DATE
+              FROM BMW_FS_INQUIRY
+              WHERE 1=1
+                  AND DEL_YN = 'N'
+              <isNotEmpty property="searchInput">
+                <isNotEmpty property="searchOption">
+                  <isEqual property="searchOption" compareValue="title">
+                    AND TITLE LIKE '%'+#searchInput#+'%'
+                  </isEqual>
+                  <isEqual property="searchOption" compareValue="author">
+                    AND AUTHOR LIKE '%'+#searchInput#+'%'
+                  </isEqual>
+                </isNotEmpty>
+              </isNotEmpty>
+              <isNotEmpty property="category">
+                  AND category = #category#
+              </isNotEmpty>
+              <isNotEmpty property="startDate">
+                AND CONVERT(char(10), REG_DATE,23) &gt;= #startDate#
+              </isNotEmpty>
+              <isNotEmpty property="endDate">
+                AND CONVERT(char(10), REG_DATE,23) &lt;= #endDate#
+              </isNotEmpty>
+      )t
+      WHERE 1=1
+      AND (RNUM BETWEEN #currentItem# AND #currentItemEnd# )
+    </select>
+
+    <select id="findAllCount" resultClass="int">
+      SELECT COUNT(*)
+        FROM BMW_FS_INQUIRY
+      WHERE 1=1
+          AND DEL_YN = 'N'
+        <isNotEmpty property="searchInput">
+          <isNotEmpty property="searchOption">
+            <isEqual property="searchOption" compareValue="title">
+              AND TITLE LIKE '%'+#searchInput#+'%'
+            </isEqual>
+            <isEqual property="searchOption" compareValue="author">
+              AND AUTHOR LIKE '%'+#searchInput#+'%'
+            </isEqual>
+          </isNotEmpty>
+      </isNotEmpty>      
+      <isNotEmpty property="category">
+        AND category = #category#
+      </isNotEmpty>
+      <isNotEmpty property="startDate" >
+        AND CONVERT(char(10), REG_DATE,23) &gt;= #startDate#
+      </isNotEmpty>
+      <isNotEmpty property="endDate" >
+        AND CONVERT(char(10), REG_DATE,23) &lt;= #endDate#
+      </isNotEmpty>
+
+    </select>
+
+    <select id="findInquiry" resultMap="InquiryMap">
+      SELECT IDX
+                ,CATEGORY
+                ,TITLE
+                ,AUTHOR
+                ,CONTENTS
+                ,REPLY_CONTENTS
+                ,STATUS
+                ,EMAIL
+                ,PHONE
+                ,REG_DATE
+                ,MAIL_SEND_DATE
+      FROM BMW_FS_INQUIRY
+      WHERE IDX = #idx#
+          AND DEL_YN = 'N'
+    </select>
+
+    <update id="updateInquiry">
+      UPDATE BMW_FS_INQUIRY
+            SET REPLY_CONTENTS = #replyContents#
+                 ,REPLY_REG_ID = #replyRegId#
+                 ,REPLY_REG_DATE = GETDATE()
+      WHERE IDX = #idx#
+    </update>
+    
+    <update id="updateInquirySendMail">
+      UPDATE BMW_FS_INQUIRY
+            SET MAIL_SEND_DATE = GETDATE()
+                 ,MAIL_SEND_ID = #mailSendId#
+                 ,STATUS = #status#
+      WHERE IDX = #idx#
+    </update>
+
+    <update id="deleteInquiry">
+        UPDATE BMW_FS_INQUIRY
+            SET DEL_YN = 'Y'
+        WHERE IDX = #idx#
+    </update>
+
+    <select id="findAllExcel" resultMap="InquiryListExcel">      
+      SELECT IDX
+                ,CATEGORY
+                ,TITLE
+                ,AUTHOR
+                ,STATUS
+                ,CONTENTS
+                ,REPLY_CONTENTS
+                ,REG_DATE
+                ,MAIL_SEND_DATE
+      FROM BMW_FS_INQUIRY
+      WHERE 1=1
+      AND DEL_YN = 'N'
+      <isNotEmpty property="searchInput">
+        <isNotEmpty property="searchOption">
+          <isEqual property="searchOption" compareValue="title">
+            AND TITLE LIKE '%'+#searchInput#+'%'
+          </isEqual>
+          <isEqual property="searchOption" compareValue="author">
+            AND AUTHOR LIKE '%'+#searchInput#+'%'
+          </isEqual>
+        </isNotEmpty>
+      </isNotEmpty>
+      <isNotEmpty property="category">
+        AND category = #category#
+      </isNotEmpty>
+      <isNotEmpty property="startDate">
+        AND CONVERT(char(10), REG_DATE,23) &gt;= #startDate#
+      </isNotEmpty>
+      <isNotEmpty property="endDate">
+        AND CONVERT(char(10), REG_DATE,23) &lt;= #endDate#
+      </isNotEmpty>
+            
+    </select>
+    
+  </statements>
+</sqlMap>

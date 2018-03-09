@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+
+<sqlMap namespace="business" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="BusinessClass" type="bmw_fs.Models.legalNotice.Business"/>
+  </alias>
+
+  <resultMaps>
+    <resultMap id="businessListMap" class="BusinessClass">
+      <result property="idx" column="IDX" />
+      <result property="title" column="TITLE" />
+      <result property="contents" column="CONTENTS" />
+      <result property="deployYn" column="DEPLOY_YN" />
+      <result property="regDate" column="REG_DATE" />
+      <result property="regId" column="REG_ID" />
+      <result property="fileIdx" column="FILE_IDX" />
+    </resultMap>
+
+    <resultMap id="businessMap" class="BusinessClass">
+      <result property="idx" column="IDX" />
+      <result property="title" column="TITLE" />
+      <result property="contents" column="CONTENTS" />
+      <result property="deployYn" column="DEPLOY_YN" />
+      <result property="regDate" column="REG_DATE" />
+      <result property="regId" column="REG_ID" />
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+
+    <select id="findAll" resultMap="businessListMap">
+      SELECT *
+      FROM (
+      SELECT
+      ROW_NUMBER() OVER(ORDER BY B.IDX DESC) AS RNUM
+      ,B.IDX
+      ,B.TITLE
+      ,B.CONTENTS
+      ,B.DEPLOY_YN
+      ,B.REG_DATE
+      ,B.REG_ID
+      ,MAX(FD.IDX) AS FILE_IDX
+      FROM BMW_FS_BUSINESS B
+      LEFT JOIN BMW_FS_FILES_DATA FD ON B.IDX = FD.MASTER_IDX
+      WHERE 1=1
+      <isNotEmpty property="searchInput">
+        <isNotEmpty property="searchOption">
+          <isEqual property="searchOption" compareValue="title">
+            AND B.TITLE LIKE '%'+#searchInput#+'%'
+          </isEqual>
+          <isEqual property="searchOption" compareValue="contents">
+            AND B.CONTENTS LIKE '%'+#searchInput#+'%'
+          </isEqual>
+        </isNotEmpty>
+      </isNotEmpty>
+      GROUP BY B.IDX
+              ,TITLE
+              ,CONTENTS
+              ,DEPLOY_YN
+              ,B.REG_DATE
+              ,REG_ID
+      )t
+      WHERE 1=1
+      AND (RNUM BETWEEN #currentItem# AND #currentItemEnd# )
+    </select>
+
+    <select id="findAllCount" resultClass="int">
+      SELECT COUNT(*)
+      FROM BMW_FS_BUSINESS
+      WHERE 1=1
+      <isNotEmpty property="searchInput">
+        <isNotEmpty property="searchOption">
+          <isEqual property="searchOption" compareValue="title">
+            AND TITLE LIKE '%'+#searchInput#+'%'
+          </isEqual>
+          <isEqual property="searchOption" compareValue="contents">
+            AND CONTENTS LIKE '%'+#searchInput#+'%'
+          </isEqual>
+        </isNotEmpty>
+      </isNotEmpty>
+    </select>
+
+    <insert id="insertBusiness">
+      INSERT INTO BMW_FS_BUSINESS(
+      IDX
+      ,TITLE
+      ,CONTENTS
+      ,DEPLOY_YN
+      ,REG_ID
+      )
+      VALUES (
+      #idx#
+      ,#title#
+      ,#contents#
+      ,#deployYn#
+      ,#regId#
+      )
+    </insert>
+
+    <select id="findBusiness" resultMap="businessMap">
+      SELECT IDX
+      ,TITLE
+      ,CONTENTS
+      ,DEPLOY_YN
+      ,REG_DATE
+      ,REG_ID
+      FROM BMW_FS_BUSINESS
+      WHERE IDX = #idx#
+    </select>
+
+    <update id="updateBusiness">
+      UPDATE BMW_FS_BUSINESS
+      SET TITLE = #title#
+      ,CONTENTS = #contents#
+      ,DEPLOY_YN = #deployYn#
+      ,UPT_ID = #uptId#
+      ,UPT_DATE = getdate()
+      WHERE IDX = #idx#;
+    </update>
+
+    <delete id="deleteBusiness">
+      DELETE BMW_FS_BUSINESS
+      WHERE IDX = #idx#;
+    </delete>
+
+  </statements>
+</sqlMap>

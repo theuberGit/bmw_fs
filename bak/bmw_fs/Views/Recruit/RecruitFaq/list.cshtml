@@ -1,0 +1,59 @@
+﻿<div id="content" class="list">
+    <form method="get">
+        <div class="cont_top">
+            <h3>채용 FAQ</h3>
+            <div class="search_box">
+                <select name="searchOption" id="searchOption">
+                    <option value="">구분</option>
+                    <option value="title">항목</option>                    
+                </select>
+                <input type="text" class="search_text" name="searchInput" value="@ViewBag.pagination.searchInput"><input type="text" style="display:none;" />
+                <button type="button" onclick="searchList();"></button>
+            </div>
+        </div>
+        <div class="cont_bottom">
+            <table class="list_table">
+                <colgroup>
+                    <col width="60px" />
+                    <col width="*" />
+                    <col width="80px" />
+                    <col width="100px" />
+                    <col width="70px" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>항목</th>
+                        <th>영문 사이트</th>
+                        <th>등록일</th>
+                        <th>배포</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (var i = 0; i < ViewBag.list.Count; i++)
+                    {
+                        <tr>
+                            <td>@(ViewBag.pagination.totalItemCount - (ViewBag.pagination.currentPage - 1) * ViewBag.pagination.itemPerPage - i)</td>
+                            <td class="tit_area"><a href="view?idx=@ViewBag.list[i].idx">@ViewBag.list[i].title</a></td>
+                            <td>@ViewBag.list[i].engYn</td>
+                            <td>@ViewBag.list[i].regDate.ToString("yyyy-MM-dd")</td>
+                            <td>@ViewBag.list[i].deployYn</td>
+                        </tr>
+                    }
+                    @if (ViewBag.list.Count == 0)
+                    {
+                        <tr>
+                            <td colspan="5">게시글이 없습니다.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @RenderPage("~/Views/Common/Pagination.cshtml")
+            <a href="register" class="btn_defualt btn_reg">등록</a>
+        </div>
+    </form>
+</div>
+<script>
+    lnbSet(".recruit_faq_mgmt");
+    $('#searchOption').val('@ViewBag.pagination.searchOption');
+</script>
