@@ -24,5 +24,9 @@ namespace bmw_fs.Service.face.payment
 
         void loadExcelByFileAndUpdateToDB(HttpFileCollectionBase multipartFiles, string regId);
 
+        IList<string> findModel(Payment payment);
+
+        IList<string> findSeries(Payment payment);
+
     }
 }

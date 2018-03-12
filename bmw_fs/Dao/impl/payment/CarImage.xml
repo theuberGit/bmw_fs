@@ -40,12 +40,13 @@
     </select>    
 
     <select id="findCarImage" resultMap="carImageMap">
-      SELECT IDX      
+      SELECT IDX
       , BRAND
       , SERIES
-      , MODEL            
+      , MODEL
       , REG_DATE
       , REG_ID
+      , '' AS ORIGINAL_FILENAME
       FROM BMW_FS_CAR_IMAGES
       WHERE IDX = #idx#
     </select>

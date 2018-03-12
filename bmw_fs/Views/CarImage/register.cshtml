@@ -23,10 +23,13 @@
                 <tr>
                     <th><label for="">분류 *</label></th>
                     <td class="">
-                        <select id="brand" name="brand">
+                        <select id="brand" name="brand" title="브랜드">
                             <option value="">브랜드</option>
+                            <option value="BMW">BMW</option>
+                            <option value="MINI">MINI</option>
+                            <option value="Motorrad">Motorrad</option>
                         </select>
-                        <select id="series" name="series">
+                        <select id="series" name="series" title="시리즈">
                             <option value="">시리즈</option>   
                         </select>
                     </td>
@@ -71,15 +74,57 @@
 })();
 
 function regForm() {
-    if (!$('#title').required()) return;    
-       
-    if ($('#mainImg').val() === '') {
-        alert('본문이미지를 등록하세요.');
+    if (!$('#brand').reqSelect()) return;
+    if (!$('#series').reqSelect()) return;
+    if (!$('#model').required()) return;
+    if ($('#carImg').val() == '') {
+        alert('차량 이미지를 등록하세요.');
         return;
     }
-    if (!validationFileType('jpg, png')) return;
+    if (!validationFileType('png')) return;
 
     if (!confirm('등록하시겠습니까?')) return;
     $('#content form').attr('action', 'registerProc').submit();
 };
+
+
+    $("#brand").change(function (e) {
+        var series = '';
+        $('#series').html(series);
+        //모델 초기화        
+        var val = $(this).val();
+        if (val == "BMW") {
+            series += '<option value="">시리즈</option>';
+            series += '<option value="1 Series">1 Series</option>';
+            series += '<option value="Active Tourer">Active Tourer</option>';
+            series += '<option value="3 Series">3 Series</option>';
+            series += '<option value="4 Series">4 Series</option>';
+            series += '<option value="5 Series">5 Series</option>';
+            series += '<option value="6 Series">6 Series</option>';
+            series += '<option value="7 Series">7 Series</option>';
+            series += '<option value="X">X</option>';
+            series += '<option value="GT">GT</option>';
+            series += '<option value="M">M</option>';
+            series += '<option value="Z">Z</option>';
+            series += '<option value="i">i</option>';
+        } else if (val == "MINI") {
+            series += '<option value="">시리즈</option>';
+            series += '<option value="3 Door">3 Door</option>';
+            series += '<option value="5 Door">5 Door</option>';
+            series += '<option value="CLUBMAN">CLUBMAN</option>';
+            series += '<option value="CONVERTIBLE">CONVERTIBLE</option>';
+            series += '<option value="THE NEW MINI COUNTRYMAN">THE NEW MINI COUNTRYMAN</option>';
+        } else if (val == "Motorrad") {
+            series += '<option value="">시리즈</option>';
+            series += '<option value="R">R</option>';
+            series += '<option value="S">S</option>';
+            series += '<option value="C">C</option>';
+            series += '<option value="F">F</option>';
+            series += '<option value="G">G</option>';
+            series += '<option value="K">K</option>';
+        } else {
+            series += '<option value="">시리즈</option>';
+        }
+        $('#series').append(series);
+    });
 </script>

@@ -65,9 +65,7 @@
     if ('@ViewBag.pagination.brand' != '') {
         $('#brand').val('@ViewBag.pagination.brand');
     }
-    if ('@ViewBag.pagination.series' != '') {
-        $('#series').val('@ViewBag.pagination.series');
-    }
+    
 
     $("#brand").change(function (e) {                
         var series = '';
@@ -108,4 +106,9 @@
         }
         $('#series').append(series);        
     });
+
+    $("#brand").trigger('change');
+    if ('@ViewBag.pagination.series' != '') {
+        $('#series').val('@ViewBag.pagination.series');
+    }
 </script>

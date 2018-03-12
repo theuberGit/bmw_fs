@@ -97,5 +97,17 @@ namespace bmw_fs.Controllers.payment
             paymentService.loadExcelByFileAndUpdateToDB(multipartfiles, regId);            
             return RedirectToAction("list");
         }
+        
+        [HttpPost]
+        public ActionResult findModels(Payment payment)
+        {
+            return Json(paymentService.findModel(payment), JsonRequestBehavior.DenyGet);
+        }
+
+        [HttpPost]
+        public ActionResult findSeries(Payment payment)
+        {
+            return Json(paymentService.findSeries(payment), JsonRequestBehavior.DenyGet);
+        }
     }
 }
