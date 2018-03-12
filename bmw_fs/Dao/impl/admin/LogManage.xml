@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace="logManage" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="LogManageClass" type="bmw_fs.Models.admin.LogManage"/>
+  </alias>
+
+  <resultMaps>
+    <resultMap id="logManageMap" class="LogManageClass">
+      <result property="idx" column="IDX" />
+      <result property="qid" column="QID" />
+      <result property="menuName" column="MENU_NAME" />
+      <result property="contents" column="CONTENTS" />
+      <result property="regDate" column="REG_DATE" />
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+
+    <select id="findAll" resultMap="logManageMap">
+      SELECT *
+      FROM (
+      SELECT
+      ROW_NUMBER() OVER(ORDER BY idx DESC) AS RNUM
+      ,IDX
+      ,QID
+      ,MENU_NAME
+      ,CONTENTS
+      ,REG_DATE
+      FROM BMW_FS_ADMIN_LOG
+      WHERE 1=1
+      <isNotEmpty property="menuName">
+        AND MENU_NAME LIKE '%'+#menuName#+'%'
+      </isNotEmpty>
+      <isNotEmpty property="qid">
+        AND QID = #qid#
+      </isNotEmpty>
+      <isNotEmpty property="contents">
+        AND CONTENTS LIKE '%'+#contents#+'%'
+      </isNotEmpty>
+      <isNotEmpty property="startDate">
+        AND REG_DATE &gt; #startDate#
+      </isNotEmpty>
+      <isNotEmpty property="endDate">
+        AND REG_DATE &lt; #endDate#
+      </isNotEmpty>
+      )t
+      WHERE 1=1
+      AND (RNUM BETWEEN #currentItem# AND #currentItemEnd# )
+    </select>
+
+    <select id="findAllCount" resultClass="int">
+      SELECT COUNT(*)
+      FROM BMW_FS_ADMIN_LOG
+      WHERE 1=1
+      <isNotEmpty property="menuName">
+        AND MENU_NAME LIKE '%'+#menuName#+'%'
+      </isNotEmpty>
+      <isNotEmpty property="qid">
+        AND QID = #qid#
+      </isNotEmpty>
+      <isNotEmpty property="contents">
+        AND CONTENTS LIKE '%'+#contents#+'%'
+      </isNotEmpty>
+      <isNotEmpty property="startDate">
+        AND REG_DATE &gt; #startDate#
+      </isNotEmpty>
+      <isNotEmpty property="endDate">
+        AND REG_DATE &lt; #endDate#
+      </isNotEmpty>
+    </select>
+
+    <insert id="insertAdminLog">
+      INSERT INTO BMW_FS_ADMIN_LOG (
+      QID
+      ,MENU_NAME
+      ,CONTENTS
+      )
+      VALUES (
+      #qid#
+      ,#menuName#
+      ,#contents#
+      )
+    </insert>
+
+  </statements>
+  
+
+
+
+</sqlMap>

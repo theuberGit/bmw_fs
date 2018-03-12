@@ -23,5 +23,18 @@ namespace bmw_fs.Models.admin
         public String tel3 { get; set; }
 
         public IList<String> roles { get; set; }
+
+        override
+        public string ToString()
+        {
+            return
+                (idx > 0 ? "idx : " + idx + ", " : "") +
+                (!string.IsNullOrWhiteSpace(userId) ? "아이디 : " + userId + ", " : "") +
+                (!string.IsNullOrWhiteSpace(tel1) ? "핸드폰번호 : " + tel1 + "-" + tel2 + "-" + tel3 + ", " : "") +
+                (!string.IsNullOrWhiteSpace(role) ? "권한 : " + role + ", " : "") +
+                (!string.IsNullOrWhiteSpace(activeYn) ? "상태 : " + activeYn + ", " : "") +
+                (page > 1 ? "page : " + page + ", " : "") +
+                (!string.IsNullOrWhiteSpace(searchOption) ? "검색 구분 : " + searchOption + "검색어 : " + searchInput : "");
+        }
     }
 }

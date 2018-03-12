@@ -45,5 +45,33 @@ namespace bmw_fs.Models.promotion
         public IList<String> mainImgEngLinks { get; set; } //영문 본문이미지 url
 
         public String brand { get; set; }
+
+        public string deployYnStr
+        {
+            get
+            {
+                if ("Y".Equals(deployYn))
+                {
+                    return "배포";
+                }
+                else if ("N".Equals(deployYn))
+                {
+                    return "미배포";
+                }
+                return "";
+            }
+        }
+
+        override
+        public string ToString()
+        {
+            return
+                (idx > 0 ? "idx : " + idx + "," : "") +
+                (!string.IsNullOrWhiteSpace(title) ? "제목 : " + (title.Length > 5 ? title.Substring(0, 5) + "..." : title) + ", " : "") +
+                (!string.IsNullOrWhiteSpace(searchOption) ? "게시기간 : " + startDate + "~" + endDate + ", " : "") +
+                (!string.IsNullOrWhiteSpace(deployYn) ? "배포여부 : " + deployYnStr + ", " : "") +
+                (page > 1 ? "page : " + page + ", " : "") +
+                (!string.IsNullOrWhiteSpace(searchOption) ? "검색 구분 : " + searchOption + " 검색어 : " + searchInput : "");
+        }
     }
 }

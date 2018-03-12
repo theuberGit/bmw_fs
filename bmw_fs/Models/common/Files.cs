@@ -14,6 +14,13 @@ namespace bmw_fs.Models.common
         public String type { get; set; }
         public IList<int> fileIdxs { get; set; }
         public DateTime regDate { get; set; }
-        
+
+        override
+        public string ToString()
+        {
+            return
+                (fileIdx > 0 ? "idx : " + fileIdx + ", " : "") +
+                (masterIdx > 0 ? "masterIdx : " + masterIdx + "," : "");
+        }
     }
 }

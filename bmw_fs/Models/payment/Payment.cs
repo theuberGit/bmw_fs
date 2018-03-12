@@ -94,5 +94,36 @@ namespace bmw_fs.Models.payment
                 return programKo;
             }
         }
+
+        public string deployYnStr
+        {
+            get
+            {
+                if ("Y".Equals(deployYn))
+                {
+                    return "배표";
+                }
+                else if ("N".Equals(deployYn))
+                {
+                    return "미배표";
+                }
+                return "";
+            }
+        }
+
+        override
+        public string ToString()
+        {
+            return
+                (idx > 0 ? "idx : " + idx + "," : "") +
+                (!string.IsNullOrWhiteSpace(brand) ? "브랜드 : " + brand + ", " : "") +
+                (!string.IsNullOrWhiteSpace(series) ? "시리즈 : " + series + ", " : "") +
+                (!string.IsNullOrWhiteSpace(model) ? "모델 : " + model + ", " : "") +
+                (!string.IsNullOrWhiteSpace(modelName) ? "모델명 : " + modelName + ", " : "") +
+                (!string.IsNullOrWhiteSpace(programsKo) ? "프로그램 : " + programsKo + ", " : "") +
+                (!string.IsNullOrWhiteSpace(deployYnStr) ? "배포여부 : " + deployYnStr + ", " : "") +
+                (page > 1 ? "page : " + page + ", " : "") +
+                (!string.IsNullOrWhiteSpace(searchOption) ? "검색 구분 : " + searchOption + "검색어 : " + searchInput : "");
+        }
     }
 }

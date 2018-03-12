@@ -18,5 +18,33 @@ namespace bmw_fs.Models.catalog
         public String fileName { get; set; }
         
         public IList<int> fileIdxs { get; set; }
+
+        public string deployYnStr
+        {
+            get
+            {
+                if ("Y".Equals(deployYn))
+                {
+                    return "배포";
+                }
+                else if ("N".Equals(deployYn))
+                {
+                    return "미배포";
+                }
+                return "";
+            }
+        }
+
+        public
+        override String ToString()
+        {
+            return
+                (idx > 0 ? "idx : " + idx + ", " : "") +
+                (!string.IsNullOrWhiteSpace(title) ? "제목 : " + (title.Length > 8 ? title.Substring(0, 8) + "..." : title) + ", " : "") +
+                (!string.IsNullOrWhiteSpace(deployYnStr) ? "배포여부 : " + deployYnStr + ", " : "") +
+                (page > 1 ? "page : " + page + ", " : "")+
+                (!string.IsNullOrWhiteSpace(searchOption) ? "검색 구분 : " + searchOption + "검색어 : " + searchInput : "");
+        }            
+
     }
 }

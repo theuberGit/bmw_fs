@@ -18,6 +18,7 @@ namespace bmw_fs.Models.legalNotice
         public DateTime regDate { get; set; }
         public String uptId { get; set; }
         public DateTime uptDate { get; set; }
+
         public String categoryName
         {
             get
@@ -47,6 +48,18 @@ namespace bmw_fs.Models.legalNotice
                     return null;
                 }
             }
+        }
+
+        override
+         public string ToString()
+        {
+            return
+                (idx > 0 ? "idx : " + idx + "," : "") +
+                (!string.IsNullOrWhiteSpace(title) ? "제목 : " + (title.Length > 5 ? title.Substring(0, 5) + "..." : title) + ", " : "") +
+                (!string.IsNullOrWhiteSpace(contents) ? "내용 : " + (contents.Length > 5 ? contents.Substring(0, 5) + "..." : contents) + ", " : "") +
+                (!string.IsNullOrWhiteSpace(categoryName) ? "카테고리 : " + categoryName + ", " : "") +
+                (page > 1 ? "page : " + page + ", " : "") +
+                (!string.IsNullOrWhiteSpace(searchOption) ? "검색 구분 : " + searchOption + "검색어 : " + searchInput : "");
         }
     }
 }
