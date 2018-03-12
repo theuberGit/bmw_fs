@@ -43,5 +43,16 @@ namespace bmw_fs.Dao.face.payment
         {
             Mapper.Instance().Delete("payment.deletePaymentAll", null);
         }
+
+        public IList<string> findModel(Payment payment)
+        {
+            return Mapper.Instance().QueryForList<string>("payment.findModel", payment);
+        }
+
+        public IList<string> findSeries(Payment payment)
+        {
+            return Mapper.Instance().QueryForList<string>("payment.findSeries", payment);
+        }
+
     }
 }

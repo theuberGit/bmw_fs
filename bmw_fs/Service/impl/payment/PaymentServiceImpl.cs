@@ -255,6 +255,17 @@ namespace bmw_fs.Service.impl.payment
             return 0;
         }
 
+        public IList<string> findModel(Payment payment)
+        {
+            return paymentDao.findModel(payment);            
+        }
+
+        public IList<string> findSeries(Payment payment)
+        {
+            return paymentDao.findSeries(payment);
+        }
+
+
         private void validation(Payment payment)
         {
             if (String.IsNullOrWhiteSpace(payment.brand)) throw new CustomException("필수 값이 없습니다.(브랜드)");

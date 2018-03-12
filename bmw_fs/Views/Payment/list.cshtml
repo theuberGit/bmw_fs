@@ -97,7 +97,7 @@
                     {
                         <tr>
                             <td class="co1">@(ViewBag.pagination.totalItemCount - (ViewBag.pagination.currentPage - 1) * ViewBag.pagination.itemPerPage - i)</td>
-                            <td class="co2 tit_area"><a href="view?idx=@ViewBag.list[i].idx">@ViewBag.list[i].modelName</a></td>
+                            <td class="co2 tit_area">@ViewBag.list[i].modelName</td>
                             <td class="co3 price">@ViewBag.list[i].price
                                 <input type="hidden" id="payNum_@i" value="@ViewBag.list[i].price" />
                             </td>
@@ -196,6 +196,8 @@
         $('.pay2_'+i).text(addComma(parseInt(result2)));
         $('.pay3_'+i).text(addComma(parseInt(result3)));
     };
+
+/*
         (function () {
         //검색 브랜드 셀렉트값 변경시
         $(".search_box").on("change", "#brand", function (e) {
@@ -337,12 +339,80 @@
             $('#model').append(model);
         });
     })();
+   */
+    $('#brand').change(function () {
+        $('#series').html('<option value="">시리즈</option>');
+        $('#model').html('<option value="">모델</option>');
+        if ($(this).val() == '') return;
+        findSeries();
+    });
+    $('#series').change(function () {        
+        $('#model').html('<option value="">모델</option>');
+        if ($(this).val() == '') return;
+        findModels();
+    });
+    //시리즈 셀렉값 가져오기
+    function findSeries() {        
+        $.ajax({
+            url: 'findSeries',
+            data: { 'brand': $('#brand').val() },
+            dataType: 'json',
+            timeout: 10000,
+            cache: false,
+            type: 'POST',
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            },
+            success: function (list) {
+                var selectHtml = '';
+                var ulHtml = '';
+                selectHtml += '<option value="">시리즈</option>';
+                for (idx = 0, size = list.length; idx < size; idx++) {
+                    selectHtml += '<option value="' + list[idx] + '">' + list[idx] + '</option>';
+                }
+                //시리즈채우기
+                $('#series').html(selectHtml);
+                $('select[name="series"]').val('@ViewBag.pagination.series');
+                $('#series').trigger('change');
+            }
+        });
+    };
+
+    //모델 셀렉값 가져오기
+    function findModels() {
+        $.ajax({
+            url: 'findModels',
+            data: { 'brand': $('#brand').val(), 'series': $('#series').val() },
+            dataType: 'json',
+            timeout: 10000,
+            cache: false,
+            type: 'POST',
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            },
+            success: function (list) {
+                var selectHtml = '';
+                var ulHtml = '';
+                selectHtml += '<option value="">모델</option>';
+                for (idx = 0, size = list.length; idx < size; idx++) {
+                    selectHtml += '<option value="' + list[idx] + '">' + list[idx] + '</option>';
+                }                
+                $('#model').html(selectHtml);
+                $('select[name="model"]').val('@ViewBag.pagination.model');
+            }
+        });
+    };
+
+
     //브랜드,모델,시리즈 값
     $('select[name="brand"]').val('@ViewBag.pagination.brand');
-    $('#brand').trigger('change');
-    $('select[name="series"]').val('@ViewBag.pagination.series');
-    $('#series').trigger('change');
-    $('select[name="model"]').val('@ViewBag.pagination.model');
+    $('#brand').trigger('change');    
+    
+    
 
     $(".file_area").on("change", ".input_file", function (e) {
         var $parent = $(this).closest("div");
