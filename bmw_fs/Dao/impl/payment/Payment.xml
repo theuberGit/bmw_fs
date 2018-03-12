@@ -241,5 +241,35 @@
       DELETE FROM BMW_FS_PAYMENT      
     </delete>
 
+    <select id="findModel" resultClass="string">
+      SELECT MODEL      
+      FROM BMW_FS_PAYMENT
+      WHERE 1=1
+      AND DEPLOY_YN = 'Y'
+      <isNotEmpty property="brand">
+        AND BRAND = #brand#
+      </isNotEmpty>
+      <isNotEmpty property="series">
+        AND SERIES = #series#
+        GROUP BY MODEL
+      </isNotEmpty>
+    </select>
+
+    <select id="findSeries" resultClass="string">
+      SELECT SERIES
+      FROM BMW_FS_PAYMENT
+      WHERE 1=1
+      AND IDX IN (
+      SELECT MIN(IDX)
+      FROM BMW_FS_PAYMENT
+      WHERE 1=1
+      AND DEPLOY_YN = 'Y'
+      <isNotEmpty property="brand">
+        AND BRAND = #brand#
+      </isNotEmpty>
+      GROUP BY SERIES
+      )
+    </select>
+
   </statements>
 </sqlMap>

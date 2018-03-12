@@ -15,47 +15,28 @@
                     <td>@ViewBag.item.regId</td>
                 </tr>
                 <tr>
-                    <th><label for="">구분</label></th>
-                    
-                    @if ("N".Equals(ViewBag.item.type))
-                    {
-                        <td class="radio_area">공지</td>
-                    }
-                    else
-                    {
-                        <td class="radio_area">일반</td>
-                    }
+                    <th><label for="">엑셀 양식 코드</label></th>
+                    <td>@ViewBag.item.idx</td>
                 </tr>
                 <tr>
-                    <th><label for="">제목</label></th>
-                    <td>@Html.Raw(@ViewBag.item.title)</td>
+                    <th><label for="">분류</label></th>
+                    <td>@ViewBag.item.brand @ViewBag.item.series</td>
                 </tr>
                 <tr>
-                    <th><label for="">내용</label></th>                    
-                    <td>@Html.Raw(ViewBag.item.contents)</td>
-                </tr>
+                    <th><label for="">상세모델</label></th>
+                    <td>@ViewBag.item.model</td>
+                </tr>                
                 <tr class="add_img_area">
-                    <th>썸네일 이미지</th>
+                    <th>차량 이미지</th>
                     <td class="file_area">
-                        @foreach (var file in ViewBag.thumbList)
+                        @foreach (var file in ViewBag.carImg)
                         {
                             <div><a href="/Files/fileDownload?fileIdx=@file.fileIdx">@file.originalFilename</a></div>
+                            <div><img src="/Files/ImageView?fileIdx=@file.fileIdx" /></div>
                         }
                     </td>
                 </tr>
-                <tr class="add_img_area">
-                    <th>본문 이미지</th>
-                    <td class="file_area">
-                        @foreach (var file in ViewBag.mainList)
-                        {
-                            <div><a href="/Files/fileDownload?fileIdx=@file.fileIdx">@file.originalFilename</a></div>
-                        }
-                    </td>
-                </tr>
-                <tr>
-                    <th><label for="">배포</label></th>
-                    <td class="radio_area">@ViewBag.item.deployYn</td>
-                </tr>
+                                
             </table>
             <input type="hidden" name="idx" value="@ViewBag.item.idx"/>
         </form>
@@ -69,14 +50,14 @@
     </div>
 </div>
 <script>
-    lnbSet(".news_mgmt");
+    lnbSet(".carImg_mgmt");
 function modForm() {
-  $('form').attr('action', 'modify').submit();
+    $('#content form').attr('action', 'modify').submit();
 };
 function delForm() {
    if (!confirm('삭제하시겠습니까?')) {
        return;
    }
-  $('form').attr('action', 'delete').submit();
+    $('#content form').attr('action', 'delete').submit();
 };
 </script>
