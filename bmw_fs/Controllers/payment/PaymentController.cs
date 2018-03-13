@@ -45,6 +45,7 @@ namespace bmw_fs.Controllers.payment
             return View();
         }
 
+        /*
         [HttpPost]
         [ValidateInput(false)]
         public RedirectToRouteResult registerProc(Payment payment)
@@ -71,6 +72,7 @@ namespace bmw_fs.Controllers.payment
             ViewBag.carList = filesService.findAllByMasterIdxAndType(item.idx, "carImg");
             return View();
         }
+        
 
         [HttpPost]
         [ValidateInput(false)]
@@ -88,7 +90,7 @@ namespace bmw_fs.Controllers.payment
             paymentService.deletePayment(payment);
             return RedirectToAction("list");
         }
-
+        */
         [HttpPost]
         public ActionResult loadExcel()
         {
@@ -97,17 +99,6 @@ namespace bmw_fs.Controllers.payment
             paymentService.loadExcelByFileAndUpdateToDB(multipartfiles, regId);            
             return RedirectToAction("list");
         }
-        
-        [HttpPost]
-        public ActionResult findModels(Payment payment)
-        {
-            return Json(paymentService.findModel(payment), JsonRequestBehavior.DenyGet);
-        }
-
-        [HttpPost]
-        public ActionResult findSeries(Payment payment)
-        {
-            return Json(paymentService.findSeries(payment), JsonRequestBehavior.DenyGet);
-        }
+       
     }
 }

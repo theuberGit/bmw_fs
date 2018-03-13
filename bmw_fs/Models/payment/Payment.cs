@@ -38,6 +38,7 @@ namespace bmw_fs.Models.payment
         public DateTime regDate { get; set; }
         public String uptId { get; set; }
         public DateTime uptDate { get; set; }
+        public int orderNum { get; set; }
         
        //public IList<int> thumbIdxs { get; set; }
         public IList<int> carIdxs { get; set; }        
