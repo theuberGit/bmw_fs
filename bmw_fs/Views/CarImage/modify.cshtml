@@ -23,6 +23,10 @@
                     <td>@ViewBag.item.regId</td>
                 </tr>
                 <tr>
+                    <th><label for="">이미지 idx</label></th>
+                    <td>@ViewBag.item.idx</td>
+                </tr>
+                <tr>
                     <th><label for="">분류 *</label></th>
                     <td class="">
                         <select id="brand" name="brand" title="브랜드">
@@ -37,32 +41,32 @@
                     </td>
                 </tr>
                 <tr>
-                    <th><label for="">상세모델 *</label></th>
+                    <th><label for="">모델 *</label></th>
                     <td><input type="text" name="model" id="model" class="input_long_type" title="상세 모델" maxlength="50" value="@ViewBag.item.model"></td>
                 </tr>
                 <tr class="add_img_area">
                     <th>차량 이미지 *</th>
                     <td class="file_area">
                         @if (ViewBag.carImg.Count != 0)
-                        {
-                            for (int i = 0, size = ViewBag.carImg.Count; i < size; i++)
-                            {
-                                <div class="main_img">
-                                    <span class="file_src main_src">@ViewBag.carImg[i].originalFilename</span>
-                                    <input type="file" class="input_file" name="carImg" id="carImg">
-                                    <label for="carImg" class="btn_file">파일찾기</label>
-                                    <input type="hidden" name="fileIdxs" value="@ViewBag.carImg[i].fileIdx" />
-                                </div>
-                            }
-                        }
-                        else
-                        {
-                            <div class="thum_nail">
-                                <span class="file_src"></span>
-                                <input type="file" class="input_file" name="carImg" id="carImg">
-                                <label for="carImg" class="btn_file">파일찾기</label>
-                            </div>
-                        }
+            {
+                for (int i = 0, size = ViewBag.carImg.Count; i < size; i++)
+                {
+                    <div class="main_img">
+                        <span class="file_src main_src">@ViewBag.carImg[i].originalFilename</span>
+                        <input type="file" class="input_file" name="carImg" id="carImg">
+                        <label for="carImg" class="btn_file">파일찾기</label>
+                        <input type="hidden" name="fileIdxs" value="@ViewBag.carImg[i].fileIdx" />
+                    </div>
+    }
+}
+else
+{
+            <div class="thum_nail">
+                <span class="file_src"></span>
+                <input type="file" class="input_file" name="carImg" id="carImg">
+                <label for="carImg" class="btn_file">파일찾기</label>
+            </div>
+}
                     </td>
                 </tr>
 
