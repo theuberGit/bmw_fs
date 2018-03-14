@@ -104,6 +104,7 @@
       </isNotEmpty>
     </select>
 
+    <!--
     <select id="findPayment" resultMap="paymentMap">
       SELECT IDX
       , BRAND
@@ -136,7 +137,8 @@
       FROM BMW_FS_PAYMENT
       WHERE IDX = #idx#
     </select>
-
+-->
+    
     <insert id="insertPayment">
       INSERT INTO BMW_FS_PAYMENT
       (
@@ -167,6 +169,7 @@
       , PP_PAY3
       , DEPLOY_YN
       , REG_ID
+      , ORDER_NUM
       )
       VALUES (
       #idx#
@@ -196,10 +199,12 @@
       ,#ppPay3#
       ,#deployYn#
       ,#regId#
+      ,#orderNum#
       )
 
     </insert>
 
+    <!--
     <update id="updatePayment">
       UPDATE BMW_FS_PAYMENT
       SET BRAND = #brand#
@@ -232,44 +237,16 @@
       WHERE IDX = #idx#
     </update>
 
+
     <delete id="deletePayment">
       DELETE FROM BMW_FS_PAYMENT
       WHERE IDX = #idx#
     </delete>
+    -->
 
     <delete id="deletePaymentAll">
       DELETE FROM BMW_FS_PAYMENT      
     </delete>
-
-    <select id="findModel" resultClass="string">
-      SELECT MODEL      
-      FROM BMW_FS_PAYMENT
-      WHERE 1=1
-      AND DEPLOY_YN = 'Y'
-      <isNotEmpty property="brand">
-        AND BRAND = #brand#
-      </isNotEmpty>
-      <isNotEmpty property="series">
-        AND SERIES = #series#
-        GROUP BY MODEL
-      </isNotEmpty>
-    </select>
-
-    <select id="findSeries" resultClass="string">
-      SELECT SERIES
-      FROM BMW_FS_PAYMENT
-      WHERE 1=1
-      AND IDX IN (
-      SELECT MIN(IDX)
-      FROM BMW_FS_PAYMENT
-      WHERE 1=1
-      AND DEPLOY_YN = 'Y'
-      <isNotEmpty property="brand">
-        AND BRAND = #brand#
-      </isNotEmpty>
-      GROUP BY SERIES
-      )
-    </select>
 
   </statements>
 </sqlMap>

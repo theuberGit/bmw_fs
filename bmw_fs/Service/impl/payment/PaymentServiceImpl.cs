@@ -22,6 +22,7 @@ namespace bmw_fs.Service.impl.payment
         SequenceService sequenceService = new SequenceServiceImpl();
         log4net.ILog logger = log4net.LogManager.GetLogger(typeof(MvcApplication));
 
+        /*
         public void deletePayment(Payment payment)
         {
             try {
@@ -35,6 +36,7 @@ namespace bmw_fs.Service.impl.payment
                 Mapper.Instance().RollBackTransaction();
             }
         }
+        */
 
         public IList<Payment> findAll(Payment payment)
         {
@@ -46,10 +48,12 @@ namespace bmw_fs.Service.impl.payment
             return paymentDao.findAllCount(payment);
         }
 
+        /*
         public Payment findPayment(Payment payment)
         {
             return paymentDao.findPayment(payment);
         }
+       
 
         public void insertPayment(HttpFileCollectionBase multipartFiles, Payment payment)
         {
@@ -115,6 +119,7 @@ namespace bmw_fs.Service.impl.payment
                 Mapper.Instance().RollBackTransaction();
             }
         }
+        */
 
         public void loadExcelByFileAndUpdateToDB(HttpFileCollectionBase multipartFiles, string regId)
         {            
@@ -194,7 +199,8 @@ namespace bmw_fs.Service.impl.payment
                             item.ppPay2 = parseExcelColumnMoney(workSheet, rowIterator, 25);
                             item.ppPay3 = parseExcelColumnMoney(workSheet, rowIterator, 26);
                             item.deployYn = parseExcelColumnStr(workSheet, rowIterator, 7);
-                            if(item.idx != 0)
+                            item.orderNum = rowIterator;
+                            if (item.idx != 0)
                             {
                                 list.Add(item);
                             }                            
@@ -254,18 +260,7 @@ namespace bmw_fs.Service.impl.payment
             }
             return 0;
         }
-
-        public IList<string> findModel(Payment payment)
-        {
-            return paymentDao.findModel(payment);            
-        }
-
-        public IList<string> findSeries(Payment payment)
-        {
-            return paymentDao.findSeries(payment);
-        }
-
-
+        
         private void validation(Payment payment)
         {
             if (String.IsNullOrWhiteSpace(payment.brand)) throw new CustomException("필수 값이 없습니다.(브랜드)");
