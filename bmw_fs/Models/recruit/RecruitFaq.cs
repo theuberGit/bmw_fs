@@ -45,10 +45,10 @@ namespace bmw_fs.Models.recruit
                 (!string.IsNullOrWhiteSpace(contents) ? "내용 : " + (contents.Length > 5 ? contents.Substring(0, 5) + "..." : contents) + ", " : "") +
                 (!string.IsNullOrWhiteSpace(deployYnStr) ? "배포여부 : " + deployYnStr + ", " : "") + 
                 (!string.IsNullOrWhiteSpace(titleEng) ? "제목eng : " + titleEng + ", " : "") + 
-                (!string.IsNullOrWhiteSpace(contentsEng) ? "내용eng : " + contentsEng + ", " : "") + 
-                (!string.IsNullOrWhiteSpace(deployYnStr) ? "배포여부 : " + deployYnStr + ", " : "") +
+                (!string.IsNullOrWhiteSpace(contentsEng) ? "내용eng : " + contentsEng + ", " : "") +
+                (!string.IsNullOrWhiteSpace(deployYn) ? "배포여부 : " + deployYnStr + ", " : "") +
                 (page > 1 ? "page : " + page + ", " : "") +
-                (!string.IsNullOrWhiteSpace(searchOption) ? "검색 구분 : " + searchOption + "검색어 : " + searchInput : "");
+                (!string.IsNullOrWhiteSpace(searchOption) ? "검색구분 : " + searchOption + " 검색어 : " + searchInput : "");
         }
     }
 }

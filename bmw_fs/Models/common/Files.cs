@@ -19,7 +19,7 @@ namespace bmw_fs.Models.common
         public string ToString()
         {
             return
-                (fileIdx > 0 ? "idx : " + fileIdx + ", " : "") +
+                (fileIdx > 0 ? "fileIdx : " + fileIdx + ", " : "") +
                 (masterIdx > 0 ? "masterIdx : " + masterIdx + "," : "");
         }
     }

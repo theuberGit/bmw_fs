@@ -170,7 +170,6 @@
     <Compile Include="Common\AdminLogFilter.cs" />
     <Compile Include="Common\CustomException.cs" />
     <Compile Include="Common\CustomFormatException.cs" />
-    <Compile Include="Config\StringProperties.cs" />
     <Compile Include="Common\Filter\TestFilter.cs" />
     <Compile Include="Controllers\admin\AdminController.cs" />
     <Compile Include="Controllers\admin\LogManageController.cs" />
@@ -512,6 +511,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Config\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

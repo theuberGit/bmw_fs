@@ -53,7 +53,7 @@ namespace bmw_fs.Service.impl.admin
             {
                 return "월납입금 정보 관리";
             }
-            else if (url.ToLower().Contains("/carImage/"))
+            else if (url.ToLower().Contains("/carimage/"))
             {
                 return "차량 이미지 관리";
             }

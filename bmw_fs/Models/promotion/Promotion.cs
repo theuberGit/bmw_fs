@@ -71,7 +71,7 @@ namespace bmw_fs.Models.promotion
                 (!string.IsNullOrWhiteSpace(searchOption) ? "게시기간 : " + startDate + "~" + endDate + ", " : "") +
                 (!string.IsNullOrWhiteSpace(deployYn) ? "배포여부 : " + deployYnStr + ", " : "") +
                 (page > 1 ? "page : " + page + ", " : "") +
-                (!string.IsNullOrWhiteSpace(searchOption) ? "검색 구분 : " + searchOption + " 검색어 : " + searchInput : "");
+                (!string.IsNullOrWhiteSpace(searchOption) ? "검색구분 : " + searchOption + " 검색어 : " + searchInput : "");
         }
     }
 }

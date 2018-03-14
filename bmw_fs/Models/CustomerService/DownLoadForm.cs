@@ -45,9 +45,9 @@ namespace bmw_fs.Models.CustomerService
                 (idx > 0 ? "idx : " + idx + ", " : "") +
                 (!string.IsNullOrWhiteSpace(formName) ? "제목 : " + (formName.Length > 5 ? formName.Substring(0, 5) + "..." : formName) + ", " : "") +
                 (!string.IsNullOrWhiteSpace(usagePurpose) ? "내용 : " + (usagePurpose.Length > 5 ? usagePurpose.Substring(0, 5) + "..." : usagePurpose) + ", " : "") +
-                (!string.IsNullOrWhiteSpace(deployYnStr) ? "배포여부 : " + deployYnStr + ", " : "") +
+                (!string.IsNullOrWhiteSpace(deployYn) ? "배포여부 : " + deployYnStr + ", " : "") +
                 (page > 1 ? "page : " + page + ", " : "") +
-                (!string.IsNullOrWhiteSpace(searchOption) ? "검색 구분 : " + searchOption + "검색어 : " + searchInput : "");
+                (!string.IsNullOrWhiteSpace(searchOption) ? "검색구분 : " + searchOption + " 검색어 : " + searchInput : "");
         }
     }
 }

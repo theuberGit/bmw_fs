@@ -34,7 +34,7 @@ namespace bmw_fs.Models.admin
                 (!string.IsNullOrWhiteSpace(role) ? "권한 : " + role + ", " : "") +
                 (!string.IsNullOrWhiteSpace(activeYn) ? "상태 : " + activeYn + ", " : "") +
                 (page > 1 ? "page : " + page + ", " : "") +
-                (!string.IsNullOrWhiteSpace(searchOption) ? "검색 구분 : " + searchOption + "검색어 : " + searchInput : "");
+                (!string.IsNullOrWhiteSpace(searchOption) ? "검색구분 : " + searchOption + " 검색어 : " + searchInput : "");
         }
     }
 }

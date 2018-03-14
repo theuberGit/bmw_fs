@@ -40,10 +40,10 @@
         AND CONTENTS LIKE '%'+#contents#+'%'
       </isNotEmpty>
       <isNotEmpty property="startDate">
-        AND REG_DATE &gt; #startDate#
+        AND CONVERT(char(10), REG_DATE,23) &gt;= #startDate#
       </isNotEmpty>
       <isNotEmpty property="endDate">
-        AND REG_DATE &lt; #endDate#
+        AND CONVERT(char(10), REG_DATE,23) &lt;= #endDate#
       </isNotEmpty>
       )t
       WHERE 1=1
@@ -64,10 +64,10 @@
         AND CONTENTS LIKE '%'+#contents#+'%'
       </isNotEmpty>
       <isNotEmpty property="startDate">
-        AND REG_DATE &gt; #startDate#
+        AND CONVERT(char(10), REG_DATE,23) &gt;= #startDate#
       </isNotEmpty>
       <isNotEmpty property="endDate">
-        AND REG_DATE &lt; #endDate#
+        AND CONVERT(char(10), REG_DATE,23) &lt;= #endDate#
       </isNotEmpty>
     </select>
 

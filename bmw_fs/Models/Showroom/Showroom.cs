@@ -56,9 +56,9 @@ namespace bmw_fs.Models.Showroom
                 (!string.IsNullOrWhiteSpace(lng) ? "경도 : " + lng + ", " : "") +
                 (!string.IsNullOrWhiteSpace(tel1) ? "전화번호 : " + tel1 + tel2 + tel3 + ", " : "") +
                 (!string.IsNullOrWhiteSpace(businessTime) ? "영업시간 : " + businessTime + ", " : "") +
-                (!string.IsNullOrWhiteSpace(deployYnStr) ? "배포여부 : " + deployYnStr + ", " : "") + 
+                (!string.IsNullOrWhiteSpace(deployYn) ? "배포여부 : " + deployYnStr + ", " : "") +
                 (page > 1 ? "page : " + page + ", " : "") +
-                (!string.IsNullOrWhiteSpace(searchOption) ? "검색 구분 : " + searchOption + "검색어 : " + searchInput : "");
+                (!string.IsNullOrWhiteSpace(searchOption) ? "검색구분 : " + searchOption + " 검색어 : " + searchInput : "");
         }
 
     }
