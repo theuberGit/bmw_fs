@@ -1,0 +1,99 @@
+﻿<style>
+    .search_box {
+        margin-top: 20px;
+    }
+    .search_box input{
+        width : 120px;
+    }
+    .search_box label {
+        display: inline-block;
+        margin-top: 7px;
+        margin-right: 3px;
+    }
+</style>
+<div id="content" class="list">
+    <form method="get">
+        <div class="cont_top">
+            <h3>로그 관리</h3>
+            <div class="search_box">
+                <label for="qid">사용자 </label><input type="text" id="qid" name="qid" value="@ViewBag.pagination.qid" />
+                <label for="menuName">화면명 </label><input type="text" id="menuName" name="menuName" value="@ViewBag.pagination.menuName" />
+                <label for="startDate">접속일 </label><input type="text" id="startDate" name="startDate" value="@ViewBag.pagination.startDate" /> ~ <input type="text" id="endDate" name="endDate" value="@ViewBag.pagination.endDate" />
+                <label for="contents">조건 </label> <input type="text" id="contents" name="contents" value="@ViewBag.pagination.contents" />
+                <button type="button" onclick="searchList();"></button>
+            </div>
+        </div>
+        <div class="cont_bottom">
+            <table class="list_table">
+                <colgroup>
+                    <col width="60px" />
+                    <col width="150px" />
+                    <col width="120px" />
+                    <col width="200px" />
+                    <col width="*" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>날짜</th>
+                        <th>사용자</th>
+                        <th>화면명</th>
+                        <th>조건</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (var i = 0; i < ViewBag.list.Count; i++)
+                    {
+                        <tr>
+                            <td>@(ViewBag.pagination.totalItemCount - (ViewBag.pagination.currentPage - 1) * ViewBag.pagination.itemPerPage - i)</td>
+                            <td>@ViewBag.list[i].regDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                            <td>@ViewBag.list[i].qid</td>
+                            <td>@ViewBag.list[i].menuName</td>
+                            <td class="tit_area">@ViewBag.list[i].contents</td>
+                        </tr>
+                    }
+                    @if (ViewBag.list.Count == 0)
+                    {
+                        <tr>
+                            <td colspan="5">항목이 없습니다.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @RenderPage("~/Views/Common/Pagination.cshtml")
+        </div>
+    </form>
+</div>
+<script>
+    lnbSet(".admin_log_mgmt");
+	$('#searchOption').val('@ViewBag.pagination.searchOption');
+
+    $("#startDate").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeMonth: true,
+        changeYear: true,
+        yearRange: 'c-14:c+10',
+        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+        onClose: function (selectedDate) {
+            $("#endDate").datepicker("option", "minDate", selectedDate);
+        }
+    });
+    $("#endDate").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeMonth: true,
+        changeYear: true,
+        yearRange: 'c-14:c+10',
+        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+        onClose: function (selectedDate) {
+            $("#startDate").datepicker("option", "maxDate", selectedDate);
+        }
+    });
+</script>

@@ -167,11 +167,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Common\AdminLogFilter.cs" />
     <Compile Include="Common\CustomException.cs" />
     <Compile Include="Common\CustomFormatException.cs" />
-    <Compile Include="Config\StringProperties.cs" />
     <Compile Include="Common\Filter\TestFilter.cs" />
     <Compile Include="Controllers\admin\AdminController.cs" />
+    <Compile Include="Controllers\admin\LogManageController.cs" />
     <Compile Include="Controllers\common\ErrorController.cs" />
     <Compile Include="Controllers\common\FilesController.cs" />
     <Compile Include="Controllers\CustomerService\DownLoadFormController.cs" />
@@ -194,6 +195,7 @@
     <Compile Include="Controllers\recruit\RecruitNoticeController.cs" />
     <Compile Include="Controllers\showroom\ShowroomController.cs" />
     <Compile Include="Controllers\test\BoardController.cs" />
+    <Compile Include="Dao\face\admin\LogManageDao.cs" />
     <Compile Include="Dao\face\admin\MemberDao.cs" />
     <Compile Include="Dao\face\admin\SmsDao.cs" />
     <Compile Include="Dao\face\board\BoardDao.cs" />
@@ -219,6 +221,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\admin\LogManage.cs" />
     <Compile Include="Models\admin\Member.cs" />
     <Compile Include="Models\admin\Sms.cs" />
     <Compile Include="Models\board\Board.cs" />
@@ -245,6 +248,7 @@
     <Compile Include="Models\rolling\Rolling.cs" />
     <Compile Include="Models\Showroom\ShowRoom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\face\admin\LogManageService.cs" />
     <Compile Include="Service\face\admin\MemberService.cs" />
     <Compile Include="Service\face\admin\SmsService.cs" />
     <Compile Include="Service\face\board\BoardService.cs" />
@@ -269,6 +273,7 @@
     <Compile Include="Service\face\recruit\RecruitNoticeService.cs" />
     <Compile Include="Service\face\rolling\RollingService.cs" />
     <Compile Include="Service\face\Showroom\ShowroomService.cs" />
+    <Compile Include="Service\impl\admin\LogManageServiceImpl.cs" />
     <Compile Include="Service\impl\admin\MemberServiceImpl.cs" />
     <Compile Include="Service\impl\admin\SmsServiceImpl.cs" />
     <Compile Include="Service\impl\board\BoardServiceImpl.cs" />
@@ -296,6 +301,7 @@
     <Compile Include="Service\impl\Showroom\ShowroomServiceImpl.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Dao\impl\admin\LogManage.xml" />
     <Content Include="Dao\impl\admin\Member.xml" />
     <Content Include="Dao\impl\admin\Sms.xml" />
     <Content Include="Dao\impl\board\Board.xml" />
@@ -501,9 +507,11 @@
     <Content Include="Views\CarImage\modify.cshtml" />
     <Content Include="Views\CarImage\register.cshtml" />
     <Content Include="Views\CarImage\view.cshtml" />
+    <Content Include="Views\LogManage\list.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Config\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

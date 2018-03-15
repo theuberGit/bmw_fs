@@ -62,5 +62,19 @@ namespace bmw_fs.Models.CustomerService
                 }
             }
         }
+
+        public
+        override String ToString()
+        {
+            return
+                (idx > 0 ? "idx : " + idx + ", " : "") +
+                (!string.IsNullOrWhiteSpace(categoryName) ? "카테고리 : " + (categoryName.Length > 5 ? categoryName.Substring(0, 5) + "..." : categoryName) + ", " : "") +
+                (!string.IsNullOrWhiteSpace(title) ? "제목 : " + (title.Length > 5 ? title.Substring(0, 5) + "..." : title) + ", " : "") +
+                (!string.IsNullOrWhiteSpace(contents) ? "질문 : " + (contents.Length > 5 ? contents.Substring(0, 5) + "..." : contents) + ", " : "") +
+                (!string.IsNullOrWhiteSpace(status) ? "상태 : " + status + ", " : "") +
+                (!string.IsNullOrWhiteSpace(replyContents) ? "답변 : " + (replyContents.Length > 5 ? replyContents.Substring(0, 5) + "..." : replyContents) + ", " : "") +
+                (page > 1 ? "page : " + page + ", " : "") +
+                (!string.IsNullOrWhiteSpace(searchOption) ? "검색구분 : " + searchOption + " 검색어 : " + searchInput : "");
+        }
     }
 }
