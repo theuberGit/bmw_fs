@@ -95,5 +95,65 @@ namespace bmw_fs.Models.payment
                 return programKo;
             }
         }
+
+        public string deployYnStr
+        {
+            get
+            {
+                if ("Y".Equals(deployYn))
+                {
+                    return "배포";
+                }
+                else if ("N".Equals(deployYn))
+                {
+                    return "미배포";
+                }
+                return "";
+            }
+        }
+
+        public string searchOptionStr
+        {
+            get
+            {
+                if ("zangaHalbu".Equals(searchOption))
+                {
+                    return "SMART 할부";
+                }
+                else if ("zangaLease".Equals(searchOption))
+                {
+                    return "SAMRT 운용리스";
+                }
+                else if ("generalHalbu".Equals(searchOption))
+                {
+                    return "일반 할부";
+                }
+                else if ("smartRent".Equals(searchOption))
+                {
+                    return "SMART 렌트";
+                }
+                else if ("postponeHalbu".Equals(searchOption))
+                {
+                    return "유예 할부";
+                }
+
+                return "";
+            }
+        }
+
+        override
+        public string ToString()
+        {
+            return
+                (idx > 0 ? "idx : " + idx + "," : "") +
+                (!string.IsNullOrWhiteSpace(brand) ? "브랜드 : " + brand + ", " : "") +
+                (!string.IsNullOrWhiteSpace(series) ? "시리즈 : " + series + ", " : "") +
+                (!string.IsNullOrWhiteSpace(model) ? "모델 : " + model + ", " : "") +
+                (!string.IsNullOrWhiteSpace(program) ? "프로그램 : " + programsKo + ", " : "") +
+                (!string.IsNullOrWhiteSpace(modelName) ? "모델명 : " + modelName + ", " : "") +
+                (!string.IsNullOrWhiteSpace(deployYnStr) ? "배포여부 : " + deployYnStr + ", " : "") +
+                (page > 1 ? "page : " + page + ", " : "") +
+                (!string.IsNullOrWhiteSpace(searchOption) ? "검색구분 : " + searchOptionStr + " 검색어 : " + searchInput : "");
+        }
     }
 }
