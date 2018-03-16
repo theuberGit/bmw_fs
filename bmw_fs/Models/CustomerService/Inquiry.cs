@@ -68,7 +68,7 @@ namespace bmw_fs.Models.CustomerService
         {
             return
                 (idx > 0 ? "idx : " + idx + ", " : "") +
-                (!string.IsNullOrWhiteSpace(categoryName) ? "카테고리 : " + (categoryName.Length > 5 ? categoryName.Substring(0, 5) + "..." : categoryName) + ", " : "") +
+                (!string.IsNullOrWhiteSpace(categoryName) ? "카테고리 : " +categoryName + ", " : "") +
                 (!string.IsNullOrWhiteSpace(title) ? "제목 : " + (title.Length > 5 ? title.Substring(0, 5) + "..." : title) + ", " : "") +
                 (!string.IsNullOrWhiteSpace(contents) ? "질문 : " + (contents.Length > 5 ? contents.Substring(0, 5) + "..." : contents) + ", " : "") +
                 (!string.IsNullOrWhiteSpace(status) ? "상태 : " + status + ", " : "") +
