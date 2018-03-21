@@ -1,6 +1,6 @@
 ﻿<div id="content" class="reg">
     <div class="cont_top">
-        <h3>관리자 관리</h3>
+        <h3>담당자 관리</h3>
     </div>
     <div class="cont_bottom">
         <form method="post" enctype="multipart/form-data">
@@ -28,7 +28,7 @@
                 </tr>
                     -->
                 <tr>
-                    <th><label for="role">관리자 권한 *</label></th>
+                    <th><label for="role">담당자 권한 *</label></th>
                     <td>
                         <input type="checkbox" name="roles" id="role1" class="role_master" value="MASTER" /><label for="role1"> MASTER</label>&nbsp;&nbsp;
                         <input type="checkbox" name="roles" id="role2" class="role_others" value="IT" /><label for="role2"> IT</label>&nbsp;&nbsp;
@@ -76,7 +76,7 @@
             },
             success: function (data) {
                 if (data == -1) {
-                    alert('동일한 관리자 ID가 존재합니다.');
+                    alert('동일한 담당자 ID가 존재합니다.');
                     isDuplicated = true;
                     return;
                 } else if (data == 1) {
