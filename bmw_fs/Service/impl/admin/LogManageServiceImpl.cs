@@ -31,7 +31,7 @@ namespace bmw_fs.Service.impl.admin
         {
             if (url.ToLower().Contains("/admin/"))
             {
-                return "관리자 관리";
+                return "담당자 관리";
             }
             else if (url.ToLower().Contains("/logmanage/"))
             {
