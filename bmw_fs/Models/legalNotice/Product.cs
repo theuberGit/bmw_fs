@@ -49,7 +49,7 @@ namespace bmw_fs.Models.legalNotice
                 }
                 else if ("longrent".Equals(category))
                 {
-                    return "장기렌터가";
+                    return "장기렌터카";
                 }
                 else
                 {
