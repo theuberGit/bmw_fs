@@ -66,7 +66,7 @@ namespace bmw_fs.Models.CustomerService
                 }
                 else if ("homepage".Equals(category))
                 {
-                    return "홈페이지 이용 관련";
+                    return "App/홈페이지 이용 관련";
                 }
                 else
                 {
