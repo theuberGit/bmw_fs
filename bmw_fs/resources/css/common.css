@@ -142,7 +142,7 @@ body, html {
 .list_area{width:1048px; border:1px solid #ccc;margin:10px 0;display:inline-block;padding:10px 0;}
 .list_area {overflow:hidden;}
 .list_area li{float:left; padding:5px 0;}
-.list_area li a{display:block; padding:0 18px; font-size:14px; border-left:1px solid #ccc;}
+.list_area li a{display:block; padding:0 15px; font-size:14px; border-left:1px solid #ccc;}
 .list_area ul li:nth-child(1) a{border-left:0px;}
 .list_area li.on a{font-weight:bold;color:#1c69d4;}
 
