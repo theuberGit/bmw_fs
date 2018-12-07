@@ -1,0 +1,48 @@
+﻿
+<head>
+    <style>
+        span.banner_yn {
+            float: right;
+        }
+    </style>
+</head>
+<div id="content" class="rolling list">
+    <div class="cont_top">
+        <h3>태블릿 프로모션</h3>
+    </div>
+    <form>
+        <div class="cont_bottom">
+            <ul class="tab">
+                <li id="promotion_now" class="on"><a href="javascript:void(0);" onclick="searchPromotion('now');">진행 중 프로모션</a></li>
+                <li id="promotion_end"><a href="javascript:void(0);" onclick="searchPromotion('end');">종료된 프로모션</a></li>
+            </ul>
+            <ul class="rolling_list on">
+            </ul>
+        </div>
+        <input type="hidden" name="searchOption" id="searchOption" value="@ViewBag.pagination.searchOption" />
+    </form>
+</div>
+<script>
+    lnbSet(".web_promotion_mgmt");
+
+    function searchPromotion(status) {
+        $('#searchOption').val(status);
+        searchList();
+    };
+
+    if ('@ViewBag.pagination.searchOption' == 'now') {
+        $('#promotion_now').addClass('on');
+        $('#promotion_end').removeClass('on');
+    } else if ('@ViewBag.pagination.searchOption' == 'end') {
+        $('#promotion_end').addClass('on');
+        $('#promotion_now').removeClass('on');
+    }
+
+$(".tab").find("li").each(function(index , item){
+	$(item).find("a").click(function(){
+		$(this).parent("li").addClass("on").siblings("li").removeClass("on");
+		$(".rolling_list").eq(index).addClass("on").siblings(".rolling_list").removeClass("on");
+		return false;
+	})
+})
+</script>
