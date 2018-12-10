@@ -19,7 +19,7 @@ namespace bmw_fs.Dao.face.promotion
             return Mapper.Instance().QueryForList<TabletPromotion>("tabletPromotion.findAll", tabletPromotion);
         }
 
-        public int findAllCount(Promotion tabletPromotion)
+        public int findAllCount(TabletPromotion tabletPromotion)
         {
             return Mapper.Instance().QueryForObject<int>("tabletPromotion.findAllCount", tabletPromotion);
         }

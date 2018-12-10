@@ -39,18 +39,55 @@ namespace bmw_fs.Service.impl.promotion
             {
                 Mapper.Instance().RollBackTransaction();
             }
+        }
 
-            //IList<Promotion> findAll(TabletPromotion tabletPromotion);
+        public IList<TabletPromotion> findAll(TabletPromotion tabletPromotion)
+        {
+            return this.tabletPromotionDao.findAll(tabletPromotion);
+        }
 
-            //int findAllCount(TabletPromotion tabletPromotion);
+        public int findAllCount(TabletPromotion tabletPromotion)
+        {
+            return this.tabletPromotionDao.findAllCount(tabletPromotion);
+        }
 
-            //Promotion findTabletPromotion(TabletPromotion tabletPromotion);
+        public TabletPromotion findTabletPromotion(TabletPromotion tabletPromotion)
+        {
+            return this.tabletPromotionDao.findTabletPromotion(tabletPromotion);
+        }
 
-            //void updateTabletPromotion(HttpFileCollectionBase multipartFiles, TabletPromotion tabletPromotion);
+        public void updateTabletPromotion(HttpFileCollectionBase multipartFiles, TabletPromotion tabletPromotion)
+        {
+            validation(tabletPromotion);
+            try
+            {
+                Mapper.Instance().BeginTransaction();
+                filesService.deleteFileAndFileUpload(multipartFiles, "thumbNail", "jpg|png", 5 * 1024 * 1024, tabletPromotion.idx, tabletPromotion.thumbIdxs);//섬네일
+                filesService.deleteFileAndFileUpload(multipartFiles, "bannerImg", "jpg|png", 5 * 1024 * 1024, tabletPromotion.idx, tabletPromotion.bannerIdxs);//띠배너
+                filesService.deleteFileAndFileUpload(multipartFiles, "mainImg", "jpg|png", 5 * 1024 * 1024, tabletPromotion.idx, tabletPromotion.mainIdxs);//메인이미지
 
-            //void deleteTabletPromotion(TabletPromotion tabletPromotion);
+                this.tabletPromotionDao.updateTabletPromotion(tabletPromotion);
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
+        }
 
-
+        public void deleteTabletPromotion(TabletPromotion tabletPromotion)
+        {
+            try
+            {
+                Mapper.Instance().BeginTransaction();
+                this.tabletPromotionDao.deleteTabletPromotion(tabletPromotion);
+                filesService.deleteRealFilesAndDataByFileMasterIdx(tabletPromotion.idx);//파일 삭제
+                Mapper.Instance().CommitTransaction();
+            }
+            catch (Exception e)
+            {
+                Mapper.Instance().RollBackTransaction();
+            }
         }
 
         private void validation(TabletPromotion tabletPromotion)

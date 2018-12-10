@@ -12,7 +12,6 @@ namespace bmw_fs.Models.promotion
         public String startDate { get; set; }
         public String endDate { get; set; }
         public String deployYn { get; set; }
-        public String engYn { get; set; }
         public String title { get; set; }
         public String note { get; set; }
         public String brand { get; set; }

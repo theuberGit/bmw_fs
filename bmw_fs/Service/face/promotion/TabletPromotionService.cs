@@ -10,14 +10,14 @@ namespace bmw_fs.Service.face.promotion
     {
         void insertTabletPromotion(HttpFileCollectionBase multipartFiles, TabletPromotion tabletPromotion);
         
-        //IList<Promotion> findAll(TabletPromotion tabletPromotion);
+        IList<TabletPromotion> findAll(TabletPromotion tabletPromotion);
 
-        //int findAllCount(TabletPromotion tabletPromotion);
+        int findAllCount(TabletPromotion tabletPromotion);
 
-        //Promotion findTabletPromotion(TabletPromotion tabletPromotion);
+        TabletPromotion findTabletPromotion(TabletPromotion tabletPromotion);
 
-        //void updateTabletPromotion(HttpFileCollectionBase multipartFiles, TabletPromotion tabletPromotion);
+        void updateTabletPromotion(HttpFileCollectionBase multipartFiles, TabletPromotion tabletPromotion);
 
-        //void deleteTabletPromotion(TabletPromotion tabletPromotion);
+        void deleteTabletPromotion(TabletPromotion tabletPromotion);
     }
 }

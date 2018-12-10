@@ -17,6 +17,61 @@
                 <li id="promotion_end"><a href="javascript:void(0);" onclick="searchPromotion('end');">종료된 프로모션</a></li>
             </ul>
             <ul class="rolling_list on">
+                @for (var i = 0; i < ViewBag.list.Count; i++)
+                {
+                    if (i == 3)
+                    {
+                        <li class="rolling_list4">
+                            <a href="view?idx=@ViewBag.list[i].idx&searchOption=@ViewBag.pagination.searchOption">
+                                <span class="img_area"><img src="/Files/imageView?fileIdx=@ViewBag.list[i].fileIdx" alt=""></span>
+                                <span class="tit_area">@Html.Raw(@ViewBag.list[i].title)</span>
+                                <span class="date_area">
+                                    @ViewBag.list[i].startDate ~ @ViewBag.list[i].endDate
+                                    @if ("N".Equals(ViewBag.list[i].deployYn))
+                                    {
+                                        <span class="banner_yn">미배포</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="banner_yn">배포</span>
+                                    }
+                                </span>
+                                @*<div class="country_area">
+                                    @if ("Y".Equals(ViewBag.list[i].engYn))
+                                    {
+                                        <span class="eng">영문</span>
+                                    }
+                                </div>*@
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="view?idx=@ViewBag.list[i].idx&searchOption=@ViewBag.pagination.searchOption">
+                                <span class="img_area"><img src="/Files/imageView?fileIdx=@ViewBag.list[i].fileIdx" alt=""></span>
+                                <span class="tit_area">@Html.Raw(@ViewBag.list[i].title)</span>
+                                <span class="date_area">
+                                    @ViewBag.list[i].startDate ~ @ViewBag.list[i].endDate
+                                    @if ("N".Equals(ViewBag.list[i].deployYn))
+                                    {
+                                        <span class="banner_yn">미배포</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="banner_yn">배포</span>
+                                    }
+                                </span>
+                                @*<div class="country_area">
+                                    @if ("Y".Equals(ViewBag.list[i].engYn))
+                                    {
+                                        <span class="eng">영문</span>
+                                    }
+                                </div>*@
+                            </a>
+                        </li>
+                    }
+                }
             </ul>
         </div>
         <input type="hidden" name="searchOption" id="searchOption" value="@ViewBag.pagination.searchOption" />
