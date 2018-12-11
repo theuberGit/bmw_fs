@@ -121,7 +121,7 @@
        WHERE IDX = #idx#
      </update>
 
-     <delete id="deletePromotion">
+     <delete id="deleteTabletPromotion">
        DELETE FROM BMW_FS_TABLETPROMOTION
        WHERE IDX = #idx#
      </delete>

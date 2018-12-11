@@ -15,6 +15,10 @@
             margin-bottom: 10px
         }
 
+        .file_area > div {
+            height: 38px;
+        }
+
         .file_area {
             counter-reset: cnt1;
         }
@@ -245,19 +249,12 @@
 		$(item).find(".btn_add_file").on("click" , function(){
 			if($(item).find( "input[type='file']" ).length < 10){
 				cnt++;
-				if($(item).is(".kor")){
-                    var html = '<div class="add_file_element"><span class="file_src"></span><input type="file" class="input_file" id="file' + cnt + '" name="mainImg" /><label for="file' + cnt + '" class="btn_file">파일찾기</label><button type="button" class="btnDelete">-</button><p><label for="url' + cnt + '"><input type="text" name="mainImgLinks" id="url' + cnt +'"placeholder="이미지에 대한 링크 URL (선택사항)"></label></p></div>';
-				}
-				if($(item).is(".eng")){
-                    var html = '<div class="add_file_element"><span class="file_src"></span><input type="file" class="input_file" id="engfile' + cnt + '" name="engMainImg" /><label for="engfile' + cnt + '" class="btn_file">파일찾기</label><button type="button" class="btnDelete">-</button><p><label for="engurl' + cnt + '"><input type="text" name="mainImgEngLinks" id="url' + cnt +'"placeholder="이미지에 대한 링크 URL (선택사항)"></label></p></div>';
-				}
+                var html = '<div class="add_file_element"><span class="file_src"></span><input type="file" class="input_file" id="file' + cnt + '" name="mainImg" /><label for="file' + cnt + '" class="btn_file">파일찾기</label><button type="button" class="btnDelete">-</button></div>';
 				$(item).find(".file_area").append(html);
 			};
 		});
 		$fileArea.on("click" , ".btnDelete" ,deleteFile);
     });
-
-    $("#note").on
 
     $("#note").keydown(function (key) {
 

@@ -61,5 +61,33 @@ namespace bmw_fs.Controllers.promotion
             ViewBag.state = tabletPromotion.searchOption;
             return View("~/Views/Promotion/TabletPromotion/view.cshtml");
         }
+
+        public ActionResult modify(TabletPromotion tabletPromotion) {
+            TabletPromotion item = tabletPromotionService.findTabletPromotion(tabletPromotion);
+            ViewBag.item = item;
+            ViewBag.thumbList = filesService.findAllByMasterIdxAndType(item.idx, "thumbNail");
+            ViewBag.bannerList = filesService.findAllByMasterIdxAndType(item.idx, "bannerImg");
+            IList<Files> mainImgList = filesService.findAllByMasterIdxAndType(item.idx, "mainImg");
+            ViewBag.mainImgList = mainImgList;
+
+            return View("~/Views/Promotion/TabletPromotion/modify.cshtml");
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public RedirectToRouteResult modifyProc(TabletPromotion tabletPromotion)
+        {
+            HttpFileCollectionBase multipartRequest = Request.Files;
+            tabletPromotion.uptId = System.Web.HttpContext.Current.User.Identity.Name;
+            tabletPromotionService.updateTabletPromotion(multipartRequest, tabletPromotion);
+            return RedirectToAction("list", (RouteValueDictionary)Session["searchMap"]);
+        }
+
+        [HttpPost]
+        public RedirectToRouteResult delete(TabletPromotion tabletPromotion)
+        {
+            tabletPromotionService.deleteTabletPromotion(tabletPromotion);
+            return RedirectToAction("list");
+        }
     }
 }

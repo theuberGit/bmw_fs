@@ -37,11 +37,11 @@
                                     }
                                 </span>
                                 @*<div class="country_area">
-                                    @if ("Y".Equals(ViewBag.list[i].engYn))
-                                    {
-                                        <span class="eng">영문</span>
-                                    }
-                                </div>*@
+                                @if ("Y".Equals(ViewBag.list[i].engYn))
+                                {
+                                    <span class="eng">영문</span>
+                                }
+                            </div>*@
                             </a>
                         </li>
                     }
@@ -63,16 +63,21 @@
                                     }
                                 </span>
                                 @*<div class="country_area">
-                                    @if ("Y".Equals(ViewBag.list[i].engYn))
-                                    {
-                                        <span class="eng">영문</span>
-                                    }
-                                </div>*@
+                                @if ("Y".Equals(ViewBag.list[i].engYn))
+                                {
+                                    <span class="eng">영문</span>
+                                }
+                            </div>*@
                             </a>
                         </li>
                     }
                 }
             </ul>
+            @RenderPage("~/Views/Common/Pagination.cshtml")
+            @if ("now".Equals(ViewBag.pagination.searchOption))
+            {
+                <a href="register" class="btn_defualt btn_reg">등록</a>
+            }
         </div>
         <input type="hidden" name="searchOption" id="searchOption" value="@ViewBag.pagination.searchOption" />
     </form>
