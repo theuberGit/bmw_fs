@@ -32,7 +32,7 @@
             }
 
             .file_area:after {
-                content: "* .jpg, .png 파일만 업로드 가능  * 사이즈:1148*736";
+                content: "* .jpg, .png 파일만 업로드 가능  * 사이즈:1093*736";
             }
 
         .file_src.on:after {
@@ -137,7 +137,7 @@
                 </tr>
                 <tr class="add_img_area">
                     <th>띠 배너 이미지</th>
-                    <td class="file_area thumb">
+                    <td class="file_area banner">
                         @if (ViewBag.bannerList.Count != 0)
                         {
                             for (int i = 0, size = ViewBag.bannerList.Count; i < size; i++)
