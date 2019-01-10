@@ -66,7 +66,7 @@ namespace bmw_fs.Models.CustomerService
                 }
                 else if ("homepage".Equals(category))
                 {
-                    return "홈페이지 이용 관련";
+                    return "App/홈페이지 이용 관련";
                 }
                 else
                 {
@@ -105,7 +105,7 @@ namespace bmw_fs.Models.CustomerService
         {
             return
                 (idx > 0 ? "idx : " + idx + ", " : "") +
-                (!string.IsNullOrWhiteSpace(categoryName) ? "카테고리 : " + (categoryName.Length > 5 ? categoryName.Substring(0, 5) + "..." : categoryName) + ", " : "") +
+                (!string.IsNullOrWhiteSpace(categoryName) ? "카테고리 : " + categoryName + ", " : "") +
                 (!string.IsNullOrWhiteSpace(question) ? "질문 : " + (question.Length > 5 ? question.Substring(0, 5) + "..." : question) + ", " : "") +
                 (!string.IsNullOrWhiteSpace(answer) ? "답변 : " + (answer.Length > 5 ? answer.Substring(0, 5) + "..." : answer) + ", " : "") +
                 (!string.IsNullOrWhiteSpace(deployYn) ? "배포여부 : " + deployYnStr + ", " : "") + 

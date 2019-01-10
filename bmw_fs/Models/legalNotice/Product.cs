@@ -43,6 +43,14 @@ namespace bmw_fs.Models.legalNotice
                 {
                     return "오토론";
                 }
+                else if ("usedcar".Equals(category))
+                {
+                    return "중고차대출";
+                }
+                else if ("longrent".Equals(category))
+                {
+                    return "장기렌터카";
+                }
                 else
                 {
                     return null;

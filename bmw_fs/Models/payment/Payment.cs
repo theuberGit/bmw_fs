@@ -72,7 +72,7 @@ namespace bmw_fs.Models.payment
                     }
                     else if ("RT".Equals(str))
                     {
-                        programKo += "SMART렌트";
+                        programKo += "SMART/SMILE 렌트";
                     }
                     else if ("PP".Equals(str))
                     {
@@ -118,11 +118,11 @@ namespace bmw_fs.Models.payment
             {
                 if ("zangaHalbu".Equals(searchOption))
                 {
-                    return "SMART 할부";
+                    return "SMART/SMILE 할부";
                 }
                 else if ("zangaLease".Equals(searchOption))
                 {
-                    return "SAMRT 운용리스";
+                    return "SAMRT/SMILE 운용리스";
                 }
                 else if ("generalHalbu".Equals(searchOption))
                 {
@@ -130,7 +130,7 @@ namespace bmw_fs.Models.payment
                 }
                 else if ("smartRent".Equals(searchOption))
                 {
-                    return "SMART 렌트";
+                    return "SMART/SMILE 렌트";
                 }
                 else if ("postponeHalbu".Equals(searchOption))
                 {

@@ -46,7 +46,7 @@
                     </td>
                 </tr>
                 <tr class="add_img_area">
-                    <th>본문 이미지 *</th>
+                    <th>본문 이미지</th>
                     <td class="file_area">
                         <div class="main_img">
                             <span class="file_src"></span>
@@ -99,10 +99,12 @@ function regForm() {
             return;
         }
     }
+    /*
     if ($('#mainImg').val() === '') {
         alert('본문이미지를 등록하세요.');
         return;
     }
+    */
     if (!validationFileType('jpg, png')) return;
 
     if (!confirm('등록하시겠습니까?')) return;
