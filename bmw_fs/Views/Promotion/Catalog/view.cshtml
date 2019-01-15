@@ -15,6 +15,11 @@
                     <td>@ViewBag.item.regId</td>
                 </tr>
                 <tr>
+                    <th>브랜드</th>
+                    @if ("B".Equals(ViewBag.item.brand)){<td>BMW</td>}
+                    else if ("M".Equals(ViewBag.item.brand)){<td>MINI</td>}
+                </tr>
+                <tr>
                     <th><label for="">카탈로그</label></th>
                     <td>@ViewBag.item.title</td>
                 </tr>
