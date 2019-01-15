@@ -21,6 +21,13 @@
                     <td>@ViewBag.item.regId</td>
                 </tr>
                 <tr>
+                    <th>브랜드 *</th>
+                    <td class="radio_area">
+                        <label for="BRAND_B"><input type="radio" name="brand" id="brandB" value="B" title="브랜드"> BMW</label>
+                        <label for="BRAND_M"><input type="radio" name="brand" id="brandM" value="M" title="브랜드"> MINI</label>
+                    </td>
+                </tr>
+                <tr>
                     <th><label for="">카탈로그 *</label></th>
                     <td>
                         <select id="catYear" title="년도">
@@ -40,12 +47,12 @@
                         {
                             for (int i = 0, size = ViewBag.files.Count; i < size; i++)
                             {
-                            <div class="thum_nail">
-                                <span class="file_src">@ViewBag.files[i].originalFilename</span>
-                                <input type="file" class="input_file" name="file" id="file">
-                                <label for="file" class="btn_file">파일찾기</label>
-                                <input type="hidden" name="fileIdxs" value="@ViewBag.files[i].fileIdx" />
-                            </div>
+                                <div class="thum_nail">
+                                    <span class="file_src">@ViewBag.files[i].originalFilename</span>
+                                    <input type="file" class="input_file" name="file" id="file">
+                                    <label for="file" class="btn_file">파일찾기</label>
+                                    <input type="hidden" name="fileIdxs" value="@ViewBag.files[i].fileIdx" />
+                                </div>
                             }
                         }
                         else
@@ -111,7 +118,14 @@
       $('#inactivity').prop('checked', true);
     }
 
+    if ('@ViewBag.item.brand' === 'B') {
+        $('#brandB').prop('checked', true);
+    } else if ('@ViewBag.item.brand' === 'M') {
+        $('#brandM').prop('checked', true);
+    }
+
     function modForm() {
+        if (!$('input[name=brand]')) return;
         if (!$('#catYear').reqSelect()) return;
         if (!$('#catMonth').reqSelect()) return;
         var title = $('#catYear').val() + '년 ' + $('#catMonth').val() + '월 금융 카탈로그';

@@ -8,6 +8,7 @@
     <resultMap id="catalogListMap" class="CatalogClass">
       <result property="idx" column="IDX" />
       <result property="title" column="TITLE" />
+      <result property="brand" column="BRAND" />
       <result property="deployYn" column="DEPLOY_YN" />
       <result property="regDate" column="REG_DATE" />
       <result property="regId" column="REG_ID" />
@@ -17,6 +18,7 @@
     <resultMap id="catalogMap" class="CatalogClass">
       <result property="idx" column="IDX" />
       <result property="title" column="TITLE" />
+      <result property="brand" column="BRAND" />
       <result property="deployYn" column="DEPLOY_YN" />
       <result property="regDate" column="REG_DATE" />
       <result property="regId" column="REG_ID" />
@@ -32,6 +34,7 @@
       ROW_NUMBER() OVER(ORDER BY CAT.IDX DESC) AS RNUM
       ,CAT.IDX
       ,CAT.TITLE
+      ,CAT.BRAND
       ,CAT.DEPLOY_YN
       ,CAT.REG_DATE
       ,CAT.REG_ID
@@ -41,7 +44,7 @@
       ON CAT.IDX = FD.MASTER_IDX
       WHERE 1=1
       <isNotEmpty property="searchInput">
-        AND CAT.TITLE LIKE '%'+#searchInput#+'%'
+          AND CAT.TITLE LIKE '%'+#searchInput#+'%'
       </isNotEmpty>
           )t
         WHERE 1=1
@@ -60,6 +63,7 @@
     <select id="findCatalog" resultMap="catalogMap">
       SELECT IDX
       ,TITLE
+      ,BRAND
       ,DEPLOY_YN
       ,REG_DATE
       ,REG_ID
@@ -72,12 +76,14 @@
       (
       IDX
       ,TITLE
+      ,BRAND
       ,DEPLOY_YN
       ,REG_ID
       )
       VALUES (
       #idx#
       ,#title#
+      ,#brand#
       ,#deployYn#
       ,#regId#
       )
@@ -87,6 +93,7 @@
     <update id="updateCatalog">
       UPDATE BMW_FS_CATALOG
       SET TITLE = #title#
+      ,BRAND = #brand#
       ,DEPLOY_YN = #deployYn#
       ,UPT_DATE = getDate()
       ,UPT_ID = #uptId#
@@ -102,6 +109,7 @@
       SELECT COUNT(*)
       FROM BMW_FS_CATALOG
       WHERE TITLE = #title#
+      AND BRAND = #brand#
     </select>
     
   </statements>

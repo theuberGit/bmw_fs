@@ -10,6 +10,7 @@ namespace bmw_fs.Models.catalog
     {
         public int idx { get; set; }
         public String title { get; set; }
+        public String brand { get; set; }
         public String deployYn { get; set; }
         public String regId { get; set; }
         public DateTime regDate { get; set; }
