@@ -191,6 +191,7 @@
     <Compile Include="Controllers\promotion\CatalogController.cs" />
     <Compile Include="Controllers\promotion\MobilePromotionController.cs" />
     <Compile Include="Controllers\promotion\PromotionController.cs" />
+    <Compile Include="Controllers\promotion\TabletPromotionController.cs" />
     <Compile Include="Controllers\recruit\RecruitFaqController.cs" />
     <Compile Include="Controllers\recruit\RecruitNoticeController.cs" />
     <Compile Include="Controllers\showroom\ShowroomController.cs" />
@@ -214,6 +215,7 @@
     <Compile Include="Dao\face\payment\CarImageDao.cs" />
     <Compile Include="Dao\face\payment\PaymentDao.cs" />
     <Compile Include="Dao\face\promotion\PromotionDao.cs" />
+    <Compile Include="Dao\face\promotion\TabletPromotionDao.cs" />
     <Compile Include="Dao\face\recruit\RecruitFaqDao.cs" />
     <Compile Include="Dao\face\recruit\RecruitNoticeDao.cs" />
     <Compile Include="Dao\face\rolling\RollingDao.cs" />
@@ -243,6 +245,7 @@
     <Compile Include="Models\payment\Payment.cs" />
     <Compile Include="Models\promotion\Promotion.cs" />
     <Compile Include="Models\promotion\PromotionUrl.cs" />
+    <Compile Include="Models\promotion\TabletPromotion.cs" />
     <Compile Include="Models\recruit\RecruitFaq.cs" />
     <Compile Include="Models\recruit\RecruitNotice.cs" />
     <Compile Include="Models\rolling\Rolling.cs" />
@@ -269,6 +272,7 @@
     <Compile Include="Service\face\payment\CarImageService.cs" />
     <Compile Include="Service\face\payment\PaymentService.cs" />
     <Compile Include="Service\face\promotion\PromotionService.cs" />
+    <Compile Include="Service\face\promotion\TabletPromotionService.cs" />
     <Compile Include="Service\face\recruit\RecruitFaqService.cs" />
     <Compile Include="Service\face\recruit\RecruitNoticeService.cs" />
     <Compile Include="Service\face\rolling\RollingService.cs" />
@@ -295,6 +299,7 @@
     <Compile Include="Service\impl\payment\CarImageServiceImpl.cs" />
     <Compile Include="Service\impl\payment\PaymentServiceImpl.cs" />
     <Compile Include="Service\impl\promotion\PromotionServiceImpl.cs" />
+    <Compile Include="Service\impl\promotion\TabletPromotionServiceImpl.cs" />
     <Compile Include="Service\impl\recruit\RecruitFaqServiceImpl.cs" />
     <Compile Include="Service\impl\recruit\RecruitNoticeServiceImpl.cs" />
     <Compile Include="Service\impl\rolling\RollingServiceImpl.cs" />
@@ -329,6 +334,7 @@
     <Content Include="Dao\impl\promotion\Promotion.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Dao\impl\promotion\TabletPromotion.xml" />
     <Content Include="Dao\impl\recruit\RecruitFaq.xml" />
     <Content Include="Dao\impl\recruit\RecruitNotice.xml" />
     <Content Include="Dao\impl\rolling\Rolling.xml">
@@ -508,6 +514,10 @@
     <Content Include="Views\CarImage\register.cshtml" />
     <Content Include="Views\CarImage\view.cshtml" />
     <Content Include="Views\LogManage\list.cshtml" />
+    <Content Include="Views\Promotion\TabletPromotion\list.cshtml" />
+    <Content Include="Views\Promotion\TabletPromotion\modify.cshtml" />
+    <Content Include="Views\Promotion\TabletPromotion\register.cshtml" />
+    <Content Include="Views\Promotion\TabletPromotion\view.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
