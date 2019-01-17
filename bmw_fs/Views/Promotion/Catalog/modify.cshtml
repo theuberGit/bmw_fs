@@ -135,7 +135,7 @@
             //카탈로그 중복확인
             $.ajax({
                 url: 'isDuplicated',
-                data: { 'title': $('#title').val() },
+                data: { 'title': $('#title').val(), 'brand': $('input[name=brand]:checked').val()},
                 dataType: 'json',
                 timeout: 10000,
                 cache: false,
