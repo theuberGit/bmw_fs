@@ -23,8 +23,8 @@
                 <tr>
                     <th>브랜드 *</th>
                     <td class="radio_area">
-                        <label for="BRAND_B"><input type="radio" name="brand" id="brandB" value="B" title="브랜드"> BMW</label>
-                        <label for="BRAND_M"><input type="radio" name="brand" id="brandM" value="M" title="브랜드"> MINI</label>
+                        <label for="BRAND_B"><input type="radio" name="brand" id="BRAND_B" value="B" title="브랜드"> BMW</label>
+                        <label for="BRAND_M"><input type="radio" name="brand" id="BRAND_M" value="M" title="브랜드"> MINI</label>
                     </td>
                 </tr>
                 <tr>
@@ -119,9 +119,9 @@
     }
 
     if ('@ViewBag.item.brand' === 'B') {
-        $('#brandB').prop('checked', true);
+        $('#BRAND_B').prop('checked', true);
     } else if ('@ViewBag.item.brand' === 'M') {
-        $('#brandM').prop('checked', true);
+        $('#BRAND_M').prop('checked', true);
     }
 
     function modForm() {
@@ -131,7 +131,7 @@
         var title = $('#catYear').val() + '년 ' + $('#catMonth').val() + '월 금융 카탈로그';
         $('#title').val(title);
 
-        if ($('#title').val() !== '@ViewBag.item.title') {
+        if ($('#title').val() !== '@ViewBag.item.title' || $('input[name=brand]:checked').val() !== '@ViewBag.item.brand' ) {
             //카탈로그 중복확인
             $.ajax({
                 url: 'isDuplicated',
