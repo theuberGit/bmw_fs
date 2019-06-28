@@ -51,6 +51,18 @@ namespace bmw_fs.Models.legalNotice
                 {
                     return "장기렌터카";
                 }
+                else if ("residualGuaranteeOperation".Equals(category))
+                {
+                    return "1+1 잔가보장형 운용리스";
+                }
+                else if ("residualGuaranteeInstallment".Equals(category))
+                {
+                    return "잔가보장형 할부금융";
+                }
+                else if ("stockFinance".Equals(category))
+                {
+                    return "딜러 재고금용 약정서";
+                }    
                 else
                 {
                     return null;
