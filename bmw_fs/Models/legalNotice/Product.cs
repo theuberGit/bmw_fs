@@ -61,7 +61,7 @@ namespace bmw_fs.Models.legalNotice
                 }
                 else if ("stockFinance".Equals(category))
                 {
-                    return "딜러 재고금용 약정서";
+                    return "딜러 재고금융 약정서";
                 }    
                 else
                 {
