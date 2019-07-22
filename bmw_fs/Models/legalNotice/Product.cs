@@ -33,7 +33,7 @@ namespace bmw_fs.Models.legalNotice
                 }
                 else if ("halbu".Equals(category))
                 {
-                    return "자동차 할부금융";
+                    return "할부거래";
                 }
                 else if ("lease".Equals(category))
                 {
