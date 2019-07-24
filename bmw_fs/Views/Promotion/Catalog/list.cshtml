@@ -22,11 +22,13 @@
                     <col width="100px" />
                     <col width="100px" />
                     <col width="100px" />
+                    <col width="100px" />
                 </colgroup>
                 <thead>
                     <tr>
                         <th>No.</th>
                         <th>양식명</th>
+                        <th>브랜드</th>
                         <th>파일명</th>
                         <th>등록일</th>
                         <th>배포</th>
@@ -38,6 +40,12 @@
                         <tr>
                             <td>@(ViewBag.pagination.totalItemCount - (ViewBag.pagination.currentPage - 1) * ViewBag.pagination.itemPerPage - i)</td>
                             <td class="tit_area"><a href="view?idx=@ViewBag.list[i].idx"> @ViewBag.list[i].title </a></td>
+                                @if ("B".Equals(ViewBag.list[i].brand)){
+                                    <td>BMW</td>
+                                }
+                                else if ("M".Equals(ViewBag.list[i].brand)){
+                                    <td>MINI</td>
+                                }
                             <td><a href="/Files/fileDownloadByMIdx?masterIdx=@ViewBag.list[i].idx"><img src="~/resources/images/BMW-save_24.png"></a></td>
                             <td>@ViewBag.list[i].regDate.ToString("yyyy-MM-dd")</td>
                             <td>@ViewBag.list[i].deployYn</td>
@@ -46,7 +54,7 @@
                     @if (ViewBag.list.Count == 0)
                     {
                         <tr>
-                            <td colspan="5">게시글이 없습니다.</td>
+                            <td colspan="6">게시글이 없습니다.</td>
                         </tr>
                     }
                 </tbody>

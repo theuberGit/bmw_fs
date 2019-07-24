@@ -9,17 +9,22 @@ using System.Web;
 namespace bmw_fs.Service.face.payment
 {
     interface PaymentService
-    {
-        void insertPayment(HttpFileCollectionBase multipartFiles, Payment payment);
-
+    {        
         IList<Payment> findAll(Payment payment);
 
         int findAllCount(Payment payment);
+
+        /*
+        void insertPayment(HttpFileCollectionBase multipartFiles, Payment payment);
 
         Payment findPayment(Payment payment);
 
         void updatePayment(HttpFileCollectionBase multipartFiles, Payment payment);
 
         void deletePayment(Payment payment);
+        */
+
+        void loadExcelByFileAndUpdateToDB(HttpFileCollectionBase multipartFiles, string regId);      
+
     }
 }

@@ -1,5 +1,4 @@
-﻿using bmw_fs.Config;
-using bmw_fs.Models.common;
+﻿using bmw_fs.Models.common;
 using bmw_fs.Service.face.common;
 using bmw_fs.Service.impl.common;
 using System;
@@ -7,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
 
 namespace bmw_fs.Controllers.common
@@ -14,6 +14,7 @@ namespace bmw_fs.Controllers.common
     [Authorize]
     public class FilesController : Controller
     {
+        private string FILE_PATH = WebConfigurationManager.AppSettings["fileUploadPath"];
         FilesService filesService = new FilesServiceImpl();
 
         public FileResult fileDownload(Files files)
@@ -21,7 +22,7 @@ namespace bmw_fs.Controllers.common
             Files item = filesService.findAllByIdx(files);
             if(item != null)
             {
-                byte[] fileBytes = System.IO.File.ReadAllBytes(StringProperties.FILE_PATH + "/" + item.savedFilename);
+                byte[] fileBytes = System.IO.File.ReadAllBytes(FILE_PATH + "/" + item.savedFilename);
                 return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, item.originalFilename);
             }
             else
@@ -37,7 +38,7 @@ namespace bmw_fs.Controllers.common
             if (items != null)
             {
                 Files item = items[0]; 
-                byte[] fileBytes = System.IO.File.ReadAllBytes(StringProperties.FILE_PATH + "/" + item.savedFilename);
+                byte[] fileBytes = System.IO.File.ReadAllBytes(FILE_PATH + "/" + item.savedFilename);
                 return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, item.originalFilename);
             }
             else
@@ -53,7 +54,7 @@ namespace bmw_fs.Controllers.common
             Files item = filesService.findAllByIdx(files);
             if (item != null)
             {
-                var path = StringProperties.FILE_PATH + "/" + item.savedFilename;
+                var path = FILE_PATH + "/" + item.savedFilename;
                 return new FileStreamResult(new FileStream(path, FileMode.Open), "image/jpeg");
             }
             else

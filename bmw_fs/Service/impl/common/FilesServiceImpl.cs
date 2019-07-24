@@ -1,5 +1,4 @@
-﻿using bmw_fs.Config;
-using bmw_fs.Dao.face.common;
+﻿using bmw_fs.Dao.face.common;
 using bmw_fs.Models.common;
 using bmw_fs.Service.face.common;
 using System;
@@ -9,11 +8,13 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
+using System.Web.Configuration;
 
 namespace bmw_fs.Service.impl.common
 {
     public class FilesServiceImpl : FilesService
     {
+        private string FILE_PATH = WebConfigurationManager.AppSettings["fileUploadPath"];
         FilesDao filesDao = new FilesDao();
 
         public Files findAllByIdx(Files files)
@@ -89,11 +90,11 @@ namespace bmw_fs.Service.impl.common
                     String replaceName = replaceFileName();//파일 이름 변환
                    
 
-                    String path = Path.Combine(StringProperties.FILE_PATH, replaceName);
+                    String path = Path.Combine(FILE_PATH, replaceName);
                     //폴더가 없으면 생성
-                    if (!Directory.Exists(StringProperties.FILE_PATH))
+                    if (!Directory.Exists(FILE_PATH))
                     {
-                        Directory.CreateDirectory(StringProperties.FILE_PATH);
+                        Directory.CreateDirectory(FILE_PATH);
                     }
                     file.SaveAs(path);
                     fileItem.originalFilename = fileName;
@@ -243,7 +244,7 @@ namespace bmw_fs.Service.impl.common
 
         private Boolean deleteRealFile(Files files)
         {
-            String path = Path.Combine(StringProperties.FILE_PATH, files.savedFilename);
+            String path = Path.Combine(FILE_PATH, files.savedFilename);
             if (File.Exists(path))
             {
                 File.Delete(path);

@@ -1,0 +1,268 @@
+﻿
+<head>
+    <style>
+        .reg .cont_bottom .reg_table td.file_area p {
+            float: none;
+            clear: both;
+            padding-top: 10px
+        }
+
+            .reg .cont_bottom .reg_table td.file_area p input[type="text"] {
+                width: 539px;
+            }
+
+        .reg h4 {
+            margin-bottom: 10px
+        }
+
+        .file_area > div {
+            height: 38px;
+        }
+
+        .file_area {
+            counter-reset: cnt1;
+        }
+
+            .file_area.thumb:after {
+                content: "* .jpg, .png 파일만 업로드 가능  * 사이즈:375*294";
+            }
+
+            .file_area.banner:after {
+                content: "* .jpg, .png 파일만 업로드 가능  * 사이즈:1035*115";
+            }
+
+            .file_area:after {
+                content: "* .jpg, .png 파일만 업로드 가능  * 사이즈:1055*688";
+            }
+
+        .file_src:after {
+            counter-increment: cnt1;
+            content: "이미지"counter(cnt1);
+            color: #ccc;
+        }
+
+        .file_src.on:after {
+            content: "";
+            color: #666;
+        }
+
+        .thum_nail {
+            overflow: hidden;
+        }
+        /*.thum_nail:after{content:"* 사이즈:351*264 "; display:inline-block; padding: 14px 0 0 5px}*/
+        .reg .cont_bottom .reg_table .event_btn_area input[type="text"] {
+            margin-bottom: 10px;
+            width: 467px;
+        }
+
+        .evt_btn_button {
+            display: inline-block;
+            width: 35px;
+            height: 36.5px;
+            line-height: 35px;
+            border: 1px solid #c8c8c8;
+            text-align: center;
+            cursor: pointer;
+            margin-left: 7px;
+            background-color: #bbbbbb;
+            color: #282828;
+            font-size: 25px;
+        }
+        #note {
+            height: 100px;
+        }
+    </style>
+</head>
+<div id="content" class="reg">
+    <div class="cont_top">
+        <h3>태블릿 프로모션</h3>
+    </div>
+    <div class="cont_bottom">
+        <form method="post" enctype="multipart/form-data">
+            <table class="reg_table">
+                <colgroup>
+                    <col width="130px" />
+                    <col width="*" />
+                </colgroup>
+                <tr>
+                    <th>작성자 *</th>
+                    <td>@HttpContext.Current.User.Identity.Name</td>
+                </tr>
+                <tr>
+                    <th>브랜드 *</th>
+                    <td class="radio_area">
+                        <label for="BRAND_B"><input type="radio" name="brand" id="brandB" value="B" checked> BMW</label>
+                        <label for="BRAND_M"><input type="radio" name="brand" id="brandM" value="M"> MINI</label>
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="startDate">게시 기간 *</label></th>
+                    <td><input type="text" name="startDate" id="startDate" readonly="readonly" title="게시 시작일" /> ~ <input type="text" name="endDate" id="endDate" readonly="readonly" title="게시 종료일" /></td>
+                </tr>
+                <tr>
+                    <th><label for="">배포 *</label></th>
+                    <td class="radio_area">
+                        <label for="deployY"><input type="radio" name="deployYn" id="deployY" value="Y"> 배포</label>
+                        <label for="deployN"><input type="radio" name="deployYn" id="deployN" value="N" checked> 미배포</label>
+                    </td>
+                </tr>
+            </table>
+            <table class="reg_table">
+                <colgroup>
+                    <col width="130px" />
+                    <col width="*" />
+                </colgroup>
+                <tr>
+                    <th><label for="tit">제목 *</label></th>
+                    <td><input type="text" class="tit" name="title" id="tit" title="제목"></td>
+                </tr>
+                <tr class="add_img_area">
+                    <th>썸네일 이미지 *</th>
+                    <td class="file_area thumb">
+                        <div class="thum_nail">
+                            <span class="file_src"></span>
+                            <input type="file" class="input_file" name="thumbNail" id="thumbNail">
+                            <label for="thumbNail" class="btn_file">파일찾기</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="add_img_area">
+                    <th>띠 배너 이미지 *</th>
+                    <td class="file_area banner">
+                        <div class="thum_nail">
+                            <span class="file_src"></span>
+                            <input type="file" class="input_file" name="bannerImg" id="bannerImg">
+                            <label for="bannerImg" class="btn_file">파일찾기</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="add_img_area kor">
+                    <th>본문 이미지 *</th>
+                    <td class="file_area">
+                        <div>
+                            <span class="file_src"></span>
+                            <input type="file" class="input_file" name="mainImg" id="file0">
+                            <label for="file0" class="btn_file">파일찾기</label>
+                            <button type="button" class="btn_add_file" id="btnAddFile">+</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="note">의무표시사항<br />(유의사항) </label></th>
+                    <td><textarea name="note" id="note" title="의무표시사항" onkeypress="checkKeys(); return false;"></textarea></td>
+                </tr>
+            </table>
+        </form>
+        <div class="btn_area">
+            <a href="list" class="btn_defualt btn_list">목록</a>
+            <a href="javascript:void(0);" class="btn_defualt btn_reg" onclick="regForm();">등록</a>
+        </div>
+    </div>
+</div>
+<script>
+    lnbSet(".tablet_promotion_mgmt");
+
+    $("#startDate").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeMonth: true,
+        changeYear: true,
+        yearRange: 'c-14:c+10',
+        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+        onClose: function (selectedDate) {
+            $("#endDate").datepicker("option", "minDate", selectedDate);
+        }
+    });
+    $("#endDate").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeMonth: true,
+        changeYear: true,
+        yearRange: 'c-14:c+10',
+        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+        onClose: function (selectedDate) {
+            $("#startDate").datepicker("option", "maxDate", selectedDate);
+        }
+    });
+
+    function regForm() {
+        if (!validation()) return;
+        if (!confirm('등록하시겠습니까?')) return;
+        $('#content form').attr('action', 'registerProc').submit();
+    };
+
+    function validation() {
+        var mainImgFlag = false;
+
+        if (!$('#startDate').required()) return;
+        if (!$('#endDate').required()) return;
+        if (!$('#tit').required()) return;
+        if ($('#thumbNail').val() === '') {
+            alert('썸네일을 등록하세요.');
+            return;
+        }
+        if ($('#bannerImg').val() === '') {
+            alert('띠 배너를 등록하세요.');
+            return;
+        }
+        $('input[name=mainImg]').each(function () {
+            if ($(this).val() === '') {
+                mainImgFlag = true;
+            }
+        });
+        if (mainImgFlag) {
+            alert('본문 이미지를 등록하세요.');
+            return;
+        }
+
+        if (!validationFileType('jpg, png')) return;
+
+        if (!$('#note').required()) return;
+        return true;
+    };
+
+(function($){
+	var $fileArea = $(".add_img_area").find('.file_area');
+
+	function deleteFile(){
+		$(this).parent("div").remove();
+	}
+
+	$(".add_img_area").find(".file_area").on("change",".input_file",function(e){
+		var $parent = $(this).closest("div");
+		var val = $(this).val();
+		var valTit = val.split("\\");
+		var valTittext = valTit[valTit.length -1]
+		if(val != ""){
+			$parent.find(".file_src").text(valTittext).addClass("on");
+		};
+	});
+
+	$(".add_img_area").each(function(index, item){
+        var cnt = 0;
+		$(item).find(".btn_add_file").on("click" , function(){
+			if($(item).find( "input[type='file']" ).length < 10){
+				cnt++;
+                var html = '<div class="add_file_element"><span class="file_src"></span><input type="file" class="input_file" id="file' + cnt + '" name="mainImg" /><label for="file' + cnt + '" class="btn_file">파일찾기</label><button type="button" class="btnDelete">-</button></div>';
+				$(item).find(".file_area").append(html);
+			};
+		});
+		$fileArea.on("click" , ".btnDelete" ,deleteFile);
+    });
+
+    $("#note").keydown(function (key) {
+
+        if (key.keyCode == 13) {//enter key block
+            return false;
+        }
+
+    });
+
+})(jQuery);
+</script>

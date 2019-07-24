@@ -83,6 +83,7 @@ namespace bmw_fs.Service.impl.catalog
         private void validation(Catalog catalog)
         {
             if (String.IsNullOrWhiteSpace(catalog.title)) throw new CustomException("필수 값이 없습니다.(카탈로그)");
+            if (String.IsNullOrWhiteSpace(catalog.brand)) throw new CustomException("필수 값이 없습니다.(브랜드)");
         }
 
         public bool findCatalogDuplicated(Catalog catalog)

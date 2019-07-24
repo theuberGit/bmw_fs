@@ -18,6 +18,7 @@ namespace bmw_fs.Models.legalNotice
         public DateTime regDate { get; set; }
         public String uptId { get; set; }
         public DateTime uptDate { get; set; }
+
         public String categoryName
         {
             get
@@ -42,11 +43,43 @@ namespace bmw_fs.Models.legalNotice
                 {
                     return "오토론";
                 }
+                else if ("usedcar".Equals(category))
+                {
+                    return "중고차대출";
+                }
+                else if ("longrent".Equals(category))
+                {
+                    return "장기렌터카";
+                }
+                else if ("residualGuaranteeOperation".Equals(category))
+                {
+                    return "1+1 잔가보장형 운용리스";
+                }
+                else if ("residualGuaranteeInstallment".Equals(category))
+                {
+                    return "잔가보장형 할부금융";
+                }
+                else if ("stockFinance".Equals(category))
+                {
+                    return "딜러 재고금융 약정서";
+                }    
                 else
                 {
                     return null;
                 }
             }
+        }
+
+        override
+         public string ToString()
+        {
+            return
+                (idx > 0 ? "idx : " + idx + "," : "") +
+                (!string.IsNullOrWhiteSpace(title) ? "제목 : " + (title.Length > 5 ? title.Substring(0, 5) + "..." : title) + ", " : "") +
+                (!string.IsNullOrWhiteSpace(contents) ? "내용 : " + (contents.Length > 5 ? contents.Substring(0, 5) + "..." : contents) + ", " : "") +
+                (!string.IsNullOrWhiteSpace(categoryName) ? "카테고리 : " + categoryName + ", " : "") +
+                (page > 1 ? "page : " + page + ", " : "") +
+                (!string.IsNullOrWhiteSpace(searchOption) ? "검색구분 : " + searchOption + " 검색어 : " + searchInput : "");
         }
     }
 }

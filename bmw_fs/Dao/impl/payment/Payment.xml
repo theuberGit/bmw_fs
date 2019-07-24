@@ -104,6 +104,7 @@
       </isNotEmpty>
     </select>
 
+    <!--
     <select id="findPayment" resultMap="paymentMap">
       SELECT IDX
       , BRAND
@@ -136,7 +137,8 @@
       FROM BMW_FS_PAYMENT
       WHERE IDX = #idx#
     </select>
-
+-->
+    
     <insert id="insertPayment">
       INSERT INTO BMW_FS_PAYMENT
       (
@@ -167,6 +169,7 @@
       , PP_PAY3
       , DEPLOY_YN
       , REG_ID
+      , ORDER_NUM
       )
       VALUES (
       #idx#
@@ -196,10 +199,12 @@
       ,#ppPay3#
       ,#deployYn#
       ,#regId#
+      ,#orderNum#
       )
 
     </insert>
 
+    <!--
     <update id="updatePayment">
       UPDATE BMW_FS_PAYMENT
       SET BRAND = #brand#
@@ -232,9 +237,15 @@
       WHERE IDX = #idx#
     </update>
 
+
     <delete id="deletePayment">
       DELETE FROM BMW_FS_PAYMENT
       WHERE IDX = #idx#
+    </delete>
+    -->
+
+    <delete id="deletePaymentAll">
+      DELETE FROM BMW_FS_PAYMENT      
     </delete>
 
   </statements>

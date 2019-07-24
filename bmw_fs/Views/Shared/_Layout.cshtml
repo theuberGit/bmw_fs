@@ -21,12 +21,7 @@
             <div class="header_inner">
                 <h2>BMW 파이낸셜 서비스</h2>
                 <form method="post" action="/login/LogOff" id="logoutForm">
-                    <div class="link_list">
-                        <!--
-                        <a href="#" class="on">관리자 관리</a>
-                        <a href="#">미답변 1:1 문의 <span></span></a>
-                        <a href="#">My Account</a>
-                         -->
+                    <div class="link_list">                      
                         @Html.AntiForgeryToken()
                         <a href="javascript:void(0);" onclick="logout();">로그아웃</a>
                     </div>
@@ -47,7 +42,7 @@
                         <a href="#">담당자 관리</a>
                         <ul>
                             <li class="admin_mgmt"><a href="/Admin/list">담당자 관리</a></li>
-                            <li class="admin_log_mgmt"><a href="javascript:void(0);" onclick="alert('준비중입니다.');">담당자 로그 관리</a></li>
+                            <li class="admin_log_mgmt"><a href="/LogManage/list">담당자 로그 관리</a></li>
                         </ul>
                     </li>
                     }
@@ -58,10 +53,18 @@
                         <ul>
                             <li class="web_promotion_mgmt"><a href="/Promotion/list">웹 프로모션</a></li>
                             <li class="mobile_promotion_mgmt"><a href="/MobilePromotion/list">모바일 프로모션</a></li>
+                            <li class="tablet_promotion_mgmt"><a href="/TabletPromotion/list">태블릿 프로모션</a></li>
                             <li class="catalog_mgmt"><a href="/Catalog/list">카탈로그 관리</a></li>
                         </ul>
-                    </li>
-                    <li class="payment_mgmt"><a href="/Payment/list">월납입금 관리</a></li>
+                    </li>      
+                    <li class="sub_list">
+                        <a href="#">월납입금 관리</a>
+                        <ul>
+                            <li class="payment_mgmt"><a href="/Payment/list">월납입금 정보 관리</a></li>
+                            <li class="carImg_mgmt"><a href="/CarImage/list">차량 이미지 관리</a></li>                            
+                        </ul>
+                    </li>                      
+
                     <li class="news_mgmt"><a href="/News/list">뉴스 관리</a></li>
                     <li class="showroom_mgmt"><a href="/Showroom/list">전시장 관리 </a></li>
                     }
@@ -72,7 +75,7 @@
                         <ul>
                             <li class="privacy_mgmt"><a href="/privacy/list">개인정보처리방침</a></li>
                             <li class="credit_mgmt"><a href="/credit/list">신용정보활용체계</a></li>
-                            <li class="product_mgmt"><a href="/product/list">상품약관</a></li>
+                            <li class="product_mgmt"><a href="/product/list">상품약관/약정서</a></li>
                             <li class="business_mgmt"><a href="/business/list">경영공시</a></li>
                             <li class="general_mgmt"><a href="/general/list">일반공시</a></li>
                         </ul>

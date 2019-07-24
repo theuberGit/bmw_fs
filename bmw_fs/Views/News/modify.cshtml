@@ -67,7 +67,7 @@
                     </td>
                 </tr>
                 <tr class="add_img_area">
-                    <th>본문 이미지 *</th>
+                    <th>본문 이미지</th>
                     <td class="file_area">
                         @if (ViewBag.mainList.Count != 0)
                         {
@@ -76,7 +76,8 @@
                                 <div class="main_img">
                                     <span class="file_src main_src">@ViewBag.mainList[i].originalFilename</span>
                                     <input type="file" class="input_file" name="mainImg" id="mainImg">
-                                    <label for="mainImg" class="btn_file">파일찾기</label>
+                                    <label for="mainImg" style="display:none;" class="btn_file btn_file_txt">파일찾기</label>
+                                    <label for="" class="btn_file del_file_txt">삭제</label>
                                     <input type="hidden" name="fileIdxs" value="@ViewBag.mainList[i].fileIdx" />
                                 </div>
                             }
@@ -86,8 +87,10 @@
                             <div class="main_img">
                                 <span class="file_src main_src"></span>
                                 <input type="file" class="input_file" name="mainImg" id="mainImg">
-                                <label for="mainImg" class="btn_file">파일찾기</label>
-                            </div>
+                                <label for="mainImg" class="btn_file btn_file_txt">파일찾기</label>
+                                <label for="" style="display:none;" class="btn_file del_file_txt">삭제</label>
+                                <input type="hidden" name="fileIdxs" value="-1" />
+                            </div>                            
                         }
 
                     </td>
@@ -122,18 +125,20 @@ if ('@ViewBag.item.deployYn' === 'Y') {//배포 여부 set
 } else {
   $('#inactivity').prop('checked', true);
 }
-$('.del_file_txt').click(function () {//썸네일 삭제 버튼 click
+$('.del_file_txt').click(function () {//삭제 버튼 click
     $(this).hide();
-    $('.thumb_file_nm').text('');
-    $('#thumNail').val('');
-    $('.btn_file_txt').show();
+    var $wrap = $(this).closest('div');
+    $wrap.find('.file_src').text('');
+    $wrap.find('.input_file').val('');
+    $wrap.find('.btn_file_txt').show();    
 });
 
 $('.btn_file_txt').click(function () {//썸네일 파일찾기 버튼 click
-    if ($('.thumb_file_nm').text() != '') {
+    var $wrap = $(this).closest('div');
+    if ($wrap.find('.file_src').text() != '') {
         $(this).hide();
-        $('.thumb_file_nm').text('');
-        $('.del_file_txt').show();
+        $wrap.find('.file_src').text('');
+        $wrap.find('.del_file_txt').show();
      }
 });
 function modifyProc() {
@@ -149,10 +154,12 @@ function modifyProc() {
             return false;
         }
     }
+    /*
     if ($('.main_src').text() === '') {
         alert('본문이미지를 등록하세요.');
         return;
     }
+    */
         
     if ($('.thumb_file_nm').text() === '' && $('input[name=thumbIdxs]').val() !== -1) {// -1 : 새로등록, 0 : 기존파일 삭제
         $('input[name=thumbIdxs]').val(0);

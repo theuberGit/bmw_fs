@@ -23,7 +23,8 @@ namespace bmw_fs.Dao.face.payment
         {
             return Mapper.Instance().QueryForObject<int>("payment.findAllCount", payment);
         }
-
+        
+        /*
         public Payment findPayment(Payment payment)
         {
             return Mapper.Instance().QueryForObject<Payment>("payment.findPayment", payment);
@@ -38,5 +39,12 @@ namespace bmw_fs.Dao.face.payment
         {
             Mapper.Instance().Delete("payment.deletePayment", payment);
         }
+        */
+
+        public void deletePaymentAll()
+        {
+            Mapper.Instance().Delete("payment.deletePaymentAll", null);
+        }
+        
     }
 }

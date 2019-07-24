@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="carImage" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+  <alias>
+    <typeAlias alias="carImageClass" type="bmw_fs.Models.payment.Payment"/>
+  </alias>
+
+  <resultMaps>
+    <resultMap id="carImageMap" class="carImageClass">
+      <result property="idx" column="IDX" />      
+      <result property="brand" column="BRAND" />
+      <result property="series" column="SERIES" />
+      <result property="model" column="MODEL" />
+      <result property="fileName" column="ORIGINAL_FILENAME" />
+      <result property="regId" column="REG_ID" />
+      <result property="regDate" column="REG_DATE" />
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+
+    <select id="findAll" resultMap="carImageMap">      
+      SELECT      
+        ci.IDX      
+      , BRAND
+      , SERIES
+      , MODEL
+      , ORIGINAL_FILENAME
+      , ci.REG_DATE
+      , REG_ID
+      FROM BMW_FS_CAR_IMAGES ci 
+        JOIN BMW_FS_FILES_DATA fd ON ci.IDX = fd.MASTER_IDX
+      WHERE 1=1
+      <isNotEmpty property="brand">
+          AND BRAND LIKE '%'+#brand#+'%'
+      </isNotEmpty>
+      <isNotEmpty property="series">
+          AND SERIES LIKE '%'+#series#+'%'
+      </isNotEmpty>           
+      ORDER BY BRAND, SERIES, MODEL
+    </select>    
+
+    <select id="findCarImage" resultMap="carImageMap">
+      SELECT IDX
+      , BRAND
+      , SERIES
+      , MODEL
+      , REG_DATE
+      , REG_ID
+      , '' AS ORIGINAL_FILENAME
+      FROM BMW_FS_CAR_IMAGES
+      WHERE IDX = #idx#
+    </select>
+
+    <insert id="insertCarImage">
+      INSERT INTO BMW_FS_CAR_IMAGES
+      (
+        IDX
+      , BRAND
+      , SERIES
+      , MODEL      
+      , REG_ID
+      )
+      VALUES (
+       #idx#
+      ,#brand#
+      ,#series#
+      ,#model#    
+      ,#regId#
+      )
+    </insert>
+
+    <update id="updateCarImage">
+      UPDATE BMW_FS_CAR_IMAGES
+      SET BRAND = #brand#
+      ,SERIES = #series#
+      ,MODEL = #model#     
+      ,UPT_DATE = getDate()
+      ,UPT_ID = #uptId#
+      WHERE IDX = #idx#
+    </update>
+
+    <delete id="deleteCarImage">
+      DELETE FROM BMW_FS_CAR_IMAGES
+      WHERE IDX = #idx#
+    </delete>
+
+  </statements>
+</sqlMap>

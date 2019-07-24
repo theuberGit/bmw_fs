@@ -21,6 +21,13 @@
                     <td>@HttpContext.Current.User.Identity.Name</td>
                 </tr>
                 <tr>
+                    <th>브랜드 *</th>
+                    <td class="radio_area">
+                        <label for="BRAND_B"><input type="radio" name="brand" id="BRAND_B" value="B" title="브랜드" checked> BMW</label>
+                        <label for="BRAND_M"><input type="radio" name="brand" id="BRAND_M" value="M" title="브랜드"> MINI</label>
+                    </td>
+                </tr>
+                <tr>
                     <th><label for="">카탈로그 *</label></th>
                     <td>
                         <select id="catYear" title="년도">
@@ -77,6 +84,8 @@
     $('#catMonth').append(monthHtml);
     function regForm() {  
         var isDup = false;
+
+        if (!$('input[name=brand]').reqRadio()) retrun;
         if (!$('#catYear').reqSelect()) return;
         if (!$('#catMonth').reqSelect()) return;
         var title = $('#catYear').val() + '년 ' + $('#catMonth').val() + '월 금융 카탈로그';
@@ -85,7 +94,7 @@
         //카탈로그 중복확인
         $.ajax({
             url: 'isDuplicated',
-            data: { 'title': $('#title').val() },
+            data: { 'title': $('#title').val(), 'brand': $('input[name=brand]:checked').val() },
             dataType: 'json',
             timeout: 10000,
             cache: false,

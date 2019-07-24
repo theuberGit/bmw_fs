@@ -1,0 +1,63 @@
+﻿
+<div id="content" class="reg">
+    <div class="cont_top">
+        <h3>차량 이미지 관리 상세</h3>
+    </div>
+    <div class="cont_bottom">
+        <form method="post" enctype="multipart/form-data">
+            <table class="reg_table">
+                <colgroup>
+                    <col width="130px" />
+                    <col width="870px" />
+                </colgroup>
+                <tr>
+                    <th>작성자 </th>
+                    <td>@ViewBag.item.regId</td>
+                </tr>
+                <tr>
+                    <th><label for="">이미지 idx</label></th>
+                    <td>@ViewBag.item.idx</td>
+                </tr>
+                <tr>
+                    <th><label for="">분류</label></th>
+                    <td>@ViewBag.item.brand @ViewBag.item.series</td>
+                </tr>
+                <tr>
+                    <th><label for="">모델</label></th>
+                    <td>@ViewBag.item.model</td>
+                </tr>                
+                <tr class="add_img_area">
+                    <th>차량 이미지</th>
+                    <td class="file_area">
+                        @foreach (var file in ViewBag.carImg)
+                        {
+                            <div><a href="/Files/fileDownload?fileIdx=@file.fileIdx">@file.originalFilename</a></div>
+                            <div><img src="/Files/ImageView?fileIdx=@file.fileIdx" /></div>
+                        }
+                    </td>
+                </tr>
+                                
+            </table>
+            <input type="hidden" name="idx" value="@ViewBag.item.idx"/>
+        </form>
+        <div class="btn_area">
+            <a href="list?@Session["searchString"]" class="btn_defualt btn_list">목록</a>
+            <div class="view_btn_area">
+                <a href="javascript:void(0);" class="btn_defualt btn_delete" onclick="delForm();">삭제</a>
+                <a href="javascript:void(0);" onclick="modForm();" class="btn_defualt btn_modify">수정</a>
+            </div>
+    </div>
+    </div>
+</div>
+<script>
+    lnbSet(".carImg_mgmt");
+function modForm() {
+    $('#content form').attr('action', 'modify').submit();
+};
+function delForm() {
+   if (!confirm('삭제하시겠습니까?')) {
+       return;
+   }
+    $('#content form').attr('action', 'delete').submit();
+};
+</script>
