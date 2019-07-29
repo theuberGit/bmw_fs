@@ -62,7 +62,8 @@ namespace bmw_fs.Models.CustomerService
                 }
                 else if ("accounting".Equals(category))
                 {
-                    return "회계처리";
+                    //return "회계처리";
+                    return "기타"; //20190729 강현수 매니저 요청 회계처리에서 기타로 노출 by.th.kim
                 }
                 else if ("homepage".Equals(category))
                 {
