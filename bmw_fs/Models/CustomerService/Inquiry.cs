@@ -52,6 +52,10 @@ namespace bmw_fs.Models.CustomerService
                 {
                     return "재금융 문의";
                 }
+                else if ("interest".Equals(category))
+                {
+                    return "금리인하요구권";
+                }
                 else if ("etc".Equals(category))
                 {
                     return "기타";
